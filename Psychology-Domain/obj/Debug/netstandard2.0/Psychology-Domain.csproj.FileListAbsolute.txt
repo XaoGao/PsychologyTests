@@ -1,0 +1,8 @@
+/home/xaogao/Documents/Psychology/Psychology-Domain/bin/Debug/netstandard2.0/Psychology-Domain.deps.json
+/home/xaogao/Documents/Psychology/Psychology-Domain/bin/Debug/netstandard2.0/Psychology-Domain.dll
+/home/xaogao/Documents/Psychology/Psychology-Domain/bin/Debug/netstandard2.0/Psychology-Domain.pdb
+/home/xaogao/Documents/Psychology/Psychology-Domain/obj/Debug/netstandard2.0/Psychology-Domain.csprojAssemblyReference.cache
+/home/xaogao/Documents/Psychology/Psychology-Domain/obj/Debug/netstandard2.0/Psychology-Domain.AssemblyInfoInputs.cache
+/home/xaogao/Documents/Psychology/Psychology-Domain/obj/Debug/netstandard2.0/Psychology-Domain.AssemblyInfo.cs
+/home/xaogao/Documents/Psychology/Psychology-Domain/obj/Debug/netstandard2.0/Psychology-Domain.dll
+/home/xaogao/Documents/Psychology/Psychology-Domain/obj/Debug/netstandard2.0/Psychology-Domain.pdb
