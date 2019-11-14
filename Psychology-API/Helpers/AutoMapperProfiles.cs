@@ -1,4 +1,6 @@
 using AutoMapper;
+using Psychology_API.Dtos;
+using Psychology_Domain.Domain;
 
 namespace Psychology_API.Helpers
 {
@@ -6,7 +8,8 @@ namespace Psychology_API.Helpers
     {
         public AutoMapperProfiles()
         {
-            
+            CreateMap<DoctorForRegisterDto, Doctor>();
+            CreateMap<DoctorForLoginDto, Doctor>();
         }
     }
 }
