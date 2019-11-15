@@ -35,5 +35,12 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string FullaName { get => $"{Lastname} {Firstname} {Middlename}"; }
+        /// <summary>
+        /// Лечещий врач.
+        /// </summary>
+        /// <value></value>
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
+        
     }
 }

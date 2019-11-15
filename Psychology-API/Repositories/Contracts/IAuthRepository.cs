@@ -14,13 +14,19 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="username"> Логин пролзователя. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns></returns>
-        Task<Doctor> Login(string username, string password);
+        Task<Doctor> LoginAsync(string username, string password);
         /// <summary>
-        /// Решистрация пользователя в системе.
+        /// Регистрация пользователя в системе.
         /// </summary>
         /// <param name="doctor"> Врач. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns></returns>
-        Task<Doctor> Register(Doctor doctor, string password);
+        Task<Doctor> RegisterAsync(Doctor doctor, string password);
+        /// <summary>
+        /// Проверка на существование пользователя в системе по логину.
+        /// </summary>
+        /// <param name="username"> Логни. </param>
+        /// <returns> Пользователь с логином уже зарегистрирован. </returns>
+        Task<bool> UserExistAsync(string username);
     }
 }

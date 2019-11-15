@@ -32,7 +32,7 @@ namespace Psychology_API.Repositories.Repositories
         /// <param name="username"> Логин пользователя. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns> Авторизованый пользователь </returns>
-        public async Task<Doctor> Login(string username, string password)
+        public async Task<Doctor> LoginAsync(string username, string password)
         {
             var doctor = await _context.Doctors.SingleOrDefaultAsync(d => d.Username.Equals(username.ToLower()));
 
@@ -72,7 +72,7 @@ namespace Psychology_API.Repositories.Repositories
         /// <param name="doctor"> Врач. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns></returns>
-        public async Task<Doctor> Register(Doctor doctor, string password)
+        public async Task<Doctor> RegisterAsync(Doctor doctor, string password)
         {
             //Приводим логин и пароль к нижнему регистру, чтобы система была регистра не зависимая.
             password = password.ToLower();
@@ -103,6 +103,18 @@ namespace Psychology_API.Repositories.Repositories
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
+        }
+        /// <summary>
+        /// Проверка на существование пользователя в системе по логину.
+        /// </summary>
+        /// <param name="username"> Логин. </param>
+        /// <returns> Пользователь с логином уже зарегистрирован. </returns>
+        public async Task<bool> UserExistAsync(string username)
+        {
+            if(await _context.Doctors.AnyAsync(d => d.Username.ToLower().Equals(username.ToLower())))
+                return true;
+
+            return false;
         }
     }
 }
