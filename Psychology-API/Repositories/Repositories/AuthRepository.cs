@@ -82,7 +82,7 @@ namespace Psychology_API.Repositories.Repositories
 
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            doctor.PasswordHash = passwordSalt;
+            doctor.PasswordHash = passwordHash;
             doctor.PasswordSalt = passwordSalt;
 
             await _context.Doctors.AddAsync(doctor);

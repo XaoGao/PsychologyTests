@@ -10,11 +10,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError(error => {
                 if (error instanceof HttpErrorResponse) {
-                    if (error.status === 400 ) {
-                        return throwError(error.statusText);
-                    }
                     if (error.status === 401 ) {
-                        return throwError(error.statusText);
+                        return throwError(error.error);
                     }
                     const applicationError = error.headers.get('Application-Error');
                     if (applicationError) {

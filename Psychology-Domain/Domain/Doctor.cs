@@ -57,29 +57,29 @@ namespace Psychology_Domain.Domain
         /// <param name="lastname"> Фамилия. </param>
         /// <param name="firstname"> Имя. </param>
         /// <param name="middlename">Отчество. </param>
-        public Doctor(string username, byte[] passwordHash, byte[] passwordSalt, string lastname, string firstname, string middlename)
-        {
-            #region Проверка входных параметров
-            if(string.IsNullOrWhiteSpace(username))
-                throw new ArgumentNullException(nameof(username));
-            if(string.IsNullOrWhiteSpace(lastname))
-                throw new ArgumentNullException(nameof(lastname));
-            if(string.IsNullOrWhiteSpace(firstname))
-                throw new ArgumentNullException(nameof(firstname));
-            if(string.IsNullOrWhiteSpace(middlename))
-                throw new ArgumentNullException(nameof(middlename));
-            if((passwordSalt.Length <= 0) || (passwordHash.Length <= 0))
-                throw new ArgumentNullException(nameof(PasswordHash));
-            #endregion
+        // public Doctor(string username, byte[] passwordHash, byte[] passwordSalt, string lastname, string firstname, string middlename)
+        // {
+        //     #region Проверка входных параметров
+        //     if(string.IsNullOrWhiteSpace(username))
+        //         throw new ArgumentNullException(nameof(username));
+        //     if(string.IsNullOrWhiteSpace(lastname))
+        //         throw new ArgumentNullException(nameof(lastname));
+        //     if(string.IsNullOrWhiteSpace(firstname))
+        //         throw new ArgumentNullException(nameof(firstname));
+        //     if(string.IsNullOrWhiteSpace(middlename))
+        //         throw new ArgumentNullException(nameof(middlename));
+        //     if((passwordSalt.Length <= 0) || (passwordHash.Length <= 0))
+        //         throw new ArgumentNullException(nameof(PasswordHash));
+        //     #endregion
             
-            #region Инициализация полей класса
-            Username = username;
-            PasswordHash = passwordHash;
-            PasswordSalt = passwordSalt;
-            Lastname = lastname;
-            Firstname = firstname;
-            Middlename = middlename;
-            #endregion
-        }
+        //     #region Инициализация полей класса
+        //     Username = username;
+        //     PasswordHash = passwordHash;
+        //     PasswordSalt = passwordSalt;
+        //     Lastname = lastname;
+        //     Firstname = firstname;
+        //     Middlename = middlename;
+        //     #endregion
+        // }
     }
 }

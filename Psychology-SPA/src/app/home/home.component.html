@@ -1,8 +1,57 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <mat-tab-group class="text text-dark">
-            <mat-tab class="text-dark" label="Войти в систему"> Войти </mat-tab>
-            <mat-tab class="text-dark" label="Зарегистрироваться"> Зарегистрироваться 2 </mat-tab>
+            <mat-tab class="text-dark" label="Войти в систему">
+                <form class="mt-5" #loginForm="ngForm">
+                    <div>
+                        <p class="text-center">Введите Ваше имя и пароль для входа в систему</p>
+                        <hr />
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введите Ваш логин" name="Username"
+                                [(ngModel)]="userForLogin.username" required />
+                        </mat-form-field>
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введтие Ваш пароль" name="Password" type="password"
+                                [(ngModel)]="userForLogin.password" required />
+                        </mat-form-field>
+                        <button class="btn btn-primary pull-right" (click)="login()" [disabled]="!loginForm.valid">
+                            Войти в систему
+                        </button>
+                    </div>
+                </form>
+            </mat-tab>
+            <mat-tab class="text-dark" label="Зарегистрироваться">
+                <form class="mt-5" #registerForm="ngForm">
+                    <div>
+                        <p class="text-center">Введите Ваши данные для регистрации</p>
+                        <hr />
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введите Ваше имя" name="Firstname"
+                                [(ngModel)]="userForRegister.firstname" required />
+                        </mat-form-field>
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введите Вашу фамилию" name="Lastname"
+                                [(ngModel)]="userForRegister.lastname" required />
+                        </mat-form-field>
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введите Ваше отчество" name="Middlename"
+                                [(ngModel)]="userForRegister.middlename" required />
+                        </mat-form-field>
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введите Ваш логин" name="Username"
+                                [(ngModel)]="userForRegister.username" required />
+                        </mat-form-field>
+                        <mat-form-field class="form-group full-width">
+                            <input matInput placeholder="Введтие Ваш пароль" type="password" name="Password"
+                                [(ngModel)]="userForRegister.password" required />
+                        </mat-form-field>
+                        <button class="btn btn-primary pull-right" (click)="register()"
+                            [disabled]="!registerForm.valid">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </form>
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>
