@@ -10,12 +10,12 @@ namespace Psychology_API.Repositories.Contracts
         /// <summary>
         /// Добавление сущности в контекст данных.
         /// </summary>
-        /// <typeparam name="T"> Обобщенная сущности из контекста. </typeparam>
+        /// <typeparam name="T"> Обобщенная сущность из контекста. </typeparam>
         void Add<T>(T entity) where T : class;
         /// <summary>
         /// Удаление сущности из контекста данных.
         /// </summary>
-        /// <typeparam name="T"> Обобщеная сущности из контекста данных. </typeparam>
+        /// <typeparam name="T"> Обобщеная сущность из контекста данных. </typeparam>
         void Remove<T>(T entity) where T : class;
         /// <summary>
         /// Сохранение изменений в контексте.

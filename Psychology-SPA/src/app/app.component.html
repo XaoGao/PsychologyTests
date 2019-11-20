@@ -1,2 +1,10 @@
- <app-nav></app-nav>
-<router-outlet></router-outlet>
+<app-nav></app-nav>
+<div class="container-fluid">
+    <div class="row" id="mainContent">
+        <app-sidebar class="col-sm-4 col-md-3 d-none d-sm-block" id="sidebar">
+        </app-sidebar>
+        <div class="col-sm-8 ml-sm-auto col-md-9 pt-3" id="main-container">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

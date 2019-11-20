@@ -8,7 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { ToastrAlertService } from './_services/toastr-alert.service';
 import { ErrorInterceptor } from './_services/error.interceptor';
-
+import { AuthGuard } from './_guards/auth.guard';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
@@ -20,6 +20,10 @@ import { HomeComponent } from './home/home.component';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { WorkshipsComponent } from './workships/workships/workships.component';
+import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 
 
 export function tokenGetter() {
@@ -31,7 +35,9 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    WorkshipsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -49,10 +55,13 @@ export function tokenGetter() {
       }
     }),
     MatTabsModule,
-    MatInputModule
+    MatInputModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [
     ErrorInterceptor,
+    AuthGuard,
     AuthService,
     ToastrAlertService
   ],

@@ -19,8 +19,10 @@ export class AuthService {
     return this.http.post(this.BASE_URL + 'login', model).pipe(
       map((res: any) => {
         const user = res;
+        console.log(user);
         if (user) {
-          localStorage.setItem('token', user);
+          localStorage.setItem('token', user.token);
+          this.decodedToken = this.helper.decodeToken(user.token);
         }
       })
     );

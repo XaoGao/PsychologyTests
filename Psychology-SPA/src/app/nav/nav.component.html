@@ -6,7 +6,12 @@
                 <a class="nav-link" href="#">Home</a>
             </li>
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
+        <button *ngIf="loggedin()" class="text-light" mat-button [matMenuTriggerFor]="menu">Привет,
+            {{ authService.decodedToken.unique_name | titlecase }} <i class="fa fa-caret-down"></i></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">Выйти <i class="fa fa-sign-out"></i></button>
+        </mat-menu>
+        <form *ngIf="!loggedin()" class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Логин">
             <input class="form-control mr-sm-2" type="text" placeholder="Пароль">
             <button class="btn btn-success my-2 my-sm-0" type="submit">Войти</button>

@@ -73,8 +73,7 @@ namespace Psychology_API.Controllers
 
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token),
-                doctorFromRepo
+                token = tokenHandler.WriteToken(token)
             });
         }       
     }
