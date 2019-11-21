@@ -16,10 +16,22 @@ namespace Psychology_API.Repositories.Repositories
             _context = context;
         }
 
+        public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
+        {
+            var patient = await _context.Patients.SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
+
+            return patient;
+        }
+
         public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
         {
             var patients = await _context.Patients.Where(p => p.DoctorId == doctorId).ToListAsync();
             return patients;
+        }
+
+        public void MovePatinetToArchive(Patient patient)
+        {
+            patient.IsDelete = true;
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace Psychology_Domain.Domain
 {
+    //TODO: Добавить необходимые данные для сущности
     /// <summary>
     /// Пациент.
     /// </summary>
@@ -36,11 +37,12 @@ namespace Psychology_Domain.Domain
         /// <value></value>
         public string FullaName { get => $"{Lastname} {Firstname} {Middlename}"; }
         /// <summary>
-        /// Лечещий врач.
+        /// Лечащий врач.
         /// </summary>
         /// <value></value>
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
+        public bool IsDelete { get; set; }
         
     }
 }
