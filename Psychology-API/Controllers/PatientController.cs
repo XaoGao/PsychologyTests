@@ -15,13 +15,13 @@ namespace Psychology_API.Controllers
     [Route("api/{doctorId}/[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly IDoctorRepository _doctorRepository;
+        private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
 
-        public PatientController(IDoctorRepository doctorRepository, IMapper mapper)
+        public PatientController(IPatientRepository patientRepository, IMapper mapper)
         {
             _mapper = mapper;
-            _doctorRepository = doctorRepository;
+            _patientRepository = patientRepository;
         }
         [HttpGet]
         public async Task<IActionResult> GetPatients(int doctorId)
@@ -29,7 +29,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patients = await _doctorRepository.GetPatientsAsync(doctorId);
+            var patients = await _patientRepository.GetPatientsAsync(doctorId);
 
             //TODO: добавить dto для возврата данных
 
@@ -41,7 +41,7 @@ namespace Psychology_API.Controllers
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _doctorRepository.GetPatientAsync(doctorId, patientId);
+            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
@@ -60,11 +60,11 @@ namespace Psychology_API.Controllers
 
             var patient = _mapper.Map<Patient>(patientForCreateDto);
 
-            _doctorRepository.Add(patient);
+            _patientRepository.Add(patient);
 
             //TODO: добавить dto для возврата данных
 
-            if (await _doctorRepository.SaveAllAsync())
+            if (await _patientRepository.SaveAllAsync())
                 return StatusCode(201);
 
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору");
@@ -75,14 +75,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _doctorRepository.GetPatientAsync(doctorId, patientForUpdateDto.Id);
+            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientForUpdateDto.Id);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
 
             _mapper.Map(patientForUpdateDto, patientFromRepo);
 
-            if (await _doctorRepository.SaveAllAsync())
+            if (await _patientRepository.SaveAllAsync())
                 return NoContent();
 
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
@@ -93,14 +93,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _doctorRepository.GetPatientAsync(doctorId, patientId);
+            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
 
-            _doctorRepository.MovePatinetToArchive(patientFromRepo);
+            _patientRepository.MovePatinetToArchive(patientFromRepo);
 
-            if (await _doctorRepository.SaveAllAsync())
+            if (await _patientRepository.SaveAllAsync())
                 return NoContent();
 
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");

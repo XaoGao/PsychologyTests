@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
@@ -8,30 +6,19 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
 {
-    public class DoctorRepository : BaseRepository, IDoctorRepository
+    public class DoctorRepository : IDoctorRepository
     {
         private readonly DataContext _context;
-        public DoctorRepository(DataContext context) : base(context)
+        public DoctorRepository(DataContext context)
         {
             _context = context;
+
         }
-
-        public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
+        public async Task<Doctor> GetDoctorAsync(int doctorId)
         {
-            var patient = await _context.Patients.SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
+            var doctor = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
 
-            return patient;
-        }
-
-        public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
-        {
-            var patients = await _context.Patients.Where(p => p.DoctorId == doctorId).ToListAsync();
-            return patients;
-        }
-
-        public void MovePatinetToArchive(Patient patient)
-        {
-            patient.IsDelete = true;
+            return doctor;
         }
     }
 }
