@@ -13,12 +13,12 @@ namespace Psychology_API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/{doctorId}/[controller]")]
-    public class PatientController : ControllerBase
+    public class PatientsController : ControllerBase
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
 
-        public PatientController(IPatientRepository patientRepository, IMapper mapper)
+        public PatientsController(IPatientRepository patientRepository, IMapper mapper)
         {
             _mapper = mapper;
             _patientRepository = patientRepository;

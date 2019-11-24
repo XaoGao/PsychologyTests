@@ -45,10 +45,46 @@ namespace Psychology_Domain.Domain
         /// <value></value>
         public string Middlename { get; set; }
         /// <summary>
+        /// Дата рождения.
+        /// </summary>
+        /// <value></value>
+        public DateTime DateOfBirth { get; set; }
+        /// <summary>
         /// Пациенты под надзором данного врача.
         /// </summary>
         /// <value></value>
         public ICollection<Patient> Patients { get; set; }
+        /// <summary>
+        /// Идентификатор отдела в котором работает доктор.
+        /// </summary>
+        /// <value></value>
+        public int DepartmentId { get; set; }
+        /// <summary>
+        /// Отдел.
+        /// </summary>
+        /// <value></value>
+        public Department Department { get; set; }
+        /// <summary>
+        /// Идентификатор должности которая назначина доктору.
+        /// </summary>
+        /// <value></value>
+        public int PositionId { get; set; }
+        /// <summary>
+        /// Должность.
+        /// </summary>
+        /// <value></value>
+        public Position Position { get; set; }
+        /// <summary>
+        /// Идентификатора телефона, который числится за доктором.
+        /// </summary>
+        /// <value></value>
+        public int PhoneId { get; set; }
+        /// <summary>
+        /// Телефон.
+        /// </summary>
+        /// <value></value>
+        public Phone Phone { get; set; }
+        #region old contructor
         /// <summary>
         /// Создание нового экземпляра класса.
         /// </summary>
@@ -82,5 +118,6 @@ namespace Psychology_Domain.Domain
         //     Middlename = middlename;
         //     #endregion
         // }
+        #endregion
     }
 }

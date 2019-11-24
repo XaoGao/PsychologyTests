@@ -9,11 +9,11 @@ namespace Psychology_API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]/{doctorId}")]
-    public class DoctorController : ControllerBase
+    public class DoctorsController : ControllerBase
     {
         private readonly IDoctorRepository _doctorRepository;
 
-        public DoctorController(IDoctorRepository doctorRepository)
+        public DoctorsController(IDoctorRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
         }
@@ -25,8 +25,11 @@ namespace Psychology_API.Controllers
 
             var doctorFromRepo = await _doctorRepository.GetDoctorAsync(doctorId);
 
-            //Доктора успешео зарегистрировался - не осуществляем проверку на null.
+            if(doctorFromRepo == null)
+                return BadRequest("Указаного пользователя не существует");
+
             //TODO: добавить Dto сущность для доктора.
+            
             return Ok(doctorFromRepo);
         }
     }

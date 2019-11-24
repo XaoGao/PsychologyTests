@@ -11,6 +11,8 @@ namespace Psychology_API.Data
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientHistory> PatientHistories { get; set; }
-        // public DbSet<Test> Tests { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Phone> Phones { get; set; }
     }
 }

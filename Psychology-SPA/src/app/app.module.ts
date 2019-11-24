@@ -1,4 +1,3 @@
-import { AuthService } from './_services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,6 +23,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
+import { PhonebookComponent } from './phonebook/phonebook.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+
+import { AuthService } from './_services/auth.service';
+import { DoctorService } from './_services/doctor.service';
+
+import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
 
 
 export function tokenGetter() {
@@ -37,7 +43,9 @@ export function tokenGetter() {
     NavComponent,
     HomeComponent,
     WorkshipsComponent,
-    SidebarComponent
+    SidebarComponent,
+    PhonebookComponent,
+    DoctorDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,9 @@ export function tokenGetter() {
     ErrorInterceptor,
     AuthGuard,
     AuthService,
-    ToastrAlertService
+    ToastrAlertService,
+    DoctorService,
+    DoctorDetailResolver
   ],
   bootstrap: [
     AppComponent
