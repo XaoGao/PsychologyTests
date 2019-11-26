@@ -8,9 +8,9 @@ namespace Psychology_API.Controllers.Phonebook
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class DepartmentsController : GenericController<Department>
+    public class PhonesController : GenericController<Phone>
     {
-        public DepartmentsController(IGenericRepository<Department> repo) : base(repo)
+        public PhonesController(IGenericRepository<Phone> repo) : base(repo)
         {
         }
     }

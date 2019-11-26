@@ -30,7 +30,8 @@ import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
 
 import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
-
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheeps-layout.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -45,7 +46,9 @@ export function tokenGetter() {
     WorkshipsComponent,
     SidebarComponent,
     PhonebookComponent,
-    DoctorDetailsComponent
+    DoctorDetailsComponent,
+    AuthLayoutComponent,
+    WorksheepsLayoutComponent
   ],
   imports: [
     BrowserModule,

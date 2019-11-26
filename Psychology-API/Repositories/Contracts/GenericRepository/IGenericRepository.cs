@@ -8,7 +8,7 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
     /// Обобщеный интерфейс для чтения данных из БД.
     /// </summary>
     /// <typeparam name="TEntity"> Класс: должность, отдел. </typeparam>
-    public interface IGenericRepository<TEntity> : IBaseRepository where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Получить конкретный экземпляр конкртеного класса.
@@ -27,5 +27,23 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
         /// <param name="predicate"> Условие актульности. </param>
         /// <returns> Лист всех актуальных записей в БД. </returns>
         IEnumerable<TEntity> GetNonLock(Func<TEntity, bool> predicate);
+        /// <summary>
+        /// Добавить в контекст данных новую запись и сохранить изменения.
+        /// </summary>
+        /// <param name="item"> Экземпляр сущности. </param>
+        /// <returns></returns>
+        Task<bool> CreateAsync(TEntity item);
+        /// <summary>
+        /// Удалить в контекст данных запись и сохранить изменения.
+        /// </summary>
+        /// <param name="item"> Экземпляр сущности. </param>
+        /// <returns></returns>
+        Task<bool> DeleteAsync(TEntity item);
+        /// <summary>
+        /// Обновить в контекст данных запись и сохранить изменения.
+        /// </summary>
+        /// <param name="item"> Экземпляр сущности. </param>
+        /// <returns></returns>
+        Task<bool> UpdateAsync(TEntity item);
     }
 }

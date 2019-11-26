@@ -8,11 +8,11 @@ using Psychology_API.Repositories.Contracts.GenericRepository;
 
 namespace Psychology_API.Repositories.Repositories
 {
-    public class GenericRepository<TEntity> : BaseRepository, IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
-        public GenericRepository(DataContext context) : base(context)
+        public GenericRepository(DataContext context)
         {
             _context = context;
         }
@@ -34,6 +34,29 @@ namespace Psychology_API.Repositories.Repositories
         public IEnumerable<TEntity> GetNonLock(Func<TEntity, bool> predicate)
         {
             return _dbSet.AsNoTracking().Where(predicate).ToList();
+        }
+
+        public Task<bool> UpdateAsync(TEntity item)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<bool> CreateAsync(TEntity item)
+        {
+            await _dbSet.AddAsync(item);
+            return await SaveChangeAsync();
+        }
+
+        public async Task<bool> DeleteAsync(TEntity item)
+        {
+            _dbSet.Remove(item);
+            return await SaveChangeAsync();
+        }
+        private async Task<bool> SaveChangeAsync()
+        {
+            if (await _context.SaveChangesAsync() > 0)
+                return true;
+
+            return false;
         }
     }
 }
