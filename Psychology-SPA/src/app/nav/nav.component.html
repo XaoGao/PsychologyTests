@@ -1,9 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand">Психея</a>
+    <a class="navbar-brand text-light">Психея</a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link">Телефонный справочник</a>
+                <button class="nav-link text-light" mat-button [matMenuTriggerFor]="phonebook">Телефонный справочник</button>
+                <mat-menu #phonebook="matMenu">
+                    <button mat-menu-item [routerLink]="['/phonebook']">Телефонный справочник</button>
+                    <button mat-menu-item [routerLink]="['/department']">Отделы</button>
+                    <button mat-menu-item [routerLink]="['/position']">Должности</button>
+                    <button mat-menu-item [routerLink]="['/phone']">Списко телефонов</button>
+                </mat-menu>
             </li>
         </ul>
         <button *ngIf="loggedin()" class="text-light" mat-button [matMenuTriggerFor]="menu">Привет,

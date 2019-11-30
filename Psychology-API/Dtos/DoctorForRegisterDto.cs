@@ -15,5 +15,11 @@ namespace Psychology_API.Dtos
         [Required]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Пароль должен содержать от 2 до 20 символов")]
         public string Password { get; set; }
+        [Required]
+        public int DepartmentId { get; set; }
+        [Required]
+        public int PositionId { get; set; }
+        [Required]
+        public int PhoneId { get; set; }
     }
 }

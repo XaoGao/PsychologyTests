@@ -15,6 +15,7 @@ namespace Psychology_API.Repositories.Repositories
         public GenericRepository(DataContext context)
         {
             _context = context;
+            _dbSet = _context.Set<TEntity>();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

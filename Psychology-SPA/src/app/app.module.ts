@@ -10,8 +10,7 @@ import { ErrorInterceptor } from './_services/error.interceptor';
 import { AuthGuard } from './_guards/auth.guard';
 
 import { JwtModule } from '@auth0/angular-jwt';
-import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
+import { AppRoutingModule } from './routes';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -30,8 +29,13 @@ import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
 
 import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
+import { DepartmentsResolver } from './_resolvers/departments.resolver';
+
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheeps-layout.component';
+import { DepartmentComponent } from './phonebook/department/department.component';
+import { PositionComponent } from './phonebook/position/position.component';
+import { PhoneComponent } from './phonebook/phone/phone.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -48,7 +52,10 @@ export function tokenGetter() {
     PhonebookComponent,
     DoctorDetailsComponent,
     AuthLayoutComponent,
-    WorksheepsLayoutComponent
+    WorksheepsLayoutComponent,
+    DepartmentComponent,
+    PositionComponent,
+    PhoneComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -76,7 +83,8 @@ export function tokenGetter() {
     AuthService,
     ToastrAlertService,
     DoctorService,
-    DoctorDetailResolver
+    DoctorDetailResolver,
+    DepartmentsResolver
   ],
   bootstrap: [
     AppComponent

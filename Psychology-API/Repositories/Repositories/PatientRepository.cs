@@ -26,6 +26,7 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
         {
             var patients = await _context.Patients.Where(p => p.DoctorId == doctorId).ToListAsync();
+
             return patients;
         }
 

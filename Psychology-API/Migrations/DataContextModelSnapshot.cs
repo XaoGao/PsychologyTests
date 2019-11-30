@@ -16,10 +16,36 @@ namespace Psychology_API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SortLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Firstname")
@@ -37,10 +63,22 @@ namespace Psychology_API.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
 
+                    b.Property<int>("PhoneId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PhoneId");
+
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Doctors");
                 });
@@ -56,6 +94,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("Firstname")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Lastname")
                         .HasColumnType("TEXT");
@@ -73,31 +114,62 @@ namespace Psychology_API.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("Psychology_Domain.Domain.PatientHistory", b =>
+            modelBuilder.Entity("Psychology_Domain.Domain.Phone", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateInsert")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("DoctorId")
+                    b.Property<bool>("IsLock")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ReceptionResult")
+                    b.Property<string>("Number")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.ToTable("Phones");
+                });
 
-                    b.HasIndex("PatientId");
+            modelBuilder.Entity("Psychology_Domain.Domain.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.ToTable("PatientHistories");
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SortLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Phone", "Phone")
+                        .WithMany()
+                        .HasForeignKey("PhoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Psychology_Domain.Domain.Patient", b =>
@@ -105,21 +177,6 @@ namespace Psychology_API.Migrations
                     b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
                         .WithMany("Patients")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Psychology_Domain.Domain.PatientHistory", b =>
-                {
-                    b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

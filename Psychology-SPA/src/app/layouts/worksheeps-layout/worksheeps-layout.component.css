@@ -1,0 +1,10 @@
+#sidebar{
+    height: 100vh;
+    padding-top: 80px;
+    position: fixed;
+    overflow-y: scroll;
+    background-color: #f8f8f8;
+}
+#main-container{
+    margin-top: 65px;
+}
