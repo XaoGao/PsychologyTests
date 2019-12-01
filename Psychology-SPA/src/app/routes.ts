@@ -1,3 +1,6 @@
+import { PhonebookResolver } from './_resolvers/phonebook.resolver';
+import { PhonesResolver } from './_resolvers/phones.resolver';
+import { PositionsResolver } from './_resolvers/positions.resolver';
 import { DepartmentsResolver } from './_resolvers/departments.resolver';
 import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
 import { PhoneComponent } from './phonebook/phone/phone.component';
@@ -27,10 +30,10 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'phonebook', component: PhonebookComponent },
-            { path: 'department', component: DepartmentComponent, resolve: {departments: DepartmentsResolver }},
-            { path: 'position', component: PositionComponent },
-            { path: 'phone', component: PhoneComponent },
+            { path: 'phonebook', component: PhonebookComponent, resolve: { departmentsWithDoctors: PhonebookResolver }},
+            { path: 'department', component: DepartmentComponent, resolve: { departments: DepartmentsResolver }},
+            { path: 'position', component: PositionComponent, resolve: { positions: PositionsResolver }},
+            { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
             { path: 'doctor/:id', component: DoctorDetailsComponent, resolve: { doctor: DoctorDetailResolver }},
         ]

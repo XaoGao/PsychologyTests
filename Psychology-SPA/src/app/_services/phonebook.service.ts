@@ -7,10 +7,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PhonebookService {
 
-  BASE_URL_DEPARTMENT = environment.apiUrl + 'doctors/';
+  BASE_URL = environment.apiUrl + 'doctors/';
   constructor(private http: HttpClient) { }
 
   getDepartments(doctorId: number) {
-    return this.http.get(this.BASE_URL_DEPARTMENT + doctorId + '/departments');
+    return this.http.get(this.BASE_URL + doctorId + '/departments');
+  }
+  getPositions(doctorId: number) {
+    return this.http.get(this.BASE_URL + doctorId + '/positions');
+  }
+  getPhones(doctorId: number) {
+    return this.http.get(this.BASE_URL + doctorId + '/phones');
+  }
+  getPhonebook(doctorId: number) {
+    return this.http.get(this.BASE_URL + doctorId + '/phonebook');
   }
 }

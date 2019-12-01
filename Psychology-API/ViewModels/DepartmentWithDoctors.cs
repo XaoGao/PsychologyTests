@@ -18,18 +18,22 @@ namespace Psychology_API.ViewModels
         /// Работники.
         /// </summary>
         /// <value></value>
-        public IEnumerable<Doctor> Doctors { get; set; }
+        public List<Doctor> Doctors { get; set; }
         /// <summary>
         /// Создание нового экземпляра класса
         /// </summary>
         /// <param name="department"> Отдел. </param>
         /// <param name="doctors"> Работники.</param>
-        public DepartmentWithDoctors(Department department, IEnumerable<Doctor> doctors)
+        public DepartmentWithDoctors(Department department, List<Doctor> doctors)
         {
             if (department == null)
                 throw new ArgumentNullException(nameof(department));
+
+            if(doctors.Count == 0)
+                throw new Exception(nameof(doctors));
             
             Department = department;
+            Doctors = doctors;
         }
     }
 }

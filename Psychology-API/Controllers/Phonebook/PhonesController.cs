@@ -7,7 +7,7 @@ namespace Psychology_API.Controllers.Phonebook
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/doctors/{doctorId}/[controller]")]
     public class PhonesController : GenericController<Phone>
     {
         public PhonesController(IGenericRepository<Phone> repo) : base(repo)

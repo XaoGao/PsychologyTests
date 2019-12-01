@@ -37,6 +37,7 @@ namespace Psychology_API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IPhonebookRepository, PhonebookRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication(options => 

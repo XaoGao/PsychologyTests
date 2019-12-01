@@ -17,12 +17,17 @@ namespace Psychology_API.Repositories.Repositories
         }
         public async Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookAsync()
         {
-            var departments = await _context.Departments.Where(d => d.IsLock == false).ToListAsync();
+            var departments = await _context.Departments.Where(d => d.IsLock != true).ToListAsync();
             List<DepartmentWithDoctors> phonebook = new List<DepartmentWithDoctors>();
 
-            foreach (var department in departments.Where(d => d.IsLock == false))
+            foreach (var department in departments)
             {
-                var doctorsInDepartment = await _context.Doctors.Where(d => d.DepartmentId == department.Id).ToListAsync();
+                var doctorsInDepartment = await _context.Doctors
+                    .Where(d => d.DepartmentId == department.Id)
+                    .Include(d => d.Position)
+                    .Include(d => d.Department)
+                    .Include (d => d.Phone)
+                    .ToListAsync();
 
                 if (doctorsInDepartment.Count == 0)
                     continue;

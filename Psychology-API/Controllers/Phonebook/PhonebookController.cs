@@ -8,11 +8,11 @@ namespace Psychology_API.Controllers.Phonebook
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
-    public class PhonebooksController : ControllerBase
+    [Route("api/doctors/{doctorId}/[controller]")]
+    public class PhonebookController : ControllerBase
     {
         private readonly IPhonebookRepository _phonebookRepository;
-        public PhonebooksController(IPhonebookRepository phonebookRepository)
+        public PhonebookController(IPhonebookRepository phonebookRepository)
         {
             _phonebookRepository = phonebookRepository;
         }

@@ -44,6 +44,7 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string Middlename { get; set; }
+        public string FullName { get => $"{Lastname} {Firstname} {Middlename}";}
         /// <summary>
         /// Дата рождения.
         /// </summary>

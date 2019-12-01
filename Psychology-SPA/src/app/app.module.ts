@@ -30,6 +30,9 @@ import { DoctorService } from './_services/doctor.service';
 
 import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
 import { DepartmentsResolver } from './_resolvers/departments.resolver';
+import { PhonesResolver } from './_resolvers/phones.resolver';
+import { PositionsResolver } from './_resolvers/positions.resolver';
+import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheeps-layout.component';
@@ -84,7 +87,10 @@ export function tokenGetter() {
     ToastrAlertService,
     DoctorService,
     DoctorDetailResolver,
-    DepartmentsResolver
+    DepartmentsResolver,
+    PositionsResolver,
+    PhonesResolver,
+    PhonebookResolver
   ],
   bootstrap: [
     AppComponent
