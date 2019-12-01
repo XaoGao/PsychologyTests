@@ -23,7 +23,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
-import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -39,6 +38,7 @@ import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheep
 import { DepartmentComponent } from './phonebook/department/department.component';
 import { PositionComponent } from './phonebook/position/position.component';
 import { PhoneComponent } from './phonebook/phone/phone.component';
+import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -53,12 +53,12 @@ export function tokenGetter() {
     WorkshipsComponent,
     SidebarComponent,
     PhonebookComponent,
-    DoctorDetailsComponent,
     AuthLayoutComponent,
     WorksheepsLayoutComponent,
     DepartmentComponent,
     PositionComponent,
-    PhoneComponent
+    PhoneComponent,
+    DoctorEditComponent
   ],
   imports: [
     BrowserModule,

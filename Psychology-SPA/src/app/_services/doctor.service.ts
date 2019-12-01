@@ -13,6 +13,6 @@ export class DoctorService {
   constructor(private http: HttpClient) { }
 
   getDoctor(id: number): Observable<Doctor> {
-    return this.http.get<Doctor>(this.BASE_URL_DOCTOR);
+    return this.http.get<Doctor>(this.BASE_URL_DOCTOR + '/' + id);
   }
 }

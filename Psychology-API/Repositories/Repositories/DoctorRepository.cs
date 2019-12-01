@@ -16,7 +16,11 @@ namespace Psychology_API.Repositories.Repositories
         }
         public async Task<Doctor> GetDoctorAsync(int doctorId)
         {
-            var doctor = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
+            var doctor = await _context.Doctors
+                .Include(d => d.Phone)
+                .Include(d => d.Position)
+                .Include(d => d.Department)
+                .SingleOrDefaultAsync(d => d.Id == doctorId);
 
             return doctor;
         }

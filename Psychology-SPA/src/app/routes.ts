@@ -1,3 +1,4 @@
+import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
 import { PositionsResolver } from './_resolvers/positions.resolver';
@@ -7,7 +8,6 @@ import { PhoneComponent } from './phonebook/phone/phone.component';
 import { PositionComponent } from './phonebook/position/position.component';
 import { DepartmentComponent } from './phonebook/department/department.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
-import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
             { path: 'position', component: PositionComponent, resolve: { positions: PositionsResolver }},
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
-            { path: 'doctor/:id', component: DoctorDetailsComponent, resolve: { doctor: DoctorDetailResolver }},
+            { path: 'doctor/edit', component: DoctorEditComponent, resolve: { doctor: DoctorDetailResolver }},
         ]
     },
     { path: '**', redirectTo: '' }

@@ -3,7 +3,8 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <button class="nav-link text-light" mat-button [matMenuTriggerFor]="phonebook">Телефонный справочник</button>
+                <button class="nav-link text-light" mat-button [matMenuTriggerFor]="phonebook">Телефонный
+                    справочник</button>
                 <mat-menu #phonebook="matMenu">
                     <button mat-menu-item [routerLink]="['/phonebook']">Телефонный справочник</button>
                     <button mat-menu-item [routerLink]="['/department']">Отделы</button>
@@ -15,6 +16,8 @@
         <button *ngIf="loggedin()" class="text-light" mat-button [matMenuTriggerFor]="menu">Привет,
             {{ authService.decodedToken.unique_name | titlecase }} <i class="fa fa-caret-down"></i></button>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/doctor/edit']">Редактировать профиль <i class="fa fa-user"></i></button>
+            <div class="dropdown-divider"></div>
             <button mat-menu-item (click)="logout()">Выйти <i class="fa fa-sign-out"></i></button>
         </mat-menu>
         <form *ngIf="!loggedin()" class="form-inline mt-2 mt-md-0">
