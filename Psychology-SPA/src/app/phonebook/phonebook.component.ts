@@ -14,7 +14,6 @@ export class PhonebookComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      console.log(this.departmentsWithDoctors);
       this.departmentsWithDoctors = data.departmentsWithDoctors;
     });
   }

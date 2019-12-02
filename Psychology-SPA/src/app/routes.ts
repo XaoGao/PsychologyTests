@@ -1,3 +1,4 @@
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
@@ -36,6 +37,7 @@ const routes: Routes = [
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
             { path: 'doctor/edit', component: DoctorEditComponent, resolve: { doctor: DoctorDetailResolver }},
+            { path: 'doctors', component: DoctorsListComponent }
         ]
     },
     { path: '**', redirectTo: '' }

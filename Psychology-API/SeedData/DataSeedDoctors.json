@@ -1,0 +1,101 @@
+[
+    {
+        "Username" : "admin",
+        "Lastname" : "admin",
+        "Firstname" : "admin",
+        "Middlename" : "admin",
+        "DateOfBirth" : "1992-05-15",
+        "DepartmentId" : 1,
+        "PositionId" : 1,
+        "PhoneId" : 1,
+        "RoleId" : 1
+    },
+    {
+        "Username" : "test",
+        "Lastname" : "Ибатуллин",
+        "Firstname" : "Ришат",
+        "Middlename" : "Магарифович",
+        "DateOfBirth" : "1992-05-15",
+        "DepartmentId" : 1,
+        "PositionId" : 1,
+        "PhoneId" : 1,
+        "RoleId" : 2
+    },
+    {
+        "Username" : "test2",
+        "Lastname" : "Кутуев",
+        "Firstname" : "Иван",
+        "Middlename" : "Борисович",
+        "DateOfBirth" : "1994-04-12",
+        "DepartmentId" : 1,
+        "PositionId" : 2,
+        "PhoneId" : 2,
+        "RoleId" : 2
+    },
+    {
+        "Username" : "test3",
+        "Lastname" : "Люлька",
+        "Firstname" : "Михаил",
+        "Middlename" : "Борисовч",
+        "DateOfBirth" : "1984-09-09",
+        "DepartmentId" : 2,
+        "PositionId" : 3,
+        "PhoneId" : 3,
+        "RoleId" : 2
+    },
+    {
+        "Username" : "test4",
+        "Lastname" : "Ярмош",
+        "Firstname" : "Александра",
+        "Middlename" : "Владимировна",
+        "DateOfBirth" : "1993-01-08",
+        "DepartmentId" : 2,
+        "PositionId" : 4,
+        "PhoneId" : 4,
+        "RoleId" : 3
+    },
+    {
+        "Username" : "test5",
+        "Lastname" : "Арсланов",
+        "Firstname" : "Нил",
+        "Middlename" : "Нильевич",
+        "DateOfBirth" : "1985-11-11",
+        "DepartmentId" : 3,
+        "PositionId" : 5,
+        "PhoneId" : 5,
+        "RoleId" : 3
+    },
+    {
+        "Username" : "test6",
+        "Lastname" : "Цубера",
+        "Firstname" : "Анжела",
+        "Middlename" : "Ивановна",
+        "DateOfBirth" : "1980-07-01",
+        "DepartmentId" : 4,
+        "PositionId" : 6,
+        "PhoneId" : 6,
+        "RoleId" : 2
+    },
+    {
+        "Username" : "test7",
+        "Lastname" : "Тарик",
+        "Firstname" : "Валентин",
+        "Middlename" : "Иванов",
+        "DateOfBirth" : "1979-05-02",
+        "DepartmentId" : 5,
+        "PositionId" : 6,
+        "PhoneId" : 7,
+        "RoleId" : 2
+    },
+    {
+        "Username" : "test8",
+        "Lastname" : "Неактивен",
+        "Firstname" : "Неактивен",
+        "Middlename" : "Неактивен",
+        "DateOfBirth" : "1990-01-01",
+        "DepartmentId" : 6,
+        "PositionId" : 7,
+        "PhoneId" : 8,
+        "RoleId" : 2
+    }
+]

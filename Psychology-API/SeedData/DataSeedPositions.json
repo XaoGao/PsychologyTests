@@ -1,0 +1,37 @@
+[
+    {
+        "Name" : "Глав врач",
+        "SortLevel" : 1,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Замечтитель глав врача",
+        "SortLevel" : 2,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Глав бух",
+        "SortLevel" : 3,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Бухалтер",
+        "SortLevel" : 4,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Кадровик",
+        "SortLevel" : 5,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Врач",
+        "SortLevel" : 6,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Не активная должность",
+        "SortLevel" : 7,
+        "IsLock" : true
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "Name" : "Администрация",
+        "SortLevel" : 1,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Бухгалтер",
+        "SortLevel" : 2,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Отдел кадров",
+        "SortLevel" : 3,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Отдел клинических психологов",
+        "SortLevel" : 4,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Отдел детских психологов",
+        "SortLevel" : 5,
+        "IsLock" : false
+    },
+    {
+        "Name" : "Неактивный отдел",
+        "SortLevel" : 6,
+        "IsLock" : true
+    }
+]

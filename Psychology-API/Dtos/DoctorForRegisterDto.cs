@@ -21,5 +21,7 @@ namespace Psychology_API.Dtos
         public int PositionId { get; set; }
         [Required]
         public int PhoneId { get; set; }
+        [Required]
+        public int RoleId { get; set; }
     }
 }

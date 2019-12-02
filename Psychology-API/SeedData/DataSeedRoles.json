@@ -1,0 +1,14 @@
+[
+    {
+        "Name" : "Администратор",
+        "IsLock" : false
+    },
+    {
+        "Name" : "Доктор",
+        "IsLock" : false
+    },
+    {
+        "Name" : "Не докторы",
+        "IsLock" : false
+    }
+]

@@ -85,6 +85,16 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public Phone Phone { get; set; }
+        /// <summary>
+        /// Идентификатор роли.
+        /// </summary>
+        /// <value></value>
+        public int RoleId { get; set; }
+        /// <summary>
+        /// Роль пользователя.
+        /// </summary>
+        /// <value></value>
+        public Role Role { get; set; }
         #region old contructor
         /// <summary>
         /// Создание нового экземпляра класса.

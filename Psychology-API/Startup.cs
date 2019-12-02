@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Psychology_API.Repositories.Contracts.GenericRepository;
+using Psychology_API.SeedData;
 
 namespace Psychology_API
 {
@@ -40,6 +41,7 @@ namespace Psychology_API
             services.AddScoped<IPhonebookRepository, PhonebookRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<SeedAllData>();
             services.AddAuthentication(options => 
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,7 +62,7 @@ namespace Psychology_API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedAllData seed)
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +84,7 @@ namespace Psychology_API
                 });
             }
             // app.UseHttpsRedirection();
-
+            // seed.SeedData();
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

@@ -69,6 +69,9 @@ namespace Psychology_API.Migrations
                     b.Property<int>("PositionId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
@@ -79,6 +82,8 @@ namespace Psychology_API.Migrations
                     b.HasIndex("PhoneId");
 
                     b.HasIndex("PositionId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Doctors");
                 });
@@ -151,6 +156,23 @@ namespace Psychology_API.Migrations
                     b.ToTable("Positions");
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>
                 {
                     b.HasOne("Psychology_Domain.Domain.Department", "Department")
@@ -168,6 +190,12 @@ namespace Psychology_API.Migrations
                     b.HasOne("Psychology_Domain.Domain.Position", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

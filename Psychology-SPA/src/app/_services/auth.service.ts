@@ -23,6 +23,8 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.helper.decodeToken(user.token);
+          // !раскомментировать, чтобы посмотреть, что лежит в токене
+          // console.log(this.decodedToken);
         }
       })
     );

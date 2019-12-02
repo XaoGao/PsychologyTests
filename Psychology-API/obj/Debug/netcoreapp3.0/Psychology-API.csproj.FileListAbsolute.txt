@@ -53,3 +53,8 @@
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.IdentityModel.Tokens.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Newtonsoft.Json.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/System.IdentityModel.Tokens.Jwt.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedDepartments.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedDoctors.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedPhones.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedPositions.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedRoles.json

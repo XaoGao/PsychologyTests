@@ -52,6 +52,20 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    IsLock = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctors",
                 columns: table => new
                 {
@@ -66,7 +80,8 @@ namespace Psychology_API.Migrations
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     DepartmentId = table.Column<int>(nullable: false),
                     PositionId = table.Column<int>(nullable: false),
-                    PhoneId = table.Column<int>(nullable: false)
+                    PhoneId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,6 +102,12 @@ namespace Psychology_API.Migrations
                         name: "FK_Doctors_Positions_PositionId",
                         column: x => x.PositionId,
                         principalTable: "Positions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Doctors_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -131,6 +152,11 @@ namespace Psychology_API.Migrations
                 column: "PositionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Doctors_RoleId",
+                table: "Doctors",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
                 column: "DoctorId");
@@ -152,6 +178,9 @@ namespace Psychology_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Positions");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

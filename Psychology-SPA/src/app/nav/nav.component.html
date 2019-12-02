@@ -2,7 +2,7 @@
     <a class="navbar-brand text-light">Психея</a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <button class="nav-link text-light" mat-button [matMenuTriggerFor]="phonebook">Телефонный
                     справочник</button>
                 <mat-menu #phonebook="matMenu">
@@ -12,11 +12,15 @@
                     <button mat-menu-item [routerLink]="['/phone']">Списко телефонов</button>
                 </mat-menu>
             </li>
+            <li class="nav-item" *ngIf="authService.decodedToken.role == 1">
+                <a class="nav-link text-light" [routerLink]="['/doctors']">Операции над врачами</a>
+            </li>
         </ul>
         <button *ngIf="loggedin()" class="text-light" mat-button [matMenuTriggerFor]="menu">Привет,
             {{ authService.decodedToken.unique_name | titlecase }} <i class="fa fa-caret-down"></i></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['/doctor/edit']">Редактировать профиль <i class="fa fa-user"></i></button>
+            <button mat-menu-item [routerLink]="['/doctor/edit']">Редактировать профиль <i
+                    class="fa fa-user"></i></button>
             <div class="dropdown-divider"></div>
             <button mat-menu-item (click)="logout()">Выйти <i class="fa fa-sign-out"></i></button>
         </mat-menu>

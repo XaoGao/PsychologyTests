@@ -39,6 +39,7 @@ import { DepartmentComponent } from './phonebook/department/department.component
 import { PositionComponent } from './phonebook/position/position.component';
 import { PhoneComponent } from './phonebook/phone/phone.component';
 import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -58,7 +59,8 @@ export function tokenGetter() {
     DepartmentComponent,
     PositionComponent,
     PhoneComponent,
-    DoctorEditComponent
+    DoctorEditComponent,
+    DoctorsListComponent
   ],
   imports: [
     BrowserModule,
