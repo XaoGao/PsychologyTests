@@ -1,15 +1,17 @@
+using Psychology_Domain.Abstarct;
+
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Отдел.
     /// </summary>
-    public class Department
+    public class Department : BaseEntity
     {
         /// <summary>
         /// Идентификатор.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Наименование отдела.
         /// </summary>

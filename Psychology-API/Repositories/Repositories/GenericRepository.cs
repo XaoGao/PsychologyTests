@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts.GenericRepository;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
-        public GenericRepository(DataContext context)
+        private IMemoryCache cache;
+        private readonly TimeSpan cacheTime;
+        public GenericRepository(DataContext context, IMemoryCache cache)
         {
+            this.cache = cache;
+            cacheTime = TimeSpan.FromMinutes(15);
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
@@ -27,7 +33,15 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<TEntity> GetAsync(int id)
         {
-            var entity = await _dbSet.FindAsync(id);
+            TEntity entity = null;
+            if(!cache.TryGetValue(id, out entity))
+            {
+                entity = await _dbSet.FindAsync(id);
+                if(entity != null)
+                {
+                    cache.Set(id, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(cacheTime));
+                }
+            }
 
             return entity;
         }
@@ -44,7 +58,13 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<bool> CreateAsync(TEntity item)
         {
             await _dbSet.AddAsync(item);
-            return await SaveChangeAsync();
+            // return await SaveChangeAsync();
+            if(await SaveChangeAsync())
+            {
+                cache.Set(item.Id, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(cacheTime));
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> DeleteAsync(TEntity item)

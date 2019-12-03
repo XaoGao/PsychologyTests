@@ -1,15 +1,17 @@
+using Psychology_Domain.Abstarct;
+
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Телефон доктора.
     /// </summary>
-    public class Phone
+    public class Phone : BaseEntity
     {
         /// <summary>
         /// Идентификатор.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Номер телефона.
         /// </summary>

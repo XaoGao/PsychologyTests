@@ -1,14 +1,14 @@
 [
     {
-        "Name" : "Администратор",
+        "Name" : "admin",
         "IsLock" : false
     },
     {
-        "Name" : "Доктор",
+        "Name" : "doctor",
         "IsLock" : false
     },
     {
-        "Name" : "Не докторы",
+        "Name" : "hr",
         "IsLock" : false
     }
 ]

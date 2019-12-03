@@ -12,6 +12,8 @@ namespace Psychology_API.Helpers
             CreateMap<DoctorForRegisterDto, Doctor>();
             CreateMap<DoctorForLoginDto, Doctor>();
 
+            CreateMap<Doctor, DoctorForRegisterDto>();
+
             // Пациент.
             CreateMap<PatientForCreateDto, Patient>();
             CreateMap<PatientForUpdateDto, Patient>();
