@@ -5,10 +5,10 @@ import { Department } from './department';
 export interface Doctor {
     id: number;
     username: string;
-    lastName: string;
-    firstName: string;
-    middleName: string;
-    fullName: string;
+    lastname: string;
+    firstname: string;
+    middlename: string;
+    fullname: string;
     dateOfBirth: Date;
     departmentId: number;
     department: Department;

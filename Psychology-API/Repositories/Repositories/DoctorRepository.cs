@@ -6,10 +6,10 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
 {
-    public class DoctorRepository : IDoctorRepository
+    public class DoctorRepository : BaseRepository, IDoctorRepository
     {
         private readonly DataContext _context;
-        public DoctorRepository(DataContext context)
+        public DoctorRepository(DataContext context) : base(context)
         {
             _context = context;
 

@@ -7,12 +7,12 @@
                     справочник</button>
                 <mat-menu #phonebook="matMenu">
                     <button mat-menu-item [routerLink]="['/phonebook']">Телефонный справочник</button>
-                    <button mat-menu-item [routerLink]="['/department']">Отделы</button>
-                    <button mat-menu-item [routerLink]="['/position']">Должности</button>
-                    <button mat-menu-item [routerLink]="['/phone']">Списко телефонов</button>
+                    <button mat-menu-item *ngIf="authService.decodedToken.role == 'hr'" [routerLink]="['/department']">Отделы</button>
+                    <button mat-menu-item *ngIf="authService.decodedToken.role == 'hr'" [routerLink]="['/position']">Должности</button>
+                    <button mat-menu-item *ngIf="authService.decodedToken.role == 'hr'" [routerLink]="['/phone']">Списко телефонов</button>
                 </mat-menu>
             </li>
-            <li class="nav-item" *ngIf="authService.decodedToken.role == 1">
+            <li class="nav-item" *ngIf="authService.decodedToken.role == 'admin'">
                 <a class="nav-link text-light" [routerLink]="['/doctors']">Операции над врачами</a>
             </li>
         </ul>

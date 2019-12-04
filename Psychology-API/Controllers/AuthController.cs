@@ -76,6 +76,20 @@ namespace Psychology_API.Controllers
             {
                 token = tokenHandler.WriteToken(token)
             });
-        }       
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost("{doctorId}")]       
+        public async Task<IActionResult> DropPassword(int doctorId)
+        {
+            //TODO: Добавить функцию для сброса пароля на стандартный для конкретного пользователя
+            return Ok();
+        }
+        [Authorize]
+        [HttpPost("{doctorId}")]
+        public async Task<IActionResult> ChangePassword(int doctorId, string newPassword)
+        {
+            //TODO: Добавить функцию для изменения пароля
+            return Ok();
+        }
     }
 }

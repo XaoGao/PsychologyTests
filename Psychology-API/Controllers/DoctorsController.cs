@@ -37,5 +37,24 @@ namespace Psychology_API.Controllers
             
             return Ok(doctorFromRepo);
         }
+        [HttpPut("{doctorId}")]
+        public async Task<IActionResult> UpdateDoctorDetail(int doctorId, DoctorForUpdateDto doctorForUpdateDto)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            var doctorFromRepo = await _doctorRepository.GetDoctorAsync(doctorId);
+
+            if(doctorFromRepo == null)
+                return BadRequest("Указаного пользователя не существует");
+
+            _mapper.Map(doctorForUpdateDto, doctorFromRepo);
+
+            if(await _doctorRepository.SaveAllAsync())
+                return NoContent();
+
+            throw new Exception("Возникла не предвиденная ошибка в ходе обновления данных");
+        }
+
     }
 }

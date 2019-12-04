@@ -1,5 +1,4 @@
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
-import { DoctorEditComponent } from './doctor-edit/doctor-edit.component';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
 import { PositionsResolver } from './_resolvers/positions.resolver';
@@ -16,6 +15,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheeps-layout.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 
 const routes: Routes = [
     {
@@ -36,7 +36,7 @@ const routes: Routes = [
             { path: 'position', component: PositionComponent, resolve: { positions: PositionsResolver }},
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
-            { path: 'doctor/edit', component: DoctorEditComponent, resolve: { doctor: DoctorDetailResolver }},
+            { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver }},
             { path: 'doctors', component: DoctorsListComponent }
         ]
     },

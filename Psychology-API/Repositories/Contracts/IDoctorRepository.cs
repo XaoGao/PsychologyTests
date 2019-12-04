@@ -6,7 +6,7 @@ namespace Psychology_API.Repositories.Contracts
     /// <summary>
     /// Интерфейса репозитория доктора.
     /// </summary>
-    public interface IDoctorRepository
+    public interface IDoctorRepository : IBaseRepository
     {
         /// <summary>
         /// Получить данные конкретного доктора.

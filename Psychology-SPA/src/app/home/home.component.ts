@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     });
   }
   register() {
-    this.authService.login(this.userForLogin).subscribe(() => {
+    this.authService.login(this.userForRegister).subscribe(() => {
       this.toastrService.success('Вы успешно зарегистрировались в программе');
     }, err => {
       this.toastrService.error(err);
