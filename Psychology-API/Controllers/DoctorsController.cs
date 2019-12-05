@@ -32,10 +32,10 @@ namespace Psychology_API.Controllers
 
             if(doctorFromRepo == null)
                 return BadRequest("Указаного пользователя не существует");
-                
-            // var doctorForReturn = _mapper.Map<DoctorForReturnDto>(doctorFromRepo);
+
+            var doctorToReturn = _mapper.Map<DoctorForReturnDto>(doctorFromRepo);
             
-            return Ok(doctorFromRepo);
+            return Ok(doctorToReturn);
         }
         [HttpPut("{doctorId}")]
         public async Task<IActionResult> UpdateDoctorDetail(int doctorId, DoctorForUpdateDto doctorForUpdateDto)

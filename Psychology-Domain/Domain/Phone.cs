@@ -21,7 +21,7 @@ namespace Psychology_Domain.Domain
         /// Актуальность телефона.
         /// </summary>
         /// <value></value>
-        public bool IsLock { get; set; }
+        // public bool IsLock { get; set; }
         /// <summary>
         /// Маска телефона.
         /// </summary>

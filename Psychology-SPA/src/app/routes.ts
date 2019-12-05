@@ -22,7 +22,8 @@ const routes: Routes = [
         path: '',
         component: AuthLayoutComponent,
         children: [
-            { path: '', component: HomeComponent}
+            { path: '', component: HomeComponent }
+            // { path: '', component: HomeComponent, resolve: { departments: DepartmentsResolver, positions: PositionsResolver }}
         ]
     },
     {
@@ -36,7 +37,8 @@ const routes: Routes = [
             { path: 'position', component: PositionComponent, resolve: { positions: PositionsResolver }},
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
-            { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver }},
+            { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver,
+                departments: DepartmentsResolver, positions: PositionsResolver }},
             { path: 'doctors', component: DoctorsListComponent }
         ]
     },

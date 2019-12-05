@@ -58,3 +58,11 @@
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedPhones.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedPositions.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedRoles.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Caching.Abstractions.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Caching.Memory.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Options.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Primitives.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/System.ComponentModel.Annotations.dll
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/System.Runtime.CompilerServices.Unsafe.dll

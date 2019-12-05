@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
 // Service
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -84,7 +85,8 @@ export function tokenGetter() {
     MatMenuModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     ErrorInterceptor,

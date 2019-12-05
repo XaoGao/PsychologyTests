@@ -1,8 +1,10 @@
+import { Position } from './../_models/position';
 import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../_models/doctor';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { ActivatedRoute } from '@angular/router';
 import { DoctorService } from '../_services/doctor.service';
+import { Department } from '../_models/department';
 
 @Component({
   selector: 'app-doctor-detail',
@@ -11,16 +13,20 @@ import { DoctorService } from '../_services/doctor.service';
 })
 export class DoctorDetailComponent implements OnInit {
   public doctor: Doctor;
+  departments: Department[];
+  positions: Position[];
   constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute, private doctorService: DoctorService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.doctor = data.doctor;
+      this.departments = data.departments;
+      this.positions = data.positions;
     });
   }
   updateDoctor() {
     this.doctorService.updateDoctor(this.doctor).subscribe(() => {
-      this.toastrService.success('Дданные успешно обновлены');
+      this.toastrService.success('Данные успешно обновлены');
     }, err => {
       this.toastrService.error(err);
     });

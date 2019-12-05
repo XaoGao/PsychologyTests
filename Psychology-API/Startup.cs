@@ -41,6 +41,7 @@ namespace Psychology_API
             services.AddScoped<IPhonebookRepository, PhonebookRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
+            services.AddMemoryCache();
             services.AddTransient<SeedAllData>();
             services.AddAuthentication(options => 
             {

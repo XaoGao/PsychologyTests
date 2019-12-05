@@ -5,35 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 using Psychology_API.Repositories.Repositories;
 using System;
 using Psychology_API.Repositories.Contracts.GenericRepository;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Controllers.Phonebook
 {
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
-    [Route("api/doctors/{doctorId}/[controller]")]
-    public class GenericController<TEntity> : ControllerBase where TEntity : class
+    [Route("api/[controller]")]
+    public class GenericController<TEntity> : ControllerBase where TEntity : BaseEntity
     {
         private readonly IGenericRepository<TEntity> _repo;
         public GenericController(IGenericRepository<TEntity> repo)
         {
             _repo = repo;
         }
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetAll(int doctorId)
+        public IActionResult GetAll()
         {
-            if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized("Пользователь должен авторизоваться.");
+            // if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized("Пользователь должен авторизоваться.");
 
-            var entities = await _repo.GetAllAsync();
+            var entities = _repo.GetWithCondition(e => e.IsLock != true);
 
             return Ok(entities);
         }
- 
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int doctorId, int id)
+        public async Task<IActionResult> Get( int id)
         {
-            if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized("Пользователь должен авторизоваться.");
+            // if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized("Пользователь должен авторизоваться.");
 
             var entity = await _repo.GetAsync(id);
 
@@ -42,6 +44,7 @@ namespace Psychology_API.Controllers.Phonebook
 
             return Ok(entity);
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(int doctorId, TEntity item)
         {
@@ -53,6 +56,7 @@ namespace Psychology_API.Controllers.Phonebook
 
             throw new Exception("Не предвиденная ошибка в ходе добавления новых данных.");
         }
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int doctorId, int id)
         {

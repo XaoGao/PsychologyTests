@@ -45,6 +45,24 @@
                             <input matInput placeholder="Введтие Ваш пароль" type="password" name="Password"
                                 [(ngModel)]="userForRegister.password" required />
                         </mat-form-field>
+                        <!-- <div class="row"> -->
+                            <!-- <mat-form-field>
+                                <mat-label>Укажите отдел</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let department of departments" [value]="department.id">
+                                        {{ department.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Укажите должность</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let position of positions" [value]="position.id">
+                                        {{ position.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                        <!-- </div> -->
                         <button class="btn btn-primary pull-right" (click)="register()"
                             [disabled]="!registerForm.valid">
                             Зарегистрироваться

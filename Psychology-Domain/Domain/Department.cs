@@ -26,6 +26,6 @@ namespace Psychology_Domain.Domain
         /// Актуальность отдела.
         /// </summary>
         /// <value></value>
-        public bool IsLock { get; set; }
+        // public bool IsLock { get; set; }
     }
 }

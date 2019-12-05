@@ -10,5 +10,10 @@ namespace Psychology_Domain.Abstarct
         /// </summary>
         /// <value></value>
         public int Id { get; set; }
+        /// <summary>
+        /// Актуальность.
+        /// </summary>
+        /// <value></value>
+        public bool IsLock { get; set; }
     }
 }

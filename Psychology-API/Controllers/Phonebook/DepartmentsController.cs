@@ -5,9 +5,9 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers.Phonebook
 {
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
-    [Route("api/doctors/{doctorId}/[controller]")]
+    [Route("api/[controller]")]
     public class DepartmentsController : GenericController<Department>
     {
         public DepartmentsController(IGenericRepository<Department> repo) : base(repo)

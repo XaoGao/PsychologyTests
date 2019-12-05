@@ -15,11 +15,11 @@ namespace Psychology_API.Repositories.Repositories
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
         private IMemoryCache cache;
-        private readonly TimeSpan cacheTime;
+        private const int CAHSE_TIME_LIFE_IN_MINUT = 15;
         public GenericRepository(DataContext context, IMemoryCache cache)
         {
             this.cache = cache;
-            cacheTime = TimeSpan.FromMinutes(15);
+            // cacheTime = TimeSpan.FromMinutes(15);
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
@@ -34,19 +34,18 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<TEntity> GetAsync(int id)
         {
             TEntity entity = null;
+                
             if(!cache.TryGetValue(id, out entity))
             {
                 entity = await _dbSet.FindAsync(id);
                 if(entity != null)
-                {
-                    cache.Set(id, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(cacheTime));
-                }
+                    cache.Set(id, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
             }
 
             return entity;
         }
 
-        public IEnumerable<TEntity> GetNonLock(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> GetWithCondition(Func<TEntity, bool> predicate)
         {
             return _dbSet.AsNoTracking().Where(predicate).ToList();
         }
@@ -58,10 +57,9 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<bool> CreateAsync(TEntity item)
         {
             await _dbSet.AddAsync(item);
-            // return await SaveChangeAsync();
             if(await SaveChangeAsync())
             {
-                cache.Set(item.Id, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(cacheTime));
+                cache.Set(item.Id, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
                 return true;
             }
             return false;
