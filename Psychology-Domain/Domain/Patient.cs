@@ -15,7 +15,7 @@ namespace Psychology_Domain.Domain
         /// Номер личной карточки.
         /// </summary>
         /// <value></value>
-        public int PersonalCardNumber { get; set; }
+        public string PersonalCardNumber { get; set; }
         /// <summary>
         /// Фамилия.
         /// </summary>
@@ -42,6 +42,10 @@ namespace Psychology_Domain.Domain
         /// <value></value>
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
+        /// <summary>
+        /// Актуальность пациента.
+        /// </summary>
+        /// <value></value>
         public bool IsDelete { get; set; }
         
     }

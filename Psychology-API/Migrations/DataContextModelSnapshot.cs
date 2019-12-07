@@ -109,8 +109,8 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Middlename")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PersonalCardNumber")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PersonalCardNumber")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -173,6 +173,31 @@ namespace Psychology_API.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Vacation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CountDays")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EndVacation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartVacation")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Vacations");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>
                 {
                     b.HasOne("Psychology_Domain.Domain.Department", "Department")
@@ -204,6 +229,15 @@ namespace Psychology_API.Migrations
                 {
                     b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
                         .WithMany("Patients")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.Vacation", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
+                        .WithMany()
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

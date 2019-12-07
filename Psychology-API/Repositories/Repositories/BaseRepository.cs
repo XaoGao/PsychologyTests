@@ -26,7 +26,7 @@ namespace Psychology_API.Repositories.Repositories
         /// Добавление сущности в контекст данных.
         /// </summary>
         /// <typeparam name="T"> Обобщенная сущность из контекста. </typeparam>
-        public void Add<T>(T entity) where T : class
+        public virtual void Add<T>(T entity) where T : class
         {
             _context.Add(entity);
         }

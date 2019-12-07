@@ -14,7 +14,11 @@ export class ToastrAlertService {
     return this.toastr.info(message);
   }
   error(message: any) {
-    return this.toastr.error(message.error);
+    if (message.error) {
+      return this.toastr.error(message.error);
+    } else {
+      return this.toastr.error(message);
+    }
   }
   warning(message: string) {
     return this.toastr.warning(message);

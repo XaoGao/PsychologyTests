@@ -13,9 +13,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    SortLevel = table.Column<int>(nullable: false),
-                    IsLock = table.Column<bool>(nullable: false)
+                    SortLevel = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,8 +28,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Number = table.Column<string>(nullable: true),
-                    IsLock = table.Column<bool>(nullable: false)
+                    IsLock = table.Column<bool>(nullable: false),
+                    Number = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,9 +42,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    SortLevel = table.Column<int>(nullable: false),
-                    IsLock = table.Column<bool>(nullable: false)
+                    SortLevel = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,7 +118,7 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    PersonalCardNumber = table.Column<int>(nullable: false),
+                    PersonalCardNumber = table.Column<string>(nullable: true),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
@@ -130,6 +130,28 @@ namespace Psychology_API.Migrations
                     table.PrimaryKey("PK_Patients", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Patients_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vacations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DoctorId = table.Column<int>(nullable: false),
+                    StartVacation = table.Column<DateTime>(nullable: false),
+                    EndVacation = table.Column<DateTime>(nullable: false),
+                    CountDays = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vacations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vacations_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
@@ -160,12 +182,20 @@ namespace Psychology_API.Migrations
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vacations_DoctorId",
+                table: "Vacations",
+                column: "DoctorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Patients");
+
+            migrationBuilder.DropTable(
+                name: "Vacations");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

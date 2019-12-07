@@ -1,3 +1,5 @@
+import { PatientsListResolver } from './_resolvers/patients-list.resolver';
+import { PatientsListComponent } from './patients-list/patients-list.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
@@ -39,7 +41,8 @@ const routes: Routes = [
             { path: 'workship/:id', component: WorkshipsComponent },
             { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver,
                 departments: DepartmentsResolver, positions: PositionsResolver }},
-            { path: 'doctors', component: DoctorsListComponent }
+            { path: 'doctors', component: DoctorsListComponent },
+            { path: 'patients', component: PatientsListComponent, resolve: { patients: PatientsListResolver }}
         ]
     },
     { path: '**', redirectTo: '' }

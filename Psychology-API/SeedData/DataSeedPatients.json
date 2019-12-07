@@ -1,0 +1,42 @@
+[
+    {
+        "PersonalCardNumber" : "ПР-1423",
+        "Lastname" : "Достевский",
+        "Firstname" : "Федор",
+        "Middlename" : "Михайлович",
+        "DoctorId" : 7,
+        "IsDelete" : false
+    },
+    {
+        "PersonalCardNumber" : "ПР-7852",
+        "Lastname" : "Андреев",
+        "Firstname" : "Леонид",
+        "Middlename" : "Николаевич",
+        "DoctorId" : 7,
+        "IsDelete" : false
+    },
+    {
+        "PersonalCardNumber" : "СЗ-1234",
+        "Lastname" : "Введенский",
+        "Firstname" : "Александр",
+        "Middlename" : "Иванович",
+        "DoctorId" : 6,
+        "IsDelete" : false
+    },
+    {
+        "PersonalCardNumber" : "ПР-6241",
+        "Lastname" : "Хармс",
+        "Firstname" : "Даниил",
+        "Middlename" : "Иванович",
+        "DoctorId" : 6,
+        "IsDelete" : false
+    },
+    {
+        "PersonalCardNumber" : "ПР-9655",
+        "Lastname" : "Хлебников",
+        "Firstname" : "Велимир",
+        "Middlename" : "Владимирович",
+        "DoctorId" : 7,
+        "IsDelete" : true
+    }
+]

@@ -11,18 +11,18 @@ namespace Psychology_API.Repositories.Repositories
     public class DoctorRepository : BaseRepository, IDoctorRepository
     {
         private readonly DataContext _context;
-        private readonly IMemoryCache cache;
+        private readonly IMemoryCache _cache;
         private const int CAHSE_TIME_LIFE_IN_MINUT = 15;
         public DoctorRepository(DataContext context, IMemoryCache cache) : base(context)
         {
-            this.cache = cache;
+            _cache = cache;
             _context = context;
         }
         public async Task<Doctor> GetDoctorAsync(int doctorId)
         {
             Doctor doctor = null;
 
-            if(!cache.TryGetValue(doctorId, out doctor))
+            if(!_cache.TryGetValue(doctorId, out doctor))
             {
                 doctor = await _context.Doctors
                     .Include(d => d.Phone)
@@ -31,13 +31,8 @@ namespace Psychology_API.Repositories.Repositories
                     .SingleOrDefaultAsync(d => d.Id == doctorId);
 
                 if(doctor != null)
-                    cache.Set(doctorId, doctorId, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                    _cache.Set(doctorId, doctorId, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
             }
-            // var doctor = await _context.Doctors
-            //         .Include(d => d.Phone)
-            //         .Include(d => d.Position)
-            //         .Include(d => d.Department)
-            //         .SingleOrDefaultAsync(d => d.Id == doctorId);
 
             return doctor;
         }

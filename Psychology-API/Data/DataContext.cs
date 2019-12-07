@@ -9,6 +9,7 @@ namespace Psychology_API.Data
         {
         }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Vacation> Vacations { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Patient> Patients { get; set; }
         //public DbSet<PatientHistory> PatientHistories { get; set; }

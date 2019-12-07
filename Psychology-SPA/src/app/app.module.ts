@@ -28,6 +28,7 @@ import { DepartmentsResolver } from './_resolvers/departments.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
 import { PositionsResolver } from './_resolvers/positions.resolver';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
+import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -42,6 +43,7 @@ import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
+import { PatientsListComponent } from './patients-list/patients-list.component';
 
 
 export function tokenGetter() {
@@ -63,7 +65,8 @@ export function tokenGetter() {
     PositionComponent,
     PhoneComponent,
     DoctorsListComponent,
-    DoctorDetailComponent
+    DoctorDetailComponent,
+    PatientsListComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,8 @@ export function tokenGetter() {
     DepartmentsResolver,
     PositionsResolver,
     PhonesResolver,
-    PhonebookResolver
+    PhonebookResolver,
+    PatientsListResolver
   ],
   bootstrap: [
     AppComponent

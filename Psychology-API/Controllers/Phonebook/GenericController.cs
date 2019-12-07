@@ -40,7 +40,7 @@ namespace Psychology_API.Controllers.Phonebook
             var entity = await _repo.GetAsync(id);
 
             if(entity == null)
-                return BadRequest("Таких данных нет.");
+                return BadRequest("Запрашиваемых данных не существует.");
 
             return Ok(entity);
         }

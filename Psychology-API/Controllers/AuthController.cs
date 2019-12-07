@@ -79,7 +79,7 @@ namespace Psychology_API.Controllers
         }
         [Authorize(Roles = "admin")]
         [HttpPost("{doctorId}")]       
-        public async Task<IActionResult> DropPassword(int doctorId)
+        public async Task<IActionResult> DropPassword()
         {
             //TODO: Добавить функцию для сброса пароля на стандартный для конкретного пользователя
             return Ok();

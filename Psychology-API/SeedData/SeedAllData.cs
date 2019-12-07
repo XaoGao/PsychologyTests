@@ -69,6 +69,15 @@ namespace Psychology_API.SeedData
                 _context.Doctors.Add(doctor);
             }
             _context.SaveChanges();
+            //Пациенты
+            var patientsFromFile = File.ReadAllText("SeedData/DataSeedPatients.json");
+            var patients = JsonConvert.DeserializeObject<List<Patient>>(patientsFromFile);
+
+            foreach(var patient in patients)
+            {
+                _context.Patients.Add(patient);
+            }
+            _context.SaveChanges();
 
         }
 

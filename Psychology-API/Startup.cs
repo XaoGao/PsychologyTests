@@ -85,7 +85,7 @@ namespace Psychology_API
                 });
             }
             // app.UseHttpsRedirection();
-            // seed.SeedData();
+            //seed.SeedData();
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
