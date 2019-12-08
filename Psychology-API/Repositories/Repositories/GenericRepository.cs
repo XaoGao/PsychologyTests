@@ -19,7 +19,6 @@ namespace Psychology_API.Repositories.Repositories
         public GenericRepository(DataContext context, IMemoryCache cache)
         {
             this.cache = cache;
-            // cacheTime = TimeSpan.FromMinutes(15);
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }

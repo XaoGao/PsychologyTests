@@ -34,7 +34,7 @@ namespace Psychology_API.Repositories.Repositories
         /// <returns> Авторизованый пользователь </returns>
         public async Task<Doctor> LoginAsync(string username, string password)
         {
-            var doctor = await _context.Doctors.SingleOrDefaultAsync(d => d.Username.Equals(username.ToLower()));
+            var doctor = await _context.Doctors.Include(d => d.Role).SingleOrDefaultAsync(d => d.Username.Equals(username.ToLower()));
 
             if(doctor == null)
                 return null;

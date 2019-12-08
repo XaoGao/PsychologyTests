@@ -1,3 +1,31 @@
-<div>
-    <a *ngFor="let department of departments"> {{ department.name }}</a>
+<div class="row">
+    <div class="col-3"></div>
+    <mat-form-field class="col-5 text-center">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+    </mat-form-field>
+    <table mat-table [dataSource]="departments" class="mat-elevation-z8 col-12">
+
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let department"> 1 </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Отдел </th>
+            <td mat-cell *matCellDef="let department"> {{ department.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sortLevel">
+            <th mat-header-cell *matHeaderCellDef> Уровень сортировки </th>
+            <td mat-cell *matCellDef="let department"> {{ department.sortLevel }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isLock">
+            <th mat-header-cell *matHeaderCellDef> Акутальность </th>
+            <td mat-cell *matCellDef="let department"><mat-checkbox [disabled]=true></mat-checkbox> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>

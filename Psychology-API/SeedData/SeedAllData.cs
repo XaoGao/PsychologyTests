@@ -78,6 +78,15 @@ namespace Psychology_API.SeedData
                 _context.Patients.Add(patient);
             }
             _context.SaveChanges();
+            //Заключения
+            var anamesesFromFile = File.ReadAllText("SeedData/DataSeedAnamnesis.json");
+            var anameses = JsonConvert.DeserializeObject<List<Anamnesis>>(anamesesFromFile);
+
+            foreach(var anamesis in anameses)
+            {
+                _context.Anamneses.Add(anamesis);
+            }
+            _context.SaveChanges();
 
         }
 

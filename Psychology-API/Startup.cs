@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.SeedData;
+using Newtonsoft.Json;
 
 namespace Psychology_API
 {
@@ -32,7 +33,11 @@ namespace Psychology_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                //you have to install nuget package - Microsoft.AspNetCore.Mvc.NewtonsoftJson 
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -43,11 +48,11 @@ namespace Psychology_API
             services.AddAutoMapper(typeof(Startup));
             services.AddMemoryCache();
             services.AddTransient<SeedAllData>();
-            services.AddAuthentication(options => 
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => 
+            }).AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
                 options.SaveToken = true;
@@ -59,20 +64,20 @@ namespace Psychology_API
                     ValidateAudience = false
                 };
             });
-            
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedAllData seed)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else 
+            else
             {
-                app.UseExceptionHandler(builder => {
-                    builder.Run( async context => {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
@@ -85,14 +90,14 @@ namespace Psychology_API
                 });
             }
             // app.UseHttpsRedirection();
-            //seed.SeedData();
+            // seed.SeedData();
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

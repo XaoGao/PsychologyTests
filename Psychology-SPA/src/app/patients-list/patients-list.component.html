@@ -1,5 +1,25 @@
-<div class="container">
-    <div class="card" *ngFor="let patient of patients">
-        {{ patient.firstname }}
-    </div>
-</div>
+<h3 class="mb-3">Пациенты:</h3>
+<mat-accordion *ngFor="let patient of patients">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Номер карты:
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ patient.personalCardNumber }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <p><strong>Ф.И.О.:</strong> {{ patient.fullname }}</p>
+            <hr>
+            <p><strong>Дата рождения:</strong> {{ patient.dateOfBirth }}</p>
+            <hr>
+            <p><strong>Последний результат анамеза:</strong> </p>
+            <hr>
+            <div class="row">
+                <button class="btn btn-primary col-3 ml-5">Провести тест</button>
+                <button class="btn btn-info col-3 ml-3">Редактировать данные</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

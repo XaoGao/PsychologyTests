@@ -26,7 +26,10 @@ namespace Psychology_API.Repositories.Repositories
             Patient patient = null;
             if(!_cache.TryGetValue(patientId, out patient))
             {
-                patient = await _context.Patients.SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
+                patient = await _context.Patients
+                    .Include(p => p.Doctor)
+                    .Include(p => p.Anamneses)
+                    .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
                 
                 if(patient != null)
                     _cache.Set(patientId, patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
@@ -37,7 +40,11 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
         {
-            var patients = await _context.Patients.Where(p => p.DoctorId == doctorId).ToListAsync();
+            var patients = await _context.Patients
+                .Include(p => p.Doctor)
+                .Include(p => p.Anamneses)
+                .Where(p => p.DoctorId == doctorId)
+                .ToListAsync();
 
             return patients;
         }

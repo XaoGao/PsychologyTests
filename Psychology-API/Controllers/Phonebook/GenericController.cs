@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.Repositories.Repositories;
 using System;
+using System.Collections.Generic;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_Domain.Abstarct;
 
@@ -21,21 +22,25 @@ namespace Psychology_API.Controllers.Phonebook
         }
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll(bool param = true)
         {
+            #region checkUser
             // if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //     return Unauthorized("Пользователь должен авторизоваться.");
-
-            var entities = _repo.GetWithCondition(e => e.IsLock != true);
-
-            return Ok(entities);
+            #endregion
+            if(param)
+                return Ok(await _repo.GetAllAsync());
+            else
+                return Ok(_repo.GetWithCondition(e => e.IsLock != true));
         }
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get( int id)
+        public async Task<IActionResult> Get(int id)
         {
+            #region checkUser
             // if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //     return Unauthorized("Пользователь должен авторизоваться.");
+            #endregion
 
             var entity = await _repo.GetAsync(id);
 

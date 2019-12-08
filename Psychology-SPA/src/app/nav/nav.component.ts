@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
   constructor(public authService: AuthService, private route: Router, private toastrService: ToastrAlertService) { }
 
   ngOnInit() {
+    console.log(this.authService.decodedToken);
   }
   loggedin(): boolean {
     return this.authService.loggedIn();

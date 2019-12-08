@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Psychology_Domain.Domain
 {
     //TODO: Добавить необходимые данные для сущности
@@ -35,7 +38,12 @@ namespace Psychology_Domain.Domain
         /// ФИО.
         /// </summary>
         /// <value></value>
-        public string FullaName { get => $"{Lastname} {Firstname} {Middlename}"; }
+        public string Fullname { get => $"{Lastname} {Firstname} {Middlename}"; }
+        /// <summary>
+        /// Дата рождения.
+        /// </summary>
+        /// <value></value>
+        public DateTime DateOfBirth { get; set; }
         /// <summary>
         /// Лечащий врач.
         /// </summary>
@@ -47,6 +55,10 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public bool IsDelete { get; set; }
-        
+        /// <summary>
+        /// Коллекция заключении пациента.
+        /// </summary>
+        /// <value></value>
+        public ICollection<Anamnesis> Anamneses { get; set; }
     }
 }

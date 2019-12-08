@@ -18,6 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 // Service
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -27,6 +30,8 @@ import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
 import { DepartmentsResolver } from './_resolvers/departments.resolver';
 import { PhonesResolver } from './_resolvers/phones.resolver';
 import { PositionsResolver } from './_resolvers/positions.resolver';
+import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.resolver';
+import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 // Component
@@ -89,7 +94,10 @@ export function tokenGetter() {
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [
     ErrorInterceptor,
@@ -102,7 +110,9 @@ export function tokenGetter() {
     PositionsResolver,
     PhonesResolver,
     PhonebookResolver,
-    PatientsListResolver
+    PatientsListResolver,
+    DepartmentsWithParamResolver,
+    PositionsWithParamResolver
   ],
   bootstrap: [
     AppComponent

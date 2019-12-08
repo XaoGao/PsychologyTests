@@ -1,3 +1,4 @@
+import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
@@ -18,6 +19,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheeps-layout.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
+import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.resolver';
 
 const routes: Routes = [
     {
@@ -25,7 +27,6 @@ const routes: Routes = [
         component: AuthLayoutComponent,
         children: [
             { path: '', component: HomeComponent }
-            // { path: '', component: HomeComponent, resolve: { departments: DepartmentsResolver, positions: PositionsResolver }}
         ]
     },
     {
@@ -40,7 +41,7 @@ const routes: Routes = [
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
             { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver,
-                departments: DepartmentsResolver, positions: PositionsResolver }},
+                departments: DepartmentsWithParamResolver, positions: PositionsWithParamResolver }},
             { path: 'doctors', component: DoctorsListComponent },
             { path: 'patients', component: PatientsListComponent, resolve: { patients: PatientsListResolver }}
         ]

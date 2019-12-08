@@ -54,7 +54,7 @@ namespace Psychology_API.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, doctorFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, doctorFromRepo.Username),
-                new Claim(ClaimTypes.Role, doctorFromRepo.RoleId.ToString())
+                new Claim(ClaimTypes.Role, doctorFromRepo.Role.Name)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));

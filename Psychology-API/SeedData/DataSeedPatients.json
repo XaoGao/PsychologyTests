@@ -4,6 +4,7 @@
         "Lastname" : "Достевский",
         "Firstname" : "Федор",
         "Middlename" : "Михайлович",
+        "DateOfBirth" : "1973-01-01",
         "DoctorId" : 7,
         "IsDelete" : false
     },
@@ -12,6 +13,7 @@
         "Lastname" : "Андреев",
         "Firstname" : "Леонид",
         "Middlename" : "Николаевич",
+        "DateOfBirth" : "1987-06-06",
         "DoctorId" : 7,
         "IsDelete" : false
     },
@@ -20,6 +22,7 @@
         "Lastname" : "Введенский",
         "Firstname" : "Александр",
         "Middlename" : "Иванович",
+        "DateOfBirth" : "1973-03-03",
         "DoctorId" : 6,
         "IsDelete" : false
     },
@@ -28,6 +31,7 @@
         "Lastname" : "Хармс",
         "Firstname" : "Даниил",
         "Middlename" : "Иванович",
+        "DateOfBirth" : "1995-05-01",
         "DoctorId" : 6,
         "IsDelete" : false
     },
@@ -36,6 +40,7 @@
         "Lastname" : "Хлебников",
         "Firstname" : "Велимир",
         "Middlename" : "Владимирович",
+        "DateOfBirth" : "1983-11-11",
         "DoctorId" : 7,
         "IsDelete" : true
     }

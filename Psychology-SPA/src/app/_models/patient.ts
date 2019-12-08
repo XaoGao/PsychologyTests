@@ -1,3 +1,4 @@
+import { Anamnesis } from './anamnesis';
 import { Doctor } from './doctor';
 export interface Patient {
     id: number;
@@ -6,6 +7,8 @@ export interface Patient {
     firstname: string;
     middlename: string;
     fullname: string;
+    dateOfBirth: Date;
     doctorId: number;
     doctor: Doctor;
+    anamneses: Anamnesis[];
 }

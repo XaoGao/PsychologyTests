@@ -16,6 +16,31 @@ namespace Psychology_API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Anamnesis", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Conclusion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ConclusionTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatinetId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Anamneses");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -93,6 +118,9 @@ namespace Psychology_API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("INTEGER");
@@ -196,6 +224,13 @@ namespace Psychology_API.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Vacations");
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.Anamnesis", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
+                        .WithMany("Anamneses")
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>

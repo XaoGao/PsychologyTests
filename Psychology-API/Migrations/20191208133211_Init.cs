@@ -122,6 +122,7 @@ namespace Psychology_API.Migrations
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     IsDelete = table.Column<bool>(nullable: false)
                 },
@@ -158,6 +159,33 @@ namespace Psychology_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Anamneses",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ConclusionTime = table.Column<DateTime>(nullable: false),
+                    PatinetId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: true),
+                    Conclusion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Anamneses", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Anamneses_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Anamneses_PatientId",
+                table: "Anamneses",
+                column: "PatientId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_DepartmentId",
                 table: "Doctors",
@@ -192,10 +220,13 @@ namespace Psychology_API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "Anamneses");
 
             migrationBuilder.DropTable(
                 name: "Vacations");
+
+            migrationBuilder.DropTable(
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

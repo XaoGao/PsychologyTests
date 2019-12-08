@@ -1,6 +1,11 @@
+import { map } from 'rxjs/operators';
+import { Phone } from './../_models/phone';
+import { Position } from './../_models/position';
+import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Department } from '../_models/department';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +13,30 @@ import { HttpClient } from '@angular/common/http';
 export class PhonebookService {
 
   BASE_URL = environment.apiUrl;
-  // BASE_URL = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  getDepartments(doctorId: number) {
-    // return this.http.get(this.BASE_URL + doctorId + '/departments');
-    return this.http.get(this.BASE_URL + 'departments');
+  getDepartments(param: boolean): Observable<Department[]> {
+    let params = new HttpParams();
+    params = params.append('param', String(param));
+    return this.http.get<Department[]>(this.BASE_URL + 'departments', { observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
-  getPositions(doctorId: number) {
-    return this.http.get(this.BASE_URL + 'positions');
-    // return this.http.get(this.BASE_URL + doctorId + '/positions');
+  getPositions(param: boolean): Observable<Position[]> {
+    let params = new HttpParams();
+    params = params.append('param', String(param));
+    return this.http.get<Position[]>(this.BASE_URL + 'positions', { observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
-  getPhones(doctorId: number) {
-    return this.http.get(this.BASE_URL + 'phones');
-    // return this.http.get(this.BASE_URL + doctorId + '/phones');
+  getPhones(): Observable<Phone[]> {
+    return this.http.get<Phone[]>(this.BASE_URL + 'phones');
   }
   getPhonebook(doctorId: number) {
     return this.http.get(this.BASE_URL  + 'doctors/' + doctorId + '/phonebook');

@@ -13,7 +13,7 @@ export class PositionsResolver implements Resolve<Position> {
                 private router: Router, private toastrService: ToastrAlertService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Position> {
-        return this.phonebookService.getPositions(this.authService.decodedToken.nameid).pipe(
+        return this.phonebookService.getPositions(true).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
                 this.router.navigate(['/workship/:id']);
