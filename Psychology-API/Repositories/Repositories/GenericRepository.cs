@@ -33,12 +33,14 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<TEntity> GetAsync(int id)
         {
             TEntity entity = null;
+
+            string key = id + "-" + entity.GetType();
                 
-            if(!cache.TryGetValue(id, out entity))
+            if(!cache.TryGetValue(key, out entity))
             {
                 entity = await _dbSet.FindAsync(id);
                 if(entity != null)
-                    cache.Set(id, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                    cache.Set(key, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
             }
 
             return entity;
@@ -58,7 +60,7 @@ namespace Psychology_API.Repositories.Repositories
             await _dbSet.AddAsync(item);
             if(await SaveChangeAsync())
             {
-                cache.Set(item.Id, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                cache.Set(item.Id + "-" + item.GetType(), item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
                 return true;
             }
             return false;

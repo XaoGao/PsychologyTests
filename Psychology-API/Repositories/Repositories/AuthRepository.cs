@@ -116,5 +116,54 @@ namespace Psychology_API.Repositories.Repositories
 
             return false;
         }
+        /// <summary>
+        /// Сменить пароль доктора на стандартный.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора, которому сменят пароль. </param>
+        /// <param name="adminId"> Идентификатор администратора, который меняет пароль. </param>
+        /// <returns></returns>
+        public async Task<bool> DropPassword(int doctorId, int adminId)
+        {
+            var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
+
+            if(doctorFromRepo == null)
+                return false;
+
+            byte[] passwordHash, passwordSalt;
+            string standratPassword = "123456";
+
+            CreatePasswordHash(standratPassword, out passwordHash, out passwordSalt);
+
+            doctorFromRepo.PasswordHash = passwordHash;
+            doctorFromRepo.PasswordSalt = passwordSalt;
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        /// <summary>
+        /// Сменить пароль доктора на новый.
+        /// </summary>
+        /// <param name="doctorId">  Идентификатор доктора. </param>
+        /// <param name="newPassword"> Новый пароль. </param>
+        /// <returns></returns>
+        public async Task<bool> ChangePassword(int doctorId, string newPassword)
+        {
+            byte[] passwordHash, passwordSalt;
+
+            var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
+
+            if(doctorFromRepo == null)
+                return false;
+
+            CreatePasswordHash(newPassword.ToLower(), out passwordHash, out passwordSalt);
+
+            doctorFromRepo.PasswordHash = passwordHash;
+            doctorFromRepo.PasswordSalt = passwordSalt;
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -22,7 +22,9 @@ namespace Psychology_API.Repositories.Repositories
         {
             Doctor doctor = null;
 
-            if(!_cache.TryGetValue(doctorId, out doctor))
+            string key = doctorId + "-Doctor";
+
+            if(!_cache.TryGetValue(key, out doctor))
             {
                 doctor = await _context.Doctors
                     .Include(d => d.Phone)
@@ -31,7 +33,7 @@ namespace Psychology_API.Repositories.Repositories
                     .SingleOrDefaultAsync(d => d.Id == doctorId);
 
                 if(doctor != null)
-                    _cache.Set(doctorId, doctorId, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                    _cache.Set(key, doctorId, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
             }
 
             return doctor;

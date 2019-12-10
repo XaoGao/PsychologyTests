@@ -24,7 +24,10 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
             Patient patient = null;
-            if(!_cache.TryGetValue(patientId, out patient))
+
+            string key = doctorId + "-Patient";
+
+            if(!_cache.TryGetValue(key, out patient))
             {
                 patient = await _context.Patients
                     .Include(p => p.Doctor)
@@ -32,7 +35,7 @@ namespace Psychology_API.Repositories.Repositories
                     .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
                 
                 if(patient != null)
-                    _cache.Set(patientId, patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                    _cache.Set(key, patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
             }
 
             return patient;
@@ -57,7 +60,7 @@ namespace Psychology_API.Repositories.Repositories
         {
             base.Add(entity);
             Patient patient = entity as Patient;
-            _cache.Set(patient.Id, patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+            _cache.Set(patient.Id + "-Patient", patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
         }
     }
 }

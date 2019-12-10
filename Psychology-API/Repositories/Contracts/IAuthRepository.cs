@@ -28,5 +28,19 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="username"> Логни. </param>
         /// <returns> Пользователь с логином уже зарегистрирован. </returns>
         Task<bool> UserExistAsync(string username);
+        /// <summary>
+        /// Сменить пароль доктора на стандартный.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора, которому сменят пароль. </param>
+        /// <param name="adminId"> Идентификатор администратора, который меняет пароль. </param>
+        /// <returns></returns>
+        Task<bool> DropPassword(int doctorId, int adminId);
+        /// <summary>
+        /// Сменить пароль доктора на новый.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="newPassword"> Новый пароль. </param>
+        /// <returns></returns>
+        Task<bool> ChangePassword(int doctorId, string newPassword);
     }
 }

@@ -79,17 +79,25 @@ namespace Psychology_API.Controllers
         }
         [Authorize(Roles = "admin")]
         [HttpPost("{doctorId}")]       
-        public async Task<IActionResult> DropPassword()
+        public async Task<IActionResult> DropPassword(int doctorId, int adminId)
         {
-            //TODO: Добавить функцию для сброса пароля на стандартный для конкретного пользователя
-            return Ok();
+            if(await _authRepo.DropPassword(doctorId, adminId))
+                return NoContent();
+
+            throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
+            
         }
         [Authorize]
         [HttpPost("{doctorId}")]
         public async Task<IActionResult> ChangePassword(int doctorId, string newPassword)
         {
-            //TODO: Добавить функцию для изменения пароля
-            return Ok();
+            if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользовать должен авторизоваться");
+
+            if(await _authRepo.ChangePassword(doctorId, newPassword))
+                return NoContent();
+
+            throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
         }
     }
 }
