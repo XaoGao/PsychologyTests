@@ -28,13 +28,18 @@ namespace Psychology_API.Migrations
                     b.Property<DateTime>("ConclusionTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PatientId")
+                    b.Property<int>("DoctorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PatinetId")
+                    b.Property<bool>("IsLast")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -228,9 +233,17 @@ namespace Psychology_API.Migrations
 
             modelBuilder.Entity("Psychology_Domain.Domain.Anamnesis", b =>
                 {
+                    b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
                         .WithMany("Anamneses")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Psychology_Domain.Domain.Doctor", b =>

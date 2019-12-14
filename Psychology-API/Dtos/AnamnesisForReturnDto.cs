@@ -1,11 +1,8 @@
 using System;
 
-namespace Psychology_Domain.Domain
+namespace Psychology_API.Dtos
 {
-    /// <summary>
-    /// Заключение по пациенту.
-    /// </summary>
-    public class Anamnesis
+    public class AnamnesisForReturnDto
     {
         /// <summary>
         /// Идентификатор.
@@ -21,23 +18,13 @@ namespace Psychology_Domain.Domain
         /// Идентификатор пациента.
         /// </summary>
         /// <value></value>
-        public int PatientId { get; set; }
-        /// <summary>
-        /// Пациент.
-        /// </summary>
-        /// <value></value>
-        public Patient Patient { get; set; }
+        public PatientForListDto Patient { get; set; }
         /// <summary>
         /// Текст заключения.
         /// </summary>
         /// <value></value>
         public string Conclusion { get; set; }
-        /// <summary>
-        /// Идентификатор доктора, который написал анамез.
-        /// </summary>
-        /// <value></value>
-        public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
+        public DoctorForListReturnDto Doctor { get; set; }
         /// <summary>
         /// Указатель на последнее заключение от врача.
         /// </summary>

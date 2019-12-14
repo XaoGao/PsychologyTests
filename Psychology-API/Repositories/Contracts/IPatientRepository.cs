@@ -28,5 +28,11 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="patient"> Пациент. </param>
         /// <returns></returns>
         void MovePatinetToArchive(Patient patient);
+        /// <summary>
+        /// Получить все заключения по конкретному пациенту.
+        /// </summary>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns></returns>
+        Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId);
     }
 }

@@ -1,3 +1,4 @@
+import { Anamnesis } from './../_models/anamnesis';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';

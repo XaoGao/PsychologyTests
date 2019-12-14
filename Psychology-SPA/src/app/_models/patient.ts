@@ -11,4 +11,6 @@ export interface Patient {
     doctorId: number;
     doctor: Doctor;
     anamneses: Anamnesis[];
+    // For list patient
+    conclusion: string;
 }

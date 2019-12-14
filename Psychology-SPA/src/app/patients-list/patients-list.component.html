@@ -12,13 +12,14 @@
         <div>
             <p><strong>Ф.И.О.:</strong> {{ patient.fullname }}</p>
             <hr>
-            <p><strong>Дата рождения:</strong> {{ patient.dateOfBirth }}</p>
+            <p><strong>Дата рождения:</strong> {{ patient.dateOfBirth | date: 'yyyy.MM.dd'}}</p>
             <hr>
-            <p><strong>Последний результат анамеза:</strong> </p>
+            <p><strong>Последний результат анамеза:</strong> {{ patient.conclusion }} </p>
             <hr>
             <div class="row">
                 <button class="btn btn-primary col-3 ml-5">Провести тест</button>
                 <button class="btn btn-info col-3 ml-3">Редактировать данные</button>
+                <button class="btn btn-info col-3 ml-3">Посмотреть историю</button>
             </div>
         </div>
     </mat-expansion-panel>

@@ -62,5 +62,12 @@ namespace Psychology_API.Repositories.Repositories
             Patient patient = entity as Patient;
             _cache.Set(patient.Id + "-Patient", patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
         }
+
+        public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)
+        {
+            var anamneses = await _context.Anamneses.Where(a => a.PatientId == patientId).ToListAsync();
+
+            return anamneses;
+        }
     }
 }

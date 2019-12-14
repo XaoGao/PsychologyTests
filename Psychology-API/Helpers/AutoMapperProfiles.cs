@@ -1,6 +1,7 @@
 using AutoMapper;
 using Psychology_API.Dtos;
 using Psychology_Domain.Domain;
+using System.Linq;
 
 namespace Psychology_API.Helpers
 {
@@ -14,11 +15,20 @@ namespace Psychology_API.Helpers
             
             CreateMap<DoctorForUpdateDto, Doctor>();
 
-            CreateMap<Doctor, DoctorForReturnDto>();
+            CreateMap<Doctor, DoctorForReturnDto>()
+                .IncludeAllDerived();
 
             // Пациент.
             CreateMap<PatientForCreateDto, Patient>();
             CreateMap<PatientForUpdateDto, Patient>();
+
+            CreateMap<Patient, PatientForListDto>()
+                .ForMember(dest => dest.Conclusion, opt => {
+                    opt.MapFrom(src => src.Anamneses.FirstOrDefault(p => p.IsLast == true).Conclusion);
+                });
+
+            // Анамнез
+            CreateMap<Anamnesis, AnamnesisForReturnDto>();
         }
     }
 }

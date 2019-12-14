@@ -49,6 +49,7 @@ import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
+import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 
 
 export function tokenGetter() {
@@ -71,7 +72,8 @@ export function tokenGetter() {
     PhoneComponent,
     DoctorsListComponent,
     DoctorDetailComponent,
-    PatientsListComponent
+    PatientsListComponent,
+    AnamnesesListComponent
   ],
   imports: [
     BrowserModule,

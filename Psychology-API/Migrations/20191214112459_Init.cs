@@ -166,20 +166,32 @@ namespace Psychology_API.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ConclusionTime = table.Column<DateTime>(nullable: false),
-                    PatinetId = table.Column<int>(nullable: false),
-                    PatientId = table.Column<int>(nullable: true),
-                    Conclusion = table.Column<string>(nullable: true)
+                    PatientId = table.Column<int>(nullable: false),
+                    Conclusion = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<int>(nullable: false),
+                    IsLast = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Anamneses", x => x.id);
                     table.ForeignKey(
+                        name: "FK_Anamneses_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Anamneses_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Anamneses_DoctorId",
+                table: "Anamneses",
+                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Anamneses_PatientId",

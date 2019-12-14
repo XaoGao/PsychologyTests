@@ -3,6 +3,7 @@ using Psychology_API.Data;
 using Psychology_Domain.Domain;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Psychology_API.SeedData
@@ -16,6 +17,10 @@ namespace Psychology_API.SeedData
         }
         public void SeedData()
         {
+            // TODO: Добавить условие, если таблицы в БД пустые то запустить SeedData
+            // if(!_context.Roles.Any())
+            //     return;
+
             //Отделы
             var departmentsFromFile = File.ReadAllText("SeedData/DataSeedDepartments.json");
             var departments = JsonConvert.DeserializeObject<List<Department>>(departmentsFromFile);

@@ -7,6 +7,7 @@ using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
 using System;
+using System.Collections.Generic;
 
 namespace Psychology_API.Controllers
 {
@@ -31,9 +32,9 @@ namespace Psychology_API.Controllers
 
             var patients = await _patientRepository.GetPatientsAsync(doctorId);
 
-            //TODO: добавить dto для возврата данных
+            var patientsForReturn = _mapper.Map<IEnumerable<PatientForListDto>>(patients);
 
-            return Ok(patients);
+            return Ok(patientsForReturn);
         }
         [HttpGet("{id}", Name = "GetPatient")]
         public async Task<IActionResult> GetPatient(int doctorId, int patientId)
@@ -48,6 +49,17 @@ namespace Psychology_API.Controllers
 
             //TODO: добавить dto для возврата данных
             return Ok(patientFromRepo);
+        }
+        [HttpGet("{patientId}/anamnses")]
+        public async Task<IActionResult> GetPatientAnamneses(int doctorId, int patientId)
+        {
+            if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
+                return Unauthorized("Пользователь не авторизован");
+
+            var anamneses = await _patientRepository.GetAnamnesesAsync(patientId);
+
+            //TODO: добавить dto для возврата данных
+            return Ok(anamneses);
         }
         [HttpPost]
         public async Task<IActionResult> CreatePetient(int doctorId, PatientForCreateDto patientForCreateDto)
