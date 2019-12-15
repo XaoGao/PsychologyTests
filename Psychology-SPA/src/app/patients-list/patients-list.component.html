@@ -18,8 +18,9 @@
             <hr>
             <div class="row">
                 <button class="btn btn-primary col-3 ml-5">Провести тест</button>
-                <button class="btn btn-info col-3 ml-3">Редактировать данные</button>
-                <button class="btn btn-info col-3 ml-3">Посмотреть историю</button>
+                <button class="btn btn-info col-3 ml-3" (click) = "openDialog(patient)">Редактировать данные</button>
+                <button class="btn btn-info col-3 ml-3" [routerLink]="['/patients/', patient.id]"
+                routerLinkActive="router-link-active">Посмотреть историю</button>
             </div>
         </div>
     </mat-expansion-panel>

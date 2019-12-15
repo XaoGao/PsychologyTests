@@ -21,7 +21,7 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <div class="col-7"></div>
-            <mat-form-field class="col-4">
+            <mat-form-field class="col-3">
                 <mat-label>Укажите отдел</mat-label>
                 <mat-select [(value)]="doctor.departmentId">
                     <mat-option *ngFor="let department of departments" [value]="department.id">
@@ -29,11 +29,19 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-4">
+            <mat-form-field class="col-3">
                 <mat-label>Укажите должность</mat-label>
                 <mat-select [(value)]="doctor.positionId">
                     <mat-option *ngFor="let position of positions" [value]="position.id">
                         {{ position.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-3">
+                <mat-label>Телефон</mat-label>
+                <mat-select [(value)]="doctor.phoneId">
+                    <mat-option *ngFor="let phone of phones" [value]="phone.id">
+                        {{ phone.numberMask }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

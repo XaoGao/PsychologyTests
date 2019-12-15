@@ -20,6 +20,8 @@ import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheep
 import { AuthGuard } from './_guards/auth.guard';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.resolver';
+import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
+import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 
 const routes: Routes = [
     {
@@ -41,9 +43,10 @@ const routes: Routes = [
             { path: 'phone', component: PhoneComponent, resolve: { phones: PhonesResolver }},
             { path: 'workship/:id', component: WorkshipsComponent },
             { path: 'doctor/edit', component: DoctorDetailComponent, resolve: { doctor: DoctorDetailResolver,
-                departments: DepartmentsWithParamResolver, positions: PositionsWithParamResolver }},
+                departments: DepartmentsWithParamResolver, positions: PositionsWithParamResolver, phones: PhonesResolver }},
             { path: 'doctors', component: DoctorsListComponent },
-            { path: 'patients', component: PatientsListComponent, resolve: { patients: PatientsListResolver }}
+            { path: 'patients', component: PatientsListComponent, resolve: { patients: PatientsListResolver }},
+            { path: 'patients/:id', component: AnamnesesListComponent, resolve: { anamneses: AnamnesesListResolver }}
         ]
     },
     { path: '**', redirectTo: '' }

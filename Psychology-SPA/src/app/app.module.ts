@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 // Service
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -34,6 +35,7 @@ import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.
 import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
+import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -50,6 +52,7 @@ import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
+import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
 
 
 export function tokenGetter() {
@@ -73,7 +76,8 @@ export function tokenGetter() {
     DoctorsListComponent,
     DoctorDetailComponent,
     PatientsListComponent,
-    AnamnesesListComponent
+    AnamnesesListComponent,
+    PatientEditComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,8 @@ export function tokenGetter() {
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [
     ErrorInterceptor,
@@ -114,10 +119,14 @@ export function tokenGetter() {
     PhonebookResolver,
     PatientsListResolver,
     DepartmentsWithParamResolver,
-    PositionsWithParamResolver
+    PositionsWithParamResolver,
+    AnamnesesListResolver
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+    entryComponents: [
+      PatientEditComponent
+    ],
 })
 export class AppModule { }

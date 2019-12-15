@@ -1,3 +1,4 @@
+import { Phone } from './../_models/phone';
 import { Position } from './../_models/position';
 import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../_models/doctor';
@@ -15,6 +16,7 @@ export class DoctorDetailComponent implements OnInit {
   public doctor: Doctor;
   departments: Department[];
   positions: Position[];
+  phones: Phone[];
   constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute, private doctorService: DoctorService) { }
 
   ngOnInit() {
@@ -22,6 +24,7 @@ export class DoctorDetailComponent implements OnInit {
       this.doctor = data.doctor;
       this.departments = data.departments;
       this.positions = data.positions;
+      this.phones = data.phones;
     });
   }
   updateDoctor() {

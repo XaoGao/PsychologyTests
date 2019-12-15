@@ -1,3 +1,4 @@
+import { Doctor } from './doctor';
 import { Patient } from './patient';
 
 export interface Anamnesis {
@@ -6,4 +7,7 @@ export interface Anamnesis {
     patinetId: number;
     patient: Patient;
     conclusion: string;
+    doctorId: number;
+    doctor: Doctor;
+    isLast: boolean;
 }

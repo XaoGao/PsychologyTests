@@ -65,7 +65,11 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)
         {
-            var anamneses = await _context.Anamneses.Where(a => a.PatientId == patientId).ToListAsync();
+            var anamneses = await _context.Anamneses
+                .Where(a => a.PatientId == patientId)
+                .Include(a => a.Doctor)
+                .Include( a => a.Patient)
+                .ToListAsync();
 
             return anamneses;
         }
