@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PatientsListComponent implements OnInit {
   public patients: Patient[];
+  public search: string;
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,

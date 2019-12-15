@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts.GenericRepository;
+using Psychology_API.Settings;
 using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories
@@ -14,11 +15,12 @@ namespace Psychology_API.Repositories.Repositories
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
-        private IMemoryCache cache;
-        private const int CAHSE_TIME_LIFE_IN_MINUT = 15;
-        public GenericRepository(DataContext context, IMemoryCache cache)
+        private IMemoryCache _cache;
+        private readonly CacheSettings _cacheSettings;
+        public GenericRepository(DataContext context, IMemoryCache cache, CacheSettings cacheSettings)
         {
-            this.cache = cache;
+            _cacheSettings = cacheSettings;
+            _cache = cache;
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
@@ -35,12 +37,12 @@ namespace Psychology_API.Repositories.Repositories
             TEntity entity = null;
 
             string key = id + "-" + entity.GetType();
-                
-            if(!cache.TryGetValue(key, out entity))
+
+            if (!_cache.TryGetValue(key, out entity))
             {
                 entity = await _dbSet.FindAsync(id);
-                if(entity != null)
-                    cache.Set(key, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                if (entity != null)
+                    _cache.Set(key, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
             }
 
             return entity;
@@ -58,9 +60,9 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<bool> CreateAsync(TEntity item)
         {
             await _dbSet.AddAsync(item);
-            if(await SaveChangeAsync())
+            if (await SaveChangeAsync())
             {
-                cache.Set(item.Id + "-" + item.GetType(), item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CAHSE_TIME_LIFE_IN_MINUT)));
+                _cache.Set(item.Id + "-" + item.GetType(), item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
                 return true;
             }
             return false;

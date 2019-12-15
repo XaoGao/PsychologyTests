@@ -3,7 +3,7 @@
         <p>Данные: <strong>{{ patient.fullname }}</strong></p>
         <hr>
         <p>Номер карточки: <strong>{{ patient.personalCardNumber }}</strong></p>
-        <mat-form-field class="col-12mt-5">
+        <mat-form-field class="col-12">
             <input matInput placeholder="Фамилия" required name="lastname" [(ngModel)]="patient.lastname" />
         </mat-form-field>
         <mat-form-field class="col-12">
@@ -12,5 +12,13 @@
         <mat-form-field class="col-12">
             <input matInput placeholder="Отчество" required name="middlename" [(ngModel)]="patient.middlename" />
         </mat-form-field>
+        <mat-form-field class="col-5">
+            <input matInput [matDatepicker]="picker" placeholder="Дата рождения" name="dateOfBirth"
+                [(ngModel)]="patient.dateOfBirth" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button class="col-3 ml-3 btn btn-primary"><i class="fa fa-save"></i>Сохранить</button>
+        <button class="col-3 ml-3 btn btn-danger"><i class="fa fa-trash"></i>Удалить</button>
     </div>
 </form>
