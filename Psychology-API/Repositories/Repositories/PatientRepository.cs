@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Settings;
+using Psychology_API.Servises;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -14,11 +12,10 @@ namespace Psychology_API.Repositories.Repositories
     public class PatientRepository : BaseRepository, IPatientRepository
     {
         private readonly DataContext _context;
-        private readonly IMemoryCache _cache;
-        private readonly CacheSettings _cacheSettings;
-        public PatientRepository(DataContext context, IMemoryCache cache, CacheSettings cacheSettings) : base(context)
+        private readonly ICache<Patient> _cache;
+
+        public PatientRepository(DataContext context, ICache<Patient> cache) : base(context)
         {
-            _cacheSettings = cacheSettings;
             _cache = cache;
             _context = context;
         }
@@ -29,7 +26,7 @@ namespace Psychology_API.Repositories.Repositories
 
             string key = doctorId + "-Patient";
 
-            if (!_cache.TryGetValue(key, out patient))
+            if(!_cache.Get(key, out patient))
             {
                 patient = await _context.Patients
                     .Include(p => p.Doctor)
@@ -37,7 +34,7 @@ namespace Psychology_API.Repositories.Repositories
                     .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
 
                 if (patient != null)
-                    _cache.Set(key, patient, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
+                    _cache.Set(key, patient);
             }
 
             return patient;
@@ -62,8 +59,7 @@ namespace Psychology_API.Repositories.Repositories
         {
             base.Add(entity);
             Patient patient = entity as Patient;
-            _cache.Set(patient.Id + "-Patient", patient, new MemoryCacheEntryOptions()
-                                                            .SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
+            _cache.Set(patient.Id + "-Patient", patient);
         }
 
         public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)

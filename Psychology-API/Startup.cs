@@ -19,6 +19,7 @@ using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.SeedData;
 using Newtonsoft.Json;
 using Psychology_API.Settings;
+using Psychology_API.Servises;
 
 namespace Psychology_API
 {
@@ -48,6 +49,7 @@ namespace Psychology_API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<CacheSettings>();
+            services.AddSingleton(typeof(Cache<>), typeof(ICache<>));
             services.AddMemoryCache();
             services.AddTransient<SeedAllData>();
             services.AddAuthentication(options =>

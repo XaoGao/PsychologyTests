@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts.GenericRepository;
-using Psychology_API.Settings;
+using Psychology_API.Servises;
 using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories
@@ -15,11 +14,9 @@ namespace Psychology_API.Repositories.Repositories
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
-        private IMemoryCache _cache;
-        private readonly CacheSettings _cacheSettings;
-        public GenericRepository(DataContext context, IMemoryCache cache, CacheSettings cacheSettings)
+        private readonly ICache<TEntity> _cache;
+        public GenericRepository(DataContext context, ICache<TEntity> cache)
         {
-            _cacheSettings = cacheSettings;
             _cache = cache;
             _context = context;
             _dbSet = _context.Set<TEntity>();
@@ -38,11 +35,11 @@ namespace Psychology_API.Repositories.Repositories
 
             string key = id + "-" + entity.GetType();
 
-            if (!_cache.TryGetValue(key, out entity))
+            if (!_cache.Get(key, out entity))
             {
                 entity = await _dbSet.FindAsync(id);
                 if (entity != null)
-                    _cache.Set(key, entity, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
+                    _cache.Set(key, entity);
             }
 
             return entity;
@@ -62,7 +59,7 @@ namespace Psychology_API.Repositories.Repositories
             await _dbSet.AddAsync(item);
             if (await SaveChangeAsync())
             {
-                _cache.Set(item.Id + "-" + item.GetType(), item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
+                _cache.Set(item.Id + "-" + item.GetType(), item);
                 return true;
             }
             return false;

@@ -2,9 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Psychology_API.Repositories.Repositories;
 using System;
-using System.Collections.Generic;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_Domain.Abstarct;
 
