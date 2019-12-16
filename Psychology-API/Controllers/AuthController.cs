@@ -77,6 +77,7 @@ namespace Psychology_API.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
+        // TODO: нельзя сверять со строкой, нужно создать отделный класс role, который будет брать роль из базы
         [Authorize(Roles = "admin")]
         [HttpPost("{doctorId}")]       
         public async Task<IActionResult> DropPassword(int doctorId, int adminId)

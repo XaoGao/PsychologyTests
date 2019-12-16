@@ -1,0 +1,17 @@
+<form class="container">
+    <div>
+        <h3 class="text-center"> {{ department.name}} </h3>
+        <hr>
+        <mat-form-field class="col-9">
+            <input matInput placeholder="Наименование отдела" name="name" [(ngModel)]="department.name" required>
+        </mat-form-field>
+        <mat-form-field class="col-9">
+            <input matInput placeholder="Уровень сортировки"  title="Чем уровень меньше, тем выше стоит в списке" name="sortLevel" [(ngModel)]="department.sortLevel" required>
+        </mat-form-field>
+        <mat-form-field class="col-9">
+            <input matInput placeholder="Актуальность отдела" name="isLock" [(ngModel)]="department.isLock" required>
+        </mat-form-field>
+        <hr>
+        <button class="btn btn-primary pull-right"><i class="fa fa-save"></i> Сохранить</button>
+    </div>
+</form>

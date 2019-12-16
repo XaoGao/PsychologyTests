@@ -1,4 +1,4 @@
-export interface Position {
+export class Position {
     id: number;
     name: string;
     sortLevel: number;

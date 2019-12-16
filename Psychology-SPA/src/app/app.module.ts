@@ -52,7 +52,11 @@ import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
+// ModalWindow
 import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
+import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
+import { ModalPositionComponent } from './phonebook/position/modal-position/modal-position.component';
+import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.component';
 
 
 export function tokenGetter() {
@@ -77,7 +81,10 @@ export function tokenGetter() {
     DoctorDetailComponent,
     PatientsListComponent,
     AnamnesesListComponent,
-    PatientEditComponent
+    PatientEditComponent,
+    ModalDepartmentComponent,
+    ModalPositionComponent,
+    ModalPhoneComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +133,10 @@ export function tokenGetter() {
     AppComponent
   ],
     entryComponents: [
-      PatientEditComponent
+      PatientEditComponent,
+      ModalDepartmentComponent,
+      ModalPositionComponent,
+      ModalPhoneComponent
     ],
 })
 export class AppModule { }

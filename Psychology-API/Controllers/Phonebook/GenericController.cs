@@ -61,6 +61,15 @@ namespace Psychology_API.Controllers.Phonebook
 
             throw new Exception("Не предвиденная ошибка в ходе добавления новых данных.");
         }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Update(int doctorId, TEntity item)
+        {
+            // TODO: Обновление данныех, скорей всего нужно будет описать в каждом отдельном контроллере
+            return Ok();
+        }
+
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int doctorId, int id)

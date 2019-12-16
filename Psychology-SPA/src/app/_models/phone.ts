@@ -1,4 +1,4 @@
-export interface Phone {
+export class Phone {
     id: number;
     number: string;
     isLock: boolean;

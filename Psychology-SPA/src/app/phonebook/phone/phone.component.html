@@ -15,9 +15,19 @@
             <td mat-cell *matCellDef="let phone"> {{ phone.numberMask }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="isLock">
+        <!-- <ng-container matColumnDef="isLock">
             <th mat-header-cell *matHeaderCellDef> Акутальность </th>
             <td mat-cell *matCellDef="let phone"> {{ phone.isLock }} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="isLock">
+            <th mat-header-cell *matHeaderCellDef> Акутальность </th>
+            <td mat-cell *matCellDef="let phone"><mat-checkbox [disabled]=true></mat-checkbox> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Редактировать </th>
+            <td mat-cell *matCellDef="let phone" (click)="openDialog(phone)"><i class="fa fa-edit"></i> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
