@@ -1,3 +1,5 @@
+import { AuthService } from './../../_services/auth.service';
+import { PhonebookService } from './../../_services/phonebook.service';
 import { Department } from './../../_models/department';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +18,11 @@ export class DepartmentComponent implements OnInit {
   public departments: Department[];
   displayedColumns: string[] = ['position', 'name', 'sortLevel', 'isLock', 'edit'];
   dataSource = new MatTableDataSource(this.departments);
-  constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private toastrService: ToastrAlertService,
+              private route: ActivatedRoute,
+              public dialog: MatDialog,
+              private phonebookService: PhonebookService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -28,7 +34,6 @@ export class DepartmentComponent implements OnInit {
   }
 
   openDialog(currentDepartment?: Department): void {
-    // console.log(currentDepartment);
     if (currentDepartment === null) {
       const dialogRef = this.dialog.open(ModalDepartmentComponent, {
         width: '600px',
@@ -46,14 +51,22 @@ export class DepartmentComponent implements OnInit {
         data: { department: currentDepartment }
       });
       dialogRef.afterClosed().subscribe(result => {
-    //     // if (result) {
-    //     //   this.updateTodo(result);
-        // }
+         if (result) {
+           this.updateDepartment(result as Department);
+        }
       });
     }
   }
 
-
+  updateDepartment(department: Department) {
+    this.phonebookService.updateDepartment(department.id, department).subscribe(
+      (res) => {
+        this.toastrService.success('Данные успешно обновлены');
+      }, err => {
+        this.toastrService.error(err);
+      }
+    );
+  }
 
 }
 

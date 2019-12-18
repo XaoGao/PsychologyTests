@@ -1,3 +1,4 @@
+import { Department } from './../_models/department';
 import { map } from 'rxjs/operators';
 import { Phone } from './../_models/phone';
 import { Position } from './../_models/position';
@@ -5,7 +6,6 @@ import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Department } from '../_models/department';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,8 @@ export class PhonebookService {
   }
   getPhonebook(doctorId: number) {
     return this.http.get(this.BASE_URL  + 'doctors/' + doctorId + '/phonebook');
+  }
+  updateDepartment(departmentId: number, department: Department) {
+    return this.http.put(this.BASE_URL + 'departments/' + departmentId, department);
   }
 }

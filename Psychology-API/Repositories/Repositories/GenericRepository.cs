@@ -29,11 +29,11 @@ namespace Psychology_API.Repositories.Repositories
             return entities;
         }
 
-        public async Task<TEntity> GetAsync(int id)
+        public async Task<TEntity> GetAsync(int id, string type)
         {
             TEntity entity = null;
 
-            string key = id + "-" + entity.GetType();
+            string key = id + "-" + type;
 
             if (!_cache.Get(key, out entity))
             {
@@ -50,9 +50,13 @@ namespace Psychology_API.Repositories.Repositories
             return _dbSet.AsNoTracking().Where(predicate).ToList();
         }
 
-        public Task<bool> UpdateAsync(TEntity item)
+        public async Task<bool> UpdateAsync(TEntity item)
         {
-            throw new NotImplementedException();
+            // _context.Entry(item).State = EntityState.Modified;
+            if(await SaveChangeAsync())
+                return true;
+
+            return false;
         }
         public async Task<bool> CreateAsync(TEntity item)
         {

@@ -34,7 +34,7 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="doctorId"> Идентификатор доктора, которому сменят пароль. </param>
         /// <param name="adminId"> Идентификатор администратора, который меняет пароль. </param>
         /// <returns></returns>
-        Task<bool> DropPassword(int doctorId, int adminId);
+        // Task<bool> DropPassword(int doctorId, int adminId);
         /// <summary>
         /// Сменить пароль доктора на новый.
         /// </summary>

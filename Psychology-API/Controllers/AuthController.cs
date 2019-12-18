@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
@@ -22,12 +23,14 @@ namespace Psychology_API.Controllers
         private readonly IAuthRepository _authRepo;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public AuthController(IAuthRepository authRepo, IMapper mapper, IConfiguration config)
+        public AuthController(IAuthRepository authRepo, IMapper mapper, IConfiguration config, IDoctorRepository doctorRepository)
         {
             _authRepo = authRepo;
             _mapper = mapper;
             _config = config;
+            _doctorRepository = doctorRepository;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(DoctorForRegisterDto doctorForRegisterDto)
@@ -78,11 +81,16 @@ namespace Psychology_API.Controllers
             });
         }
         // TODO: нельзя сверять со строкой, нужно создать отделный класс role, который будет брать роль из базы
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = RolesSettings.Administrator)]
         [HttpPost("{doctorId}")]       
         public async Task<IActionResult> DropPassword(int doctorId, int adminId)
         {
-            if(await _authRepo.DropPassword(doctorId, adminId))
+            var doctorFromRepo = await _doctorRepository.GetDoctorAsync(doctorId);
+
+            if(doctorFromRepo == null)
+                return BadRequest("Указаный пользователь не зарегистрирован в системе");
+
+            if(await _authRepo.ChangePassword(doctorId, "123456"))
                 return NoContent();
 
             throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");

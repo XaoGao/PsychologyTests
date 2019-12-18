@@ -3,16 +3,16 @@ using Psychology_API.Data;
 namespace Psychology_API.Settings
 {
     /// <summary>
-    /// Роли беруться их базы
+    /// Представление ролей в виде C# класса
+    /*
+        TODO: нужно продумать как реализовать данный класс, так как нас не устраивает сравние с чистой строкой плохая практика.
+    */
     /// </summary>
-    public class RolesSettings
+    public static class RolesSettings
     {
-        private readonly DataContext _context;
-        public RolesSettings(DataContext context)
-        {
-            _context = context;
-        }
-
+        public const string Administrator = "admin";
+        public const string HR = "hr";
+        public const string Doctor = "doctor";
 
     }
 }

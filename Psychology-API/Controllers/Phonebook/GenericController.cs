@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_Domain.Abstarct;
+using Psychology_API.Settings;
+using AutoMapper;
 
 namespace Psychology_API.Controllers.Phonebook
 {
@@ -14,9 +16,12 @@ namespace Psychology_API.Controllers.Phonebook
     public class GenericController<TEntity> : ControllerBase where TEntity : BaseEntity
     {
         private readonly IGenericRepository<TEntity> _repo;
-        public GenericController(IGenericRepository<TEntity> repo)
+        private readonly IMapper _mapper;
+
+        public GenericController(IGenericRepository<TEntity> repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
         [AllowAnonymous]
         [HttpGet]
@@ -26,6 +31,7 @@ namespace Psychology_API.Controllers.Phonebook
             // if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //     return Unauthorized("Пользователь должен авторизоваться.");
             #endregion
+            //param - указатель, получить все значения или только актуальные
             if(param)
                 return Ok(await _repo.GetAllAsync());
             else
@@ -40,7 +46,7 @@ namespace Psychology_API.Controllers.Phonebook
             //     return Unauthorized("Пользователь должен авторизоваться.");
             #endregion
 
-            var entity = await _repo.GetAsync(id);
+            var entity = await _repo.GetAsync(id, typeof(TEntity).ToString());
 
             if(entity == null)
                 return BadRequest("Запрашиваемых данных не существует.");
@@ -60,13 +66,22 @@ namespace Psychology_API.Controllers.Phonebook
             throw new Exception("Не предвиденная ошибка в ходе добавления новых данных.");
         }
 
-        [Authorize]
-        [HttpPut]
-        public async Task<IActionResult> Update(int doctorId, TEntity item)
-        {
-            // TODO: Обновление данныех, скорей всего нужно будет описать в каждом отдельном контроллере
-            return Ok();
-        }
+        // [Authorize(Roles = RolesSettings.HR)]
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> Update(int id, TEntity item)
+        // {
+        //     var itemFromRepo = await _repo.GetAsync(id);
+
+        //     if(itemFromRepo == null)
+        //         return BadRequest($"Данного объекта для обновленя нет");
+
+        //     _mapper.Map(item, itemFromRepo);
+
+        //     if(await _repo.UpdateAsync(item))
+        //         return Ok(itemFromRepo);
+            
+        //     throw new Exception("Непредвиденая ошибка в ходе обновления данных");
+        // }
 
         [Authorize]
         [HttpDelete("{id}")]
@@ -75,7 +90,7 @@ namespace Psychology_API.Controllers.Phonebook
             if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь должен авторизоваться.");
 
-            var entity = await _repo.GetAsync(id);
+            var entity = await _repo.GetAsync(id,typeof(TEntity).ToString());
 
             if (entity == null)
                 return BadRequest("Запрашиваемых данных не существует.");

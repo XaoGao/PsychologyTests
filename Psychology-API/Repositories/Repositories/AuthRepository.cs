@@ -116,31 +116,33 @@ namespace Psychology_API.Repositories.Repositories
 
             return false;
         }
+        
         /// <summary>
-        /// Сменить пароль доктора на стандартный.
+        /// Сменить пароль доктора на стандартный. Функционал дублирует метод ChangePassword
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора, которому сменят пароль. </param>
         /// <param name="adminId"> Идентификатор администратора, который меняет пароль. </param>
         /// <returns></returns>
-        public async Task<bool> DropPassword(int doctorId, int adminId)
-        {
-            var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
+        // public async Task<bool> DropPassword(int doctorId, int adminId)
+        // {
+        //     var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
 
-            if(doctorFromRepo == null)
-                return false;
+        //     if(doctorFromRepo == null)
+        //         return false;
 
-            byte[] passwordHash, passwordSalt;
-            string standratPassword = "123456";
+        //     byte[] passwordHash, passwordSalt;
+        //     string standratPassword = "123456";
 
-            CreatePasswordHash(standratPassword, out passwordHash, out passwordSalt);
+        //     CreatePasswordHash(standratPassword, out passwordHash, out passwordSalt);
 
-            doctorFromRepo.PasswordHash = passwordHash;
-            doctorFromRepo.PasswordSalt = passwordSalt;
+        //     doctorFromRepo.PasswordHash = passwordHash;
+        //     doctorFromRepo.PasswordSalt = passwordSalt;
 
-            await _context.SaveChangesAsync();
+        //     await _context.SaveChangesAsync();
 
-            return true;
-        }
+        //     return true;
+        // }
+
         /// <summary>
         /// Сменить пароль доктора на новый.
         /// </summary>

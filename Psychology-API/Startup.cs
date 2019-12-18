@@ -49,7 +49,7 @@ namespace Psychology_API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<CacheSettings>();
-            services.AddSingleton(typeof(Cache<>), typeof(ICache<>));
+            services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
             services.AddMemoryCache();
             services.AddTransient<SeedAllData>();
             services.AddAuthentication(options =>

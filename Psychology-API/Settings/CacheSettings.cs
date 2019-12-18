@@ -5,7 +5,7 @@ namespace Psychology_API.Settings
     /// <summary>
     /// Настройки кеша.
     /// </summary>
-    // TODO: Если изменить ключь-значение хранилища (например redis) то нужно добавить необходимые поля в appsettings поля и добавить в данный класс.
+    // TODO: Если изменить ключ-значение хранилища (например redis) то нужно добавить необходимые поля в appsettings поля и добавить в данный класс.
     public class CacheSettings
     {
         private readonly IConfiguration _configuration;

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.Repositories.Contracts.GenericRepository;
@@ -10,7 +11,7 @@ namespace Psychology_API.Controllers.Phonebook
     [Route("api/[controller]")]
     public class PositionsController : GenericController<Position>
     {
-        public PositionsController(IGenericRepository<Position> repo) : base(repo)
+        public PositionsController(IGenericRepository<Position> repo, IMapper mapper) : base(repo, mapper)
         {
         }
     }

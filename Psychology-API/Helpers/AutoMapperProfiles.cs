@@ -29,6 +29,10 @@ namespace Psychology_API.Helpers
 
             // Анамнез
             CreateMap<Anamnesis, AnamnesisForReturnDto>();
+
+            CreateMap<Department, Department>();
+            CreateMap<Position, Position>();
+            CreateMap<Phone, Phone>();
         }
     }
 }

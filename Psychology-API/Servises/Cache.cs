@@ -44,6 +44,9 @@ namespace Psychology_API.Servises
         /// <param name="item"> Объект, который мы хотим положить в хранилище. </param>
         public void Set(string key, TEntity item)
         {
+            if(string.IsNullOrWhiteSpace(key))
+                throw new ArgumentNullException(nameof(key), "Ключ не может быть пустой строкой");
+                
             _cache.Set(key, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
         }
     }
