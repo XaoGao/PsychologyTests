@@ -8,10 +8,14 @@
         <mat-form-field class="col-9">
             <input matInput placeholder="Уровень сортировки"  title="Чем уровень меньше, тем выше стоит в списке" name="sortLevel" [(ngModel)]="position.sortLevel" required>
         </mat-form-field>
-        <mat-form-field class="col-9">
-            <input matInput placeholder="Актуальность отдела" name="isLock" [(ngModel)]="position.isLock" required>
-        </mat-form-field>
+        <mat-checkbox 
+            class="col-4" 
+            name="isLock" 
+            [(ngModel)]="data.position.isLock" 
+        >Должность заблокирован
+        </mat-checkbox>
         <hr>
-        <button class="btn btn-primary pull-right"><i class="fa fa-save"></i> Сохранить</button>
+        <button class="btn btn-primary pull-right" [mat-dialog-close]="data.position"><i class="fa fa-save"></i>
+            Сохранить</button>
     </div>
 </form>

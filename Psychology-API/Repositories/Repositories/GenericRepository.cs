@@ -81,5 +81,12 @@ namespace Psychology_API.Repositories.Repositories
 
             return false;
         }
+
+        public async Task<TEntity> GetAsync(int id)
+        {
+            var item = await _dbSet.FindAsync(id);
+
+            return item;
+        }
     }
 }

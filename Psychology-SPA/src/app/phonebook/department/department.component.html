@@ -3,6 +3,7 @@
     <mat-form-field class="col-5 text-center">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
     </mat-form-field>
+    <button class="col-2 btn btn-default" title="Добавить отдел"><i class="fa fa-plus"></i></button>
     <table mat-table [dataSource]="departments" class="mat-elevation-z8 col-12">
 
         <ng-container matColumnDef="position">

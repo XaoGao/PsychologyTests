@@ -54,7 +54,7 @@ namespace Psychology_API.Controllers.Phonebook
             return Ok(entity);
         }
         [Authorize]
-        [HttpPost]
+        [HttpPost("{doctorId}")]
         public async Task<IActionResult> Create(int doctorId, TEntity item)
         {
             if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -65,12 +65,12 @@ namespace Psychology_API.Controllers.Phonebook
 
             throw new Exception("Не предвиденная ошибка в ходе добавления новых данных.");
         }
-
+        #region  GenericUpdate
         // [Authorize(Roles = RolesSettings.HR)]
         // [HttpPut("{id}")]
         // public async Task<IActionResult> Update(int id, TEntity item)
         // {
-        //     var itemFromRepo = await _repo.GetAsync(id);
+        //     var itemFromRepo = await _repo.GetAsync(id, typeof(TEntity).ToString());
 
         //     if(itemFromRepo == null)
         //         return BadRequest($"Данного объекта для обновленя нет");
@@ -82,6 +82,7 @@ namespace Psychology_API.Controllers.Phonebook
             
         //     throw new Exception("Непредвиденая ошибка в ходе обновления данных");
         // }
+        #endregion
 
         [Authorize]
         [HttpDelete("{id}")]

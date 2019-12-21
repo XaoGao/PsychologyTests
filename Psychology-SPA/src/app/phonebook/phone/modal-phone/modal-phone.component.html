@@ -5,10 +5,14 @@
         <mat-form-field class="col-9">
             <input matInput placeholder="Наименование отдела" name="number" [(ngModel)]="phone.number" required>
         </mat-form-field>
-        <mat-form-field class="col-9">
-            <input matInput placeholder="Актуальность отдела" name="isLock" [(ngModel)]="phone.isLock" required>
-        </mat-form-field>
+        <mat-checkbox 
+            class="col-4" 
+            name="isLock" 
+            [(ngModel)]="data.phone.isLock" 
+        >Телефон заблокирован
+        </mat-checkbox>
         <hr>
-        <button class="btn btn-primary pull-right"><i class="fa fa-save"></i> Сохранить</button>
+        <button class="btn btn-primary pull-right" [mat-dialog-close]="data.phone"><i class="fa fa-save"></i>
+            Сохранить</button>
     </div>
 </form>

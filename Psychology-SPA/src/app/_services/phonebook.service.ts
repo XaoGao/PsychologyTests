@@ -44,4 +44,51 @@ export class PhonebookService {
   updateDepartment(departmentId: number, department: Department) {
     return this.http.put(this.BASE_URL + 'departments/' + departmentId, department);
   }
+  createDepartment(doctorId: number, department: Department) {
+    return this.http.post(this.BASE_URL + 'departments/' + doctorId, department);
+  }
+
+  updatePosition(positionId: number, position: Position) {
+    return this.http.put(this.BASE_URL + 'positions/' + positionId, position);
+  }
+  createPosition(doctorId: number, position: Position) {
+    return this.http.post(this.BASE_URL + 'positions/' + doctorId, position);
+  }
+
+  updatePhone(phoneId: number, phone: Phone) {
+    return this.http.put(this.BASE_URL + 'phones/' + phoneId, phone);
+  }
+  createPhone(doctorId: number, phone: Phone) {
+    return this.http.post(this.BASE_URL + 'phones/' + doctorId, phone);
+  }
+  deleteDepartment(doctorId: number, departmentId: number) {
+    let params = new HttpParams();
+    params = params.append('doctorId', String(doctorId));
+    return this.http.delete(this.BASE_URL + 'department/' + departmentId, { observe: 'response', params})
+    .pipe(
+      map(response => {
+        return response.body;
+      })
+    );
+  }
+  deletePosition(doctorId: number, positionId: number) {
+    let params = new HttpParams();
+    params = params.append('doctorId', String(doctorId));
+    return this.http.delete(this.BASE_URL + 'Position/' + positionId, { observe: 'response', params})
+    .pipe(
+      map(response => {
+        return response.body;
+      })
+    );
+  }
+  deletePhone(doctorId: number, phoneId: number) {
+    let params = new HttpParams();
+    params = params.append('doctorId', String(doctorId));
+    return this.http.delete(this.BASE_URL + 'Phone/' + phoneId, { observe: 'response', params})
+    .pipe(
+      map(response => {
+        return response.body;
+      })
+    );
+  }
 }

@@ -15,6 +15,13 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> Объект класса. </returns>
+        Task<TEntity> GetAsync(int id);
+        /// <summary>
+        /// Получить конкретный экземпляр конкретного класса, записав его в кеш-хранилище.
+        /// </summary>
+        /// <param name="id"> Идетификатор. </param>
+        /// <param name="type"> Тип класса, который будет ключем для кеш хранилища. </param>
+        /// <returns></returns>
         Task<TEntity> GetAsync(int id, string type);
         /// <summary>
         /// Получить все объекты указаного класса.

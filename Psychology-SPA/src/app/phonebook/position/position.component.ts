@@ -1,3 +1,4 @@
+import { PhonebookService } from './../../_services/phonebook.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Position } from './../../_models/position';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,10 @@ export class PositionComponent implements OnInit {
   public positions: Position[];
   displayedColumns: string[] = ['position', 'name', 'sortLevel', 'isLock', 'edit'];
   dataSource = new MatTableDataSource(this.positions);
-  constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private toastrService: ToastrAlertService,
+              private route: ActivatedRoute,
+              private phonebookService: PhonebookService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -27,7 +31,6 @@ export class PositionComponent implements OnInit {
   }
 
   openDialog(currentPosition?: Position): void {
-    // console.log(currentPosition);
     if (currentPosition === null) {
       const dialogRef = this.dialog.open(ModalPositionComponent, {
         width: '600px',
@@ -45,10 +48,19 @@ export class PositionComponent implements OnInit {
         data: { position: currentPosition }
       });
       dialogRef.afterClosed().subscribe(result => {
-    //     // if (result) {
-    //     //   this.updateTodo(result);
-        // }
+        if (result) {
+      this.updatePosition(result as Position);
+        }
       });
     }
+  }
+  updatePosition(position: Position) {
+    this.phonebookService.updatePosition(position.id, position).subscribe(
+      (res) => {
+        this.toastrService.success('Данные успешно обновлены');
+      }, err => {
+        this.toastrService.error(err);
+      }
+    );
   }
 }
