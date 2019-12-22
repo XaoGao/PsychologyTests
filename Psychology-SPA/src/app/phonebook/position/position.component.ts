@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { PhonebookService } from './../../_services/phonebook.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Position } from './../../_models/position';
@@ -19,7 +20,8 @@ export class PositionComponent implements OnInit {
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               private phonebookService: PhonebookService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,18 +31,23 @@ export class PositionComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  addPosition() {
+    this.openDialog();
+  }
+  editPosition(position: Position) {
+    this.openDialog(position);
+  }
   openDialog(currentPosition?: Position): void {
-    if (currentPosition === null) {
+    if (!currentPosition) {
       const dialogRef = this.dialog.open(ModalPositionComponent, {
         width: '600px',
         data: { position: new Position()}
       });
       dialogRef.afterClosed().subscribe(result => {
-    //     // if (result) {
-    //     //   this.createTodo(result as Todo);
-    //     //   this.todoListService.activeTodoList.todos.push(result);
-    //     // }
+        if (result) {
+          this.createPosition(result as Position);
+          this.positions.push(result);
+        }
       });
     } else {
       const dialogRef = this.dialog.open(ModalPositionComponent, {
@@ -58,6 +65,15 @@ export class PositionComponent implements OnInit {
     this.phonebookService.updatePosition(position.id, position).subscribe(
       (res) => {
         this.toastrService.success('Данные успешно обновлены');
+      }, err => {
+        this.toastrService.error(err);
+      }
+    );
+  }
+  createPosition(position: Position) {
+    this.phonebookService.createPosition(this.authService.decodedToken.nameid, position).subscribe(
+      () => {
+        this.toastrService.success('Новая должность успешно добавлена');
       }, err => {
         this.toastrService.error(err);
       }

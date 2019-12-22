@@ -52,7 +52,6 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<bool> UpdateAsync(TEntity item)
         {
-            // _context.Entry(item).State = EntityState.Modified;
             if(await SaveChangeAsync())
                 return true;
 
@@ -87,6 +86,18 @@ namespace Psychology_API.Repositories.Repositories
             var item = await _dbSet.FindAsync(id);
 
             return item;
+        }
+
+        public async Task<bool> UpdateAsync(TEntity item, string type)
+        {
+            if(await SaveChangeAsync())
+            {
+                string key = item.Id + "-" + type;
+                _cache.Set(key, item);
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { PhonebookService } from './../../_services/phonebook.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Phone } from './../../_models/phone';
@@ -19,7 +20,8 @@ export class PhoneComponent implements OnInit {
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               private phonebookService: PhonebookService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,18 +31,23 @@ export class PhoneComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  addPhone() {
+    this.openDialog();
+  }
+  editPhone(phone: Phone) {
+    this.openDialog(phone);
+  }
   openDialog(currentPhone?: Phone): void {
-    if (currentPhone === null) {
+    if (!currentPhone) {
       const dialogRef = this.dialog.open(ModalPhoneComponent, {
         width: '600px',
         data: { phone: new Phone()}
       });
       dialogRef.afterClosed().subscribe(result => {
-    //     // if (result) {
-    //     //   this.createTodo(result as Todo);
-    //     //   this.todoListService.activeTodoList.todos.push(result);
-    //     // }
+        if (result) {
+          this.createPhone(result as Phone);
+          this.phones.push(result);
+        }
       });
     } else {
       const dialogRef = this.dialog.open(ModalPhoneComponent, {
@@ -58,6 +65,15 @@ export class PhoneComponent implements OnInit {
     this.phonebookService.updatePhone(phone.id, phone).subscribe(
       (res) => {
         this.toastrService.success('Данные успешно обновлены');
+      }, err => {
+        this.toastrService.error(err);
+      }
+    );
+  }
+  createPhone(phone: Phone) {
+    this.phonebookService.createPhone(this.authService.decodedToken.nameid, phone).subscribe(
+      () => {
+        this.toastrService.success('Новый телефон успешно добавлен');
       }, err => {
         this.toastrService.error(err);
       }

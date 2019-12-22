@@ -33,17 +33,24 @@ export class DepartmentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  addDepartment() {
+    this.openDialog();
+  }
+  editDepartment(department: Department) {
+    this.openDialog(department);
+  }
+
   openDialog(currentDepartment?: Department): void {
-    if (currentDepartment === null) {
+    if (!currentDepartment) {
       const dialogRef = this.dialog.open(ModalDepartmentComponent, {
         width: '600px',
         data: { department: new Department()}
       });
       dialogRef.afterClosed().subscribe(result => {
-    //     // if (result) {
-    //     //   this.createTodo(result as Todo);
-    //     //   this.todoListService.activeTodoList.todos.push(result);
-    //     // }
+        if (result) {
+          this.createDepartment(result as Department);
+          this.departments.push(result);
+        }
       });
     } else {
       const dialogRef = this.dialog.open(ModalDepartmentComponent, {
@@ -60,13 +67,21 @@ export class DepartmentComponent implements OnInit {
 
   updateDepartment(department: Department) {
     this.phonebookService.updateDepartment(department.id, department).subscribe(
-      (res) => {
+      () => {
         this.toastrService.success('Данные успешно обновлены');
       }, err => {
         this.toastrService.error(err);
       }
     );
   }
-
+  createDepartment(department: Department) {
+    this.phonebookService.createDepartment(this.authService.decodedToken.nameid, department).subscribe(
+      () => {
+        this.toastrService.success('Новый отдел успешно добавлен');
+      }, err => {
+        this.toastrService.error(err);
+      }
+    );
+  }
 }
 

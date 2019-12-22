@@ -1,18 +1,19 @@
-<form class="container">
+<form #phoneForm="ngForm" class="container">
     <div>
-        <h3 class="text-center"> {{ phone.numberMask }} </h3>
+        <h3 *ngIf="phone.id !== undefined" class="text-center"> {{ phone.numberMask}} </h3>
+        <h3 *ngIf="phone.id === undefined" class="text-center"> Создать новый отдел </h3>
         <hr>
         <mat-form-field class="col-9">
-            <input matInput placeholder="Наименование отдела" name="number" [(ngModel)]="phone.number" required>
+            <input matInput placeholder="Номер телефона" name="number" [(ngModel)]="phone.number" required>
         </mat-form-field>
         <mat-checkbox 
             class="col-4" 
             name="isLock" 
-            [(ngModel)]="data.phone.isLock" 
+            [(ngModel)]="phone.isLock" 
         >Телефон заблокирован
         </mat-checkbox>
         <hr>
-        <button class="btn btn-primary pull-right" [mat-dialog-close]="data.phone"><i class="fa fa-save"></i>
+        <button class="btn btn-primary pull-right" [disabled]="phoneForm.invalid" [mat-dialog-close]="phone"><i class="fa fa-save"></i>
             Сохранить</button>
     </div>
 </form>

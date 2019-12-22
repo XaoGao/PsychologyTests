@@ -14,7 +14,11 @@ export class ModalPhoneComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.phone = this.data.phone;
+    if (this.data.phone) {
+      this.phone = this.data.phone;
+    } else {
+      this.phone = new Phone();
+    }
   }
 
 }

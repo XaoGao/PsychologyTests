@@ -15,6 +15,10 @@ export class ModalDepartmentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.department = this.data.department;
+    if (this.data.department) {
+      this.department = this.data.department;
+    } else {
+      this.department = new Department();
+    }
   }
 }

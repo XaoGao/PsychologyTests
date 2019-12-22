@@ -27,14 +27,14 @@ namespace Psychology_API.Controllers.Phonebook
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Department item)
         {
-            var itemFromRepo = await _repo.GetAsync(id, typeof(Department).ToString());
+            var itemFromRepo = await _repo.GetAsync(id);
 
             if(itemFromRepo == null)
                 return BadRequest($"Данного объекта для обновленя нет");
 
             _mapper.Map(item, itemFromRepo);
 
-            if(await _repo.UpdateAsync(item))
+            if(await _repo.UpdateAsync(item, typeof(Department).ToString()))
                 return Ok(itemFromRepo);
             
             throw new Exception("Непредвиденая ошибка в ходе обновления данных");

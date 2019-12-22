@@ -20,7 +20,7 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
         /// Получить конкретный экземпляр конкретного класса, записав его в кеш-хранилище.
         /// </summary>
         /// <param name="id"> Идетификатор. </param>
-        /// <param name="type"> Тип класса, который будет ключем для кеш хранилища. </param>
+        /// <param name="type"> Тип класса, который будет ключем для кеш-хранилища. </param>
         /// <returns></returns>
         Task<TEntity> GetAsync(int id, string type);
         /// <summary>
@@ -52,5 +52,12 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
         /// <param name="item"> Экземпляр сущности. </param>
         /// <returns></returns>
         Task<bool> UpdateAsync(TEntity item);
+        /// <summary>
+        /// Обновить в контексте данных запись, записать значение в кеш-хранилище и сохранить изменения.
+        /// </summary>
+        /// <param name="item"> Экземпляр сущности. </param>
+        /// <param name="type"> Тип класса, который будет ключем для кеш-хранилища. </param>
+        /// <returns></returns>
+        Task<bool> UpdateAsync(TEntity item, string type);
     }
 }
