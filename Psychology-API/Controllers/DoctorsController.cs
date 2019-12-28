@@ -43,7 +43,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var doctorFromRepo = await _doctorRepository.GetDoctorAsync(doctorId);
+            var doctorFromRepo = await _doctorRepository.GetDoctorWithoutCacheAsync(doctorId);
 
             if(doctorFromRepo == null)
                 return BadRequest("Указаного пользователя не существует");

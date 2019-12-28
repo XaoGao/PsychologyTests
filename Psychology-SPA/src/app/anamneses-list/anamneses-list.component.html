@@ -1,8 +1,12 @@
+<div class="text-center mb-5">
+    <h3>История заключении пациента: {{ patientFullname }}</h3>
+    <hr>
+</div>
 <div *ngFor="let anamnesis of anamneses">
     <div>
-        <p> {{ anamnesis.conclusionTime | date: 'yyyy.MM.dd' }} </p>
-        <p> {{ anamnesis.conclusion }}</p>
-        <p> Заключение сделал: {{ anamnesis.doctor.fullname }}</p>
+        <p> <strong>Дата осмотра:</strong> {{ anamnesis.conclusionTime | date: 'yyyy.MM.dd' }}</p>
+        <p> <strong>Заключение:</strong> {{ anamnesis.conclusion }}</p>
+        <p> <strong>Заключение сделал:</strong> {{ anamnesis.doctor.fullname }}</p>
     </div>
     <hr>
 </div>

@@ -1,14 +1,15 @@
 <div class="container">
-    <div [routerLink]="['/patients']" routerLinkActive="router-link-active">
+    <div *ngIf="isDoctor()" [routerLink]="['/patients']" routerLinkActive="router-link-active">
         <p>Пациенты</p>
+        <hr>
     </div>
-    <hr>
-    <div>
+    <div *ngIf="isDoctor()">
         <p>Провести тест</p>
+        <hr>
     </div>
-    <hr>
-    <div>
+    
+    <div *ngIf="isHr()">
         <p>График работ</p>
+        <hr>
     </div>
-    <hr>
 </div>

@@ -14,5 +14,11 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <returns></returns>
         Task<Doctor> GetDoctorAsync(int doctorId);
+        /// <summary>
+        /// Получить данные конкретного доктора без записи данных в кеш.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns></returns>
+        Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId);
     }
 }

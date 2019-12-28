@@ -3,35 +3,31 @@ using System.Collections.Generic;
 namespace Psychology_Domain.Domain
 {
     /// <summary>
-    /// Тест
+    /// Воспрос
     /// </summary>
-    public class Test
+    public class Question
     {
         /// <summary>
-        /// Идентификатор
+        /// Идентификатор вопроса
         /// </summary>
         /// <value></value>
         public int Id { get; set; }
         /// <summary>
-        /// Наименование теста
+        /// Текст вопроса
         /// </summary>
         /// <value></value>
-        public string Name { get; set; }
+        public string Text { get; set; }
         /// <summary>
-        /// Описание теста
+        /// Порядковый номер
         /// </summary>
         /// <value></value>
-        public string Description { get; set; }
+        public int ortLevel { get; set; }
         /// <summary>
-        /// Вопросы
+        /// Идентификатор теста к которому привязаны вопросы
         /// </summary>
         /// <value></value>
-        public ICollection<Question> Questions { get; set; }
-        /// <summary>
-        /// Ответы
-        /// </summary>
-        /// <value></value>
+        public int TestId { get; set; }
+        public Test Test { get; set; }
         public ICollection<Answer> Answers { get; set; }
-
     }
 }

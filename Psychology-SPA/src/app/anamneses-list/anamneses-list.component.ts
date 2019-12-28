@@ -10,12 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 export class AnamnesesListComponent implements OnInit {
 
   public anamneses: Anamnesis[];
+  public patientFullname;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.anamneses = data.anamneses;
+      this.getFullname();
     });
   }
-
+  private getFullname() {
+    this.patientFullname = this.anamneses[0].patient.fullname;
+  }
 }

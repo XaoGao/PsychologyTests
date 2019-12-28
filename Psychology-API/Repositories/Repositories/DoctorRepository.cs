@@ -36,5 +36,12 @@ namespace Psychology_API.Repositories.Repositories
 
             return doctor;
         }
+
+        public async Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId)
+        {
+            var doctor = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
+
+            return doctor;
+        }
     }
 }

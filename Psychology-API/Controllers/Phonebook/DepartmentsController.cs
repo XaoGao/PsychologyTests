@@ -24,7 +24,7 @@ namespace Psychology_API.Controllers.Phonebook
         }
 
         [Authorize(Roles = RolesSettings.HR)]
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]   
         public async Task<IActionResult> Update(int id, Department item)
         {
             var itemFromRepo = await _repo.GetAsync(id);

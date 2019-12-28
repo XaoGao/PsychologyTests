@@ -46,7 +46,6 @@ export class PositionComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.createPosition(result as Position);
-          this.positions.push(result);
         }
       });
     } else {
@@ -56,14 +55,13 @@ export class PositionComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-      this.updatePosition(result as Position);
+          this.updatePosition(result as Position);
         }
       });
     }
   }
   updatePosition(position: Position) {
-    this.phonebookService.updatePosition(position.id, position).subscribe(
-      (res) => {
+    this.phonebookService.updatePosition(position.id, position).subscribe((res: Position) => {
         this.toastrService.success('Данные успешно обновлены');
       }, err => {
         this.toastrService.error(err);
@@ -71,11 +69,16 @@ export class PositionComponent implements OnInit {
     );
   }
   createPosition(position: Position) {
-    this.phonebookService.createPosition(this.authService.decodedToken.nameid, position).subscribe(
-      () => {
+    this.phonebookService.createPosition(this.authService.decodedToken.nameid, position).subscribe((res: Position) => {
         this.toastrService.success('Новая должность успешно добавлена');
+        this.positions.push(res);
+        // console.log(res);
+        // console.log('----------');
+        // console.log(this.positions);
       }, err => {
         this.toastrService.error(err);
+      }, () => {
+        
       }
     );
   }

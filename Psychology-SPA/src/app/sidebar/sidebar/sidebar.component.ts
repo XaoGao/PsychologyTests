@@ -1,3 +1,4 @@
+import { RolesService } from './../../_services/roles.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Doctor } from './../../_models/doctor';
 import { AuthService } from './../../_services/auth.service';
@@ -10,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   doctor: Doctor;
-  constructor(public authService: AuthService, private toastrService: ToastrAlertService) { }
+  constructor(public authService: AuthService,
+              private toastrService: ToastrAlertService,
+              private rolesService: RolesService) { }
 
   ngOnInit() {
   }
@@ -19,5 +22,11 @@ export class SidebarComponent implements OnInit {
   }
   ShowMeError() {
     this.toastrService.error('err');
+  }
+  isDoctor(): boolean {
+    return this.authService.decodedToken.role === this.rolesService.doctor;
+  }
+  isHr(): boolean {
+    return this.authService.decodedToken.role === this.rolesService.HR;
   }
 }

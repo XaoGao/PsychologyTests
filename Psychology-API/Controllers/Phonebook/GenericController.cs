@@ -61,7 +61,7 @@ namespace Psychology_API.Controllers.Phonebook
                 return Unauthorized("Пользователь должен авторизоваться.");
 
             if(await _repo.CreateAsync(item))
-                return Ok("Данные успешно добавлены.");
+                return Ok(item);//Ok("Данные успешно добавлены.");
 
             throw new Exception("Не предвиденная ошибка в ходе добавления новых данных.");
         }

@@ -15,7 +15,7 @@ export class ModalPositionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.data.department) {
+    if (this.data.position) {
       this.position = this.data.position;
     } else {
       this.position = new Position();

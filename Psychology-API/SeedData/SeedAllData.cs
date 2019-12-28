@@ -18,8 +18,8 @@ namespace Psychology_API.SeedData
         public void SeedData()
         {
             // TODO: Добавить условие, если таблицы в БД пустые то запустить SeedData
-            // if(!_context.Roles.Any())
-            //     return;
+            // if(_context.Roles.Any(rolename => rolename.Name == "admin"))
+                // return;
 
             //Отделы
             var departmentsFromFile = File.ReadAllText("SeedData/DataSeedDepartments.json");

@@ -1,3 +1,4 @@
+import { RolesService } from './../_services/roles.service';
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public authService: AuthService, private route: Router, private toastrService: ToastrAlertService) { }
+  constructor(public authService: AuthService,
+              private route: Router,
+              private toastrService: ToastrAlertService,
+              private rolseService: RolesService) { }
 
   ngOnInit() {
     console.log(this.authService.decodedToken);
@@ -22,5 +26,8 @@ export class NavComponent implements OnInit {
     this.authService.loggedOut();
     this.toastrService.info('Вы вышли из системы');
     this.route.navigate(['/']);
+  }
+  isHR(): boolean {
+    return this.authService.decodedToken.role === this.rolseService.HR;
   }
 }

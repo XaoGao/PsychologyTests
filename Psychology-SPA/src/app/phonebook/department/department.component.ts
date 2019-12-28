@@ -2,11 +2,12 @@ import { AuthService } from './../../_services/auth.service';
 import { PhonebookService } from './../../_services/phonebook.service';
 import { Department } from './../../_models/department';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDepartmentComponent } from './modal-department/modal-department.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-department',
@@ -17,7 +18,8 @@ export class DepartmentComponent implements OnInit {
 
   public departments: Department[];
   displayedColumns: string[] = ['position', 'name', 'sortLevel', 'isLock', 'edit'];
-  dataSource = new MatTableDataSource(this.departments);
+
+  dataSource = new MatTableDataSource<Department>(this.departments);
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
@@ -49,7 +51,6 @@ export class DepartmentComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.createDepartment(result as Department);
-          this.departments.push(result);
         }
       });
     } else {
@@ -75,8 +76,7 @@ export class DepartmentComponent implements OnInit {
     );
   }
   createDepartment(department: Department) {
-    this.phonebookService.createDepartment(this.authService.decodedToken.nameid, department).subscribe(
-      () => {
+    this.phonebookService.createDepartment(this.authService.decodedToken.nameid, department).subscribe((res: Department) => {
         this.toastrService.success('Новый отдел успешно добавлен');
       }, err => {
         this.toastrService.error(err);
