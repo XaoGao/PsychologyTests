@@ -57,6 +57,7 @@ import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
 import { ModalPositionComponent } from './phonebook/position/modal-position/modal-position.component';
 import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.component';
+import { SelectTestComponent } from './select-test/select-test.component';
 
 
 export function tokenGetter() {
@@ -84,7 +85,8 @@ export function tokenGetter() {
     PatientEditComponent,
     ModalDepartmentComponent,
     ModalPositionComponent,
-    ModalPhoneComponent
+    ModalPhoneComponent,
+    SelectTestComponent
   ],
   imports: [
     BrowserModule,

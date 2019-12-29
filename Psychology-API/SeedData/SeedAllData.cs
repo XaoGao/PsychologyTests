@@ -18,8 +18,8 @@ namespace Psychology_API.SeedData
         public void SeedData()
         {
             // TODO: Добавить условие, если таблицы в БД пустые то запустить SeedData
-            // if(_context.Roles.Any(rolename => rolename.Name == "admin"))
-                // return;
+            if(_context.Roles.Any() == true)
+                return;
 
             //Отделы
             var departmentsFromFile = File.ReadAllText("SeedData/DataSeedDepartments.json");
@@ -86,10 +86,37 @@ namespace Psychology_API.SeedData
             //Заключения
             var anamesesFromFile = File.ReadAllText("SeedData/DataSeedAnamnesis.json");
             var anameses = JsonConvert.DeserializeObject<List<Anamnesis>>(anamesesFromFile);
-
+            
             foreach(var anamesis in anameses)
             {
                 _context.Anamneses.Add(anamesis);
+            }
+
+            //Тесты
+            var testsFromFile = File.ReadAllText("SeedData/DataSeedTests.json");
+            var tests = JsonConvert.DeserializeObject<List<Test>>(testsFromFile);
+
+            foreach (var test in tests)
+            {
+                _context.Tests.Add(test);
+            }
+
+            //Вопросы
+            var questionsFromFile = File.ReadAllText("SeedData/DataSeedQuestions.json");
+            var questions = JsonConvert.DeserializeObject<List<Question>>(questionsFromFile);
+
+            foreach (var question in questions)
+            {
+                _context.Questions.Add(question);
+            }
+
+            //Ответы
+            var answersFromFile = File.ReadAllText("SeedData/DataSeedAnswers.json");
+            var answers = JsonConvert.DeserializeObject<List<Answer>>(answersFromFile);
+
+            foreach (var answer in answers)
+            {
+                _context.Answers.Add(answer);
             }
             _context.SaveChanges();
 

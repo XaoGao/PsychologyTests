@@ -1,0 +1,12 @@
+{
+	"Print to console": {
+		"scope": "C#, csharp",
+		"prefix": "WebApi",
+		"body": [
+			"[AllowAnonymous]",
+    		"[ApiController]",
+    		"[Route(\"api/[controller]\")]",
+		],
+		"description": "Header controller base"
+	}
+}

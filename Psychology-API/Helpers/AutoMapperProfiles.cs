@@ -27,12 +27,16 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => src.Anamneses.FirstOrDefault(p => p.IsLast == true).Conclusion);
                 });
 
-            // Анамнез
+            // Анамнез.
             CreateMap<Anamnesis, AnamnesisForReturnDto>();
 
+            // Телефон.
             CreateMap<Department, Department>();
             CreateMap<Position, Position>();
             CreateMap<Phone, Phone>();
+
+            // Тесты.
+            CreateMap<Test, TestForReturnListDto>();
         }
     }
 }

@@ -19,7 +19,8 @@ using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.SeedData;
 using Newtonsoft.Json;
 using Psychology_API.Settings;
-using Psychology_API.Servises;
+using Psychology_API.Servises.Cache;
+using Microsoft.Extensions.Logging;
 
 namespace Psychology_API
 {
@@ -46,10 +47,13 @@ namespace Psychology_API
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IPhonebookRepository, PhonebookRepository>();
+            services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<CacheSettings>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
+            services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+            services.AddDistributedMemoryCache();
             services.AddMemoryCache();
             services.AddTransient<SeedAllData>();
             services.AddAuthentication(options =>
@@ -94,7 +98,7 @@ namespace Psychology_API
                 });
             }
             // app.UseHttpsRedirection();
-            // seed.SeedData();
+            seed.SeedData();
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

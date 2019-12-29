@@ -3,7 +3,7 @@ using System;
 using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Settings;
 
-namespace Psychology_API.Servises
+namespace Psychology_API.Servises.Cache
 {
     // Обертка для хранилища, если мы хотим поменять хранилище например на Redis то нужно будет изменить данный класс.
     /// <summary>

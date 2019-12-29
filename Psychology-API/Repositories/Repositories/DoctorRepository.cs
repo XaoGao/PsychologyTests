@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Servises;
+using Psychology_API.Servises.Cache;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
