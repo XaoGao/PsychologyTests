@@ -12,6 +12,7 @@ namespace Psychology_API.Controllers
 {
     [Authorize(Roles = RolesSettings.Doctor)]
     [ApiController]
+    // [Route("api/doctors/{doctorId}/patients/{patientId}/[controller]")]
     [Route("api/[controller]")]
     public class TestsController : ControllerBase
     {
@@ -24,10 +25,10 @@ namespace Psychology_API.Controllers
 
         }
         [HttpGet("gettests")]
-        public async Task<IActionResult> GetTests(int doctorId)
+        public async Task<IActionResult> GetTests(/*int doctorId*/)
         {
-            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized("Пользователь не авторизован");
+            // if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized("Пользователь не авторизован");
 
             var tests = await _testRepository.GetTestsAsync();
 

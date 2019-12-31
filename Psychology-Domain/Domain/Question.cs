@@ -3,27 +3,27 @@ using System.Collections.Generic;
 namespace Psychology_Domain.Domain
 {
     /// <summary>
-    /// Воспрос
+    /// Воспрос.
     /// </summary>
     public class Question
     {
         /// <summary>
-        /// Идентификатор вопроса
+        /// Идентификатор вопроса.
         /// </summary>
         /// <value></value>
         public int Id { get; set; }
         /// <summary>
-        /// Текст вопроса
+        /// Текст вопроса.
         /// </summary>
         /// <value></value>
         public string Text { get; set; }
         /// <summary>
-        /// Порядковый номер
+        /// Порядковый номер.
         /// </summary>
         /// <value></value>
-        public int ortLevel { get; set; }
+        public int sortLevel { get; set; }
         /// <summary>
-        /// Идентификатор теста к которому привязаны вопросы
+        /// Идентификатор теста к которому привязаны вопросы.
         /// </summary>
         /// <value></value>
         public int TestId { get; set; }

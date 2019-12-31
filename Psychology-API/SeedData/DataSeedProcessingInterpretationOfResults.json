@@ -1,0 +1,32 @@
+[
+    {
+        "MinValue" : 0,
+        "MaxValue" : 9,
+        "Description" : "Отсутствие депрессивных симптомов.",
+        "TestId" : 1
+    },
+    {
+        "MinValue" : 10,
+        "MaxValue" : 15,
+        "Description" : "Легкая депрессия (субдепрессия).",
+        "TestId" : 1
+    },
+    {
+        "MinValue" : 16,
+        "MaxValue" : 19,
+        "Description" : "Умеренная депрессия.",
+        "TestId" : 1
+    },
+    {
+        "MinValue" : 20,
+        "MaxValue" : 29,
+        "Description" : "Выраженная депрессия (средней тяжести).",
+        "TestId" : 1
+    },
+    {
+        "MinValue" : 30,
+        "MaxValue" : 63,
+        "Description" : "Тяжелая депрессия.",
+        "TestId" : 1
+    }
+]

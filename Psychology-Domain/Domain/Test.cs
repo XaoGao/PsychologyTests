@@ -37,6 +37,7 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public ICollection<Answer> Answers { get; set; }
+        public ICollection<ProcessingInterpretationOfResult> ProcessingInterpretationOfResults { get; set; }
 
     }
 }

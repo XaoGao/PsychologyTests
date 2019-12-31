@@ -8,6 +8,7 @@ using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace Psychology_API.Controllers
 {
@@ -18,10 +19,12 @@ namespace Psychology_API.Controllers
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<PatientsController> _logger;
 
-        public PatientsController(IPatientRepository patientRepository, IMapper mapper)
+        public PatientsController(IPatientRepository patientRepository, IMapper mapper, ILogger<PatientsController> logger)
         {
             _mapper = mapper;
+            _logger = logger;
             _patientRepository = patientRepository;
         }
         [HttpGet]
@@ -79,7 +82,8 @@ namespace Psychology_API.Controllers
             if (await _patientRepository.SaveAllAsync())
                 return StatusCode(201);
 
-            throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору");
+            _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
+            throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");
         }
         [HttpPut]
         public async Task<IActionResult> UpdatePatient(int doctorId, PatientForUpdateDto patientForUpdateDto)
@@ -96,8 +100,8 @@ namespace Psychology_API.Controllers
 
             if (await _patientRepository.SaveAllAsync())
                 return NoContent();
-
-            throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
+            _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
+            throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору.");
         }
         [HttpDelete]
         public async Task<IActionResult> DeletePatient(int doctorId, int patientId)
@@ -115,6 +119,7 @@ namespace Psychology_API.Controllers
             if (await _patientRepository.SaveAllAsync())
                 return NoContent();
 
+            _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
         }
     }

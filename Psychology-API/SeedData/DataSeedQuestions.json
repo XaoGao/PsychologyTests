@@ -1,0 +1,107 @@
+[
+    {
+        "Test" : "Растроен",
+        "SortLevel" : 1,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Тревога",
+        "SortLevel" : 2,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Неудачи",
+        "SortLevel" : 3,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Удолетворение",
+        "SortLevel" : 4,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Вина",
+        "SortLevel" : 5,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Наказание",
+        "SortLevel" : 6,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Разочарование",
+        "SortLevel" : 7,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Критика",
+        "SortLevel" : 8,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Самоубийство",
+        "SortLevel" : 9,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Слезы",
+        "SortLevel" : 10,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Раздражение",
+        "SortLevel" : 11,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Интерес",
+        "SortLevel" : 12,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Решения",
+        "SortLevel" : 13,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Внешний вид",
+        "SortLevel" : 14,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Работа",
+        "SortLevel" : 15,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Сон",
+        "SortLevel" : 16,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Усталость",
+        "SortLevel" : 17,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Аппетит",
+        "SortLevel" : 18,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Потеря веса",
+        "SortLevel" : 19,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Физическое состояние",
+        "SortLevel" : 20,
+        "TestId" : 1
+    },
+    {
+        "Test" : "Секс",
+        "SortLevel" : 21,
+        "TestId" : 1
+    }
+]

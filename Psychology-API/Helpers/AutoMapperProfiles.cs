@@ -36,7 +36,8 @@ namespace Psychology_API.Helpers
             CreateMap<Phone, Phone>();
 
             // Тесты.
-            CreateMap<Test, TestForReturnListDto>();
+            CreateMap<Test, TestForReturnListDto>()
+                .IncludeAllDerived();
         }
     }
 }

@@ -118,6 +118,15 @@ namespace Psychology_API.SeedData
             {
                 _context.Answers.Add(answer);
             }
+
+            //Интерпритация
+            var interFromFile = File.ReadAllText("SeedData/DataSeedDataSeedProcessingInterpretationOfResults.json");
+            var inters = JsonConvert.DeserializeObject<List<ProcessingInterpretationOfResult>>(answersFromFile);
+
+            foreach (var inter in inters)
+            {
+                _context.ProcessingInterpretationOfResults.Add(inter);
+            }
             _context.SaveChanges();
 
         }

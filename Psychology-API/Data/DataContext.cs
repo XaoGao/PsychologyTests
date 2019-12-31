@@ -19,5 +19,8 @@ namespace Psychology_API.Data
         public DbSet<Test> Tests { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<ProcessingInterpretationOfResult> ProcessingInterpretationOfResults { get; set; }
+        // public DbSet<Document> Documents { get; set; }
+        // public DbSet<DocumentType> DocumentTypes { get; set; }
     }
 }

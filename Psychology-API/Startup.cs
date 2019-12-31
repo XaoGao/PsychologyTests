@@ -52,7 +52,7 @@ namespace Psychology_API
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<CacheSettings>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
-            services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+            // services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
             services.AddDistributedMemoryCache();
             services.AddMemoryCache();
             services.AddTransient<SeedAllData>();

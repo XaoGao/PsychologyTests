@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
 
@@ -16,11 +17,13 @@ namespace Psychology_API.Controllers
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<DoctorsController> _logger;
 
-        public DoctorsController(IDoctorRepository doctorRepository, IMapper mapper)
+        public DoctorsController(IDoctorRepository doctorRepository, IMapper mapper, ILogger<DoctorsController> logger)
         {
             _doctorRepository = doctorRepository;
             _mapper = mapper;
+            _logger = logger;
         }
         [HttpGet("{doctorId}")]
         public async Task<IActionResult> GetDoctorDetail(int doctorId)
@@ -53,6 +56,7 @@ namespace Psychology_API.Controllers
             if(await _doctorRepository.SaveAllAsync())
                 return NoContent();
 
+            _logger.LogError($"Ошибка в обновлении данных. {doctorForUpdateDto.Username + " " + doctorForUpdateDto.Firstname + " " + doctorForUpdateDto.Lastname + " " + doctorForUpdateDto.Middlename + " departamentId = " + doctorForUpdateDto.DepartmentId + " positionId = " + doctorForUpdateDto.PositionId + " phoneId = " + doctorForUpdateDto.PhoneId + " db = " + doctorForUpdateDto.DateOfBirth}");
             throw new Exception("Возникла не предвиденная ошибка в ходе обновления данных");
         }
 

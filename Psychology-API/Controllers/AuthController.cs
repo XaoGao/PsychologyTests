@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
@@ -24,13 +25,19 @@ namespace Psychology_API.Controllers
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly IDoctorRepository _doctorRepository;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IAuthRepository authRepo, IMapper mapper, IConfiguration config, IDoctorRepository doctorRepository)
+        public AuthController(IAuthRepository authRepo,
+                              IMapper mapper,
+                              IConfiguration config,
+                              IDoctorRepository doctorRepository,
+                              ILogger<AuthController> logger)
         {
             _authRepo = authRepo;
             _mapper = mapper;
             _config = config;
             _doctorRepository = doctorRepository;
+            _logger = logger;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(DoctorForRegisterDto doctorForRegisterDto)
@@ -75,12 +82,12 @@ namespace Psychology_API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            // Если есть данные, которые необходимо отправить на view сразу после авторизации, то добавить данные в данный кортедж
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token)
             });
         }
-        // TODO: нельзя сверять со строкой, нужно создать отделный класс role, который будет брать роль из базы
         [Authorize(Roles = RolesSettings.Administrator)]
         [HttpPost("{doctorId}")]       
         public async Task<IActionResult> DropPassword(int doctorId, int adminId)
@@ -93,6 +100,7 @@ namespace Psychology_API.Controllers
             if(await _authRepo.ChangePassword(doctorId, "123456"))
                 return NoContent();
 
+            _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Администратор c ID {adminId} хотел измнить пароль для доктора {doctorFromRepo.Fullname} id = {doctorId}");
             throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
             
         }
@@ -106,6 +114,7 @@ namespace Psychology_API.Controllers
             if(await _authRepo.ChangePassword(doctorId, newPassword))
                 return NoContent();
 
+            _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Доктор id = {doctorId} хотел измнить пароль на {newPassword} ");
             throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
         }
     }

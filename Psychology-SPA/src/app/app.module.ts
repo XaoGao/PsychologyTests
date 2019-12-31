@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
 import { ToastrAlertService } from './_services/toastr-alert.service';
+import { TestService } from './_services/test.service';
 // Resolver
 import { DoctorDetailResolver } from './_resolvers/doctor-detail.resolver';
 import { DepartmentsResolver } from './_resolvers/departments.resolver';
@@ -36,6 +37,7 @@ import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.reso
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
+import { TestsResolver } from './_resolvers/tests.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -52,12 +54,13 @@ import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
+import { SelectTestComponent } from './select-test/select-test.component';
 // ModalWindow
 import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
 import { ModalPositionComponent } from './phonebook/position/modal-position/modal-position.component';
 import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.component';
-import { SelectTestComponent } from './select-test/select-test.component';
+
 
 
 export function tokenGetter() {
@@ -121,6 +124,7 @@ export function tokenGetter() {
     AuthService,
     ToastrAlertService,
     DoctorService,
+    TestService,
     DoctorDetailResolver,
     DepartmentsResolver,
     PositionsResolver,
@@ -129,7 +133,8 @@ export function tokenGetter() {
     PatientsListResolver,
     DepartmentsWithParamResolver,
     PositionsWithParamResolver,
-    AnamnesesListResolver
+    AnamnesesListResolver,
+    TestsResolver
   ],
   bootstrap: [
     AppComponent
