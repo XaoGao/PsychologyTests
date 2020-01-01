@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using Psychology_API.Settings;
 using Psychology_API.Servises.Cache;
 using Microsoft.Extensions.Logging;
+using Psychology_API.Servises.DI;
 
 namespace Psychology_API
 {
@@ -43,19 +44,21 @@ namespace Psychology_API
             });
             services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IPhonebookRepository, PhonebookRepository>();
-            services.AddScoped<ITestRepository, TestRepository>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(Startup));
-            services.AddSingleton<CacheSettings>();
-            services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
-            // services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
             services.AddDistributedMemoryCache();
             services.AddMemoryCache();
-            services.AddTransient<SeedAllData>();
+            services.AddAllServices();
+            #region Old
+            // services.AddScoped<IAuthRepository, AuthRepository>();
+            // services.AddScoped<IPatientRepository, PatientRepository>();
+            // services.AddScoped<IDoctorRepository, DoctorRepository>();
+            // services.AddScoped<IPhonebookRepository, PhonebookRepository>();
+            // services.AddScoped<ITestRepository, TestRepository>();
+            // services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // services.AddSingleton<CacheSettings>();
+            // services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
+            // services.AddTransient<SeedAllData>();
+            #endregion
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

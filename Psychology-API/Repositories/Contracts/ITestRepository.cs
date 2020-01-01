@@ -14,5 +14,11 @@ namespace Psychology_API.Repositories.Contracts
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<Test>> GetTestsAsync();
+        /// <summary>
+        /// Получить данные о тесте.
+        /// </summary>
+        /// <param name="testId"> Идентификатор теста. </param>
+        /// <returns></returns>
+        Task<Test> GetTestAsync(int testId);
     }
 }

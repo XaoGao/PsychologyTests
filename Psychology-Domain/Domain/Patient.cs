@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Psychology_Domain.Domain
 {
-    //TODO: Добавить необходимые данные для сущности
     /// <summary>
     /// Пациент.
     /// </summary>
@@ -60,5 +59,10 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public ICollection<Anamnesis> Anamneses { get; set; }
+        /// <summary>
+        /// Документы пациента.
+        /// </summary>
+        /// <value></value>
+        public ICollection<Document> Documents { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace Psychology_API.SeedData
         }
         public void SeedData()
         {
-            // TODO: Добавить условие, если таблицы в БД пустые то запустить SeedData
             if(_context.Roles.Any() == true)
                 return;
 
@@ -91,7 +90,7 @@ namespace Psychology_API.SeedData
             {
                 _context.Anamneses.Add(anamesis);
             }
-
+            _context.SaveChanges();
             //Тесты
             var testsFromFile = File.ReadAllText("SeedData/DataSeedTests.json");
             var tests = JsonConvert.DeserializeObject<List<Test>>(testsFromFile);
@@ -100,7 +99,7 @@ namespace Psychology_API.SeedData
             {
                 _context.Tests.Add(test);
             }
-
+            _context.SaveChanges();
             //Вопросы
             var questionsFromFile = File.ReadAllText("SeedData/DataSeedQuestions.json");
             var questions = JsonConvert.DeserializeObject<List<Question>>(questionsFromFile);
@@ -109,7 +108,7 @@ namespace Psychology_API.SeedData
             {
                 _context.Questions.Add(question);
             }
-
+            _context.SaveChanges();
             //Ответы
             var answersFromFile = File.ReadAllText("SeedData/DataSeedAnswers.json");
             var answers = JsonConvert.DeserializeObject<List<Answer>>(answersFromFile);
@@ -118,14 +117,23 @@ namespace Psychology_API.SeedData
             {
                 _context.Answers.Add(answer);
             }
-
+            _context.SaveChanges();
             //Интерпритация
-            var interFromFile = File.ReadAllText("SeedData/DataSeedDataSeedProcessingInterpretationOfResults.json");
-            var inters = JsonConvert.DeserializeObject<List<ProcessingInterpretationOfResult>>(answersFromFile);
+            var interFromFile = File.ReadAllText("SeedData/DataSeedProcessingInterpretationOfResults.json");
+            var inters = JsonConvert.DeserializeObject<List<ProcessingInterpretationOfResult>>(interFromFile);
 
             foreach (var inter in inters)
             {
                 _context.ProcessingInterpretationOfResults.Add(inter);
+            }
+            _context.SaveChanges();
+            //Типы документов
+            var doctypesFromFile = File.ReadAllText("SeedData/DataSeedDocumentTypes.json");
+            var doctypes = JsonConvert.DeserializeObject<List<DocumentType>>(doctypesFromFile);
+
+            foreach (var doctype in doctypes)
+            {
+                _context.DocumentTypes.Add(doctype);
             }
             _context.SaveChanges();
 

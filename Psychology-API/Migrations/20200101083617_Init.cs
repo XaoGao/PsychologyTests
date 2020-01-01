@@ -23,6 +23,19 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DocumentTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DocumentTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Phones",
                 columns: table => new
                 {
@@ -128,13 +141,35 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProcessingInterpretationOfResults",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MinValue = table.Column<int>(nullable: false),
+                    MaxValue = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    TestId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProcessingInterpretationOfResults", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProcessingInterpretationOfResults_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Text = table.Column<string>(nullable: true),
-                    ortLevel = table.Column<int>(nullable: false),
+                    sortLevel = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -252,6 +287,38 @@ namespace Psychology_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Documents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DocName = table.Column<string>(nullable: true),
+                    Series = table.Column<string>(nullable: true),
+                    Number = table.Column<string>(nullable: true),
+                    DateUpload = table.Column<DateTime>(nullable: false),
+                    DocumentTypeId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false),
+                    Body = table.Column<byte[]>(nullable: true),
+                    Extension = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Documents_DocumentTypes_DocumentTypeId",
+                        column: x => x.DocumentTypeId,
+                        principalTable: "DocumentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Documents_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Anamneses_DoctorId",
                 table: "Anamneses",
@@ -293,9 +360,24 @@ namespace Psychology_API.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Documents_DocumentTypeId",
+                table: "Documents",
+                column: "DocumentTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Documents_PatientId",
+                table: "Documents",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProcessingInterpretationOfResults_TestId",
+                table: "ProcessingInterpretationOfResults",
+                column: "TestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_TestId",
@@ -317,19 +399,28 @@ namespace Psychology_API.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Vacations");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "ProcessingInterpretationOfResults");
+
+            migrationBuilder.DropTable(
+                name: "Vacations");
 
             migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "DocumentTypes");
+
+            migrationBuilder.DropTable(
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Tests");
+
+            migrationBuilder.DropTable(
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Departments");

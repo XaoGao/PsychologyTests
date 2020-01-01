@@ -145,6 +145,59 @@ namespace Psychology_API.Migrations
                     b.ToTable("Doctors");
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("Body")
+                        .HasColumnType("BLOB");
+
+                    b.Property<DateTime>("DateUpload")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DocName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DocumentTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Series")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentTypeId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.DocumentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentTypes");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -216,6 +269,31 @@ namespace Psychology_API.Migrations
                     b.ToTable("Positions");
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.ProcessingInterpretationOfResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MaxValue")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MinValue")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("ProcessingInterpretationOfResults");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -228,7 +306,7 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ortLevel")
+                    b.Property<int>("sortLevel")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -355,11 +433,35 @@ namespace Psychology_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.Document", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.DocumentType", "DocumenType")
+                        .WithMany()
+                        .HasForeignKey("DocumentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
+                        .WithMany("Documents")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Patient", b =>
                 {
                     b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
                         .WithMany("Patients")
                         .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.ProcessingInterpretationOfResult", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Test", "Test")
+                        .WithMany("ProcessingInterpretationOfResults")
+                        .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

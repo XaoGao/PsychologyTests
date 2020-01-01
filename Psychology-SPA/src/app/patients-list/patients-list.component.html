@@ -3,12 +3,6 @@
 </div>
 <hr>
 <div>
-    <!-- <div class="row">
-        <h3 class="mb-3 col-2">Пациенты:</h3>
-        <mat-form-field class="col-4">
-            <input matInput placeholder="Поиск по номеру карты" name="search" [(ngModel)]="search" />
-        </mat-form-field>
-    </div> -->
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Пациенты:</span>
@@ -16,7 +10,7 @@
         <input type="text" class="form-control" placeholder="Поиск по номеру карты" name="search" [(ngModel)]="search" aria-describedby="basic-addon1">
     </div>
     <mat-accordion *ngFor="let patient of patients">
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngIf="patient.personalCardNumber.includes(search)">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Номер карты:

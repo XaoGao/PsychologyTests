@@ -74,3 +74,5 @@
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedAnswers.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedQuestions.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedTests.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedProcessingInterpretationOfResults.json
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedDocumentTypes.json

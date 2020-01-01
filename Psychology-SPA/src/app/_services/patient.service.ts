@@ -19,4 +19,10 @@ export class PatientService {
   getAnamnesesList(doctorId: number, patientId: number): Observable<Anamnesis[]> {
     return this.http.get<Anamnesis[]>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamnses');
   }
+  updatePatient(doctorId: number, patientId: number, patient: Patient) {
+    return this.http.put(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId, patient);
+  }
+  createPatient(doctorId: number, patient: Patient) {
+    return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/', patient);
+  }
 }

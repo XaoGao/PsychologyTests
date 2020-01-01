@@ -1,6 +1,6 @@
 import { Anamnesis } from './anamnesis';
 import { Doctor } from './doctor';
-export interface Patient {
+export class Patient {
     id: number;
     personalCardNumber: string;
     lastname: string;
