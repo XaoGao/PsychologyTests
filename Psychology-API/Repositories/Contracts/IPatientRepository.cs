@@ -23,6 +23,13 @@ namespace Psychology_API.Repositories.Contracts
         /// <returns> Пациент. </returns>
         Task<Patient> GetPatientAsync(int doctorId, int patientId);
         /// <summary>
+        /// Получить конкретного пациента доктора без добовления в кеш.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns></returns>
+        Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId);
+        /// <summary>
         /// Перевести пациента в архив.
         /// </summary>
         /// <param name="patient"> Пациент. </param>

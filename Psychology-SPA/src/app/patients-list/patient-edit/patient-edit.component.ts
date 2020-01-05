@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { Patient } from './../../_models/patient';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -10,6 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class PatientEditComponent implements OnInit {
   public patient: Patient;
   constructor(
+    public authService: AuthService,
     public dialogRef: MatDialogRef<PatientEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -19,5 +21,13 @@ export class PatientEditComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  isNewPatient(): boolean {
+    if (this.patient.id === undefined) {
+      this.patient.doctorId = this.authService.decodedToken.nameid;
+      return true;
+    } else {
+      return false;
+    }
   }
 }

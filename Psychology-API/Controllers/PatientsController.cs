@@ -85,13 +85,13 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");
         }
-        [HttpPut]
-        public async Task<IActionResult> UpdatePatient(int doctorId, PatientForUpdateDto patientForUpdateDto)
+        [HttpPut("{patientId}")]
+        public async Task<IActionResult> UpdatePatient(int doctorId, int patientId, PatientForUpdateDto patientForUpdateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientForUpdateDto.Id);
+            var patientFromRepo = await _patientRepository.GetPatientWithoutCacheAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
@@ -99,7 +99,8 @@ namespace Psychology_API.Controllers
             _mapper.Map(patientForUpdateDto, patientFromRepo);
 
             if (await _patientRepository.SaveAllAsync())
-                return NoContent();
+                return Ok(patientFromRepo);
+
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору.");
         }

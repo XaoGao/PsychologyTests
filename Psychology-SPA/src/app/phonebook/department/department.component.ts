@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDepartmentComponent } from './modal-department/modal-department.component';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-department',
@@ -35,14 +34,14 @@ export class DepartmentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  addDepartment() {
+  public addDepartment() {
     this.openDialog();
   }
-  editDepartment(department: Department) {
+  public editDepartment(department: Department) {
     this.openDialog(department);
   }
 
-  openDialog(currentDepartment?: Department): void {
+  private openDialog(currentDepartment?: Department): void {
     if (!currentDepartment) {
       const dialogRef = this.dialog.open(ModalDepartmentComponent, {
         width: '600px',
@@ -66,7 +65,7 @@ export class DepartmentComponent implements OnInit {
     }
   }
 
-  updateDepartment(department: Department) {
+  private updateDepartment(department: Department) {
     this.phonebookService.updateDepartment(department.id, department).subscribe(
       () => {
         this.toastrService.success('Данные успешно обновлены');
@@ -75,7 +74,7 @@ export class DepartmentComponent implements OnInit {
       }
     );
   }
-  createDepartment(department: Department) {
+  private createDepartment(department: Department) {
     this.phonebookService.createDepartment(this.authService.decodedToken.nameid, department).subscribe((res: Department) => {
         this.toastrService.success('Новый отдел успешно добавлен');
       }, err => {

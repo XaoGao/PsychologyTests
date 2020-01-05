@@ -19,7 +19,6 @@ namespace Psychology_API.Repositories.Repositories
             _cache = cache;
             _context = context;
         }
-
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
             Patient patient = null;
@@ -45,7 +44,7 @@ namespace Psychology_API.Repositories.Repositories
             var patients = await _context.Patients
                 .Include(p => p.Doctor)
                 .Include(p => p.Anamneses)
-                .Where(p => p.DoctorId == doctorId)
+                .Where(p => p.DoctorId == doctorId && p.IsDelete != true)
                 .ToListAsync();
 
             return patients;
@@ -71,6 +70,16 @@ namespace Psychology_API.Repositories.Repositories
                 .ToListAsync();
 
             return anamneses;
+        }
+
+        public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
+        {
+            var patient = await _context.Patients
+                    .Include(p => p.Doctor)
+                    .Include(p => p.Anamneses)
+                    .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
+
+            return patient;
         }
     }
 }

@@ -8,9 +8,15 @@ using Psychology_API.Settings;
 
 namespace Psychology_API.Servises.DI
 {
-    // TODO: Вынести сюда все зависимости из класса startup
+    /// <summary>
+    /// Статический класс, в котором содердиться метод расширения для IServiceCollection.
+    /// </summary>
     public static class DependencyInjection
     {
+        /// <summary>
+        /// Регестрирует в сервисах все кастомные инъекции, вынесено в этот метод, чтобы не засорять startup класс.
+        /// </summary>
+        /// <param name="services"> IServiceCollection. </param>
         public static void AddAllServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthRepository, AuthRepository>();

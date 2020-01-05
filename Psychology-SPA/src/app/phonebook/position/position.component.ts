@@ -31,13 +31,13 @@ export class PositionComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  addPosition() {
+  public addPosition() {
     this.openDialog();
   }
-  editPosition(position: Position) {
+  public editPosition(position: Position) {
     this.openDialog(position);
   }
-  openDialog(currentPosition?: Position): void {
+  private openDialog(currentPosition?: Position): void {
     if (!currentPosition) {
       const dialogRef = this.dialog.open(ModalPositionComponent, {
         width: '600px',
@@ -60,7 +60,7 @@ export class PositionComponent implements OnInit {
       });
     }
   }
-  updatePosition(position: Position) {
+  private updatePosition(position: Position) {
     this.phonebookService.updatePosition(position.id, position).subscribe((res: Position) => {
         this.toastrService.success('Данные успешно обновлены');
       }, err => {
@@ -68,18 +68,12 @@ export class PositionComponent implements OnInit {
       }
     );
   }
-  createPosition(position: Position) {
+  private createPosition(position: Position) {
     this.phonebookService.createPosition(this.authService.decodedToken.nameid, position).subscribe((res: Position) => {
         this.toastrService.success('Новая должность успешно добавлена');
         this.positions.push(res);
-        // console.log(res);
-        // console.log('----------');
-        // console.log(this.positions);
       }, err => {
         this.toastrService.error(err);
-      }, () => {
-        
-      }
-    );
+      });
   }
 }

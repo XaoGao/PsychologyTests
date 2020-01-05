@@ -20,6 +20,10 @@ export class AnamnesesListComponent implements OnInit {
     });
   }
   private getFullname() {
-    this.patientFullname = this.anamneses[0].patient.fullname;
+    if (this.anamneses[0]) {
+      this.patientFullname = this.anamneses[0].patient.fullname;
+    } else {
+      this.patientFullname = 'нет ни одной записи';
+    }
   }
 }

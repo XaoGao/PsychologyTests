@@ -31,13 +31,13 @@ export class PhoneComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  addPhone() {
+  public addPhone() {
     this.openDialog();
   }
-  editPhone(phone: Phone) {
+  public editPhone(phone: Phone) {
     this.openDialog(phone);
   }
-  openDialog(currentPhone?: Phone): void {
+  private openDialog(currentPhone?: Phone): void {
     if (!currentPhone) {
       const dialogRef = this.dialog.open(ModalPhoneComponent, {
         width: '600px',
@@ -61,7 +61,7 @@ export class PhoneComponent implements OnInit {
       });
     }
   }
-  updatePhone(phone: Phone) {
+  private updatePhone(phone: Phone) {
     this.phonebookService.updatePhone(phone.id, phone).subscribe(
       (res) => {
         this.toastrService.success('Данные успешно обновлены');
@@ -70,7 +70,7 @@ export class PhoneComponent implements OnInit {
       }
     );
   }
-  createPhone(phone: Phone) {
+  private createPhone(phone: Phone) {
     this.phonebookService.createPhone(this.authService.decodedToken.nameid, phone).subscribe(
       () => {
         this.toastrService.success('Новый телефон успешно добавлен');

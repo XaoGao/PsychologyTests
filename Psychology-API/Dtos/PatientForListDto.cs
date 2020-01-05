@@ -45,5 +45,10 @@ namespace Psychology_API.Dtos
         /// </summary>
         /// <value></value>
         public string Conclusion { get; set; }
+        /// <summary>
+        /// Идентификатор доктора.
+        /// </summary>
+        /// <value></value>
+        public int DoctorId { get; set; }
     }
 }

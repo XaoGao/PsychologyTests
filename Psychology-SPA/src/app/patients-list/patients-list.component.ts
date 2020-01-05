@@ -29,24 +29,50 @@ export class PatientsListComponent implements OnInit {
       this.patients = data.patients;
     });
   }
-  openDialog(currentPatient: Patient): void {
-    const dialogRef = this.dialog.open(PatientEditComponent, {
-      data: { patient: currentPatient }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(currentPatient);
-    });
+
+  public addPatient() {
+    this.openDialog();
   }
-  updatePatient(patient: Patient) {
-    this.patientService.updatePatient(this.authService.decodedToken.nameid, patient.id, patient).subscribe(() => {
-       this.toastrService.success(`Данные ${patient.fullname} пациента успешно обновлены`); }
+  public editPatient(patient: Patient) {
+    this.openDialog(patient);
+  }
+
+  private openDialog(currentPatient?: Patient): void {
+    if (!currentPatient) {
+      const dialogRef = this.dialog.open(PatientEditComponent, {
+        data: { patient: new Patient() }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.createPatient(result as Patient);
+      });
+    } else {
+      const dialogRef = this.dialog.open(PatientEditComponent, {
+        data: { patient: currentPatient }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.updatePatient(result as Patient);
+      });
+    }
+  }
+  private updatePatient(patient: Patient) {
+    this.patientService.updatePatient(this.authService.decodedToken.nameid, patient.id, patient).subscribe((res) => {
+       const newpatient = res as Patient;
+       this.toastrService.success(`Данные ${newpatient.fullname} пациента успешно обновлены`);
+       const index = this.patients.indexOf(patient, 0);
+       if (index > -1) {
+         this.patients.splice(index, 1);
+         this.patients.push(newpatient as Patient);
+       }
+      }
     , err => {
       this.toastrService.error(err);
     });
   }
-  createPatient(patient: Patient) {
-    this.patientService.createPatient(this.authService.decodedToken.nameid, patient).subscribe(() => {
-      this.toastrService.success(`Пациент ${patient.fullname} успешно добавлен в систему`);
+  private createPatient(patient: Patient) {
+    this.patientService.createPatient(this.authService.decodedToken.nameid, patient).subscribe((res) => {
+      const newpatient = res as Patient;
+      this.toastrService.success(`Пациент ${newpatient.fullname} успешно добавлен в систему`);
+      this.patients.push(newpatient);
     }, err => {
       this.toastrService.error(err);
     });
