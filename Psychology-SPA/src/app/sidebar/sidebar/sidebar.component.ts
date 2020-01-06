@@ -24,9 +24,9 @@ export class SidebarComponent implements OnInit {
     this.toastrService.error('err');
   }
   isDoctor(): boolean {
-    return this.authService.decodedToken.role === this.rolesService.doctor;
+    return this.rolesService.isDoctor(this.authService.decodedToken.role);
   }
-  isHr(): boolean {
-    return this.authService.decodedToken.role === this.rolesService.HR;
+  isHR(): boolean {
+    return this.rolesService.isHR(this.authService.decodedToken.role);
   }
 }

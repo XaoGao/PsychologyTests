@@ -9,10 +9,13 @@ import { Test } from '../_models/test';
 })
 export class TestService {
 
-  BASE_URL_TESTS = environment.apiUrl + 'Tests';
+  BASE_URL_DOCTOR = environment.apiUrl + 'doctors/';
   constructor(private http: HttpClient) { }
 
-  getTests(): Observable<Test[]> {
-    return this.http.get<Test[]>(this.BASE_URL_TESTS);
+  getTests(doctorId: string, patientId: string): Observable<Test[]> {
+    return this.http.get<Test[]>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests');
+  }
+  getTest(doctorId: string, patientId: string, testId: string): Observable<Test> {
+    return this.http.get<Test>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/' + testId);
   }
 }

@@ -1,5 +1,5 @@
 import { Test } from './../_models/test';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { TestService } from './../_services/test.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectTestComponent implements OnInit {
 
-  tests: Test[];
+  public tests: Test[];
   constructor(private testService: TestService, private route: ActivatedRoute) { }
 
   ngOnInit() {

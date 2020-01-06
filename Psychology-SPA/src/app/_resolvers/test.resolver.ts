@@ -10,12 +10,12 @@ import { Test } from '../_models/test';
 
 @Injectable()
 
-export class TestsResolver implements Resolve<Test[]> {
+export class TestResolver implements Resolve<Test> {
     constructor(private authService: AuthService, private testService: TestService ,
                 private router: Router, private toastrService: ToastrAlertService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Test[]> {
-        return this.testService.getTests(this.authService.decodedToken.nameid, route.params.id).pipe(
+    resolve(route: ActivatedRouteSnapshot): Observable<Test> {
+        return this.testService.getTest(this.authService.decodedToken.nameid, route.params.id, route.params.testId).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
                 this.router.navigate(['/workship/:id']);

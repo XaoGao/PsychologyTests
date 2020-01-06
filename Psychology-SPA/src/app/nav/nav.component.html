@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand text-light">Психея</a>
+    <a class="navbar-brand text-light" [routerLink]="['/workship/', authService.decodedToken.nameid]">Психея</a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -12,7 +12,7 @@
                     <button mat-menu-item *ngIf="isHR()" [routerLink]="['/phone']">Списко телефонов</button>
                 </mat-menu>
             </li>
-            <li class="nav-item" *ngIf="authService.decodedToken.role == 'admin'">
+            <li class="nav-item" *ngIf="isAdmin()">
                 <a class="nav-link text-light" [routerLink]="['/doctors']">Операции над врачами</a>
             </li>
         </ul>

@@ -13,7 +13,6 @@ namespace Psychology_API.Controllers
     [Authorize(Roles = RolesSettings.Doctor)]
     [ApiController]
     [Route("api/doctors/{doctorId}/patients/{patientId}/[controller]")]
-    // [Route("api/[controller]")]
     public class TestsController : ControllerBase
     {
         private readonly ITestRepository _testRepository;

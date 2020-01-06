@@ -1,3 +1,6 @@
+import { TestComponent } from './tests/test/test.component';
+import { TestsResolver } from './_resolvers/tests.resolver';
+import { SelectTestComponent } from './select-test/select-test.component';
 import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { PatientsListComponent } from './patients-list/patients-list.component';
@@ -22,6 +25,7 @@ import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
+import { TestResolver } from './_resolvers/test.resolver';
 
 const routes: Routes = [
     {
@@ -46,7 +50,9 @@ const routes: Routes = [
                 departments: DepartmentsWithParamResolver, positions: PositionsWithParamResolver, phones: PhonesResolver }},
             { path: 'doctors', component: DoctorsListComponent },
             { path: 'patients', component: PatientsListComponent, resolve: { patients: PatientsListResolver }},
-            { path: 'patients/:id', component: AnamnesesListComponent, resolve: { anamneses: AnamnesesListResolver }}
+            { path: 'patients/:id', component: AnamnesesListComponent, resolve: { anamneses: AnamnesesListResolver }},
+            { path: 'patients/:id/tests', component: SelectTestComponent, resolve: { tests: TestsResolver }},
+            { path: 'patients/:id/tests/:testId', component: TestComponent, resolve: { test: TestResolver }}
         ]
     },
     { path: '**', redirectTo: '' }

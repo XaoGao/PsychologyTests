@@ -22,6 +22,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 // Service
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -60,7 +62,11 @@ import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
 import { ModalPositionComponent } from './phonebook/position/modal-position/modal-position.component';
 import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.component';
-
+// fullcalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { TestComponent } from './tests/test/test.component';
 
 
 export function tokenGetter() {
@@ -89,7 +95,8 @@ export function tokenGetter() {
     ModalDepartmentComponent,
     ModalPositionComponent,
     ModalPhoneComponent,
-    SelectTestComponent
+    SelectTestComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +123,10 @@ export function tokenGetter() {
     MatTableModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    FullCalendarModule,
+    MatCardModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
     ErrorInterceptor,
@@ -134,7 +144,8 @@ export function tokenGetter() {
     DepartmentsWithParamResolver,
     PositionsWithParamResolver,
     AnamnesesListResolver,
-    TestsResolver
+    TestsResolver,
+    { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ],
   bootstrap: [
     AppComponent

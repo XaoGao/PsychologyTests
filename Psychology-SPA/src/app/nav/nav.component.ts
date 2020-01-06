@@ -28,6 +28,10 @@ export class NavComponent implements OnInit {
     this.route.navigate(['/']);
   }
   isHR(): boolean {
-    return this.authService.decodedToken.role === this.rolseService.HR;
+    // return this.authService.decodedToken.role === this.rolseService.HR;
+    return this.rolseService.isHR(this.authService.decodedToken.role);
+  }
+  isAdmin(): boolean {
+    return this.rolseService.isAdmin(this.authService.decodedToken.role);
   }
 }

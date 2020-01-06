@@ -1,1 +1,25 @@
-<p>workships works!</p>
+<!-- <full-calendar
+  #calendar
+  defaultView="dayGridWeek"
+  [plugins]="calendarPlugins"
+  [weekends]="false"
+  locale="ru"
+  [events]="[
+  { title: 'event 1', date: '2020-01-06' },
+  { title: 'event 2', date: '2020-01-07' }
+]"
+></full-calendar> -->
+<div>
+<div>
+  <h2 class="text-center mb-1">График работы</h2>
+  <br>
+</div>
+<div>
+<mwl-calendar-week-view
+  [viewDate]="viewDate "
+  [events]="events"
+  [dayStartHour]="8"
+  [dayEndHour]="18">
+</mwl-calendar-week-view>
+</div>
+</div>
