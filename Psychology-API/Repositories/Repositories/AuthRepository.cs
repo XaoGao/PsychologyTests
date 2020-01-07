@@ -6,11 +6,12 @@ using Psychology_Domain.Domain;
 using System.Text;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using Psychology_API.Servises.ComputedHash;
 
 namespace Psychology_API.Repositories.Repositories
 {
     /// <summary>
-    /// 
+    /// Репозитории регистрации и авторизации пользователй в системе.
     /// </summary>
     public class AuthRepository : IAuthRepository
     {
@@ -22,8 +23,10 @@ namespace Psychology_API.Repositories.Repositories
         /// Создание нового экземпляра класса.
         /// </summary>
         /// <param name="context"></param>
-        public AuthRepository(DataContext context)
+        private readonly IHash _hash;
+        public AuthRepository(DataContext context, IHash hash)
         {
+            _hash = hash;
             _context = context;
         }
         /// <summary>
@@ -36,10 +39,10 @@ namespace Psychology_API.Repositories.Repositories
         {
             var doctor = await _context.Doctors.Include(d => d.Role).SingleOrDefaultAsync(d => d.Username.Equals(username.ToLower()));
 
-            if(doctor == null)
+            if (doctor == null)
                 return null;
 
-            if(VerifyPasswordHash(password, doctor.PasswordHash, doctor.PasswordSalt))
+            if (_hash.VerifyPasswordHash(password, doctor.PasswordHash, doctor.PasswordSalt))
                 return doctor;
 
             return null;
@@ -51,21 +54,21 @@ namespace Psychology_API.Repositories.Repositories
         /// <param name="passwordHash"> Хэш пароль пользователя из БД. </param>
         /// <param name="passwordSalt"> Соль пароля из пользователя из БД. </param>
         /// <returns> Пароль и хэш пароль совпадают. </returns>
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            password = password.ToLower();
+        // private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        // {
+        //     password = password.ToLower();
 
-            using(var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (passwordHash[i] != computedHash[i])
-                        return false;
-                }
-            }
-            return true;
-        }
+        //     using(var hmac = new HMACSHA512(passwordSalt))
+        //     {
+        //         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        //         for (int i = 0; i < computedHash.Length; i++)
+        //         {
+        //             if (passwordHash[i] != computedHash[i])
+        //                 return false;
+        //         }
+        //     }
+        //     return true;
+        // }
         /// <summary>
         /// Регистрация пользователя.
         /// </summary>
@@ -80,7 +83,7 @@ namespace Psychology_API.Repositories.Repositories
 
             byte[] passwordHash, passwordSalt;
 
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            _hash.CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
             doctor.PasswordHash = passwordHash;
             doctor.PasswordSalt = passwordSalt;
@@ -96,14 +99,14 @@ namespace Psychology_API.Repositories.Repositories
         /// <param name="password"> Пароль. </param>
         /// <param name="passwordHash"> out переменная для хранения хэш пароля. </param>
         /// <param name="passwordSalt"> out переменная для хранения соли хэш пароля. </param>
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using(var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-            }
-        }
+        // private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        // {
+        //     using(var hmac = new HMACSHA512())
+        //     {
+        //         passwordSalt = hmac.Key;
+        //         passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        //     }
+        // }
         /// <summary>
         /// Проверка на существование пользователя в системе по логину.
         /// </summary>
@@ -111,38 +114,11 @@ namespace Psychology_API.Repositories.Repositories
         /// <returns> Пользователь с логином уже зарегистрирован. </returns>
         public async Task<bool> UserExistAsync(string username)
         {
-            if(await _context.Doctors.AnyAsync(d => d.Username.ToLower().Equals(username.ToLower())))
+            if (await _context.Doctors.AnyAsync(d => d.Username.ToLower().Equals(username.ToLower())))
                 return true;
 
             return false;
         }
-        
-        /// <summary>
-        /// Сменить пароль доктора на стандартный. Функционал дублирует метод ChangePassword
-        /// </summary>
-        /// <param name="doctorId"> Идентификатор доктора, которому сменят пароль. </param>
-        /// <param name="adminId"> Идентификатор администратора, который меняет пароль. </param>
-        /// <returns></returns>
-        // public async Task<bool> DropPassword(int doctorId, int adminId)
-        // {
-        //     var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
-
-        //     if(doctorFromRepo == null)
-        //         return false;
-
-        //     byte[] passwordHash, passwordSalt;
-        //     string standratPassword = "123456";
-
-        //     CreatePasswordHash(standratPassword, out passwordHash, out passwordSalt);
-
-        //     doctorFromRepo.PasswordHash = passwordHash;
-        //     doctorFromRepo.PasswordSalt = passwordSalt;
-
-        //     await _context.SaveChangesAsync();
-
-        //     return true;
-        // }
-
         /// <summary>
         /// Сменить пароль доктора на новый.
         /// </summary>
@@ -155,10 +131,10 @@ namespace Psychology_API.Repositories.Repositories
 
             var doctorFromRepo = await _context.Doctors.SingleOrDefaultAsync(d => d.Id == doctorId);
 
-            if(doctorFromRepo == null)
+            if (doctorFromRepo == null)
                 return false;
 
-            CreatePasswordHash(newPassword.ToLower(), out passwordHash, out passwordSalt);
+            _hash.CreatePasswordHash(newPassword.ToLower(), out passwordHash, out passwordSalt);
 
             doctorFromRepo.PasswordHash = passwordHash;
             doctorFromRepo.PasswordSalt = passwordSalt;

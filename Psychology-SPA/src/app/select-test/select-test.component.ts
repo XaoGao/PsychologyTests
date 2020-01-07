@@ -17,8 +17,6 @@ export class SelectTestComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.tests = data.tests;
     });
-  }
-  getTest() {
-
+    console.log(this.route.params);
   }
 }

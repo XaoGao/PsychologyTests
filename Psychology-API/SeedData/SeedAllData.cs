@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Psychology_API.Data;
+using Psychology_API.Servises.ComputedHash;
 using Psychology_Domain.Domain;
 using System.Collections.Generic;
 using System.IO;
@@ -11,20 +12,22 @@ namespace Psychology_API.SeedData
     public class SeedAllData
     {
         private readonly DataContext _context;
-        public SeedAllData(DataContext context)
+        private readonly IHash _hash;
+        public SeedAllData(DataContext context, IHash hash)
         {
+            _hash = hash;
             _context = context;
         }
         public void SeedData()
         {
-            if(_context.Roles.Any() == true)
+            if (_context.Roles.Any() == true)
                 return;
 
             //Отделы
             var departmentsFromFile = File.ReadAllText("SeedData/DataSeedDepartments.json");
             var departments = JsonConvert.DeserializeObject<List<Department>>(departmentsFromFile);
 
-            foreach(var department in departments)
+            foreach (var department in departments)
             {
                 _context.Departments.Add(department);
             }
@@ -33,7 +36,7 @@ namespace Psychology_API.SeedData
             var positionsFromFile = File.ReadAllText("SeedData/DataSeedPositions.json");
             var positions = JsonConvert.DeserializeObject<List<Position>>(positionsFromFile);
 
-            foreach(var position in positions)
+            foreach (var position in positions)
             {
                 _context.Positions.Add(position);
             }
@@ -42,7 +45,7 @@ namespace Psychology_API.SeedData
             var phonesFromFile = File.ReadAllText("SeedData/DataSeedPhones.json");
             var phones = JsonConvert.DeserializeObject<List<Phone>>(phonesFromFile);
 
-            foreach(var phone in phones)
+            foreach (var phone in phones)
             {
                 _context.Phones.Add(phone);
             }
@@ -51,7 +54,7 @@ namespace Psychology_API.SeedData
             var rolesFromFile = File.ReadAllText("SeedData/DataSeedRoles.json");
             var roles = JsonConvert.DeserializeObject<List<Role>>(rolesFromFile);
 
-            foreach(var role in roles)
+            foreach (var role in roles)
             {
                 _context.Roles.Add(role);
             }
@@ -60,11 +63,11 @@ namespace Psychology_API.SeedData
             var doctorsFromFile = File.ReadAllText("SeedData/DataSeedDoctors.json");
             var doctors = JsonConvert.DeserializeObject<List<Doctor>>(doctorsFromFile);
 
-            foreach(var doctor in doctors)
+            foreach (var doctor in doctors)
             {
                 byte[] passwordHash, passwordSalt;
 
-                CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                _hash.CreatePasswordHash("password", out passwordHash, out passwordSalt);
 
                 doctor.PasswordHash = passwordHash;
                 doctor.PasswordSalt = passwordSalt;
@@ -77,7 +80,7 @@ namespace Psychology_API.SeedData
             var patientsFromFile = File.ReadAllText("SeedData/DataSeedPatients.json");
             var patients = JsonConvert.DeserializeObject<List<Patient>>(patientsFromFile);
 
-            foreach(var patient in patients)
+            foreach (var patient in patients)
             {
                 _context.Patients.Add(patient);
             }
@@ -85,8 +88,8 @@ namespace Psychology_API.SeedData
             //Заключения
             var anamesesFromFile = File.ReadAllText("SeedData/DataSeedAnamnesis.json");
             var anameses = JsonConvert.DeserializeObject<List<Anamnesis>>(anamesesFromFile);
-            
-            foreach(var anamesis in anameses)
+
+            foreach (var anamesis in anameses)
             {
                 _context.Anamneses.Add(anamesis);
             }
@@ -139,13 +142,13 @@ namespace Psychology_API.SeedData
 
         }
 
-        private void CreatePasswordHash(string v, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using(var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(v));
-            }
-        }
+        // private void CreatePasswordHash(string v, out byte[] passwordHash, out byte[] passwordSalt)
+        // {
+        //     using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        //     {
+        //         passwordSalt = hmac.Key;
+        //         passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(v));
+        //     }
+        // }
     }
 }
