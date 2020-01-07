@@ -27,10 +27,7 @@ namespace Psychology_API.Repositories.Repositories
 
             if(!_cache.Get(key, out patient))
             {
-                patient = await _context.Patients
-                    .Include(p => p.Doctor)
-                    .Include(p => p.Anamneses)
-                    .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
+                patient = await GetPatientFromContext(doctorId, patientId);
 
                 if (patient != null)
                     _cache.Set(key, patient);
@@ -73,6 +70,12 @@ namespace Psychology_API.Repositories.Repositories
         }
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
+        {
+            var patient = await GetPatientFromContext(doctorId, patientId);
+
+            return patient;
+        }
+        private async Task<Patient> GetPatientFromContext(int doctorId, int patientId)
         {
             var patient = await _context.Patients
                     .Include(p => p.Doctor)
