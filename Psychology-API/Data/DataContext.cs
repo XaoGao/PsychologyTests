@@ -22,6 +22,7 @@ namespace Psychology_API.Data
         public DbSet<ProcessingInterpretationOfResult> ProcessingInterpretationOfResults { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
-        // public DbSet<Log> Logs { get; set; }
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<Reception> Receptions { get; set; }
     }
 }

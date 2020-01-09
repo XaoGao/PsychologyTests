@@ -43,14 +43,18 @@ export class PatientsListComponent implements OnInit {
         data: { patient: new Patient() }
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.createPatient(result as Patient);
+        if (result) {
+          this.createPatient(result as Patient);
+        }
       });
     } else {
       const dialogRef = this.dialog.open(PatientEditComponent, {
         data: { patient: currentPatient }
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.updatePatient(result as Patient);
+        if (result) {
+          this.updatePatient(result as Patient);
+        }
       });
     }
   }

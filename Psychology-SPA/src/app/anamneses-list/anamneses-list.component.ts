@@ -1,3 +1,5 @@
+import { AuthService } from './../_services/auth.service';
+import { PatientService } from './../_services/patient.service';
 import { Anamnesis } from './../_models/anamnesis';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -11,13 +13,16 @@ export class AnamnesesListComponent implements OnInit {
 
   public anamneses: Anamnesis[];
   public patientFullname;
-  constructor(private route: ActivatedRoute) { }
+  public isNewRecord = false;
+  public newRecord = new Anamnesis();
+  constructor(private route: ActivatedRoute, private patientService: PatientService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.anamneses = data.anamneses;
       this.getFullname();
     });
+    this.newRecord.conclusion = '';
   }
   private getFullname() {
     if (this.anamneses[0]) {
@@ -25,5 +30,15 @@ export class AnamnesesListComponent implements OnInit {
     } else {
       this.patientFullname = 'нет ни одной записи';
     }
+  }
+  public addNewRecordAnamnesis(): void {
+    this.isNewRecord = !this.isNewRecord;
+  }
+  public addAnamnesis() {
+    const doctorId = this.authService.decodedToken.nameid;
+    const patientId = +this.route.snapshot.paramMap.get('id');
+    this.newRecord.doctorId = doctorId;
+    this.newRecord.patinetId = patientId;
+    this.patientService.createAnamnesis(doctorId, patientId, this.newRecord);
   }
 }

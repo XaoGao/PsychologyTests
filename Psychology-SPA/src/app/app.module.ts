@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 // Guard
 import { ErrorInterceptor } from './_services/error.interceptor';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedTestGuard } from './_guards/prevent-unsaved-test.guard';
 // Routing
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './routes';
@@ -24,6 +25,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 // Service
 import { AuthService } from './_services/auth.service';
 import { DoctorService } from './_services/doctor.service';
@@ -40,6 +42,7 @@ import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
+import { TestResolver } from './_resolvers/test.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -57,6 +60,7 @@ import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 import { SelectTestComponent } from './select-test/select-test.component';
+import { TestComponent } from './tests/test/test.component';
 // ModalWindow
 import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
@@ -66,7 +70,7 @@ import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.c
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { TestComponent } from './tests/test/test.component';
+
 
 
 export function tokenGetter() {
@@ -124,6 +128,7 @@ export function tokenGetter() {
     MatCheckboxModule,
     MatExpansionModule,
     MatDialogModule,
+    MatRadioModule,
     FullCalendarModule,
     MatCardModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
@@ -131,6 +136,7 @@ export function tokenGetter() {
   providers: [
     ErrorInterceptor,
     AuthGuard,
+    PreventUnsavedTestGuard,
     AuthService,
     ToastrAlertService,
     DoctorService,
@@ -145,6 +151,7 @@ export function tokenGetter() {
     PositionsWithParamResolver,
     AnamnesesListResolver,
     TestsResolver,
+    TestResolver,
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ],
   bootstrap: [

@@ -35,7 +35,7 @@ namespace Psychology_API.Controllers
 
             return Ok(testForReturn);
         }
-        [HttpGet("testId")]
+        [HttpGet("{testId}")]
         public async Task<IActionResult> GetTest(int doctorId, int patientId, int testId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

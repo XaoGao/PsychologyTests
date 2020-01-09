@@ -1,7 +1,7 @@
 import { Doctor } from './doctor';
 import { Patient } from './patient';
 
-export interface Anamnesis {
+export class Anamnesis {
     id: number;
     conclusionTime: Date;
     patinetId: number;

@@ -9,7 +9,7 @@
         </p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button> Выбрать тест </button>
+        <button mat-button [routerLink]="['/patients', id, 'tests', test.id]"> Выбрать тест </button>
     </mat-card-actions>
 </mat-card>
 </div>

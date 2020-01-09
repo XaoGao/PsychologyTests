@@ -11,12 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class SelectTestComponent implements OnInit {
 
   public tests: Test[];
+  public id: string;
   constructor(private testService: TestService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.tests = data.tests;
     });
-    console.log(this.route.params);
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 }

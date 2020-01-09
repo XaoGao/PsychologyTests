@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Psychology_API.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,20 @@ namespace Psychology_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DocumentTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Text = table.Column<string>(nullable: true),
+                    DateInsert = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,6 +333,33 @@ namespace Psychology_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Receptions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DateTimeReception = table.Column<DateTime>(nullable: false),
+                    DoctorId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receptions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Receptions_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Receptions_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Anamneses_DoctorId",
                 table: "Anamneses",
@@ -385,6 +426,16 @@ namespace Psychology_API.Migrations
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Receptions_DoctorId",
+                table: "Receptions",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receptions_PatientId",
+                table: "Receptions",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vacations_DoctorId",
                 table: "Vacations",
                 column: "DoctorId");
@@ -402,7 +453,13 @@ namespace Psychology_API.Migrations
                 name: "Documents");
 
             migrationBuilder.DropTable(
+                name: "Logs");
+
+            migrationBuilder.DropTable(
                 name: "ProcessingInterpretationOfResults");
+
+            migrationBuilder.DropTable(
+                name: "Receptions");
 
             migrationBuilder.DropTable(
                 name: "Vacations");

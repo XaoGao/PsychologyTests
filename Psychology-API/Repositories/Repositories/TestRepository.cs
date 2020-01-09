@@ -19,9 +19,12 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<Test> GetTestAsync(int testId)
         {
             var test = await _context.Tests
-                                .Include(t => t.Answers)
                                 .Include(t => t.Questions)
+                                    .ThenInclude(q => q.Answers)
                                 .SingleOrDefaultAsync(t => t.Id == testId);
+
+            if(test != null && test.Questions != null)
+                test.Questions.OrderBy(q => q.sortLevel);
 
             return test;
         }
