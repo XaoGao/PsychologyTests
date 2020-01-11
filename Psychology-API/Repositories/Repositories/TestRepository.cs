@@ -5,14 +5,20 @@ using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
+using Dapper;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace Psychology_API.Repositories.Repositories
 {
     public class TestRepository : BaseRepository, ITestRepository
     {
         private readonly DataContext _context;
-        public TestRepository(DataContext context) : base(context)
+        private readonly IConfiguration _configuration;
+        public TestRepository(DataContext context, IConfiguration configuration) : base(context)
         {
+            _configuration = configuration;
             _context = context;
         }
 
@@ -22,9 +28,6 @@ namespace Psychology_API.Repositories.Repositories
                                 .Include(t => t.Questions)
                                     .ThenInclude(q => q.Answers)
                                 .SingleOrDefaultAsync(t => t.Id == testId);
-
-            if(test != null && test.Questions != null)
-                test.Questions.OrderBy(q => q.sortLevel);
 
             return test;
         }

@@ -28,5 +28,23 @@
         "MaxValue" : 63,
         "Description" : "Тяжелая депрессия.",
         "TestId" : 1
+    },
+    {
+        "MinValue" : 0,
+        "MaxValue" : 30,
+        "Description" : "Низкая тревожность.",
+        "TestId" : 2
+    },
+    {
+        "MinValue" : 30,
+        "MaxValue" : 45,
+        "Description" : "Умереная тревожность.",
+        "TestId" : 2
+    },
+    {
+        "MinValue" : 46,
+        "MaxValue" : 100,
+        "Description" : "Высокая тревожность.",
+        "TestId" : 2
     }
 ]

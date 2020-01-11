@@ -21,5 +21,7 @@ export class TestComponent implements OnInit {
   }
   public SaveTestResult(): void {
     console.log('test');
+    console.log(this.testResult);
   }
+  testResult: any = [];
 }

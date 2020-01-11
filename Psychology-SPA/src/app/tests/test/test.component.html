@@ -1,17 +1,14 @@
-<form #testForm="ngForm" id="testForm" (ngSubmit)="SaveTestResult()">
-    <div *ngFor="let question of test.questions">
-        <div>
-            <h6 class="ml-5"> {{ question.text }}: </h6>
-            <mat-radio-group class="example-radio-group">
-                <mat-radio-button class="example-radio-button" *ngFor="let answer of question.answers"
-                    value="answer.value">
-                    {{ answer.text }}</mat-radio-button>
-            </mat-radio-group>
-            <hr>
-        </div>
+<form #testForm="ngForm" class="ml-2" (ngSubmit)="SaveTestResult()">
+    <div *ngFor="let question of test.questions ; let i = index">
+        <label id="example-radio-group-label">{{question.text}}</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="testResult{{i}}"
+            [(ngModel)]="testResult[i]" required>
+            <mat-radio-button class="example-radio-button" *ngFor="let answer of question.answers"
+                [value]="answer.value">
+                {{answer.text}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <hr>
     </div>
-    <div class="btn-group">
-        <button class="btn btn-danger">Отменить тестирование</button>
-        <button class="btn btn-primary ml-2">Получить результат</button>
-    </div>
+    <button class="btn btn-primary float-right"> Закончить тестирование</button>
 </form>

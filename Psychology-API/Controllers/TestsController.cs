@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -43,7 +44,20 @@ namespace Psychology_API.Controllers
                 
             var test = await _testRepository.GetTestAsync(testId);
 
+            var questions = test.Questions.OrderBy(q => q.sortLevel);
+
             return Ok(test);
+        }
+        //TODO: Дописать метод получения результата тестирования
+        [HttpPost]
+        public async Task<IActionResult> GetTestResult(int doctorId, int patientId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            
+
+            return Ok();
         }
     }
 }

@@ -27,20 +27,21 @@ namespace Psychology_API.SeedData
             var departmentsFromFile = File.ReadAllText("SeedData/DataSeedDepartments.json");
             var departments = JsonConvert.DeserializeObject<List<Department>>(departmentsFromFile);
 
-            foreach (var department in departments)
+            foreach (var department in departments.OrderBy(d => d.SortLevel))
             {
                 _context.Departments.Add(department);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
             //Должности
             var positionsFromFile = File.ReadAllText("SeedData/DataSeedPositions.json");
             var positions = JsonConvert.DeserializeObject<List<Position>>(positionsFromFile);
 
-            foreach (var position in positions)
+            foreach (var position in positions.OrderBy(d => d.SortLevel))
             {
                 _context.Positions.Add(position);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Телефоны
             var phonesFromFile = File.ReadAllText("SeedData/DataSeedPhones.json");
             var phones = JsonConvert.DeserializeObject<List<Phone>>(phonesFromFile);
@@ -48,8 +49,9 @@ namespace Psychology_API.SeedData
             foreach (var phone in phones)
             {
                 _context.Phones.Add(phone);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Роли
             var rolesFromFile = File.ReadAllText("SeedData/DataSeedRoles.json");
             var roles = JsonConvert.DeserializeObject<List<Role>>(rolesFromFile);
@@ -57,8 +59,9 @@ namespace Psychology_API.SeedData
             foreach (var role in roles)
             {
                 _context.Roles.Add(role);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Доктора
             var doctorsFromFile = File.ReadAllText("SeedData/DataSeedDoctors.json");
             var doctors = JsonConvert.DeserializeObject<List<Doctor>>(doctorsFromFile);
@@ -74,8 +77,9 @@ namespace Psychology_API.SeedData
                 doctor.Username = doctor.Username.ToLower();
 
                 _context.Doctors.Add(doctor);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Пациенты
             var patientsFromFile = File.ReadAllText("SeedData/DataSeedPatients.json");
             var patients = JsonConvert.DeserializeObject<List<Patient>>(patientsFromFile);
@@ -83,44 +87,52 @@ namespace Psychology_API.SeedData
             foreach (var patient in patients)
             {
                 _context.Patients.Add(patient);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Заключения
             var anamesesFromFile = File.ReadAllText("SeedData/DataSeedAnamnesis.json");
             var anameses = JsonConvert.DeserializeObject<List<Anamnesis>>(anamesesFromFile);
 
-            foreach (var anamesis in anameses)
+            foreach (var anamesis in anameses.OrderByDescending(a => a.ConclusionTime))
             {
                 _context.Anamneses.Add(anamesis);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Тесты
             var testsFromFile = File.ReadAllText("SeedData/DataSeedTests.json");
             var tests = JsonConvert.DeserializeObject<List<Test>>(testsFromFile);
+            tests = tests.OrderByDescending(t => t.Name).ToList();
 
             foreach (var test in tests)
             {
                 _context.Tests.Add(test);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Вопросы
             var questionsFromFile = File.ReadAllText("SeedData/DataSeedQuestions.json");
             var questions = JsonConvert.DeserializeObject<List<Question>>(questionsFromFile);
+            questions = questions.OrderBy(q => q.TestId).ThenBy(q => q.sortLevel).ToList();
 
             foreach (var question in questions)
             {
                 _context.Questions.Add(question);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Ответы
             var answersFromFile = File.ReadAllText("SeedData/DataSeedAnswers.json");
             var answers = JsonConvert.DeserializeObject<List<Answer>>(answersFromFile);
+            answers = answers.OrderBy(a => a.QuestionId).ThenBy(a => a.Value).ToList();
 
             foreach (var answer in answers)
             {
                 _context.Answers.Add(answer);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Интерпритация
             var interFromFile = File.ReadAllText("SeedData/DataSeedProcessingInterpretationOfResults.json");
             var inters = JsonConvert.DeserializeObject<List<ProcessingInterpretationOfResult>>(interFromFile);
@@ -128,8 +140,9 @@ namespace Psychology_API.SeedData
             foreach (var inter in inters)
             {
                 _context.ProcessingInterpretationOfResults.Add(inter);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
             //Типы документов
             var doctypesFromFile = File.ReadAllText("SeedData/DataSeedDocumentTypes.json");
             var doctypes = JsonConvert.DeserializeObject<List<DocumentType>>(doctypesFromFile);
@@ -137,18 +150,10 @@ namespace Psychology_API.SeedData
             foreach (var doctype in doctypes)
             {
                 _context.DocumentTypes.Add(doctype);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+            
 
         }
-
-        // private void CreatePasswordHash(string v, out byte[] passwordHash, out byte[] passwordSalt)
-        // {
-        //     using (var hmac = new System.Security.Cryptography.HMACSHA512())
-        //     {
-        //         passwordSalt = hmac.Key;
-        //         passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(v));
-        //     }
-        // }
     }
 }

@@ -418,5 +418,805 @@
         "Text" : "Я полностью утратил сексуальный интерес.",
         "Value" : 3,
         "QuestionId" : 21
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 22
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 22
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 22
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 22
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 23
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 23
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 23
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 23
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 24
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 24
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 24
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 24
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 25
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 25
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 25
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 25
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 26
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 26
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 26
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 26
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 27
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 27
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 27
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 27
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 28
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 28
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 28
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 28
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 29
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 29
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 29
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 29
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 30
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 30
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 30
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 30
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 31
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 31
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 31
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 31
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 32
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 32
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 32
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 32
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 33
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 33
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 33
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 33
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 34
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 34
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 34
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 34
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 35
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 35
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 35
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 35
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 36
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 36
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 36
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 36
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 37
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 37
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 37
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 37
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 38
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 38
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 38
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 38
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 39
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 39
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 39
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 39
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 40
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 40
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 40
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 40
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 41
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 41
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 41
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 41
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 42
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 42
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 42
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 42
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 43
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 43
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 43
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 43
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 44
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 44
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 44
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 44
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 45
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 45
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 45
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 45
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 46
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 46
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 46
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 46
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 47
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 47
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 47
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 47
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 48
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 48
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 48
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 48
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 49
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 49
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 49
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 49
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 50
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 50
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 50
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 50
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 51
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 51
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 51
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 51
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 52
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 52
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 52
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 52
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 53
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 53
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 53
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 53
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 54
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 54
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 54
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 54
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 55
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 55
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 55
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 55
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 56
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 56
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 56
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 56
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 57
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 57
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 57
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 57
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 58
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 58
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 58
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 58
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 59
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 59
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 59
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 59
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 60
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 60
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 60
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 60
+    },
+    {
+        "Text" : "Нет, это не так.",
+        "Value" : 1,
+        "QuestionId" : 61
+    },
+    {
+        "Text" : "Пожалуй, так.",
+        "Value" : 2,
+        "QuestionId" : 61
+    },
+    {
+        "Text" : "Верно.",
+        "Value" : 3,
+        "QuestionId" : 61
+    },
+    {
+        "Text" : "Совершено верно.",
+        "Value" : 4,
+        "QuestionId" : 61
     }
 ]
