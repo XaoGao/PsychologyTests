@@ -1,14 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
-using Dapper;
-using Microsoft.Data.SqlClient;
-using System.Data;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Psychology_API.Repositories.Repositories
 {
@@ -20,6 +17,27 @@ namespace Psychology_API.Repositories.Repositories
         {
             _configuration = configuration;
             _context = context;
+        }
+
+        public async Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testResultInPoints)
+        {
+            var testResult = await _context.ProcessingInterpretationOfResults
+                .SingleOrDefaultAsync(tr => testResultInPoints > tr.MinValue && testResultInPoints < tr.MaxValue);
+
+            if(testResult == null)
+                throw new Exception("Не предвиденная ошибка, не верное расчитаны количество баллов");
+
+            var patientTestResult = new PatientTestResult();
+
+            patientTestResult.DoctorId = doctorId;
+            patientTestResult.PatientId = patientId;
+            patientTestResult.ProcessingInterpretationOfResultId = testResult.Id;
+            patientTestResult.DateTimeCreate = DateTime.Now;
+
+            await _context.PatientTestResult.AddAsync(patientTestResult);
+            await _context.SaveChangesAsync();
+
+            return patientTestResult;
         }
 
         public async Task<Test> GetTestAsync(int testId)

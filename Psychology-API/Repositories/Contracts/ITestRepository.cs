@@ -20,5 +20,13 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="testId"> Идентификатор теста. </param>
         /// <returns></returns>
         Task<Test> GetTestAsync(int testId);
+        /// <summary>
+        /// Создать новую запись о результате тестирования и вернуть ее.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пацента. </param>
+        /// <param name="TestResultInPoints"> Результат тестирования в баллах. </param>
+        /// <returns></returns>
+        Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testResultInPoints);
     }
 }

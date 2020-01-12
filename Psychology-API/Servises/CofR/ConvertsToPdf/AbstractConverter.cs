@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Psychology_API.Servises.ConvertsToPdf
+namespace Psychology_API.Servises.COfR.ConvertsToPdf
 {
     /// <summary>
     /// Базовый класс от которого должны наследоваться все остальные обработчики.
@@ -50,6 +50,5 @@ namespace Psychology_API.Servises.ConvertsToPdf
                 throw new Exception($"{extension} формат не обрабатывается.");
             }
         }
-
     }
 }

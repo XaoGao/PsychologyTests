@@ -24,5 +24,6 @@ namespace Psychology_API.Data
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Reception> Receptions { get; set; }
+        public DbSet<PatientTestResult> PatientTestResult { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 <form #testForm="ngForm" class="ml-2" (ngSubmit)="SaveTestResult()">
-    <div *ngFor="let question of test.questions ; let i = index">
+    <div *ngFor="let question of test.questions ; let questionIndex = index">
         <label id="example-radio-group-label">{{question.text}}</label>
-            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="testResult{{i}}"
-            [(ngModel)]="testResult[i]" required>
-            <mat-radio-button class="example-radio-button" *ngFor="let answer of question.answers"
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="testResult{{questionIndex}}"
+            [(ngModel)]="questionsAnswers.questionsAnswerList[questionIndex].answerValue" required>
+            <mat-radio-button class="example-radio-button" *ngFor="let answer of question.answers; let answerValue = index"
                 [value]="answer.value">
                 {{answer.text}}
             </mat-radio-button>

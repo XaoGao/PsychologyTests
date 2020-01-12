@@ -1,4 +1,4 @@
-namespace Psychology_API.Servises.ConvertsToPdf
+namespace Psychology_API.Servises.COfR.ConvertsToPdf
 {
     /// <summary>
     /// Цепочка ответственных для конвертации разных докумнетов в pdf формат.
