@@ -6,7 +6,7 @@ namespace Psychology_Domain.Domain
     public class DocumentType
     {
         /// <summary>
-        /// Идентификатор документа.
+        /// Идентификатор.
         /// </summary>
         /// <value></value>
         public int Id { get; set; }

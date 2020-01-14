@@ -249,6 +249,43 @@ namespace Psychology_API.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.PatientTestResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateTimeCreate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProcessingInterpretationOfResultId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TestResultInPoints")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("ProcessingInterpretationOfResultId");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("PatientTestResult");
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.Phone", b =>
                 {
                     b.Property<int>("Id")
@@ -331,6 +368,40 @@ namespace Psychology_API.Migrations
                     b.HasIndex("TestId");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.QuestionAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AnswersValue")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PatientTestResultId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("PatientTestResultId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("QuestionsAnswers");
                 });
 
             modelBuilder.Entity("Psychology_Domain.Domain.Reception", b =>
@@ -498,6 +569,33 @@ namespace Psychology_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Psychology_Domain.Domain.PatientTestResult", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.ProcessingInterpretationOfResult", "ProcessingInterpretationOfResult")
+                        .WithMany()
+                        .HasForeignKey("ProcessingInterpretationOfResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Test", "Test")
+                        .WithMany()
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Psychology_Domain.Domain.ProcessingInterpretationOfResult", b =>
                 {
                     b.HasOne("Psychology_Domain.Domain.Test", "Test")
@@ -511,6 +609,31 @@ namespace Psychology_API.Migrations
                 {
                     b.HasOne("Psychology_Domain.Domain.Test", "Test")
                         .WithMany("Questions")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Psychology_Domain.Domain.QuestionAnswer", b =>
+                {
+                    b.HasOne("Psychology_Domain.Domain.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.PatientTestResult", null)
+                        .WithMany("QuestionsAnswers")
+                        .HasForeignKey("PatientTestResultId");
+
+                    b.HasOne("Psychology_Domain.Domain.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Psychology_Domain.Domain.Test", "Test")
+                        .WithMany()
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

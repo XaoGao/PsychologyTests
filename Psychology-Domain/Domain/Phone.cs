@@ -8,20 +8,10 @@ namespace Psychology_Domain.Domain
     public class Phone : BaseEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Номер телефона.
         /// </summary>
         /// <value></value>
         public string Number { get; set; }
-        /// <summary>
-        /// Актуальность телефона.
-        /// </summary>
-        /// <value></value>
-        // public bool IsLock { get; set; }
         /// <summary>
         /// Маска телефона.
         /// </summary>

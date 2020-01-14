@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Psychology_API.ViewModels;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Contracts
@@ -25,8 +26,9 @@ namespace Psychology_API.Repositories.Contracts
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <param name="patientId"> Идентификатор пацента. </param>
+        /// /// <param name="patientId"> Идентификатор теста. </param>
         /// <param name="TestResultInPoints"> Результат тестирования в баллах. </param>
         /// <returns></returns>
-        Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testResultInPoints);
+        Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testId, int testResultInPoints, QuestionsAnswersViewModel questionsAnswers);
     }
 }

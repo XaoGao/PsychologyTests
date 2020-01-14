@@ -52,7 +52,7 @@ namespace Psychology_API.Controllers
         }
         //TODO: Дописать метод получения результата тестирования
         [HttpPost("{testId}")]
-        public async Task<IActionResult> GetTestResult(int doctorId, int patientId, int testId, QuestionsAnswers questionsAnswers)
+        public async Task<IActionResult> GetTestResult(int doctorId, int patientId, int testId, QuestionsAnswersViewModel questionsAnswers)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
@@ -64,7 +64,7 @@ namespace Psychology_API.Controllers
             var managerComputedTest = new ManagerComputedTestResultHandler();
             var testResultInPoints =  managerComputedTest.GetTestResultInPoints(questionsAnswers, test.Name);
 
-            var patientTestResult = await _testRepository.CreateAndGetPatientTestResultAsnyc(doctorId, patientId, testResultInPoints);
+            var patientTestResult = await _testRepository.CreateAndGetPatientTestResultAsnyc(doctorId, patientId, testId, testResultInPoints, questionsAnswers);
 
             return Ok(patientTestResult);
         }

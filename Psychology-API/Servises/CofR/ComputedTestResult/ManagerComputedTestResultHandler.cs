@@ -25,7 +25,7 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         /// <param name="questionsAnswers"> Входящий массив вопросов и ответов. </param>
         /// <param name="testName"> Название теста. </param>
         /// <returns></returns>
-        public int GetTestResultInPoints(QuestionsAnswers questionsAnswers, string testName)
+        public int GetTestResultInPoints(QuestionsAnswersViewModel questionsAnswers, string testName)
         {
             return beckDepressionInventoryTestResultHandler.ComputedTestResult(questionsAnswers, testName);
         }

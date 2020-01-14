@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Пациент.
     /// </summary>
-    public class Patient
+    public class Patient : People
     {
         /// <summary>
         /// Идентификатор.
@@ -18,31 +18,6 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string PersonalCardNumber { get; set; }
-        /// <summary>
-        /// Фамилия.
-        /// </summary>
-        /// <value></value>
-        public string Lastname { get; set; }
-        /// <summary>
-        /// Имя.
-        /// </summary>
-        /// <value></value>
-        public string Firstname { get; set; }
-        /// <summary>
-        /// Отчество.
-        /// </summary>
-        /// <value></value>
-        public string Middlename { get; set; }
-        /// <summary>
-        /// ФИО.
-        /// </summary>
-        /// <value></value>
-        public string Fullname { get => $"{Lastname} {Firstname} {Middlename}"; }
-        /// <summary>
-        /// Дата рождения.
-        /// </summary>
-        /// <value></value>
-        public DateTime DateOfBirth { get; set; }
         /// <summary>
         /// Лечащий врач.
         /// </summary>

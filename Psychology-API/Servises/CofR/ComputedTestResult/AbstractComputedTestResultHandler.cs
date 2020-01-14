@@ -30,7 +30,7 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         /// </summary>
         /// <param name="questionsAnswers"> Входящий документа в виде массива байтов. </param>
         /// <param name="testName"> Название теста. </param>
-        public virtual int ComputedTestResult(QuestionsAnswers questionsAnswers, string testName)
+        public virtual int ComputedTestResult(QuestionsAnswersViewModel questionsAnswers, string testName)
         {
             if (next != null)
             {

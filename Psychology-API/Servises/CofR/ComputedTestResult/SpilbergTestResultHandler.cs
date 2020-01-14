@@ -5,7 +5,7 @@ using Psychology_API.ViewModels;
 namespace Psychology_API.Servises.CofR.ComputedTestResult
 {
     /// <summary>
-    /// Класс в цепоче ответственных для расчета баллов.
+    /// Класс в цепоче ответственных для расчета баллов для теста Спилбергера.
     /// </summary>
     public class SpilbergTestResultHandler : AbstractComputedTestResultHandler
     {
@@ -23,7 +23,7 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         /// <param name="questionsAnswers"> Перечень вопросов и ответов на них. </param>
         /// <param name="testName"> Наименование теста. </param>
         /// <returns></returns>
-        public override int ComputedTestResult(QuestionsAnswers questionsAnswers, string testName)
+        public override int ComputedTestResult(QuestionsAnswersViewModel questionsAnswers, string testName)
         {
             if(testName.Equals("Тест Спилбергера"))
             {

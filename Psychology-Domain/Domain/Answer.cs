@@ -1,27 +1,27 @@
 namespace Psychology_Domain.Domain
 {
     /// <summary>
-    /// Ответ
+    /// Ответ.
     /// </summary>
     public class Answer
     {
         /// <summary>
-        /// Идентификатор
+        /// Идентификатор.
         /// </summary>
         /// <value></value>
         public int Id { get; set; }
         /// <summary>
-        /// Текст ответа
+        /// Текст ответа.
         /// </summary>
         /// <value></value>
         public string Text { get; set; }
         /// <summary>
-        /// Значение
+        /// Значение.
         /// </summary>
         /// <value></value>
         public int Value { get; set; }
         /// <summary>
-        /// Идентифкатор вопроса
+        /// Идентификатор вопроса.
         /// </summary>
         /// <value></value>
         public int QuestionId { get; set; }

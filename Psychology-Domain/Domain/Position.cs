@@ -8,11 +8,6 @@ namespace Psychology_Domain.Domain
     public class Position : BaseEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Наименование должности.
         /// </summary>
         /// <value></value>
@@ -22,10 +17,5 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public int SortLevel { get; set; }
-        /// <summary>
-        /// Актуальность должности.
-        /// </summary>
-        /// <value></value>
-        // public bool IsLock { get; set; }
     }
 }

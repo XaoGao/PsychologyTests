@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Psychology_API.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -113,13 +113,13 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Username = table.Column<string>(nullable: true),
-                    PasswordHash = table.Column<byte[]>(nullable: true),
-                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     DepartmentId = table.Column<int>(nullable: false),
                     PositionId = table.Column<int>(nullable: false),
                     PhoneId = table.Column<int>(nullable: false),
@@ -203,11 +203,11 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    PersonalCardNumber = table.Column<string>(nullable: true),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
+                    PersonalCardNumber = table.Column<string>(nullable: true),
                     DoctorId = table.Column<int>(nullable: false),
                     IsDelete = table.Column<bool>(nullable: false)
                 },
@@ -334,6 +334,48 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PatientTestResult",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DoctorId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false),
+                    TestId = table.Column<int>(nullable: false),
+                    TestResultInPoints = table.Column<int>(nullable: false),
+                    ProcessingInterpretationOfResultId = table.Column<int>(nullable: false),
+                    DateTimeCreate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientTestResult", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PatientTestResult_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientTestResult_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientTestResult_ProcessingInterpretationOfResults_ProcessingInterpretationOfResultId",
+                        column: x => x.ProcessingInterpretationOfResultId,
+                        principalTable: "ProcessingInterpretationOfResults",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientTestResult_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Receptions",
                 columns: table => new
                 {
@@ -356,6 +398,47 @@ namespace Psychology_API.Migrations
                         name: "FK_Receptions_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuestionsAnswers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientId = table.Column<int>(nullable: false),
+                    TestId = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<int>(nullable: false),
+                    AnswersValue = table.Column<int>(nullable: false),
+                    PatientTestResultId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuestionsAnswers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QuestionsAnswers_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QuestionsAnswers_PatientTestResult_PatientTestResultId",
+                        column: x => x.PatientTestResultId,
+                        principalTable: "PatientTestResult",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_QuestionsAnswers_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QuestionsAnswers_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -416,6 +499,26 @@ namespace Psychology_API.Migrations
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PatientTestResult_DoctorId",
+                table: "PatientTestResult",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientTestResult_PatientId",
+                table: "PatientTestResult",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientTestResult_ProcessingInterpretationOfResultId",
+                table: "PatientTestResult",
+                column: "ProcessingInterpretationOfResultId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientTestResult_TestId",
+                table: "PatientTestResult",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProcessingInterpretationOfResults_TestId",
                 table: "ProcessingInterpretationOfResults",
                 column: "TestId");
@@ -423,6 +526,26 @@ namespace Psychology_API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_TestId",
                 table: "Questions",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionsAnswers_PatientId",
+                table: "QuestionsAnswers",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionsAnswers_PatientTestResultId",
+                table: "QuestionsAnswers",
+                column: "PatientTestResultId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionsAnswers_QuestionId",
+                table: "QuestionsAnswers",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionsAnswers_TestId",
+                table: "QuestionsAnswers",
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
@@ -456,7 +579,7 @@ namespace Psychology_API.Migrations
                 name: "Logs");
 
             migrationBuilder.DropTable(
-                name: "ProcessingInterpretationOfResults");
+                name: "QuestionsAnswers");
 
             migrationBuilder.DropTable(
                 name: "Receptions");
@@ -465,19 +588,25 @@ namespace Psychology_API.Migrations
                 name: "Vacations");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "DocumentTypes");
 
             migrationBuilder.DropTable(
-                name: "DocumentTypes");
+                name: "PatientTestResult");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Tests");
+                name: "ProcessingInterpretationOfResults");
 
             migrationBuilder.DropTable(
                 name: "Doctors");
+
+            migrationBuilder.DropTable(
+                name: "Tests");
 
             migrationBuilder.DropTable(
                 name: "Departments");

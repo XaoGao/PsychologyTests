@@ -5,7 +5,7 @@ namespace Psychology_API.ViewModels
     /// <summary>
     /// Массив данных (Идентификатор вопроса - ответ на вопрос)
     /// </summary>
-    public class QuestionsAnswers
+    public class QuestionsAnswersViewModel
     {
         public List<QuestionsAnswer> QuestionsAnswerList { get; set; }
 

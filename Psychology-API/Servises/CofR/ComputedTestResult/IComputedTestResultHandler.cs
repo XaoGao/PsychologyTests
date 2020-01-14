@@ -18,6 +18,6 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         /// </summary>
         /// <param name="questionsAnswers"> Входящий массив вопросов и ответов. </param>
         /// <param name="testName"> Название теста. </param>
-        int ComputedTestResult(QuestionsAnswers questionsAnswers, string testName);
+        int ComputedTestResult(QuestionsAnswersViewModel questionsAnswers, string testName);
     }
 }
