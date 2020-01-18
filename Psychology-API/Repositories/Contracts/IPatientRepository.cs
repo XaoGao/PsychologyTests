@@ -39,7 +39,20 @@ namespace Psychology_API.Repositories.Contracts
         /// Получить все заключения по конкретному пациенту.
         /// </summary>
         /// <param name="patientId"> Идентификатор пациента. </param>
-        /// <returns></returns>
+        /// <returns> Список всех заключении по пациенту. </returns>
         Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId);
+        /// <summary>
+        /// Создать новое заключение для пациента.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <param name="anamnesis"> Заключение. </param>
+        /// <returns> В БД добавлено нового заключение для пациента. </returns>
+        Task<Anamnesis> CreateAnamnesisAsync(int doctorId, int patientId, Anamnesis anamnesis);
+        /// <summary>
+        /// Получить всех пациентов для регистратора.
+        /// </summary>
+        /// <returns> Список все пациентов. </returns>
+        Task<IEnumerable<Patient>> GetPatientsForRegistryAsync();
     }
 }

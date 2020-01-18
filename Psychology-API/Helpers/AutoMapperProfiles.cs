@@ -2,6 +2,7 @@ using AutoMapper;
 using Psychology_API.Dtos;
 using Psychology_Domain.Domain;
 using System.Linq;
+using System;
 
 namespace Psychology_API.Helpers
 {
@@ -29,6 +30,13 @@ namespace Psychology_API.Helpers
 
             // Анамнез.
             CreateMap<Anamnesis, AnamnesisForReturnDto>();
+            CreateMap<AnamnesisForCreateDto, Anamnesis>()
+                .ForMember(dest => dest.ConclusionTime, opt => {
+                    opt.MapFrom(src => DateTime.Now);
+                })
+                .ForMember(dest => dest.IsLast, opt => {
+                    opt.MapFrom(src => true);
+                });
 
             // Телефон.
             CreateMap<Department, Department>();

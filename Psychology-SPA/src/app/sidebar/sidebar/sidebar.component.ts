@@ -29,4 +29,7 @@ export class SidebarComponent implements OnInit {
   isHR(): boolean {
     return this.rolesService.isHR(this.authService.decodedToken.role);
   }
+  isRegistry(): boolean {
+    return this.rolesService.isRegistry(this.authService.decodedToken.role);
+  }
 }

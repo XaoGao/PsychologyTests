@@ -8,6 +8,7 @@ export class RolesService {
   private admin = 'admin';
   private HR = 'hr';
   private doctor = 'doctor';
+  private registry = 'registry';
   constructor() { }
 
   public isAdmin(role: string): boolean {
@@ -26,6 +27,13 @@ export class RolesService {
   }
   public isDoctor(role: string): boolean {
     if (role === this.doctor) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public isRegistry(role: string): boolean {
+    if (role === this.registry) {
       return true;
     } else {
       return false;

@@ -22,9 +22,9 @@ export class PatientService {
     return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/', patient);
   }
   getAnamnesesList(doctorId: number, patientId: number): Observable<Anamnesis[]> {
-    return this.http.get<Anamnesis[]>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamnses');
+    return this.http.get<Anamnesis[]>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses');
   }
   createAnamnesis(doctorId: number, patientId: number, anamnesis: Anamnesis) {
-    return this.http.post(this.BASE_URL_PATIENT + '/patients/' + patientId + '/anamnses', anamnesis);
+    return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses', anamnesis);
   }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -66,7 +67,7 @@ namespace Psychology_API.Repositories.Repositories
                 .Include(a => a.Patient)
                 .ToListAsync();
 
-            return anamneses;
+            return anamneses.OrderByDescending(a => a.ConclusionTime);
         }
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
@@ -83,6 +84,31 @@ namespace Psychology_API.Repositories.Repositories
                     .SingleOrDefaultAsync(p => p.DoctorId == doctorId && p.Id == patientId);
 
             return patient;
+        }
+
+        public async Task<Anamnesis> CreateAnamnesisAsync(int doctorId, int patientId, Anamnesis anamnesis)
+        {
+            var patient = await _context.Patients.SingleOrDefaultAsync(p => p.Id == patientId);
+
+            var anamnesisIsLast = await _context.Anamneses.SingleOrDefaultAsync(a => a.IsLast == true && a.PatientId == patientId);
+
+            if(anamnesisIsLast != null)
+                anamnesisIsLast.IsLast = false;
+
+            patient.Anamneses.Add(anamnesis);
+
+            await _context.Anamneses.AddAsync(anamnesis);
+
+            await _context.SaveChangesAsync();
+
+            return anamnesis;
+        }
+
+        public async Task<IEnumerable<Patient>> GetPatientsForRegistryAsync()
+        {
+            var patients = await _context.Patients.Where(p => p.IsDelete != true).ToListAsync();
+
+            return patients;
         }
     }
 }

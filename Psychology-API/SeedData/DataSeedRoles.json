@@ -10,5 +10,9 @@
     {
         "Name" : "hr",
         "IsLock" : false
+    },
+    {
+        "Name" : "registry",
+        "IsLock": false
     }
 ]

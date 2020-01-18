@@ -61,6 +61,7 @@ import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 import { SelectTestComponent } from './select-test/select-test.component';
 import { TestComponent } from './tests/test/test.component';
+import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
 // ModalWindow
 import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
@@ -70,7 +71,6 @@ import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.c
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
 
 
 export function tokenGetter() {
@@ -100,7 +100,8 @@ export function tokenGetter() {
     ModalPositionComponent,
     ModalPhoneComponent,
     SelectTestComponent,
-    TestComponent
+    TestComponent,
+    PatientsListForRegistryComponent
   ],
   imports: [
     BrowserModule,

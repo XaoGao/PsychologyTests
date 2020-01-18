@@ -9,6 +9,7 @@ using Psychology_Domain.Domain;
 using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using Psychology_API.Settings;
 
 namespace Psychology_API.Controllers
 {
@@ -53,7 +54,7 @@ namespace Psychology_API.Controllers
             //TODO: добавить dto для возврата данных
             return Ok(patientFromRepo);
         }
-        [HttpGet("{patientId}/anamnses")]
+        [HttpGet("{patientId}/anamneses")]
         public async Task<IActionResult> GetPatientAnamneses(int doctorId, int patientId)
         {
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
@@ -122,6 +123,34 @@ namespace Psychology_API.Controllers
 
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
+        }
+        [HttpPost("{patientId}/anamneses")]
+        public async Task<IActionResult> CreatePatientAnamnesis(int doctorId, int patientId, AnamnesisForCreateDto anamnesisForCreateDto)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            var patient = await _patientRepository.GetPatientAsync(doctorId, patientId);
+
+            if(patient == null)
+                return BadRequest("Указаный пациент не зарегистрирован в системе");
+            
+            var anamnesis = _mapper.Map<Anamnesis>(anamnesisForCreateDto);
+
+            await _patientRepository.CreateAnamnesisAsync(doctorId, patientId, anamnesis);
+
+            return Ok(anamnesis);
+        }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpGet("patientsforregistry")]
+        public async Task<IActionResult> GetPatientsForRegistry(int doctorId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            var patient = await _patientRepository.GetPatientsForRegistryAsync();
+
+            return Ok(patient);
         }
     }
 }

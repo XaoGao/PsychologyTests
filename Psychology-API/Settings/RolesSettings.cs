@@ -13,6 +13,7 @@ namespace Psychology_API.Settings
         public const string Administrator = "admin";
         public const string HR = "hr";
         public const string Doctor = "doctor";
+        public const string Registry = "registry";
 
     }
 }

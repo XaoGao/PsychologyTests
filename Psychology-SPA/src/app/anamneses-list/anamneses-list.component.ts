@@ -1,3 +1,4 @@
+import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
 import { PatientService } from './../_services/patient.service';
 import { Anamnesis } from './../_models/anamnesis';
@@ -15,7 +16,10 @@ export class AnamnesesListComponent implements OnInit {
   public patientFullname;
   public isNewRecord = false;
   public newRecord = new Anamnesis();
-  constructor(private route: ActivatedRoute, private patientService: PatientService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute,
+              private patientService: PatientService,
+              private authService: AuthService,
+              private toastrService: ToastrAlertService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -39,6 +43,11 @@ export class AnamnesesListComponent implements OnInit {
     const patientId = +this.route.snapshot.paramMap.get('id');
     this.newRecord.doctorId = doctorId;
     this.newRecord.patinetId = patientId;
-    this.patientService.createAnamnesis(doctorId, patientId, this.newRecord);
+    this.patientService.createAnamnesis(doctorId, patientId, this.newRecord).subscribe((res) => {
+      this.toastrService.success('Запись успешно добавлена в историю');
+      // this.anamneses.push(res as Anamnesis);
+    }, err => {
+      this.toastrService.error(err);
+    });
   }
 }
