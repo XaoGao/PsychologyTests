@@ -1,3 +1,5 @@
+import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
+import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
 import { PreventUnsavedTestGuard } from './_guards/prevent-unsaved-test.guard';
 import { TestComponent } from './tests/test/test.component';
 import { TestsResolver } from './_resolvers/tests.resolver';
@@ -76,6 +78,11 @@ const routes: Routes = [
         path: 'patients',
         component: PatientsListComponent,
         resolve: { patients: PatientsListResolver }
+      },
+      {
+        path: 'patientsforregistry',
+        component: PatientsListForRegistryComponent,
+        resolve: { patients: PatientsListForRegistryResolver }
       },
       {
         path: 'patients/:id',

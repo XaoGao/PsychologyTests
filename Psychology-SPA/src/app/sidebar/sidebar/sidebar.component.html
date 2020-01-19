@@ -1,13 +1,13 @@
 <div class="container">
     <!-- Для доктора -->
     <div *ngIf="isDoctor()" [routerLink]="['/patients']" routerLinkActive="router-link-active">
-        <p>Пациенты</p>
+        <p>Пациенты(для врача)</p>
         <hr>
     </div>
 
     <!-- Для регистратора -->
-    <div *ngIf="isRegistry()" [routerLink]="['/']">
-        <p>Пациенты</p>
+    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry']">
+        <p>Пациенты(для регистратора)</p>
         <hr>
     </div>
     

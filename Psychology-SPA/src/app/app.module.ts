@@ -40,6 +40,7 @@ import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.
 import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
+import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
 import { TestResolver } from './_resolvers/test.resolver';
@@ -148,6 +149,7 @@ export function tokenGetter() {
     PhonesResolver,
     PhonebookResolver,
     PatientsListResolver,
+    PatientsListForRegistryResolver,
     DepartmentsWithParamResolver,
     PositionsWithParamResolver,
     AnamnesesListResolver,

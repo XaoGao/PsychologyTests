@@ -27,4 +27,7 @@ export class PatientService {
   createAnamnesis(doctorId: number, patientId: number, anamnesis: Anamnesis) {
     return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses', anamnesis);
   }
+  getPatientsForRegistry(doctorId: number): Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.BASE_URL_PATIENT + doctorId + '/patients/patientsforregistry');
+  }
 }
