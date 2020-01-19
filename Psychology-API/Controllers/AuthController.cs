@@ -82,10 +82,13 @@ namespace Psychology_API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var receptionsForWeekForDoctor = await _doctorRepository.GetReceptionsForDoctors(doctorFromRepo.Id);
+
             // Если есть данные, которые необходимо отправить на view сразу после авторизации, то добавить данные в данный кортедж
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                receptionsForWeekForDoctor
             });
         }
         [Authorize(Roles = RolesSettings.Administrator)]

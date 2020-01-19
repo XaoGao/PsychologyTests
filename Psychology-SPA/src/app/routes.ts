@@ -29,6 +29,7 @@ import { DepartmentsWithParamResolver } from './_resolvers/departmentsWithParam.
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 import { TestResolver } from './_resolvers/test.resolver';
+import { DoctorsListResolver } from './_resolvers/doctors-list.resolver';
 
 const routes: Routes = [
   {
@@ -83,6 +84,11 @@ const routes: Routes = [
         path: 'patientsforregistry',
         component: PatientsListForRegistryComponent,
         resolve: { patients: PatientsListForRegistryResolver }
+      },
+      {
+        path: 'patientsforregistry/:id',
+        component: PatientsListForRegistryComponent,
+        resolve: { doctors: DoctorsListResolver }
       },
       {
         path: 'patients/:id',

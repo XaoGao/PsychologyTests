@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Psychology_Domain.Domain;
 
@@ -20,5 +21,16 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <returns></returns>
         Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId);
+        /// <summary>
+        /// Получить список лечащих врачей.
+        /// </summary>
+        /// <returns> Список врачей. </returns>
+        Task<IEnumerable<Doctor>> GetDoctors();
+        /// <summary>
+        /// Получить приемы пациентов у конкретного врача в течении текущей недели
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns> Список приемов у врача. </returns>
+        Task<IEnumerable<Reception>> GetReceptionsForDoctors(int doctorId);
     }
 }

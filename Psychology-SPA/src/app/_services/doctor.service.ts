@@ -18,4 +18,7 @@ export class DoctorService {
   updateDoctor(doctor: Doctor) {
     return this.http.put(this.BASE_URL_DOCTOR + '/' + doctor.id, doctor);
   }
+  getDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(this.BASE_URL_DOCTOR);
+  }
 }

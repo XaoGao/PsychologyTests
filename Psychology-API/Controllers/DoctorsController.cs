@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Settings;
 
 namespace Psychology_API.Controllers
 {
@@ -39,6 +41,16 @@ namespace Psychology_API.Controllers
             var doctorToReturn = _mapper.Map<DoctorForReturnDto>(doctorFromRepo);
             
             return Ok(doctorToReturn);
+        }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpGet]
+        public async Task<IActionResult> GetDoctors() 
+        {
+            var doctors = await _doctorRepository.GetDoctors();
+
+            var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
+
+            return Ok(doctorsForReturn);
         }
         [HttpPut("{doctorId}")]
         public async Task<IActionResult> UpdateDoctorDetail(int doctorId, DoctorForUpdateDto doctorForUpdateDto)

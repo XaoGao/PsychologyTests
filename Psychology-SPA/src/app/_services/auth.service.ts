@@ -22,6 +22,7 @@ export class AuthService {
         console.log(user);
         if (user) {
           localStorage.setItem('token', user.token);
+          localStorage.setItem('receptions', JSON.stringify(user.receptionsForWeekForDoctor));
           this.decodedToken = this.helper.decodeToken(user.token);
           // !раскомментировать, чтобы посмотреть, что лежит в токене
           // console.log(this.decodedToken);
