@@ -59,7 +59,10 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<IEnumerable<Reception>> GetReceptionsForDoctors(int doctorId)
         {
             //TODO: Дописать , вернуть все записи к врачу в течении недели.
-            var receptions = await _context.Receptions.Where(r => r.DoctorId == doctorId).ToListAsync();
+            var receptions = await _context.Receptions
+                .Include(r => r.Patient)
+                .Where(r => r.DoctorId == doctorId)
+                .ToListAsync();
 
             return receptions;
         }

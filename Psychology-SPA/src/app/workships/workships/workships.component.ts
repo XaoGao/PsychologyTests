@@ -1,10 +1,29 @@
+import { Reception } from '../../_models/reception';
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { CalendarDateFormatter } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarEvent } from 'angular-calendar';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { addHours, parseISO, format } from 'date-fns';
 // import dayGridPlugin from '@fullcalendar/daygrid';
 // import timeGrigPlugin from '@fullcalendar/timegrid';
 // import interactionPlugin from '@fullcalendar/interaction';
+
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
+
 
 @Component({
   selector: 'app-workships',
@@ -21,15 +40,31 @@ export class WorkshipsComponent implements OnInit {
 
   // calendarPlugins = [dayGridPlugin];
   viewDate: Date = new Date();
-  events = [];
   locale = 'ru';
+  receptions: Reception[];
+  events: CalendarEvent[] = [];
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     // this.calendarPlugins.setOptions('height', 700);
     // console.log(this.calendarPlugins);
+    this.getReceptions();
   }
-  logged(): boolean {
+  public logged(): boolean {
     return this.authService.loggedIn();
+  }
+  private getReceptions() {
+    this.receptions = this.authService.receptions;
+    for (const reception of this.receptions) {
+      const datetime = new Date(reception.dateTimeReception);
+      const startTime: string = datetime.toISOString();
+      const event: CalendarEvent = {
+        start: addHours(parseISO(startTime), 0),
+        end: addHours(parseISO(startTime), 1),
+        title: reception.fullname,
+        color: colors.red
+      };
+      this.events.push(event);
+    }
   }
 }

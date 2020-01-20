@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -83,12 +84,13 @@ namespace Psychology_API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             var receptionsForWeekForDoctor = await _doctorRepository.GetReceptionsForDoctors(doctorFromRepo.Id);
+            var receptionsForReturn = _mapper.Map<IEnumerable<ReceptionForReturnDto>>(receptionsForWeekForDoctor);
 
             // Если есть данные, которые необходимо отправить на view сразу после авторизации, то добавить данные в данный кортедж
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token),
-                receptionsForWeekForDoctor
+                receptionsForReturn
             });
         }
         [Authorize(Roles = RolesSettings.Administrator)]
