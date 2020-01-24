@@ -6,11 +6,18 @@
     </div>
 
     <!-- Для регистратора -->
+
+    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry']">
+        <p>Добавить пациента</p>
+        <hr>
+    </div>
+
     <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry']">
         <p>Пациенты(для регистратора)</p>
         <hr>
     </div>
-    
+
+    <!-- Для отдела кадров -->
     <div *ngIf="isHR()">
         <p>График работ</p>
         <hr>

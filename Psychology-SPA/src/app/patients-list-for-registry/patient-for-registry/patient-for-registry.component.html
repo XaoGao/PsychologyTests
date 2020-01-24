@@ -1,0 +1,102 @@
+<form #editPatientForm="ngForm">
+    <div>
+        <p>Данные: <strong>{{ patient.fullname }}</strong></p>
+        <hr>
+        <p>Номер карточки: <strong>{{ patient.personalCardNumber }}</strong></p>
+        <mat-form-field *ngIf="isNewPatient()" class="col-12">
+            <input matInput placeholder="Номер персональной карты" required name="personalCardNumber" [(ngModel)]="patient.personalCardNumber" title="Будте придельно внимательны при заполнении даного поля, оно не редактируемо, заполяете только русскими буквами и цифрами!"/>
+        </mat-form-field>
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Фамилия" required name="lastname" [(ngModel)]="patient.lastname" />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Имя" required name="firstname" [(ngModel)]="patient.firstname" />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+            <input matInput placeholder="Отчество" required name="middlename" [(ngModel)]="patient.middlename" />
+        </mat-form-field>
+        <mat-form-field class="col-5">
+            <input matInput [matDatepicker]="picker" placeholder="Дата рождения" name="dateOfBirth"
+                [(ngModel)]="patient.dateOfBirth" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button class="col-3 ml-3 btn btn-primary" [mat-dialog-close]="patient"><i class="fa fa-save"></i>Сохранить</button>
+        <button class="col-3 ml-3 btn btn-danger"><i class="fa fa-trash"></i>Удалить</button>
+    </div>
+</form>
+
+<div class="row mt-3">
+ 
+    <div class="col-md-3">
+
+        <h3>Загрузить документы</h3>
+
+        <div ng2FileDrop
+             [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+             (fileOver)="fileOverBase($event)"
+             [uploader]="uploader"
+             class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+             <i class="fa fa-upload fa-3x"></i>
+            Паспорт
+        </div>
+
+        <!-- <div ng2FileDrop
+             [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+             (fileOver)="fileOverAnother($event)"
+             [uploader]="uploader"
+             class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+            Another drop zone
+        </div> -->
+
+        Multiple
+        <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+
+        Single
+        <input type="file" ng2FileSelect [uploader]="uploader" />
+    </div>
+
+    <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+
+        <h3>Upload queue</h3>
+        <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="50%">Name</th>
+                <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of uploader.queue">
+                <td><strong>{{ item?.file?.name }}</strong></td>
+                <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <div>
+                Queue progress:
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-s"
+                    (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                <span class="fa fa-upload"></span> Загрузить документы
+            </button>
+            <button type="button" class="btn btn-warning btn-s"
+                    (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                <span class="fa fa-ban"></span> Отменить
+            </button>
+            <button type="button" class="btn btn-danger btn-s"
+                    (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                <span class="fa fa-trash"></span> Удалить
+            </button>
+        </div>
+
+    </div>
+
+</div>

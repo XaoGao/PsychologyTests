@@ -75,6 +75,9 @@ import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.c
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
+// Upload File
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 export function tokenGetter() {
@@ -106,7 +109,8 @@ export function tokenGetter() {
     SelectTestComponent,
     TestComponent,
     PatientsListForRegistryComponent,
-    PatientForRegistryDetailComponent
+    PatientForRegistryDetailComponent,
+    PatientForRegistryComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +118,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
     JwtModule.forRoot({

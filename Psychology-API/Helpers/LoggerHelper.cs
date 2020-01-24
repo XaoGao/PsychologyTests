@@ -1,6 +1,8 @@
+using System;
 using Microsoft.Extensions.Logging;
 using Psychology_API.Data;
 using Psychology_Domain.Domain;
+using System.IO;
 
 namespace Psychology_API.Helpers
 {
@@ -8,7 +10,6 @@ namespace Psychology_API.Helpers
     /// Расширенное логирование.
     /// </summary>
     /// <typeparam name="T"> Класс, которой отслеживает лог. </typeparam>
-    /// TODO: выполнить миграцию для данного класса.
     public class LoggerHelper<T> where T : class
     {
         private readonly DataContext _context;
@@ -26,13 +27,27 @@ namespace Psychology_API.Helpers
         /// <summary>
         /// Запись ошибки в БД.
         /// </summary>
-        /// <param name="msg"> Текст для вывода ошибки в консоль. </param>
-        /// <param name="extensions"> Полный текст ошибки для записи в БД.</param>
-        public void SaveLog(string msg, string extensions)
+        /// <param name="msg"> Текст ошибки. </param>
+        public void SaveLog(string msg)
+        {
+            ConsoleLogger(msg);
+            FileLogger(msg);
+            DBLogger(msg);
+        }
+        private void ConsoleLogger(string msg)
+        {
+            // Console.WriteLine($"{DateTime.Now} : Ошибка: {msg}");
+            _logger.LogError($"{DateTime.Now} : Ошибка: {msg}");
+        }
+        private void FileLogger(string msg)
+        {
+            string path = Directory.GetCurrentDirectory();
+            using var sw = new StreamWriter(path, true);
+            sw.WriteLine($"{DateTime.Now} : Ошибка: {msg}");
+        }
+        private void DBLogger(string msg)
         {
             Log log = new Log(msg);
-
-            _logger.LogError(extensions);
 
             _context.Logs.Add(log);
             _context.SaveChanges();

@@ -104,7 +104,7 @@ namespace Psychology_API
             seed.SeedData();
             app.UseRouting();
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());// .AllowCredentials()
 
             app.UseAuthentication();
             app.UseAuthorization();
