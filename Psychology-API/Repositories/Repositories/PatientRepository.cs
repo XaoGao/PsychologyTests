@@ -81,6 +81,7 @@ namespace Psychology_API.Repositories.Repositories
             var patient = await _context.Patients
                     .Include(p => p.Doctor)
                     .Include(p => p.Anamneses)
+                    .Include(p => p.Documents)
                     .SingleOrDefaultAsync(p =>/*p.DoctorId == doctorId &&*/ p.Id == patientId);
 
             return patient;

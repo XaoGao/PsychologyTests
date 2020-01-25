@@ -24,7 +24,7 @@ namespace Psychology_API.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> UploadDocs(int doctorId, int patientId, DocForCreateDto docForCreateDto)
+        public async Task<IActionResult> UploadDocs(int doctorId, int patientId, [FromForm]DocForCreateDto docForCreateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");
@@ -36,10 +36,17 @@ namespace Psychology_API.Controllers
 
             var document = _mapper.Map<Document>(docForCreateDto);
 
-            if (await _documentRepository.SaveDoc(document, docForCreateDto.FileBody))
+            if (await _documentRepository.SaveDocAsync(document, docForCreateDto.FileBody))
                 return NoContent();
 
             throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetDocTypes()
+        {
+            var docTypes = await _documentRepository.GetDocTypesAsync();
+
+            return Ok(docTypes);
         }
     }
 }

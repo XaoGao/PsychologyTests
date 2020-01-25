@@ -1,3 +1,5 @@
+import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
+import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
 import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
 import { PreventUnsavedTestGuard } from './_guards/prevent-unsaved-test.guard';
@@ -30,6 +32,7 @@ import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
 import { TestResolver } from './_resolvers/test.resolver';
 import { DoctorsListResolver } from './_resolvers/doctors-list.resolver';
+import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 
 const routes: Routes = [
   {
@@ -87,8 +90,8 @@ const routes: Routes = [
       },
       {
         path: 'patientsforregistry/:id',
-        component: PatientsListForRegistryComponent,
-        resolve: { doctors: DoctorsListResolver }
+        component: PatientForRegistryComponent,
+        resolve: { patient: PatientForRegistryResolver, docTypes: DocumentTypesResolver }
       },
       {
         path: 'patients/:id',

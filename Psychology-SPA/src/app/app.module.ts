@@ -42,9 +42,11 @@ import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.reso
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
+import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
 import { TestResolver } from './_resolvers/test.resolver';
+import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -156,10 +158,12 @@ export function tokenGetter() {
     DoctorsListResolver,
     DepartmentsResolver,
     PositionsResolver,
+    DocumentTypesResolver,
     PhonesResolver,
     PhonebookResolver,
     PatientsListResolver,
     PatientsListForRegistryResolver,
+    PatientForRegistryResolver,
     DepartmentsWithParamResolver,
     PositionsWithParamResolver,
     AnamnesesListResolver,

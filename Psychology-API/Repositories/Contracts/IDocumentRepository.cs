@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Psychology_Domain.Domain;
@@ -15,6 +16,11 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="document"> Документа. </param>
         /// <param name="formFile"> Обертка входящего документа. </param>
         /// <returns> Перевсти документа в массив байтов, и сохранить в базу данных. </returns>
-        Task<bool> SaveDoc(Document document, IFormFile formFile);
+        Task<bool> SaveDocAsync(Document document, IFormFile formFile);
+        /// <summary>
+        /// Получить все категории документов.
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<DocumentType>> GetDocTypesAsync();
     }
 }

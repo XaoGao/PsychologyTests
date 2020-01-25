@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
@@ -15,7 +17,14 @@ namespace Psychology_API.Repositories.Repositories
             _context = context;
         }
 
-        public async Task<bool> SaveDoc(Document document, IFormFile formFile)
+        public async Task<IEnumerable<DocumentType>> GetDocTypesAsync()
+        {
+            var docTypes = await _context.DocumentTypes.ToListAsync();
+
+            return docTypes;
+        }
+
+        public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
         {
             byte[] docBase64 = null;
 
