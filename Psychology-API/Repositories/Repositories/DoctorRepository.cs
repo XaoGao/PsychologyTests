@@ -15,6 +15,7 @@ namespace Psychology_API.Repositories.Repositories
     {
         private readonly DataContext _context;
         private readonly ICache<Doctor> _cache;
+        private const string suffix = "-Doctor";
         public DoctorRepository(DataContext context, ICache<Doctor> cache) : base(context)
         {
             _cache = cache;
@@ -24,7 +25,7 @@ namespace Psychology_API.Repositories.Repositories
         {
             Doctor doctor = null;
 
-            string key = doctorId + "-Doctor";
+            string key = _cache.CreateKeyForCache(doctorId, suffix);
 
             if(!_cache.Get(key, out doctor))
             {
@@ -51,6 +52,8 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId)
         {
+            var key = _cache.CreateKeyForCache(doctorId, suffix);
+            _cache.Remove(key);
             var doctor = await GetDoctorFromContext(doctorId);
 
             return doctor;

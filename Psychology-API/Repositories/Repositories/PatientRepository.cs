@@ -14,6 +14,7 @@ namespace Psychology_API.Repositories.Repositories
     {
         private readonly DataContext _context;
         private readonly ICache<Patient> _cache;
+        private const string suffix = "-Patient";
 
         public PatientRepository(DataContext context, ICache<Patient> cache) : base(context)
         {
@@ -24,7 +25,7 @@ namespace Psychology_API.Repositories.Repositories
         {
             Patient patient = null;
                 
-            string key = patientId + "-Patient";
+            string key = _cache.CreateKeyForCache(patientId, suffix);
 
             if(!_cache.Get(key, out patient))
             {
@@ -58,7 +59,8 @@ namespace Psychology_API.Repositories.Repositories
         {
             base.Add(entity);
             Patient patient = entity as Patient;
-            _cache.Set(patient.Id + "-Patient", patient);
+            var key = _cache.CreateKeyForCache(patient.Id, suffix);
+            _cache.Set(key, patient);
         }
 
         public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)
@@ -74,6 +76,8 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
         {
+            var key = _cache.CreateKeyForCache(patientId, suffix);
+            _cache.Remove(key);
             var patient = await GetPatientFromContext(doctorId, patientId);
 
             return patient;

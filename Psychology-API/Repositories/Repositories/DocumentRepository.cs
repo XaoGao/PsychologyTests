@@ -36,6 +36,8 @@ namespace Psychology_API.Repositories.Repositories
 
             document.Body = docBase64;
 
+            _context.Documents.Add(document);
+
             if (await _context.SaveChangesAsync() > 0)
                 return true;
 

@@ -54,6 +54,7 @@ namespace Psychology_API.Controllers
             //TODO: добавить dto для возврата данных
             return Ok(patientFromRepo);
         }
+        [Authorize(Roles = RolesSettings.Doctor)]
         [HttpGet("{patientId}/anamneses")]
         public async Task<IActionResult> GetPatientAnamneses(int doctorId, int patientId)
         {
@@ -65,6 +66,7 @@ namespace Psychology_API.Controllers
             //TODO: добавить dto для возврата данных
             return Ok(anamneses);
         }
+        [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
         public async Task<IActionResult> CreatePetient(int doctorId, PatientForCreateDto patientForCreateDto)
         {
@@ -86,6 +88,7 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");
         }
+        [Authorize(Roles = RolesSettings.Registry)]
         [HttpPut("{patientId}")]
         public async Task<IActionResult> UpdatePatient(int doctorId, int patientId, PatientForUpdateDto patientForUpdateDto)
         {
@@ -105,13 +108,14 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору.");
         }
-        [HttpDelete]
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpDelete("{patientId}")]
         public async Task<IActionResult> DeletePatient(int doctorId, int patientId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientId);
+            var patientFromRepo = await _patientRepository.GetPatientWithoutCacheAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
@@ -124,6 +128,7 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
         }
+        [Authorize(Roles = RolesSettings.Doctor)]
         [HttpPost("{patientId}/anamneses")]
         public async Task<IActionResult> CreatePatientAnamnesis(int doctorId, int patientId, AnamnesisForCreateDto anamnesisForCreateDto)
         {

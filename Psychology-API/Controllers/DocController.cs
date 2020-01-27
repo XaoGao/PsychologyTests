@@ -33,10 +33,13 @@ namespace Psychology_API.Controllers
             if (file == null || file.Length <= 0 )
                 return BadRequest("Не корретный документ.");
 
-            // var document = _mapper.Map<Document>(docForCreateDto);
+            var document = _mapper.Map<Document>(docForCreateDto);
+            
+            document.DocName = docForCreateDto.File.FileName;
+            document.GetExtensionFromFullNameDocument();
 
-            // if (await _documentRepository.SaveDocAsync(document, docForCreateDto.FileBody))
-            //     return NoContent();
+            if (await _documentRepository.SaveDocAsync(document, docForCreateDto.File))
+                return NoContent();
 
             throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");
         }

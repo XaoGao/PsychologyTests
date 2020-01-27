@@ -54,5 +54,12 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string Extension { get; set; }
+        public void GetExtensionFromFullNameDocument()
+        {
+            if(!string.IsNullOrWhiteSpace(DocName))
+            {
+                Extension = DocName.Substring(DocName.IndexOf('.'));
+            }
+        }
     }
 }

@@ -9,28 +9,31 @@ import { Patient } from '../_models/patient';
   providedIn: 'root'
 })
 export class PatientService {
-  BASE_URL_PATIENT = environment.apiUrl + 'doctors/';
+  private BASE_URL_PATIENT = environment.apiUrl + 'doctors/';
   constructor(private http: HttpClient) { }
 
-  getPatients(doctorId: number): Observable<Patient[]> {
+  public getPatients(doctorId: number): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.BASE_URL_PATIENT + doctorId + '/patients');
   }
-  getPatient(doctorId: number, patientId: number): Observable<Patient> {
+  public getPatient(doctorId: number, patientId: number): Observable<Patient> {
     return this.http.get<Patient>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId);
   }
-  updatePatient(doctorId: number, patientId: number, patient: Patient) {
+  public updatePatient(doctorId: number, patientId: number, patient: Patient) {
     return this.http.put(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId, patient);
   }
-  createPatient(doctorId: number, patient: Patient) {
+  public createPatient(doctorId: number, patient: Patient) {
     return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/', patient);
   }
-  getAnamnesesList(doctorId: number, patientId: number): Observable<Anamnesis[]> {
+  public getAnamnesesList(doctorId: number, patientId: number): Observable<Anamnesis[]> {
     return this.http.get<Anamnesis[]>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses');
   }
-  createAnamnesis(doctorId: number, patientId: number, anamnesis: Anamnesis) {
+  public createAnamnesis(doctorId: number, patientId: number, anamnesis: Anamnesis) {
     return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses', anamnesis);
   }
-  getPatientsForRegistry(doctorId: number): Observable<Patient[]> {
+  public getPatientsForRegistry(doctorId: number): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.BASE_URL_PATIENT + doctorId + '/patients/patientsforregistry');
+  }
+  public deletePatient(doctorId: number, patientId: number) {
+    return this.http.delete(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId);
   }
 }

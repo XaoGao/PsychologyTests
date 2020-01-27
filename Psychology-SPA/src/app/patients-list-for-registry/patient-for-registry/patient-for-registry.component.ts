@@ -22,7 +22,6 @@ export class PatientForRegistryComponent implements OnInit {
   public doc: Document = new Document();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
-  // hasAnotherDropZoneOver = false;
   baseUrl = environment.apiUrl;
   // response: string;
   constructor(private route: ActivatedRoute,
@@ -42,9 +41,9 @@ export class PatientForRegistryComponent implements OnInit {
   }
   public isNewPatient(): boolean {
     if (this.patient.id) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
   public fileOverBase(e: any): void {
@@ -56,18 +55,18 @@ export class PatientForRegistryComponent implements OnInit {
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image', 'tiff', 'doc', 'docx', 'pdf'],
-      removeAfterUpload: false,
+      removeAfterUpload: true,
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024
     });
 
     this.uploader.onAfterAddingFile = (file) => {
-      console.log(this.doc);
       file.withCredentials = false;
-      this.uploader.setOptions({additionalParameter: {number: this.doc.number,
+      this.uploader.setOptions({additionalParameter: {
+        number: this.doc.number,
         patientId: this.patient.id,
         series: this.doc.series,
-        documentTypeId: this.docTypes[0].id}});
+        documentTypeId: this.doc.documentTypeId}});
     };
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
@@ -85,11 +84,9 @@ export class PatientForRegistryComponent implements OnInit {
   }
   public save(): void {
     if (this.isNewPatient()) {
-      console.log('save');
-      console.log(this.patient);
+      this.createPatient(this.patient);
     } else {
-      console.log('update');
-      console.log(this.patient);
+      this.updatePatient(this.patient);
     }
   }
   private updatePatient(patient: Patient) {
@@ -112,11 +109,13 @@ export class PatientForRegistryComponent implements OnInit {
     });
   }
   public deletePatient() {
-    console.log('delete');
-    console.log(this.patient.id);
-    this.router.navigate(['/patientsforregistry']);
+    if (confirm(`Вы уверены, что хотите удалить из системы пациента:${this.patient.fullname}?`)) {
+      this.patientService.deletePatient(this.authService.decodedToken.nameid, this.patient.id).subscribe(() => {
+        this.toastrService.success('Вы удалили пользователя');
+        this.router.navigate(['/patientsforregistry']);
+      }, err => {
+        this.toastrService.error(err);
+      });
+    }
   }
-  // public fileOverAnother(e: any): void {
-  //   this.hasAnotherDropZoneOver = e;
-  // }
 }

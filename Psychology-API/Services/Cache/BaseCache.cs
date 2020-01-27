@@ -21,6 +21,11 @@ namespace Psychology_API.Servises.Cache
             _cache = cache;
         }
 
+        public string CreateKeyForCache(int id, string suffix)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual bool Get(string key, out T item)
         {
             item = null;
@@ -41,6 +46,11 @@ namespace Psychology_API.Servises.Cache
                 item = (T)formatter.Deserialize(ms);
                 return true;
             }
+        }
+
+        public void Remove(string key)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void Set(string key, T item)

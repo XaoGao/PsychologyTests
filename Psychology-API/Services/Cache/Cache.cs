@@ -25,6 +25,17 @@ namespace Psychology_API.Servises.Cache
             _cache = cache;
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
+        public string CreateKeyForCache(int id, string suffix)
+        {
+            return $"{id}{suffix}";
+        }
+
+        /// <summary>
         /// Получить за хранилища данные.
         /// </summary>
         /// <param name="key"> Ключ. </param>
@@ -37,6 +48,16 @@ namespace Psychology_API.Servises.Cache
 
             return true;
         }
+        /// <summary>
+        /// Удалить из хранилища объект.
+        /// </summary>
+        /// <param name="key"> Ключ. </param>
+
+        public void Remove(string key)
+        {
+            _cache.Remove(key);
+        }
+
         /// <summary>
         /// Положить данные в хранилище. 
         /// </summary>
