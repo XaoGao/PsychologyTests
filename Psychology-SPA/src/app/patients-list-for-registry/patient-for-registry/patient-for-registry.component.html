@@ -1,9 +1,10 @@
-<form #editPatientForm="ngForm">
+<form #editPatientForm="ngForm" (ngSubmit)="save()">
     <div>
-        <p> Новый пациента. Данные: <strong>{{ patient.fullname }}</strong></p>
+        <p *ngIf="!isNewPatient()"> Новый пациента.</p>
+        <p *ngIf="isNewPatient()"> Данные: <strong>{{ patient.fullname }}</strong></p>
         <hr>
         <p>Номер карточки: <strong>{{ patient.personalCardNumber }}</strong></p>
-        <mat-form-field class="col-12">
+        <mat-form-field *ngIf="!isNewPatient()" class="col-12">
             <input matInput placeholder="Номер персональной карты" required name="personalCardNumber" [(ngModel)]="patient.personalCardNumber" title="Будте придельно внимательны при заполнении даного поля, оно не редактируемо, заполяете только русскими буквами и цифрами!"/>
         </mat-form-field>
         <mat-form-field class="col-12">
@@ -24,21 +25,18 @@
         <mat-form-field class="col-3">
             <mat-label>Укажите врача</mat-label>
             <mat-select [(value)]="patient.doctorId">
-                <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+                <mat-option *ngFor="let doctor of doctors" [value]="doctor.id" required>
                     {{ doctor.fullname }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <br>
-        <button class="col-3 ml-3 btn btn-primary" [mat-dialog-close]="patient"><i class="fa fa-save"></i>Сохранить</button>
-        <button class="col-3 ml-3 btn btn-danger"><i class="fa fa-trash"></i>Удалить</button>
+        <button class="col-3 ml-3 btn btn-primary" [mat-dialog-close]="patient" type="submit" ><i class="fa fa-save"></i>Сохранить</button>
+        <button *ngIf="isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i class="fa fa-trash"></i>Удалить</button>
     </div>
 </form>
 <hr>
-
-
 <div class="container">
- 
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand" href>Раздел документов</a>
@@ -55,12 +53,17 @@
                  <i class="fa fa-upload fa-3x"></i> <br> Загрузить паспорт
             </div>
         </div>
- 
         <div class="col-md-9" style="margin-bottom: 40px">
- 
-            <h3>Список документов</h3>
+            <div class="row">
+                <h3 class="col-4">Список документов</h3>
+                <mat-form-field class="col-4">
+                    <input matInput placeholder="Номер" name="number" [(ngModel)]="doc.number" />
+                </mat-form-field>
+                <mat-form-field class="col-4">
+                    <input matInput placeholder="Серия" name="series" [(ngModel)]="doc.series" />
+                </mat-form-field>
+            </div>
             <p>Очередь: {{ uploader?.queue?.length }}</p>
- 
             <table class="table">
                 <thead>
                 <tr>
@@ -82,7 +85,7 @@
                         <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
                         <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                     </td>
-                    <td nowrap>
+                    <!-- <td nowrap>
                         <button type="button" class="btn btn-success btn-xs"
                                 (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
                             <span class="glyphicon glyphicon-upload"></span> Upload
@@ -95,11 +98,10 @@
                                 (click)="item.remove()">
                             <span class="glyphicon glyphicon-trash"></span> Remove
                         </button>
-                    </td>
+                    </td> -->
                 </tr>
                 </tbody>
             </table>
- 
             <div>
                 <div>
                     Загрузка документов:

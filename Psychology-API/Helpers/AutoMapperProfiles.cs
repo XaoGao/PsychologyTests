@@ -51,6 +51,12 @@ namespace Psychology_API.Helpers
                 .ForMember(dest => dest.Fullname, opt => {
                     opt.MapFrom(src => src.Patient.Fullname);
                 });
+
+            // Документы
+            // CreateMap<DocForCreateDto, Document>()
+            //     .ForMember(dest => dest.Extension, opt => {
+            //         opt.MapFrom(src => src.DocName);
+            //     });
         }
     }
 }

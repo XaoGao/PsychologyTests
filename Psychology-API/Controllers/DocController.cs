@@ -29,15 +29,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");
 
-            var file = docForCreateDto.FileBody;
-
+            var file = docForCreateDto.File;
             if (file == null || file.Length <= 0 )
                 return BadRequest("Не корретный документ.");
 
-            var document = _mapper.Map<Document>(docForCreateDto);
+            // var document = _mapper.Map<Document>(docForCreateDto);
 
-            if (await _documentRepository.SaveDocAsync(document, docForCreateDto.FileBody))
-                return NoContent();
+            // if (await _documentRepository.SaveDocAsync(document, docForCreateDto.FileBody))
+            //     return NoContent();
 
             throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");
         }
