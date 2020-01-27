@@ -48,9 +48,9 @@ namespace Psychology_API.Controllers
         {
             var doctors = await _doctorRepository.GetDoctors();
 
-            var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
+            // var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
 
-            return Ok(doctorsForReturn);
+            return Ok(doctors);
         }
         [HttpPut("{doctorId}")]
         public async Task<IActionResult> UpdateDoctorDetail(int doctorId, DoctorForUpdateDto doctorForUpdateDto)

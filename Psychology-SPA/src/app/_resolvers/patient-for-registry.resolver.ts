@@ -9,11 +9,11 @@ import { Patient } from '../_models/patient';
 
 @Injectable()
 
-export class PatientForRegistryResolver implements Resolve<Patient[]> {
+export class PatientForRegistryResolver implements Resolve<Patient> {
     constructor(private authService: AuthService, private patientService: PatientService,
                 private router: Router, private toastrService: ToastrAlertService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Patient[]> {
+    resolve(route: ActivatedRouteSnapshot): Observable<Patient> {
         return this.patientService.getPatient(this.authService.decodedToken.nameid, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');

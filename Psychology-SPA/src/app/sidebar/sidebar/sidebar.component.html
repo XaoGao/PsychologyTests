@@ -7,7 +7,7 @@
 
     <!-- Для регистратора -->
 
-    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry']">
+    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry', 0]">
         <p>Добавить пациента</p>
         <hr>
     </div>

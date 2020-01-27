@@ -40,7 +40,7 @@ namespace Psychology_API.Controllers
 
             return Ok(patientsForReturn);
         }
-        [HttpGet("{id}", Name = "GetPatient")]
+        [HttpGet("{patientId}", Name = "GetPatient")]
         public async Task<IActionResult> GetPatient(int doctorId, int patientId)
         {
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))

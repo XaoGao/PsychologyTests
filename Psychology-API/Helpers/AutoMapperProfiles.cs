@@ -16,8 +16,8 @@ namespace Psychology_API.Helpers
             
             CreateMap<DoctorForUpdateDto, Doctor>();
 
-            CreateMap<Doctor, DoctorForReturnDto>()
-                .IncludeAllDerived();
+            CreateMap<Doctor, DoctorForReturnDto>();
+                // .IncludeAllDerived();
 
             // Пациент.
             CreateMap<PatientForCreateDto, Patient>();

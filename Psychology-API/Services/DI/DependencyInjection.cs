@@ -24,6 +24,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IPhonebookRepository, PhonebookRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

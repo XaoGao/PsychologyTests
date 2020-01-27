@@ -23,8 +23,8 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
             Patient patient = null;
-
-            string key = doctorId + "-Patient";
+                
+            string key = patientId + "-Patient";
 
             if(!_cache.Get(key, out patient))
             {
@@ -32,6 +32,8 @@ namespace Psychology_API.Repositories.Repositories
 
                 if (patient != null)
                     _cache.Set(key, patient);
+                else
+                    patient = new Patient();
             }
 
             return patient;

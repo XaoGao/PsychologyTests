@@ -1,3 +1,6 @@
+import { Doctor } from './../../_models/doctor';
+import { DocumentType } from './../../_models/documentType';
+import { ActivatedRoute } from '@angular/router';
 import { Document } from './../../_models/document';
 import { environment } from './../../../environments/environment';
 import { Patient } from './../../_models/patient';
@@ -11,14 +14,21 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class PatientForRegistryComponent implements OnInit {
   public patient: Patient;
+  public docTypes: DocumentType[];
+  public doctors: Doctor[];
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
-  hasAnotherDropZoneOver = false;
+  // hasAnotherDropZoneOver = false;
   baseUrl = environment.apiUrl;
-  response: string;
-  constructor() { }
+  // response: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe((data) => {
+      this.patient = data.patient;
+      this.docTypes = data.docTypes;
+      this.doctors = data.doctors;
+    });
     this.initUploader();
   }
   public isNewPatient(): boolean {
@@ -36,7 +46,7 @@ export class PatientForRegistryComponent implements OnInit {
       url: this.baseUrl, // TODO: указать путь до контроллера по приему документов
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
-      allowedFileType: ['image'],
+      allowedFileType: ['image', 'tiff', 'doc', 'docx', 'pdf'],
       removeAfterUpload: true,
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024
@@ -57,7 +67,7 @@ export class PatientForRegistryComponent implements OnInit {
     };
   }
 
-  public fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  }
+  // public fileOverAnother(e: any): void {
+  //   this.hasAnotherDropZoneOver = e;
+  // }
 }
