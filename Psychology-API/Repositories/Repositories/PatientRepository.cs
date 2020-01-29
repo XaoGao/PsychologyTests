@@ -88,6 +88,8 @@ namespace Psychology_API.Repositories.Repositories
                     .Include(p => p.Doctor)
                     .Include(p => p.Anamneses)
                     .Include(p => p.Documents)
+                    .Include(p => p.Documents)
+                        .ThenInclude(d => d.DocumenType)
                     .SingleOrDefaultAsync(p =>/*p.DoctorId == doctorId &&*/ p.Id == patientId);
 
             return patient;

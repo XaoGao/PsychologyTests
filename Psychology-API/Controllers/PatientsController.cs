@@ -73,9 +73,6 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            if (doctorId != patientForCreateDto.DoctorId)
-                return BadRequest("Пациент должен быть привязан к текущему врачу");
-
             var patient = _mapper.Map<Patient>(patientForCreateDto);
 
             _patientRepository.Add(patient);

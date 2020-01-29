@@ -1,3 +1,4 @@
+import { ReceptionsComponent } from './receptions/receptions.component';
 import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
 import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
@@ -108,6 +109,10 @@ const routes: Routes = [
         component: TestComponent,
         resolve: { test: TestResolver },
         canDeactivate: [PreventUnsavedTestGuard]
+      },
+      {
+        path: 'receptions',
+        component: ReceptionsComponent,
       }
     ]
   },

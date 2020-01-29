@@ -1,20 +1,20 @@
 import { QuestionsAnswers } from '../../_models/questionsAnswers';
-import { ToastrAlertService } from "./../../_services/toastr-alert.service";
-import { TestService } from "./../../_services/test.service";
-import { Test } from "./../../_models/test";
-import { ActivatedRoute } from "@angular/router";
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { AuthService } from "../../_services/auth.service";
+import { ToastrAlertService } from './../../_services/toastr-alert.service';
+import { TestService } from './../../_services/test.service';
+import { Test } from './../../_models/test';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../_services/auth.service';
 import { QuestionsAnswer } from 'src/app/_models/questionsAnswer';
 
 @Component({
-  selector: "app-test",
-  templateUrl: "./test.component.html",
-  styleUrls: ["./test.component.css"]
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  @ViewChild("testForm", { static: false }) testForm: NgForm;
+  @ViewChild('testForm', { static: false }) testForm: NgForm;
   public test: Test;
   public questionsAnswers: QuestionsAnswers = new QuestionsAnswers();
   constructor(
@@ -35,6 +35,7 @@ export class TestComponent implements OnInit {
   }
   private setQuestuinsId(): void {
     this.questionsAnswers.questionsAnswerList = [];
+    // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index < this.test.questions.length; index++) {
       const questionsAnswer: QuestionsAnswer = new QuestionsAnswer();
       questionsAnswer.questionId = this.test.questions[index].id;
@@ -44,12 +45,12 @@ export class TestComponent implements OnInit {
   }
   public sendQuestionsAnswersResult() {
     const doctorId = this.authService.decodedToken.nameid;
-    const patientId = +this.route.snapshot.paramMap.get("id");
+    const patientId = +this.route.snapshot.paramMap.get('id');
     this.testService
       .sendQuestionsAnswers(doctorId, patientId, this.test.id, this.questionsAnswers)
       .subscribe(
         res => {
-          this.toastrService.success("Тест успешно пройден, данные сохранены");
+          this.toastrService.success('Тест успешно пройден, данные сохранены');
         },
         err => {
           this.toastrService.error(err);

@@ -80,6 +80,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
+import { ReceptionsComponent } from './receptions/receptions.component';
 
 
 export function tokenGetter() {
@@ -112,7 +113,8 @@ export function tokenGetter() {
     TestComponent,
     PatientsListForRegistryComponent,
     PatientForRegistryDetailComponent,
-    PatientForRegistryComponent
+    PatientForRegistryComponent,
+    ReceptionsComponent
   ],
   imports: [
     BrowserModule,

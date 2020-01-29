@@ -5,7 +5,9 @@
         <hr>
         <p>Номер карточки: <strong>{{ patient.personalCardNumber }}</strong></p>
         <mat-form-field *ngIf="isNewPatient()" class="col-12">
-            <input matInput placeholder="Номер персональной карты" required name="personalCardNumber" [(ngModel)]="patient.personalCardNumber" title="Будте придельно внимательны при заполнении даного поля, оно не редактируемо, заполяете только русскими буквами и цифрами!"/>
+            <input matInput placeholder="Номер персональной карты" required name="personalCardNumber"
+                [(ngModel)]="patient.personalCardNumber"
+                title="Будте придельно внимательны при заполнении даного поля, оно не редактируемо, заполяете только русскими буквами и цифрами!" />
         </mat-form-field>
         <mat-form-field class="col-12">
             <input matInput placeholder="Фамилия" required name="lastname" [(ngModel)]="patient.lastname" />
@@ -31,26 +33,50 @@
             </mat-select>
         </mat-form-field>
         <br>
-        <button class="col-3 ml-3 btn btn-primary" (click)="save()" ><i class="fa fa-save"></i>Сохранить</button>
-        <button *ngIf="!isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i class="fa fa-trash"></i>Удалить</button>
+        <button class="col-3 ml-3 btn btn-primary" (click)="save()"><i class="fa fa-save"></i>Сохранить</button>
+        <button *ngIf="!isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i
+                class="fa fa-trash"></i>Удалить</button>
     </div>
 </form>
 <hr>
-<div class="container">
+<div *ngIf="!isNewPatient() && haveDocuments()">
+    <h3>Документы:</h3>
+    <table class="table table-striped">
+        <thead class="row">
+            <th scope="col" class="col-1">№</th>
+            <th scope="col" class="col-3">Наименование документа</th>
+            <th scope="col" class="col-1">Номер</th>
+            <th scope="col" class="col-1">Серия</th>
+            <th scope="col" class="col-3">Тип</th>
+            <th scope="col" class="col-2">Запрос</th>
+            <th scope="col" class="col-1">Удалить</th>
+        </thead>
+
+        <tbody *ngFor="let documentFromPatient of patient.documents; index as i;" class="col-12 row">
+            <th class="col-1">{{ i  + 1 }})</th>
+            <th class="col-3">{{ documentFromPatient.docName }}</th>
+            <th class="col-1">{{ documentFromPatient.number }}</th>
+            <th class="col-1">{{ documentFromPatient.series }}</th>
+            <th class="col-3">{{ documentFromPatient.documenType.name }}</th>
+            <th class="col-2">Запрос</th>
+            <th class="col-1 text-center"><button class="btn btn-danger" title="Удалить документ"
+                    (click)="deleteDoc(documentFromPatient)"><i class="fa fa-trash"></i></button></th>
+        </tbody>
+    </table>
+</div>
+<hr>
+<div class="container" *ngIf="!isNewPatient()">
     <div class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href>Раздел документов</a>
+            <a class="navbar-brand">Раздел документов</a>
         </div>
     </div>
-    <div class="row"> 
+    <div class="row">
         <div class="col-md-3">
             <h3>Выбрать документы</h3>
-            <div ng2FileDrop
-                 [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                 (fileOver)="fileOverBase($event)"
-                 [uploader]="uploader"
-                 class="card bg-faded p-3 text-center mb-3 my-drop-zone">
-                 <i class="fa fa-upload fa-3x"></i> <br> Загрузить паспорт
+            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                [uploader]="uploader" class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+                <i class="fa fa-upload fa-3x"></i> <br> Загрузить паспорт
             </div>
         </div>
         <div class="col-md-9" style="margin-bottom: 40px">
@@ -74,63 +100,48 @@
             <p>Очередь: {{ uploader?.queue?.length }}</p>
             <table class="table">
                 <thead>
-                <tr>
-                    <th width="50%">Наименование документа</th>
-                    <th>Размер</th>
-                </tr>
+                    <tr>
+                        <th width="50%">Наименование документа</th>
+                        <th>Размер</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of uploader.queue">
-                    <td><strong>{{ item?.file?.name }}</strong></td>
-                    <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                    <td *ngIf="uploader.options.isHTML5">
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                    <!-- <td nowrap>
-                        <button type="button" class="btn btn-success btn-xs"
-                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                            <span class="glyphicon glyphicon-upload"></span> Upload
-                        </button>
-                        <button type="button" class="btn btn-warning btn-xs"
-                                (click)="item.cancel()" [disabled]="!item.isUploading">
-                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                        </button>
-                        <button type="button" class="btn btn-danger btn-xs"
-                                (click)="item.remove()">
-                            <span class="glyphicon glyphicon-trash"></span> Remove
-                        </button>
-                    </td> -->
-                </tr>
+                    <tr *ngFor="let item of uploader.queue">
+                        <td><strong>{{ item?.file?.name }}</strong></td>
+                        <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB
+                        </td>
+                        <td *ngIf="uploader.options.isHTML5">
+                            <div class="progress" style="margin-bottom: 0;">
+                                <div class="progress-bar" role="progressbar"
+                                    [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                            <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                            <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div>
                 <div>
                     Загрузка документов:
                     <div class="progress mb-4">
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-s"
-                        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length ">
+                <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
+                    [disabled]="!uploader.getNotUploadedItems().length ">
                     <span class="glyphicon glyphicon-upload"></span> Загрузить
                 </button>
-                <!-- <button type="button" class="btn btn-warning btn-s"
-                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Отмена
-                </button> -->
-                <button type="button" class="btn btn-danger btn-s"
-                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+                    [disabled]="!uploader.queue.length">
                     <span class="glyphicon glyphicon-trash"></span> Удалить
                 </button>
             </div>
- 
+
         </div>
- 
+
     </div>

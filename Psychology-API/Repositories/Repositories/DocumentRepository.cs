@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Servises.Cache;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -12,9 +13,12 @@ namespace Psychology_API.Repositories.Repositories
     public class DocumentRepository : BaseRepository, IDocumentRepository
     {
         private readonly DataContext _context;
-        public DocumentRepository(DataContext context) : base(context)
+        private readonly ICache<Patient> _cache;
+
+        public DocumentRepository(DataContext context, ICache<Patient> cache) : base(context)
         {
             _context = context;
+            _cache = cache;
         }
 
         public async Task<IEnumerable<DocumentType>> GetDocTypesAsync()
@@ -22,6 +26,16 @@ namespace Psychology_API.Repositories.Repositories
             var docTypes = await _context.DocumentTypes.ToListAsync();
 
             return docTypes;
+        }
+
+        public async Task<Document> GetDocumentAsync(int documentId)
+        {
+            var document = await _context.Documents.SingleOrDefaultAsync(d => d.Id == documentId);
+
+            if(document != null)
+                _cache.Remove($"{document.PatientId}-Patient");
+
+            return document;
         }
 
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
@@ -36,6 +50,7 @@ namespace Psychology_API.Repositories.Repositories
 
             document.Body = docBase64;
 
+            _cache.Remove($"{document.PatientId}-Patient");
             _context.Documents.Add(document);
 
             if (await _context.SaveChangesAsync() > 0)

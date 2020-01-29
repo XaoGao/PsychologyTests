@@ -52,6 +52,8 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => src.Patient.Fullname);
                 });
 
+            CreateMap<ReceptionForCreateDto, Reception>();
+
             // Документы
             CreateMap<DocForCreateDto, Document>();
         }

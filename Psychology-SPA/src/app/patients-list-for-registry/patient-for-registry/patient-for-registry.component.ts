@@ -1,3 +1,4 @@
+import { DocService } from './../../_services/doc.service';
 import { AuthService } from './../../_services/auth.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { Doctor } from './../../_models/doctor';
@@ -28,13 +29,15 @@ export class PatientForRegistryComponent implements OnInit {
               private patientService: PatientService,
               private authService: AuthService,
               private toastrService: ToastrAlertService,
-              private router: Router) { }
+              private router: Router,
+              private docService: DocService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.patient = data.patient;
       this.docTypes = data.docTypes;
       this.doctors = data.doctors;
+      // this.doctors = this.doctors.filter(doctor => doctor.del)
     });
     this.isNewPatient();
     this.initUploader();
@@ -75,10 +78,15 @@ export class PatientForRegistryComponent implements OnInit {
         const document = {
           id: res.id,
           docName: res.docName,
-          patientId: res.patientId,
+          series: res.series,
           number: res.number,
-          series: res.series
+          dateUpload: res.dateUpload,
+          documentTypeId: res.documentTypeId,
+          documenType: res.documenType,
+          patientId: res.patientId,
+          patient: res.patient
         };
+        this.patient.documents.push(document);
       }
     };
   }
@@ -117,5 +125,23 @@ export class PatientForRegistryComponent implements OnInit {
         this.toastrService.error(err);
       });
     }
+  }
+  public haveDocuments(): boolean {
+    if (this.patient.documents.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public deleteDoc(document: Document) {
+    this.docService.deleteDocument(this.authService.decodedToken.nameid, this.patient.id, document.id).subscribe(() => {
+      this.toastrService.success('Документ успешно удален');
+      const index = this.patient.documents.indexOf(document, 0);
+      if (index > 0) {
+        this.patient.documents.splice(index, 1);
+      }
+    }, err => {
+      this.toastrService.error(err);
+    });
   }
 }

@@ -7,6 +7,10 @@
 
     <!-- Для регистратора -->
 
+    <div *ngIf="isRegistry()" [routerLink]="['/receptions']">
+        <p>Назначить прием пациента</p>
+        <hr>
+    </div>
     <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry', 0]">
         <p>Добавить пациента</p>
         <hr>
@@ -20,6 +24,10 @@
     <!-- Для отдела кадров -->
     <div *ngIf="isHR()">
         <p>График работ</p>
+        <hr>
+    </div>
+    <div *ngIf="isHR()">
+        <p>График отпусков</p>
         <hr>
     </div>
 </div>

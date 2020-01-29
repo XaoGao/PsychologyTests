@@ -27,6 +27,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IPhonebookRepository, PhonebookRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IReceptionRepository, ReceptionRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddSingleton<CacheSettings>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));

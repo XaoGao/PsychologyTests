@@ -16,4 +16,7 @@ export class DocService {
   public getDocumentTypes(doctorId: number, patientId: number): Observable<DocumentType[]>  {
     return this.http.get<DocumentType[]>(this.BASE_URL_DOC + doctorId + '/patients/' + patientId + '/doc');
   }
+  public deleteDocument(doctorId: number, patientId: number, documentId: number) {
+    return this.http.delete(this.BASE_URL_DOC + doctorId + '/patients/' + patientId + '/doc/' + documentId);
+  }
 }

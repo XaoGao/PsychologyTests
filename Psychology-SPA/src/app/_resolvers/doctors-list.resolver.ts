@@ -7,7 +7,6 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { Patient } from '../_models/patient';
 
 @Injectable()
 

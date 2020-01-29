@@ -1,3 +1,4 @@
+import { Document } from './document';
 import { Anamnesis } from './anamnesis';
 import { Doctor } from './doctor';
 export class Patient {
@@ -11,6 +12,7 @@ export class Patient {
     doctorId: number;
     doctor: Doctor;
     anamneses: Anamnesis[];
+    documents: Document[];
     // For list patient
     conclusion: string;
 }

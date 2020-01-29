@@ -22,5 +22,11 @@ namespace Psychology_API.Repositories.Contracts
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<DocumentType>> GetDocTypesAsync();
+        /// <summary>
+        /// Получить документ из БД.
+        /// </summary>
+        /// <param name="docuemntId"> Идентификатор документа. </param>
+        /// <returns> Документ типа Document </returns>
+        Task<Document> GetDocumentAsync(int documentId);
     }
 }

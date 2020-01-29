@@ -10,6 +10,4 @@ export class Document {
     documenType: DocumentType;
     patientId: number;
     patient: Patient;
-    body: Blob[];
-    extension: string;
 }
