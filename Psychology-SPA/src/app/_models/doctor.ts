@@ -1,3 +1,4 @@
+import { Patient } from './patient';
 import { Position } from './position';
 import { Phone } from './phone';
 import { Department } from './department';
@@ -16,4 +17,5 @@ export interface Doctor {
     position: Position;
     phoneId: number;
     phone: Phone;
+    patients: Patient[];
 }

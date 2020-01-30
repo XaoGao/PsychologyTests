@@ -80,7 +80,7 @@ namespace Psychology_API.Controllers
             //TODO: добавить dto для возврата данных
 
             if (await _patientRepository.SaveAllAsync())
-                return StatusCode(201);
+                return Ok(patient);
 
             _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");

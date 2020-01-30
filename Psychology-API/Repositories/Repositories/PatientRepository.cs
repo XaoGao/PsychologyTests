@@ -59,8 +59,12 @@ namespace Psychology_API.Repositories.Repositories
         {
             base.Add(entity);
             Patient patient = entity as Patient;
-            var key = _cache.CreateKeyForCache(patient.Id, suffix);
-            _cache.Set(key, patient);
+            
+            if(patient.Id != 0)
+            {
+                var key = _cache.CreateKeyForCache(patient.Id, suffix);
+                _cache.Set(key, patient);
+            }
         }
 
         public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)

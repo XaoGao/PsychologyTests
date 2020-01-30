@@ -1,4 +1,4 @@
-<form #editPatientForm="ngForm">
+<form #patientForm="ngForm">
     <div>
         <p *ngIf="isNewPatient()"> Новый пациента.</p>
         <p *ngIf="!isNewPatient()"> Данные: <strong>{{ patient.fullname }}</strong></p>
@@ -33,7 +33,7 @@
             </mat-select>
         </mat-form-field>
         <br>
-        <button class="col-3 ml-3 btn btn-primary" (click)="save()"><i class="fa fa-save"></i>Сохранить</button>
+        <button class="col-3 ml-3 btn btn-primary" (click)="save(patientForm)"><i class="fa fa-save"></i>Сохранить</button>
         <button *ngIf="!isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i
                 class="fa fa-trash"></i>Удалить</button>
     </div>

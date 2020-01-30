@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { DocService } from './../../_services/doc.service';
 import { AuthService } from './../../_services/auth.service';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
@@ -65,6 +66,9 @@ export class PatientForRegistryComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
+    };
+
+    this.uploader.onBeforeUploadItem = (file) => {
       this.uploader.setOptions({additionalParameter: {
         number: this.doc.number,
         patientId: this.patient.id,
@@ -90,9 +94,9 @@ export class PatientForRegistryComponent implements OnInit {
       }
     };
   }
-  public save(): void {
+  public save(patientForm: NgForm): void {
     if (this.isNewPatient()) {
-      this.createPatient(this.patient);
+      this.createPatient(this.patient, patientForm);
     } else {
       this.updatePatient(this.patient);
     }
@@ -107,11 +111,12 @@ export class PatientForRegistryComponent implements OnInit {
       this.toastrService.error(err);
     });
   }
-  private createPatient(patient: Patient) {
+  private createPatient(patient: Patient, patientForm: NgForm) {
     this.patientService.createPatient(this.authService.decodedToken.nameid, patient).subscribe((res) => {
       const newpatient = res as Patient;
       this.toastrService.success(`Пациент ${newpatient.fullname} успешно добавлен в систему`);
-      this.router.navigate(['/patientsforregistry']);
+      patientForm.resetForm();
+      this.router.navigate(['/patientsforregistry/', newpatient.id]);
     }, err => {
       this.toastrService.error(err);
     });

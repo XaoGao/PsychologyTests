@@ -113,6 +113,7 @@ const routes: Routes = [
       {
         path: 'receptions',
         component: ReceptionsComponent,
+        resolve: { doctors: DoctorsListResolver }
       }
     ]
   },
