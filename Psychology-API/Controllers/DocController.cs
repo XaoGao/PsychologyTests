@@ -37,11 +37,13 @@ namespace Psychology_API.Controllers
 
             var document = _mapper.Map<Document>(docForCreateDto);
             
-            document.DocName = docForCreateDto.File.FileName;
             document.GetExtensionFromFullNameDocument();
 
             if (await _documentRepository.SaveDocAsync(document, docForCreateDto.File))
+            {
+                document.DocumenType = await _documentRepository.GetDocTypeAsync(document.Id);
                 return Ok(document);
+            }
 
             throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");
         }

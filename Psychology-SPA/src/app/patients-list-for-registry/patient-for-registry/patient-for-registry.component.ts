@@ -142,7 +142,7 @@ export class PatientForRegistryComponent implements OnInit {
     this.docService.deleteDocument(this.authService.decodedToken.nameid, this.patient.id, document.id).subscribe(() => {
       this.toastrService.success('Документ успешно удален');
       const index = this.patient.documents.indexOf(document, 0);
-      if (index > 0) {
+      if (index >= 0) {
         this.patient.documents.splice(index, 1);
       }
     }, err => {

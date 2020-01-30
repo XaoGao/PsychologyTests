@@ -55,8 +55,8 @@
         <tbody *ngFor="let documentFromPatient of patient.documents; index as i;" class="col-12 row">
             <th class="col-1">{{ i  + 1 }})</th>
             <th class="col-3">{{ documentFromPatient.docName }}</th>
-            <th class="col-1">{{ documentFromPatient.number }}</th>
-            <th class="col-1">{{ documentFromPatient.series }}</th>
+            <th class="col-1">{{ documentFromPatient?.number }}</th>
+            <th class="col-1">{{ documentFromPatient?.series }}</th>
             <th class="col-3">{{ documentFromPatient.documenType.name }}</th>
             <th class="col-2">Запрос</th>
             <th class="col-1 text-center"><button class="btn btn-danger" title="Удалить документ"

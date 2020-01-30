@@ -38,6 +38,14 @@ namespace Psychology_API.Repositories.Repositories
             return document;
         }
 
+        public async Task<DocumentType> GetDocTypeAsync(int documentId)
+        {
+            var doc = await _context.Documents.SingleOrDefaultAsync(d => d.Id == documentId);
+            var doctype = await _context.DocumentTypes.SingleOrDefaultAsync(dt => dt.Id == doc.DocumentTypeId);
+
+            return doctype;
+        }
+
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
         {
             byte[] docBase64 = null;

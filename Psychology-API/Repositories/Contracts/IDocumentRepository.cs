@@ -25,8 +25,14 @@ namespace Psychology_API.Repositories.Contracts
         /// <summary>
         /// Получить документ из БД.
         /// </summary>
-        /// <param name="docuemntId"> Идентификатор документа. </param>
+        /// <param name="documentId"> Идентификатор документа. </param>
         /// <returns> Документ типа Document </returns>
         Task<Document> GetDocumentAsync(int documentId);
+        /// <summary>
+        /// Получить категорию документа.
+        /// </summary>
+        /// <param name="documentId"> Идентификатор документа. </param>
+        /// <returns></returns>
+        Task<DocumentType> GetDocTypeAsync(int documentId);
     }
 }

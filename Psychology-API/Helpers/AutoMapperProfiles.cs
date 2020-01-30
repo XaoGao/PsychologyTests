@@ -55,7 +55,10 @@ namespace Psychology_API.Helpers
             CreateMap<ReceptionForCreateDto, Reception>();
 
             // Документы
-            CreateMap<DocForCreateDto, Document>();
+            CreateMap<DocForCreateDto, Document>()
+                .ForMember(dest => dest.DocName, opt => {
+                    opt.MapFrom(src => src.File.FileName);
+                });
         }
     }
 }

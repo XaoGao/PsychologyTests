@@ -8,15 +8,26 @@ using RabbitMQ.Client.Events;
 
 namespace Psychology_API.Services.RabbitMQ
 {
+    /// <summary>
+    /// Сервис для работы с брокером сообщении RabbitMQ.
+    /// </summary>
     public class Rabbit
     {
         private readonly RabbitMQSettings _settingsRabbit;
         private readonly IServiceProvider _serviceProvider;
+        /// <summary>
+        /// Создание экземпляра класса.
+        /// </summary>
+        /// <param name="serviceProvider">  </param>
         public Rabbit(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _settingsRabbit = _serviceProvider.GetRequiredService<RabbitMQSettings>();
         }
+        /// <summary>
+        /// Отправка документа в очередь для проверки.
+        /// </summary>
+        /// <param name="document"> Документа пациента. </param>
         public void Request(Document document)
         {
             var factory = new ConnectionFactory()
@@ -40,6 +51,10 @@ namespace Psychology_API.Services.RabbitMQ
 
             channel.BasicPublish(exchange: "", routingKey: "Test", basicProperties: null, body: body);
         }
+        /// <summary>
+        /// Получить результат проверки конкретного документа из очереди.
+        /// </summary>
+        /// <param name="documentId"> Идентификатор документа. </param>
         public void Response(int documentId)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
