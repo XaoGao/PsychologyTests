@@ -9,6 +9,10 @@ namespace Psychology_API.Settings
     public class CacheSettings
     {
         private readonly IConfiguration _configuration;
+        /// <summary>
+        /// Создать экземпляр класса.
+        /// </summary>
+        /// <param name="configuration"></param>
         public CacheSettings(IConfiguration configuration)
         {
             _configuration = configuration;
