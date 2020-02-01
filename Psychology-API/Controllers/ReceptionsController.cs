@@ -29,7 +29,7 @@ namespace Psychology_API.Controllers
         {
             var reception = _mapper.Map<Reception>(receptionForCreateDto);
 
-            if(!await _receptionRepository.CheckFreeReceptionTime(reception.DoctorId, reception.DateTimeReception))
+            if(!await _receptionRepository.CheckReceptionTime(reception.DoctorId, reception.DateTimeReception))
                 return BadRequest("Указанное время занято.");
 
             _receptionRepository.Add(reception);
@@ -38,6 +38,12 @@ namespace Psychology_API.Controllers
                 return NoContent();
 
             throw new Exception();
+        }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpGet("GetFreeTime")]
+        public async Task<IActionResult> GetFreeTime(ReceptionCheckFreeTimeDto receptionCheckFreeTimeDto)
+        {
+            return Ok();
         }
     }
 }

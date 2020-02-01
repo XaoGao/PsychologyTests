@@ -18,7 +18,7 @@ namespace Psychology_API.Repositories.Repositories
             _context = context;
         }
 
-        public async Task<bool> CheckFreeReceptionTime(int doctorId, DateTime timeReception)
+        public async Task<bool> CheckReceptionTime(int doctorId, DateTime timeReception)
         {
             var receptions = await GetReseptionsAsync(doctorId);
 
@@ -33,6 +33,10 @@ namespace Psychology_API.Repositories.Repositories
             var receptions = await _context.Receptions.Where(r => r.DoctorId == doctorId).ToListAsync();
 
             return receptions;
+        }
+        public async Task<IEnumerable<DateTime>> GetFreeReceptionTimeForDay(int doctorId, DateTime dateTimeReception)
+        {
+            throw  new Exception();
         }
     }
 }

@@ -23,7 +23,7 @@ export class ReceptionsComponent implements OnInit {
       this.currentDoctor = this.doctors[0];
     });
   }
-  public test(): void {
-    console.log(this.currentDoctor);
+  public getFreeTime(): void {
+    console.log(this.data);
   }
 }
