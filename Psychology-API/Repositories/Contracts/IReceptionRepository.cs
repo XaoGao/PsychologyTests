@@ -11,11 +11,18 @@ namespace Psychology_API.Repositories.Contracts
     public interface IReceptionRepository : IBaseRepository
     {
         /// <summary>
-        /// Получить все приемы у конкретного врача.
+        /// Получить все приемы у конкретного врача в течении рабочей недели.
         /// </summary>
         /// <param name="doctorId"> Идентификатор врача. </param>
         /// <returns> Список приемов. </returns>
         Task<IEnumerable<Reception>> GetReseptionsAsync(int doctorId);
+        /// <summary>
+        /// Получить все приемы у конкретного врача в течении рабочей недели.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор врача. </param>
+        /// <param name="now"> Текущее число. </param>
+        /// <returns> Список приемов. </returns>
+        Task<IEnumerable<Reception>> GetReseptionsOfCurrentWeekAsync(int doctorId, DateTime now);
         /// <summary>
         /// Проверить свободно ли время у врача для приема.
         /// </summary>

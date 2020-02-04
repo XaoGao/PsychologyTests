@@ -43,7 +43,12 @@ namespace Psychology_API.Controllers
         [HttpGet("GetFreeTime")]
         public async Task<IActionResult> GetFreeTime(ReceptionCheckFreeTimeDto receptionCheckFreeTimeDto)
         {
-            return Ok();
+            var freeTimesOfDoctorForDay = await _receptionRepository
+                .GetFreeReceptionTimeForDay(receptionCheckFreeTimeDto.DoctorId, receptionCheckFreeTimeDto.DateTimeReception);
+
+
+
+            return Ok(freeTimesOfDoctorForDay);
         }
     }
 }

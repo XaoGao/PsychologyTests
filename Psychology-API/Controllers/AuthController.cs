@@ -26,18 +26,21 @@ namespace Psychology_API.Controllers
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly IDoctorRepository _doctorRepository;
+        private readonly IReceptionRepository _receptionRepository;
         private readonly ILogger<AuthController> _logger;
 
         public AuthController(IAuthRepository authRepo,
                               IMapper mapper,
                               IConfiguration config,
                               IDoctorRepository doctorRepository,
+                              IReceptionRepository receptionRepository,
                               ILogger<AuthController> logger)
         {
             _authRepo = authRepo;
             _mapper = mapper;
             _config = config;
             _doctorRepository = doctorRepository;
+            _receptionRepository = receptionRepository;
             _logger = logger;
         }
         [HttpPost("register")]
@@ -83,7 +86,7 @@ namespace Psychology_API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var receptionsForWeekForDoctor = await _doctorRepository.GetReceptionsForDoctors(doctorFromRepo.Id);
+            var receptionsForWeekForDoctor = await _receptionRepository.GetReseptionsOfCurrentWeekAsync(doctorFromRepo.Id, DateTime.Now);
             var receptionsForReturn = _mapper.Map<IEnumerable<ReceptionForReturnDto>>(receptionsForWeekForDoctor);
 
             // Если есть данные, которые необходимо отправить на view сразу после авторизации, то добавить данные в данный кортедж
