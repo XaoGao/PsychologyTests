@@ -25,7 +25,7 @@ namespace Psychology_API.Repositories.Contracts
         /// Получить список лечащих врачей.
         /// </summary>
         /// <returns> Список врачей. </returns>
-        Task<IEnumerable<Doctor>> GetDoctors();
+        Task<IEnumerable<Doctor>> GetDoctorsAsync();
         /// <summary>
         /// Получить приемы пациентов у конкретного врача в течении текущей недели
         /// </summary>

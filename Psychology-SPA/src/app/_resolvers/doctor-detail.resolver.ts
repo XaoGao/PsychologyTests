@@ -11,13 +11,13 @@ import { AuthService } from '../_services/auth.service';
 
 export class DoctorDetailResolver implements Resolve<Doctor> {
     constructor(private doctorService: DoctorService, private router: Router,
-                private toastrService: ToastrAlertService, private authSerivec: AuthService) {}
+                private toastrService: ToastrAlertService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Doctor> {
-        return this.doctorService.getDoctor(this.authSerivec.decodedToken.nameid).pipe(
+        return this.doctorService.getDoctor(this.authService.decodedToken.nameid).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id']);
+                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
                 return of(null);
             })
         );

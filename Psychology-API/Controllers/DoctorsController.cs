@@ -42,11 +42,11 @@ namespace Psychology_API.Controllers
             
             return Ok(doctorToReturn);
         }
-        [Authorize(Roles = RolesSettings.Registry)]
+        [Authorize(Roles = RolesSettings.Registry + "," + RolesSettings.HR)]
         [HttpGet]
         public async Task<IActionResult> GetDoctors() 
         {
-            var doctors = await _doctorRepository.GetDoctors();
+            var doctors = await _doctorRepository.GetDoctorsAsync();
 
             // var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
 

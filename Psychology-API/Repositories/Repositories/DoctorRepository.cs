@@ -38,7 +38,7 @@ namespace Psychology_API.Repositories.Repositories
             return doctor;
         }
 
-        public async Task<IEnumerable<Doctor>> GetDoctors()
+        public async Task<IEnumerable<Doctor>> GetDoctorsAsync()
         {
             var role = await _context.Roles.SingleOrDefaultAsync(r => r.Name.Equals(RolesSettings.Doctor));
 

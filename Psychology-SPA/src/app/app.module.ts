@@ -46,6 +46,8 @@ import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.re
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
 import { TestResolver } from './_resolvers/test.resolver';
+import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
+import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 // Component
 import { AppComponent } from './app.component';
@@ -81,6 +83,8 @@ import { PatientForRegistryComponent } from './patients-list-for-registry/patien
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReceptionsComponent } from './receptions/receptions.component';
+import { VacationsComponent } from './vacations/vacations.component';
+import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
 
 
 export function tokenGetter() {
@@ -114,7 +118,9 @@ export function tokenGetter() {
     PatientsListForRegistryComponent,
     PatientForRegistryDetailComponent,
     PatientForRegistryComponent,
-    ReceptionsComponent
+    ReceptionsComponent,
+    VacationsComponent,
+    CreateVacationComponent
   ],
   imports: [
     BrowserModule,
@@ -170,6 +176,8 @@ export function tokenGetter() {
     PositionsWithParamResolver,
     AnamnesesListResolver,
     TestsResolver,
+    VacationsListResolver,
+    VacationsListForDoctorResolver,
     TestResolver,
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ],

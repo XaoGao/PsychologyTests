@@ -52,4 +52,24 @@
                 изменения</button>
         </div>
     </form>
+    <table *ngIf="haveVacations()" class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Ф.И.О.</th>
+                <th scope="col">Начало</th>
+                <th scope="col">Конец</th>
+                <th scope="col">Кол-во дней</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vacation of vacations; index as i;">
+                <td> {{ i + 1 }} </td>
+                <td> {{ vacation.doctor.fullname }} </td>
+                <td> {{ vacation.startVacation }} </td>
+                <td> {{ vacation.endVacation }} </td>
+                <td> {{ vacation.countDays }} </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

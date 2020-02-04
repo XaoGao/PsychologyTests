@@ -1,3 +1,6 @@
+import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
+import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
+import { VacationsComponent } from './vacations/vacations.component';
 import { ReceptionsComponent } from './receptions/receptions.component';
 import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
 import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
@@ -34,6 +37,7 @@ import { AnamnesesListComponent } from './anamneses-list/anamneses-list.componen
 import { TestResolver } from './_resolvers/test.resolver';
 import { DoctorsListResolver } from './_resolvers/doctors-list.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
+import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 
 const routes: Routes = [
   {
@@ -75,7 +79,8 @@ const routes: Routes = [
           doctor: DoctorDetailResolver,
           departments: DepartmentsWithParamResolver,
           positions: PositionsWithParamResolver,
-          phones: PhonesResolver
+          phones: PhonesResolver,
+          vacations: VacationsListForDoctorResolver
         }
       },
       { path: 'doctors', component: DoctorsListComponent },
@@ -113,6 +118,16 @@ const routes: Routes = [
       {
         path: 'receptions',
         component: ReceptionsComponent,
+        resolve: { doctors: DoctorsListResolver }
+      },
+      {
+        path: 'vacations',
+        component: VacationsComponent,
+        resolve: { vacations: VacationsListResolver }
+      },
+      {
+        path: 'vacations/new',
+        component: CreateVacationComponent,
         resolve: { doctors: DoctorsListResolver }
       }
     ]

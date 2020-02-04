@@ -17,7 +17,7 @@ export class PhonebookResolver implements Resolve<DepartmentWithDoctors> {
         return this.phonebookService.getPhonebook(this.authService.decodedToken.nameid).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id']);
+                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
                 return of(null);
             })
         );

@@ -1,0 +1,24 @@
+<h1 class="text-center">Добавить новый отпуск</h1>
+<form #createVacationForm="ngForm" (ngSubmit)="createVacation()">
+    <mat-form-field class="col-3">
+        <mat-label>Укажите врача</mat-label>
+        <mat-select [(value)]="newVacation.doctorId">
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+                {{ doctor.fullname }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-4">
+        <input matInput [matDatepicker]="pickerStart" placeholder="Начало отпуска" name="startVacation"
+            [(ngModel)]="newVacation.startVacation" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="col-4">
+        <input matInput [matDatepicker]="pickerEnd" placeholder="Конец отпуска" name="endVacation"
+            [(ngModel)]="newVacation.endVacation" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+    </mat-form-field>
+    <button class="btn btn-primary float-right" [disabled]="!createVacationForm.valid">Добавить отпуск</button>
+</form>

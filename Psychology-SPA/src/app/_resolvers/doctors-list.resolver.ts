@@ -1,6 +1,5 @@
 import { DoctorService } from './../_services/doctor.service';
 import { Doctor } from './../_models/doctor';
-import { PatientService } from '../_services/patient.service';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';

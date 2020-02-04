@@ -18,7 +18,7 @@ export class AnamnesesListResolver implements Resolve<Anamnesis[]> {
         return this.patientService.getAnamnesesList(this.authService.decodedToken.nameid, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id']);
+                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
                 return of(null);
             })
         );

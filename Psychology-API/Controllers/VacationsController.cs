@@ -43,7 +43,7 @@ namespace Psychology_API.Controllers
         {
             var vacation = _mapper.Map<Vacation>(vacationForCreateDto);
 
-            if(vacation.CountDays > 0 && vacation.StartVacation >= DateTime.Now)
+            if(vacation.CountDays <= 0 && vacation.StartVacation <= DateTime.Now)
                 return BadRequest("Неверная начальная дата отпуска.");
 
             _vacationRepository.Add(vacation);

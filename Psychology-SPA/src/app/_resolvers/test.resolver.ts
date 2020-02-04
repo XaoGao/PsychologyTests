@@ -18,7 +18,7 @@ export class TestResolver implements Resolve<Test> {
         return this.testService.getTest(this.authService.decodedToken.nameid, route.params.id, route.params.testId).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id']);
+                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
                 return of(null);
             })
         );
