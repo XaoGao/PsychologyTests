@@ -17,9 +17,17 @@ namespace Psychology_API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IReceptionRepository _receptionRepository;
-        public ReceptionsController(IMapper mapper, IReceptionRepository receptionRepository)
+        private readonly IDoctorRepository _doctorRepository;
+        private readonly IPatientRepository _patientRepository;
+
+        public ReceptionsController(IMapper mapper,
+                                    IReceptionRepository receptionRepository,
+                                    IDoctorRepository doctorRepository,
+                                    IPatientRepository patientRepository)
         {
             _receptionRepository = receptionRepository;
+            _doctorRepository = doctorRepository;
+            _patientRepository = patientRepository;
             _mapper = mapper;
 
         }
@@ -28,6 +36,16 @@ namespace Psychology_API.Controllers
         public async Task<IActionResult> AddReceptions(ReceptionForCreateDto receptionForCreateDto)
         {
             var reception = _mapper.Map<Reception>(receptionForCreateDto);
+
+            var doctor = await _doctorRepository.GetDoctorAsync(reception.DoctorId);
+
+            if (doctor == null)
+                return BadRequest("Указаный доктор не зарегистрирован в системе.");
+
+            var patient = await _patientRepository.GetPatientAsync(reception.DoctorId, reception.PatientId);
+
+            if (doctor == null)
+                return BadRequest("Указаного пациента нет в системе.");
 
             if(!await _receptionRepository.CheckReceptionTime(reception.DoctorId, reception.DateTimeReception))
                 return BadRequest("Указанное время занято.");
@@ -41,12 +59,10 @@ namespace Psychology_API.Controllers
         }
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpGet("GetFreeTime")]
-        public async Task<IActionResult> GetFreeTime(ReceptionCheckFreeTimeDto receptionCheckFreeTimeDto)
+        public async Task<IActionResult> GetFreeTime(int doctorId, DateTime dateTimeReception)
         {
             var freeTimesOfDoctorForDay = await _receptionRepository
-                .GetFreeReceptionTimeForDay(receptionCheckFreeTimeDto.DoctorId, receptionCheckFreeTimeDto.DateTimeReception);
-
-
+                .GetFreeReceptionTimeForDay(doctorId, dateTimeReception);
 
             return Ok(freeTimesOfDoctorForDay);
         }

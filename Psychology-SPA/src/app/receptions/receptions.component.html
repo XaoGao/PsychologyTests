@@ -1,26 +1,48 @@
 <h1 class="text-center"> Назначить новый прием</h1>
 <hr>
-<mat-form-field class="col-3 mt-5 ml-5">
-    <mat-label>Выберете доктора</mat-label>
-    <mat-select [(ngModel)]="currentDoctor">
-        <mat-option *ngFor="let doctor of doctors" [value]="doctor">
-            {{ doctor.fullname }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field class="col-3 mt-5 ml-5">
-    <mat-label>Выберете пациента</mat-label>
-    <mat-select >
-        <mat-option *ngFor="let patient of currentDoctor.patients" [value]="patient.id">
-            {{ patient.fullname }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field class="col-5">
-    <input matInput [matDatepicker]="picker" placeholder="День встречи" name="dataRecipion"
-        [(ngModel)]="data" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-<button (click)="getFreeTime()" class="btn btn-primary">Запросить свободное время по указанной дате</button>
+<form #creatReceptionForm="ngForm">
+    <mat-form-field class="col-3 mt-5 ml-5">
+        <mat-label>Выберете доктора</mat-label>
+        <mat-select [(ngModel)]="currentDoctor" required name="doctor">
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor">
+                {{ doctor.fullname }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-3 mt-5 ml-5">
+        <mat-label>Выберете пациента</mat-label>
+        <mat-select [(ngModel)]="currentPatient" required name="patient"> 
+            <mat-option *ngFor="let patient of currentDoctor.patients" [value]="patient">
+                {{ patient.fullname }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-5">
+        <input matInput [matDatepicker]="picker" placeholder="День встречи" name="dateRecipion" [(ngModel)]="date"
+            required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button (click)="getFreeTime()" class="btn btn-primary float-right" [disabled]="!creatReceptionForm.valid">Запросить свободное время по указанной
+        дате</button>
+</form>
+<div *ngIf="times?.length > 0">
+    <table class="table">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-3">№</th>
+                <th scope="col" class="col-6">Время</th>
+                <th scope="col" class="col-3 text-center">Записаться</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row" *ngFor="let time of times; let i=index;">
+                <th class="col-3"> {{ i + 1 }}</th>
+                <td class="col-6"> {{ time | date: 'hh.mm'}} </td>
+                <td class="col-3"> <button class="btn btn-primary" (click)="toMakeAnAppointment(time)">Записаться</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!-- [(value)]="currentDoctor.id" -->
