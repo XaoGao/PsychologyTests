@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Psychology_API.Dtos
 {
     public class AnamnesisForCreateDto
     {
-        public int PatinetId { get; set; }
+        [Required]
+        public int PatientId { get; set; }
+        [Required]
         public int DoctorId { get; set; }
+        [Required]
         public string Conclusion { get; set; }
     }
 }

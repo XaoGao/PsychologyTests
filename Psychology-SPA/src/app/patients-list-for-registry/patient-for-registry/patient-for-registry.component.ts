@@ -25,6 +25,7 @@ export class PatientForRegistryComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
+  public minDate: Date = new Date(1940, 1, 1);
   // response: string;
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
@@ -38,7 +39,7 @@ export class PatientForRegistryComponent implements OnInit {
       this.patient = data.patient;
       this.docTypes = data.docTypes;
       this.doctors = data.doctors;
-      // this.doctors = this.doctors.filter(doctor => doctor.del)
+      this.doctors = this.doctors.filter(doctor => doctor.isDeleted === false);
     });
     this.isNewPatient();
     this.initUploader();

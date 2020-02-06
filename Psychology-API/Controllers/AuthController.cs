@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Services.Token;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
@@ -64,27 +65,11 @@ namespace Psychology_API.Controllers
             if (doctorFromRepo == null)
                 return Unauthorized("В системе нет пользователя с указаными логином и паролем.");
 
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, doctorFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, doctorFromRepo.Username),
-                new Claim(ClaimTypes.Role, doctorFromRepo.Role.Name)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddHours(4),
-                SigningCredentials = creds
-            };
-
+            var tokenService = new TokenService();
             var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenService.CreateToken(doctorFromRepo,
+                _config.GetSection("AppSettings:Token").Value,
+                _config.GetSection("AppSettings:TimeLifeTokenInHours").Value);
 
             var receptionsForWeekForDoctor = await _receptionRepository.GetReseptionsOfCurrentWeekAsync(doctorFromRepo.Id, DateTime.Now);
             var receptionsForReturn = _mapper.Map<IEnumerable<ReceptionForReturnDto>>(receptionsForWeekForDoctor);
