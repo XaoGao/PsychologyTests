@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories
 {
@@ -22,11 +24,14 @@ namespace Psychology_API.Repositories.Repositories
         {
             _context = context;
         }
+
+        public event Action<DomainEntity> Logger;
+
         /// <summary>
         /// Добавление сущности в контекст данных.
         /// </summary>
         /// <typeparam name="T"> Обобщенная сущность из контекста. </typeparam>
-        public virtual void Add<T>(T entity) where T : class
+        public virtual void Add<T>(T entity) where T : DomainEntity
         {
             _context.Add(entity);
         }
@@ -34,14 +39,15 @@ namespace Psychology_API.Repositories.Repositories
         /// Удаление сущности из контекста данных.
         /// </summary>
         /// <typeparam name="T"> Обобщеная сущность из контекста данных. </typeparam>
-        public void Remove<T>(T entity) where T : class
+        public void Remove<T>(T entity) where T : DomainEntity
         {
+            Logger?.Invoke(entity);
             _context.Remove(entity);
         }
         /// <summary>
         /// Сохранение изменений в контексте.
         /// </summary>
-        /// <returns> Успешное сохранение 1 и более изменений. </returns>
+        /// <returns> Успешное сохранение одной и более записи в БД. </returns>
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

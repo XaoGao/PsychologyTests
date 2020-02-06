@@ -28,7 +28,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    IsLock = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,6 +42,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    LevelLog = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     DateInsert = table.Column<DateTime>(nullable: false)
                 },
@@ -123,7 +126,8 @@ namespace Psychology_API.Migrations
                     DepartmentId = table.Column<int>(nullable: false),
                     PositionId = table.Column<int>(nullable: false),
                     PhoneId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    RoleId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

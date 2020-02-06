@@ -1,9 +1,9 @@
 namespace Psychology_Domain.Abstarct
 {
     /// <summary>
-    /// Базовый класс для сущностей в которых нужен предобределный идентификатор.
+    /// Базовый класс для сущностей в которых нужен предопределный идентификатор.
     /// </summary>
-    public abstract class BaseEntity
+    public abstract class BaseEntity : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

@@ -1,11 +1,12 @@
 using System;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Отпуск врача, время, когда он не принимает пациентов.
     /// </summary>
-    public class Vacation
+    public class Vacation : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

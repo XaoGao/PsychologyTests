@@ -108,6 +108,9 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Lastname")
                         .HasColumnType("TEXT");
 
@@ -190,6 +193,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -204,7 +210,13 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Body")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DateInsert")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LevelLog")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Text")

@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Contracts
 {
@@ -8,15 +10,19 @@ namespace Psychology_API.Repositories.Contracts
     public interface IBaseRepository
     {
         /// <summary>
+        /// 
+        /// </summary>
+        event Action<DomainEntity> Logger;
+        /// <summary>
         /// Добавление сущности в контекст данных.
         /// </summary>
         /// <typeparam name="T"> Обобщенная сущность из контекста. </typeparam>
-        void Add<T>(T entity) where T : class;
+        void Add<T>(T entity) where T : DomainEntity;
         /// <summary>
         /// Удаление сущности из контекста данных.
         /// </summary>
         /// <typeparam name="T"> Обобщеная сущность из контекста данных. </typeparam>
-        void Remove<T>(T entity) where T : class;
+        void Remove<T>(T entity) where T : DomainEntity;
         /// <summary>
         /// Сохранение изменений в контексте.
         /// </summary>

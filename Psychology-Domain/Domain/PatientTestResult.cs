@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Результат тестирования пациента.
     /// </summary>
-    public class PatientTestResult
+    public class PatientTestResult : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

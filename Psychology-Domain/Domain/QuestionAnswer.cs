@@ -1,9 +1,11 @@
+using Psychology_Domain.Abstarct;
+
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Ответы пациента на вопросы теста.
     /// </summary>
-    public class QuestionAnswer
+    public class QuestionAnswer : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

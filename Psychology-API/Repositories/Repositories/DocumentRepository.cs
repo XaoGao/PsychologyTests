@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,9 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<IEnumerable<DocumentType>> GetDocTypesAsync()
         {
-            var docTypes = await _context.DocumentTypes.ToListAsync();
+            var docTypes = await _context.DocumentTypes
+                .Where(dt => dt.IsLock == false)
+                .ToListAsync();
 
             return docTypes;
         }

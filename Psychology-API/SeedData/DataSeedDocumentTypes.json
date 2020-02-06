@@ -1,8 +1,15 @@
 [
     {
-        "Name" : "Паспорт"
+        "Name" : "Паспорт",
+        "IsLock" : false
+
     },
     {
-        "Name" : "Справка 0/70"
+        "Name" : "Справка 0/70",
+        "IsLock" : false
+    },
+    {
+        "Name" : "Не актульно",
+        "IsLock" : true
     }
 ]

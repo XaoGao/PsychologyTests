@@ -74,5 +74,10 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public Role Role { get; set; }
+        /// <summary>
+        /// Флаг для удаленных врачей.
+        /// </summary>
+        /// <value></value>
+        public bool IsDeleted { get; set; }
     }
 }

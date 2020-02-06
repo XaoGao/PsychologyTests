@@ -48,17 +48,6 @@ namespace Psychology_API
             services.AddDistributedMemoryCache();
             services.AddMemoryCache();
             services.AddAllServices();
-            #region Old
-            // services.AddScoped<IAuthRepository, AuthRepository>();
-            // services.AddScoped<IPatientRepository, PatientRepository>();
-            // services.AddScoped<IDoctorRepository, DoctorRepository>();
-            // services.AddScoped<IPhonebookRepository, PhonebookRepository>();
-            // services.AddScoped<ITestRepository, TestRepository>();
-            // services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            // services.AddSingleton<CacheSettings>();
-            // services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
-            // services.AddTransient<SeedAllData>();
-            #endregion
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

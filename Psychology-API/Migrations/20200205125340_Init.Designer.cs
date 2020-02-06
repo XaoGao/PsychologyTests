@@ -9,7 +9,7 @@ using Psychology_API.Data;
 namespace Psychology_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200114164216_Init")]
+    [Migration("20200205125340_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,9 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Lastname")
                         .HasColumnType("TEXT");
 
@@ -192,6 +195,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -206,7 +212,13 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Body")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DateInsert")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LevelLog")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Text")

@@ -5,7 +5,7 @@ namespace Psychology_Domain.Abstarct
     /// <summary>
     /// Абстрактный класс человека.
     /// </summary>
-    public abstract class People
+    public abstract class People : DomainEntity
     {
         /// <summary>
         /// Фамилия.

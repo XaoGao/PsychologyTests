@@ -8,7 +8,8 @@
         "DepartmentId" : 1,
         "PositionId" : 1,
         "PhoneId" : 1,
-        "RoleId" : 1
+        "RoleId" : 1,
+        "IsDeleted" : false 
     },
     {
         "Username" : "test",
@@ -19,7 +20,8 @@
         "DepartmentId" : 1,
         "PositionId" : 1,
         "PhoneId" : 1,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : false
     },
     {
         "Username" : "test2",
@@ -30,7 +32,8 @@
         "DepartmentId" : 1,
         "PositionId" : 2,
         "PhoneId" : 2,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : false
     },
     {
         "Username" : "test3",
@@ -41,7 +44,8 @@
         "DepartmentId" : 2,
         "PositionId" : 3,
         "PhoneId" : 3,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : false
     },
     {
         "Username" : "test4",
@@ -52,7 +56,8 @@
         "DepartmentId" : 2,
         "PositionId" : 4,
         "PhoneId" : 4,
-        "RoleId" : 3
+        "RoleId" : 3,
+        "IsDeleted" : false
     },
     {
         "Username" : "test5",
@@ -63,7 +68,8 @@
         "DepartmentId" : 3,
         "PositionId" : 5,
         "PhoneId" : 5,
-        "RoleId" : 3
+        "RoleId" : 3,
+        "IsDeleted" : false
     },
     {
         "Username" : "test6",
@@ -74,7 +80,8 @@
         "DepartmentId" : 4,
         "PositionId" : 6,
         "PhoneId" : 6,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : false
     },
     {
         "Username" : "test7",
@@ -85,7 +92,8 @@
         "DepartmentId" : 5,
         "PositionId" : 6,
         "PhoneId" : 7,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : false
     },
     {
         "Username" : "test8",
@@ -96,6 +104,7 @@
         "DepartmentId" : 6,
         "PositionId" : 7,
         "PhoneId" : 8,
-        "RoleId" : 2
+        "RoleId" : 2,
+        "IsDeleted" : true
     }
 ]

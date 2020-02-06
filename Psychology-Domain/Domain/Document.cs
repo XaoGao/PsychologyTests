@@ -1,11 +1,13 @@
 using System;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Документы пациента
     /// </summary>
-    public class Document
+    [Serializable]
+    public class Document : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

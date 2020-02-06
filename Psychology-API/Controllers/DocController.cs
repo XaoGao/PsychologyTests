@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
+using Psychology_Domain.Abstarct;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
@@ -18,8 +19,10 @@ namespace Psychology_API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IDocumentRepository _documentRepository;
-        public DocController(IDocumentRepository documentRepository, IMapper mapper)
+        private readonly ILoggerRepository _loggerRepository;
+        public DocController(IDocumentRepository documentRepository, IMapper mapper, ILoggerRepository loggerRepository)
         {
+            _loggerRepository = loggerRepository;
             _documentRepository = documentRepository;
             _mapper = mapper;
 
@@ -32,11 +35,11 @@ namespace Psychology_API.Controllers
                 return BadRequest("Пользователь не авторизован");
 
             var file = docForCreateDto.File;
-            if (file == null || file.Length <= 0 )
+            if (file == null || file.Length <= 0)
                 return BadRequest("Не корретный документ.");
 
             var document = _mapper.Map<Document>(docForCreateDto);
-            
+
             document.GetExtensionFromFullNameDocument();
 
             if (await _documentRepository.SaveDocAsync(document, docForCreateDto.File))
@@ -63,12 +66,13 @@ namespace Psychology_API.Controllers
 
             var document = await _documentRepository.GetDocumentAsync(documentId);
 
-            if(document == null)
+            if (document == null)
                 return BadRequest("Указаного документа не существует");
 
+            _documentRepository.Logger += _loggerRepository.WriteInformerLog;
             _documentRepository.Remove(document);
 
-            if(await _documentRepository.SaveAllAsync())
+            if (await _documentRepository.SaveAllAsync())
                 return NoContent();
 
             // TODO: что то пошло не так, записать в БД ошибку

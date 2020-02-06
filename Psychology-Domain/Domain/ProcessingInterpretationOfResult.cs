@@ -1,9 +1,11 @@
+using Psychology_Domain.Abstarct;
+
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Интерпритация результатов.
     /// </summary>
-    public class ProcessingInterpretationOfResult
+    public class ProcessingInterpretationOfResult : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

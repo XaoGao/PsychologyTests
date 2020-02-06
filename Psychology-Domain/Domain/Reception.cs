@@ -1,11 +1,12 @@
 using System;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Прием у врача.
     /// </summary>
-    public class Reception
+    public class Reception : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

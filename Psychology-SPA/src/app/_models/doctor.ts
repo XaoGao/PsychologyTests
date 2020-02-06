@@ -18,4 +18,5 @@ export interface Doctor {
     phoneId: number;
     phone: Phone;
     patients: Patient[];
+    isDeleted: boolean;
 }

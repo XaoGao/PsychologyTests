@@ -1,9 +1,11 @@
+using Psychology_Domain.Abstarct;
+
 namespace Psychology_Domain.Domain
 {
     /// <summary>
     /// Роль пользователя.
     /// </summary>
-    public class Role
+    public class Role : DomainEntity
     {
         /// <summary>
         /// Идентификатор.

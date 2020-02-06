@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
     /// <summary>
-    /// Воспрос.
+    /// Воспрос из теста.
     /// </summary>
-    public class Question
+    public class Question : DomainEntity
     {
         /// <summary>
         /// Идентификатор вопроса.
