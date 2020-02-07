@@ -76,5 +76,17 @@ namespace Psychology_API.Repositories.Repositories
 
             return tests;
         }
+
+        public async Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatient(int patientId)
+        {
+            var patientTestResults = await _context.PatientTestResult
+                .Include(ptr => ptr.Doctor)
+                .Include(ptr => ptr.Patient)
+                .Include(ptr => ptr.Test)
+                .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .ToListAsync();
+
+            return patientTestResults;
+        }
     }
 }

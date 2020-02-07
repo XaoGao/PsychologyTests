@@ -1,3 +1,4 @@
+import { TestHistoryComponent } from './tests/test-history/test-history.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
 import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsComponent } from './vacations/vacations.component';
@@ -38,6 +39,7 @@ import { TestResolver } from './_resolvers/test.resolver';
 import { DoctorsListResolver } from './_resolvers/doctors-list.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
+import { PatientTestResultsListResolver } from './_resolvers/patient-test-results-list.resolver';
 
 const routes: Routes = [
   {
@@ -129,6 +131,11 @@ const routes: Routes = [
         path: 'vacations/new',
         component: CreateVacationComponent,
         resolve: { doctors: DoctorsListResolver }
+      },
+      {
+        path: 'patients/:id/testhistory',
+        component: TestHistoryComponent,
+        resolve: { patientTestHistoryList: PatientTestResultsListResolver }
       }
     ]
   },

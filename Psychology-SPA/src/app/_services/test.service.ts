@@ -4,22 +4,29 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Test } from '../_models/test';
+import { PatientTestResult } from '../_models/patientTestResults';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestService {
 
-  BASE_URL_DOCTOR = environment.apiUrl + 'doctors/';
+  private BASE_URL_DOCTOR = environment.apiUrl + 'doctors/';
   constructor(private http: HttpClient) { }
 
-  getTests(doctorId: number, patientId: number): Observable<Test[]> {
-    return this.http.get<Test[]>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests');
+  public getTests(doctorId: number, patientId: number): Observable<Test[]> {
+    return this.http.get<Test[]>(this.getTestsURL(doctorId, patientId));
   }
-  getTest(doctorId: number, patientId: number, testId: number): Observable<Test> {
-    return this.http.get<Test>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/' + testId);
+  public getTest(doctorId: number, patientId: number, testId: number): Observable<Test> {
+    return this.http.get<Test>(this.getTestsURL(doctorId, patientId) + testId);
   }
-  sendQuestionsAnswers(doctorId: number, patientId: number, testId: number, questionsAnswers: QuestionsAnswers) {
-    return this.http.post(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/' + testId, questionsAnswers);
+  public sendQuestionsAnswers(doctorId: number, patientId: number, testId: number, questionsAnswers: QuestionsAnswers) {
+    return this.http.post(this.getTestsURL(doctorId, patientId) + testId, questionsAnswers);
+  }
+  public getTestHistory(doctorId: number, patientId: number): Observable<PatientTestResult[]> {
+    return this.http.get<PatientTestResult[]>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/gethistory');
+  }
+  private getTestsURL(doctorId: number, patientId: number): string {
+    return this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/';
   }
 }

@@ -17,6 +17,8 @@ namespace Psychology_API.Helpers
             CreateMap<DoctorForUpdateDto, Doctor>();
 
             CreateMap<Doctor, DoctorForReturnDto>();
+
+            CreateMap<Doctor, DoctorForListReturnDto>();
                 // .IncludeAllDerived();
 
             // Пациент.
@@ -38,7 +40,7 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => true);
                 });
 
-            // Телефон.
+            // Телефоный справочник.
             CreateMap<Department, Department>();
             CreateMap<Position, Position>();
             CreateMap<Phone, Phone>();
@@ -46,12 +48,16 @@ namespace Psychology_API.Helpers
             // Тесты.
             CreateMap<Test, TestForReturnListDto>()
                 .IncludeAllDerived();
+
+            // Результат тестирования
+            CreateMap<PatientTestResult, PatientTestResultForReturnListDto>()
+                .IncludeAllDerived();
+                
             // Прием у врача
             CreateMap<Reception, ReceptionForReturnDto>()
                 .ForMember(dest => dest.Fullname, opt => {
                     opt.MapFrom(src => src.Patient.Fullname);
                 });
-
             CreateMap<ReceptionForCreateDto, Reception>();
 
             // Документы

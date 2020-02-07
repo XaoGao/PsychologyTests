@@ -26,9 +26,15 @@ namespace Psychology_API.Repositories.Contracts
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <param name="patientId"> Идентификатор пацента. </param>
-        /// /// <param name="patientId"> Идентификатор теста. </param>
+        /// <param name="patientId"> Идентификатор теста. </param>
         /// <param name="TestResultInPoints"> Результат тестирования в баллах. </param>
         /// <returns></returns>
         Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testId, int testResultInPoints, QuestionsAnswersViewModel questionsAnswers);
+        /// <summary>
+        /// Получить историю тестов кокретного пациента.
+        /// </summary>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns> Список истории тестирования пациента. </returns>
+        Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatient(int patientId);
     }
 }

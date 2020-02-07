@@ -50,9 +50,8 @@ namespace Psychology_API.Controllers
 
             return Ok(test);
         }
-        //TODO: Дописать метод получения результата тестирования
         [HttpPost("{testId}")]
-        public async Task<IActionResult> GetTestResult(int doctorId, int patientId, int testId, QuestionsAnswersViewModel questionsAnswers)
+        public async Task<IActionResult> CreateTestResult(int doctorId, int patientId, int testId, QuestionsAnswersViewModel questionsAnswers)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
@@ -67,6 +66,18 @@ namespace Psychology_API.Controllers
             var patientTestResult = await _testRepository.CreateAndGetPatientTestResultAsnyc(doctorId, patientId, testId, testResultInPoints, questionsAnswers);
 
             return Ok(patientTestResult);
+        }
+        [HttpGet("GetHistory")]
+        public async Task<IActionResult> GetTestResult(int doctorId, int patientId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            var testHistory = await _testRepository.GetTestsHistiryOfPatient(patientId);
+
+            var testHistoryListReturn = _mapper.Map<IEnumerable<PatientTestResultForReturnListDto>>(testHistory);
+
+            return Ok(testHistoryListReturn);
         }
     }
 }

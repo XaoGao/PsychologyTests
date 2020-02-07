@@ -46,6 +46,7 @@ import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.re
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
 import { TestResolver } from './_resolvers/test.resolver';
+import { PatientTestResultsListResolver } from './_resolvers/patient-test-results-list.resolver';
 import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
@@ -85,6 +86,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ReceptionsComponent } from './receptions/receptions.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
+import { TestHistoryComponent } from './tests/test-history/test-history.component';
 
 
 export function tokenGetter() {
@@ -120,7 +122,8 @@ export function tokenGetter() {
     PatientForRegistryComponent,
     ReceptionsComponent,
     VacationsComponent,
-    CreateVacationComponent
+    CreateVacationComponent,
+    TestHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -176,6 +179,7 @@ export function tokenGetter() {
     PositionsWithParamResolver,
     AnamnesesListResolver,
     TestsResolver,
+    PatientTestResultsListResolver,
     VacationsListResolver,
     VacationsListForDoctorResolver,
     TestResolver,

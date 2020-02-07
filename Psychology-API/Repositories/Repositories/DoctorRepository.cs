@@ -46,7 +46,7 @@ namespace Psychology_API.Repositories.Repositories
                 throw new Exception("Возникла ошибка. Обратитесь к администратору для утрочнее ролей пользователей системы");
 
             var doctors = await _context.Doctors
-                .Where(d => d.RoleId == role.Id)
+                .Where(d => d.RoleId == role.Id && d.IsDeleted == false)
                 .Include(d => d.Patients)
                 .ToListAsync();
 

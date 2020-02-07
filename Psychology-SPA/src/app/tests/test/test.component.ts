@@ -2,7 +2,7 @@ import { QuestionsAnswers } from '../../_models/questionsAnswers';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
 import { TestService } from './../../_services/test.service';
 import { Test } from './../../_models/test';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
@@ -19,6 +19,7 @@ export class TestComponent implements OnInit {
   public questionsAnswers: QuestionsAnswers = new QuestionsAnswers();
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private testService: TestService,
     private authService: AuthService,
     private toastrService: ToastrAlertService
@@ -43,7 +44,7 @@ export class TestComponent implements OnInit {
       this.questionsAnswers.questionsAnswerList.push(questionsAnswer);
     }
   }
-  public sendQuestionsAnswersResult() {
+  public sendQuestionsAnswersResult(): void {
     const doctorId = this.authService.decodedToken.nameid;
     const patientId = +this.route.snapshot.paramMap.get('id');
     this.testService
@@ -51,6 +52,7 @@ export class TestComponent implements OnInit {
       .subscribe(
         res => {
           this.toastrService.success('Тест успешно пройден, данные сохранены');
+          this.router.navigate(['/patients']);
         },
         err => {
           this.toastrService.error(err);
