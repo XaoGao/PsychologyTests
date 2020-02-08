@@ -52,7 +52,9 @@ namespace Psychology_API.Helpers
             // Результат тестирования
             CreateMap<PatientTestResult, PatientTestResultForReturnListDto>()
                 .IncludeAllDerived();
-                
+            CreateMap<PatientTestResult, PatientTestResultForReturnDetailDto>()
+                .IncludeAllDerived();
+
             // Прием у врача
             CreateMap<Reception, ReceptionForReturnDto>()
                 .ForMember(dest => dest.Fullname, opt => {

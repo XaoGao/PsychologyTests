@@ -1,3 +1,4 @@
+import { QuestionAnserResult } from './questionAnswerResult';
 import { ProcessingInterpretationOfResult } from './processingInterpretationOfResult';
 import { Test } from './test';
 import { Doctor } from './doctor';
@@ -10,8 +11,9 @@ export interface PatientTestResult {
     doctor: Doctor;
     testId: number;
     test: Test;
-    TestResultInPoints: number;
+    testResultInPoints: number;
     processingInterpretationOfResultId: number;
     processingInterpretationOfResult: ProcessingInterpretationOfResult;
     dateTimeCreate: Date;
+    questionsAnswers: QuestionAnserResult[];
 }

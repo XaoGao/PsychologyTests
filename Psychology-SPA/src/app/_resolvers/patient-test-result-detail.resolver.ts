@@ -1,20 +1,20 @@
-import { PatientService } from './../_services/patient.service';
+import { TestService } from '../_services/test.service';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { Patient } from '../_models/patient';
+import { PatientTestResult } from '../_models/patientTestResults';
 
 @Injectable()
 
-export class PatientForRegistryResolver implements Resolve<Patient> {
-    constructor(private authService: AuthService, private patientService: PatientService,
+export class PatientTestResultsDetailResolver implements Resolve<PatientTestResult> {
+    constructor(private authService: AuthService, private testService: TestService ,
                 private router: Router, private toastrService: ToastrAlertService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Patient> {
-        return this.patientService.getPatient(this.authService.decodedToken.nameid, route.params.id).pipe(
+    resolve(route: ActivatedRouteSnapshot): Observable<PatientTestResult> {
+        return this.testService.getTestHistory(this.authService.decodedToken.nameid, route.params.id, route.params.testhistoryId).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
                 this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);

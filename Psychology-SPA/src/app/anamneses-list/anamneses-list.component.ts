@@ -3,7 +3,7 @@ import { AuthService } from './../_services/auth.service';
 import { PatientService } from './../_services/patient.service';
 import { Anamnesis } from './../_models/anamnesis';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-anamneses-list',
@@ -19,7 +19,8 @@ export class AnamnesesListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
               private authService: AuthService,
-              private toastrService: ToastrAlertService) { }
+              private toastrService: ToastrAlertService,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -45,7 +46,7 @@ export class AnamnesesListComponent implements OnInit {
     this.newRecord.patinetId = patientId;
     this.patientService.createAnamnesis(doctorId, patientId, this.newRecord).subscribe((res) => {
       this.toastrService.success('Запись успешно добавлена в историю');
-      // this.anamneses.push(res as Anamnesis);
+      this.router.navigate(['/patients']);
     }, err => {
       this.toastrService.error(err);
     });

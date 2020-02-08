@@ -1,1 +1,13 @@
-<p *ngFor="let patientHistory of patientTestHistoryList"> {{patientHistory.dateTimeCreate}}</p>
+<h1 class="text-center">История тестирования пациента: {{ patient.fullname }}</h1>
+<hr>
+<div class="mt-3">
+    <div *ngFor="let patientTestHistory of patientTestHistoryList" >
+        <p>Тест: {{patientTestHistory.test.name}}</p>
+        <p>Дата прохождения: {{ patientTestHistory.dateTimeCreate | date: "dd.MM.yyyy"}}</p>
+        <p>Количество баллов: {{patientTestHistory.testResultInPoints}}</p>
+        <p>Результат: {{patientTestHistory.processingInterpretationOfResult.description}}</p>
+        <p>Тест проводил: {{ patientTestHistory.doctor.fullname}}</p>
+        <button class="btn btn-primary float-right mb-5" [routerLink]="['/patients', patient.id ,'testhistory', patientTestHistory.id]">Подробнее</button>
+        <hr class="mt-5">
+    </div>
+</div>

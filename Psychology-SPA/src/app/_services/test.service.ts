@@ -23,9 +23,15 @@ export class TestService {
   public sendQuestionsAnswers(doctorId: number, patientId: number, testId: number, questionsAnswers: QuestionsAnswers) {
     return this.http.post(this.getTestsURL(doctorId, patientId) + testId, questionsAnswers);
   }
-  public getTestHistory(doctorId: number, patientId: number): Observable<PatientTestResult[]> {
-    return this.http.get<PatientTestResult[]>(this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/gethistory');
+  public getTestsHistory(doctorId: number, patientId: number): Observable<PatientTestResult[]> {
+    return this.http.get<PatientTestResult[]>(this.getTestsURL(doctorId, patientId) + 'gethistory');
   }
+  public getTestHistory(doctorId: number, patientId: number, patientTestHistoryId: number): Observable<PatientTestResult> {
+    return this.http.get<PatientTestResult>(this.getTestsURL(doctorId, patientId) + 'gethistory/' + patientTestHistoryId);
+  }
+  /**
+   * URL
+   */
   private getTestsURL(doctorId: number, patientId: number): string {
     return this.BASE_URL_DOCTOR + doctorId + '/patients/' + patientId + '/tests/';
   }

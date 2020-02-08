@@ -42,11 +42,12 @@ import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.reso
 import { PhonebookResolver } from './_resolvers/phonebook.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
-import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
+import { PatientResolver } from './_resolvers/patient.resolver';
 import { AnamnesesListResolver } from './_resolvers/anamneses-list.resolver';
 import { TestsResolver } from './_resolvers/tests.resolver';
 import { TestResolver } from './_resolvers/test.resolver';
 import { PatientTestResultsListResolver } from './_resolvers/patient-test-results-list.resolver';
+import { PatientTestResultsDetailResolver } from './_resolvers/patient-test-result-detail.resolver';
 import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
@@ -87,6 +88,7 @@ import { ReceptionsComponent } from './receptions/receptions.component';
 import { VacationsComponent } from './vacations/vacations.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
+import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 
 
 export function tokenGetter() {
@@ -123,7 +125,8 @@ export function tokenGetter() {
     ReceptionsComponent,
     VacationsComponent,
     CreateVacationComponent,
-    TestHistoryComponent
+    TestHistoryComponent,
+    TestDetailHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -174,12 +177,13 @@ export function tokenGetter() {
     PhonebookResolver,
     PatientsListResolver,
     PatientsListForRegistryResolver,
-    PatientForRegistryResolver,
+    PatientResolver,
     DepartmentsWithParamResolver,
     PositionsWithParamResolver,
     AnamnesesListResolver,
     TestsResolver,
     PatientTestResultsListResolver,
+    PatientTestResultsDetailResolver,
     VacationsListResolver,
     VacationsListForDoctorResolver,
     TestResolver,

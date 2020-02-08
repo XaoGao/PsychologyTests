@@ -68,16 +68,28 @@ namespace Psychology_API.Controllers
             return Ok(patientTestResult);
         }
         [HttpGet("GetHistory")]
-        public async Task<IActionResult> GetTestResult(int doctorId, int patientId)
+        public async Task<IActionResult> GetTestResults(int doctorId, int patientId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var testHistory = await _testRepository.GetTestsHistiryOfPatient(patientId);
+            var testsHistory = await _testRepository.GetTestsHistiryOfPatient(patientId);
 
-            var testHistoryListReturn = _mapper.Map<IEnumerable<PatientTestResultForReturnListDto>>(testHistory);
+            var testsHistoryListReturn = _mapper.Map<IEnumerable<PatientTestResultForReturnListDto>>(testsHistory);
 
-            return Ok(testHistoryListReturn);
+            return Ok(testsHistoryListReturn);
+        }
+        [HttpGet("GetHistory/{patientTestResultId}")]
+        public async Task<IActionResult> GetTestResult(int doctorId, int patientId, int patientTestResultId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+
+            var testHistory = await _testRepository.GetTestHistiryOfPatient(patientTestResultId);
+
+            var testHistoryForReturn = _mapper.Map<PatientTestResultForReturnDetailDto>(testHistory);
+
+            return Ok(testHistoryForReturn);
         }
     }
 }

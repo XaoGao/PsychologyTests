@@ -1,9 +1,10 @@
+import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
 import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsComponent } from './vacations/vacations.component';
 import { ReceptionsComponent } from './receptions/receptions.component';
-import { PatientForRegistryResolver } from './_resolvers/patient-for-registry.resolver';
+import { PatientResolver } from './_resolvers/patient.resolver';
 import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
 import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
@@ -40,6 +41,7 @@ import { DoctorsListResolver } from './_resolvers/doctors-list.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { PatientTestResultsListResolver } from './_resolvers/patient-test-results-list.resolver';
+import { PatientTestResultsDetailResolver } from './_resolvers/patient-test-result-detail.resolver';
 
 const routes: Routes = [
   {
@@ -99,7 +101,7 @@ const routes: Routes = [
       {
         path: 'patientsforregistry/:id',
         component: PatientForRegistryComponent,
-        resolve: { patient: PatientForRegistryResolver, docTypes: DocumentTypesResolver, doctors: DoctorsListResolver }
+        resolve: { patient: PatientResolver, docTypes: DocumentTypesResolver, doctors: DoctorsListResolver }
       },
       {
         path: 'patients/:id',
@@ -135,7 +137,12 @@ const routes: Routes = [
       {
         path: 'patients/:id/testhistory',
         component: TestHistoryComponent,
-        resolve: { patientTestHistoryList: PatientTestResultsListResolver }
+        resolve: { patientTestHistoryList: PatientTestResultsListResolver, patient: PatientResolver }
+      },
+      {
+        path: 'patients/:id/testhistory/:testhistoryId',
+        component: TestDetailHistoryComponent,
+        resolve: { patientTestHistory: PatientTestResultsDetailResolver }
       }
     ]
   },

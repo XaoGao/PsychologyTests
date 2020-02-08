@@ -16,24 +16,30 @@ export class PatientService {
     return this.http.get<Patient[]>(this.BASE_URL_PATIENT + doctorId + '/patients');
   }
   public getPatient(doctorId: number, patientId: number): Observable<Patient> {
-    return this.http.get<Patient>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId);
+    return this.http.get<Patient>(this.getPatientURL(doctorId, patientId));
   }
   public updatePatient(doctorId: number, patientId: number, patient: Patient) {
-    return this.http.put(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId, patient);
+    return this.http.put(this.getPatientURL(doctorId, patientId), patient);
   }
   public createPatient(doctorId: number, patient: Patient) {
     return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/', patient);
   }
   public getAnamnesesList(doctorId: number, patientId: number): Observable<Anamnesis[]> {
-    return this.http.get<Anamnesis[]>(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses');
+    return this.http.get<Anamnesis[]>(this.getPatientURL(doctorId, patientId) + '/anamneses');
   }
   public createAnamnesis(doctorId: number, patientId: number, anamnesis: Anamnesis) {
-    return this.http.post(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId + '/anamneses', anamnesis);
+    return this.http.post(this.getPatientURL(doctorId, patientId) + '/anamneses', anamnesis);
   }
   public getPatientsForRegistry(doctorId: number): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.BASE_URL_PATIENT + doctorId + '/patients/patientsforregistry');
   }
   public deletePatient(doctorId: number, patientId: number) {
-    return this.http.delete(this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId);
+    return this.http.delete(this.getPatientURL(doctorId, patientId));
+  }
+  /*
+    Get url
+  */
+  private getPatientURL(doctorId: number, patientId: number): string {
+    return this.BASE_URL_PATIENT + doctorId + '/patients/' + patientId;
   }
 }

@@ -1,3 +1,4 @@
+import { Patient } from './../../_models/patient';
 import { TestService } from './../../_services/test.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../_services/auth.service';
@@ -12,7 +13,8 @@ import { PatientTestResult } from 'src/app/_models/patientTestResults';
 })
 export class TestHistoryComponent implements OnInit {
 
-  patientTestHistoryList: PatientTestResult[];
+  public patientTestHistoryList: PatientTestResult[];
+  public patient: Patient;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -24,6 +26,7 @@ export class TestHistoryComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.patientTestHistoryList = data.patientTestHistoryList;
+      this.patient = data.patient;
     });
   }
 

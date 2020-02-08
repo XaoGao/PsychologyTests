@@ -7,6 +7,7 @@ using Psychology_Domain.Domain;
 using Microsoft.Extensions.Configuration;
 using System;
 using Psychology_API.ViewModels;
+using System.Linq;
 
 namespace Psychology_API.Repositories.Repositories
 {
@@ -84,9 +85,23 @@ namespace Psychology_API.Repositories.Repositories
                 .Include(ptr => ptr.Patient)
                 .Include(ptr => ptr.Test)
                 .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .OrderByDescending(ptr => ptr.DateTimeCreate)
                 .ToListAsync();
 
             return patientTestResults;
+        }
+
+        public async Task<PatientTestResult> GetTestHistiryOfPatient(int patientTestResultId)
+        {
+            var patientTestResult = await _context.PatientTestResult
+                .Include(ptr => ptr.Test)
+                .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .Include(ptr => ptr.QuestionsAnswers)
+                    .ThenInclude(q => q.Question)
+                    .ThenInclude(a => a.Answers)
+                .SingleOrDefaultAsync(ptr => ptr.Id == patientTestResultId);
+
+            return patientTestResult;
         }
     }
 }
