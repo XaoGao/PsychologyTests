@@ -9,10 +9,7 @@ namespace Psychology_API.Repositories.Contracts
     /// </summary>
     public interface IBaseRepository
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        event Action<DomainEntity> Logger;
+    
         /// <summary>
         /// Добавление сущности в контекст данных.
         /// </summary>

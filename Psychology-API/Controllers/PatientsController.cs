@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Psychology_API.Settings;
+using Psychology_API.DataServices.Contracts;
 
 namespace Psychology_API.Controllers
 {
@@ -18,15 +19,15 @@ namespace Psychology_API.Controllers
     [Route("api/doctors/{doctorId}/[controller]")]
     public class PatientsController : ControllerBase
     {
-        private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<PatientsController> _logger;
+        private readonly IPatientService _patientService;
 
-        public PatientsController(IPatientRepository patientRepository, IMapper mapper, ILogger<PatientsController> logger)
+        public PatientsController(IMapper mapper, ILogger<PatientsController> logger, IPatientService patientService)
         {
+            _patientService = patientService;
             _mapper = mapper;
             _logger = logger;
-            _patientRepository = patientRepository;
         }
         [HttpGet]
         public async Task<IActionResult> GetPatients(int doctorId)
@@ -34,7 +35,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patients = await _patientRepository.GetPatientsAsync(doctorId);
+            var patients = await _patientService.GetPatientsAsync(doctorId);
 
             var patientsForReturn = _mapper.Map<IEnumerable<PatientForListDto>>(patients);
 
@@ -46,7 +47,7 @@ namespace Psychology_API.Controllers
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _patientRepository.GetPatientAsync(doctorId, patientId);
+            var patientFromRepo = await _patientService.GetPatientAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
@@ -61,7 +62,7 @@ namespace Psychology_API.Controllers
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
                 return Unauthorized("Пользователь не авторизован");
 
-            var anamneses = await _patientRepository.GetAnamnesesAsync(patientId);
+            var anamneses = await _patientService.GetAnamnesesAsync(patientId);
 
             //TODO: добавить dto для возврата данных
             return Ok(anamneses);
@@ -75,11 +76,11 @@ namespace Psychology_API.Controllers
 
             var patient = _mapper.Map<Patient>(patientForCreateDto);
 
-            _patientRepository.Add(patient);
+            _patientService.Add(patient);
 
             //TODO: добавить dto для возврата данных
 
-            if (await _patientRepository.SaveAllAsync())
+            if (await _patientService.SaveAllAsync())
                 return Ok(patient);
 
             _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
@@ -92,14 +93,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _patientRepository.GetPatientWithoutCacheAsync(doctorId, patientId);
+            var patientFromRepo = await _patientService.GetPatientWithoutCacheAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
 
             _mapper.Map(patientForUpdateDto, patientFromRepo);
 
-            if (await _patientRepository.SaveAllAsync())
+            if (await _patientService.SaveAllAsync())
                 return Ok(patientFromRepo);
 
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
@@ -112,14 +113,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patientFromRepo = await _patientRepository.GetPatientWithoutCacheAsync(doctorId, patientId);
+            var patientFromRepo = await _patientService.GetPatientWithoutCacheAsync(doctorId, patientId);
 
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
 
-            _patientRepository.MovePatinetToArchive(patientFromRepo);
+            _patientService.MovePatinetToArchive(patientFromRepo);
 
-            if (await _patientRepository.SaveAllAsync())
+            if (await _patientService.SaveAllAsync())
                 return NoContent();
 
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
@@ -132,14 +133,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patient = await _patientRepository.GetPatientAsync(doctorId, patientId);
+            var patient = await _patientService.GetPatientAsync(doctorId, patientId);
 
-            if(patient == null)
+            if (patient == null)
                 return BadRequest("Указаный пациент не зарегистрирован в системе");
-            
+
             var anamnesis = _mapper.Map<Anamnesis>(anamnesisForCreateDto);
 
-            await _patientRepository.CreateAnamnesisAsync(doctorId, patientId, anamnesis);
+            await _patientService.CreateAnamnesisAsync(doctorId, patientId, anamnesis);
 
             return Ok(anamnesis);
         }
@@ -150,7 +151,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patient = await _patientRepository.GetPatientsForRegistryAsync();
+            var patient = await _patientService.GetPatientsForRegistryAsync();
 
             return Ok(patient);
         }

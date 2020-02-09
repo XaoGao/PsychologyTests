@@ -14,31 +14,40 @@ namespace Psychology_API.Repositories.Repositories
     public class DoctorRepository : BaseRepository, IDoctorRepository
     {
         private readonly DataContext _context;
-        private readonly ICache<Doctor> _cache;
         private const string suffix = "-Doctor";
-        public DoctorRepository(DataContext context, ICache<Doctor> cache) : base(context)
+
+        /// <summary>
+        /// Событие на добавления объекта из кеш.
+        /// </summary>
+        public event Action<string, string, Doctor> SetInCashe;
+        /// <summary>
+        /// Событие на получение объекта из кеш.
+        /// </summary>
+        public event Func<string, string, Doctor> GetFromCashe;
+        /// <summary>
+        /// Событие на удаление объекта из кеш.
+        /// </summary>
+        public event Action<string, string> RemoveItemInCashe;
+
+        public DoctorRepository(DataContext context) : base(context)
         {
-            _cache = cache;
             _context = context;
         }
-        public async Task<Doctor> GetDoctorAsync(int doctorId)
+        public async Task<Doctor> GetDoctorRepositoryAsync(int doctorId)
         {
-            Doctor doctor = null;
-
-            string key = _cache.CreateKeyForCache(doctorId, suffix);
-
-            if(!_cache.Get(key, out doctor))
+            Doctor doctor = GetFromCashe(doctorId.ToString(), suffix);
+            if( doctor == null) 
             {
                 doctor = await GetDoctorFromContext(doctorId);
 
                 if (doctor != null)
-                    _cache.Set(key, doctor);
+                    SetInCashe(doctorId.ToString(), suffix, doctor);
             }
 
             return doctor;
         }
 
-        public async Task<IEnumerable<Doctor>> GetDoctorsAsync()
+        public async Task<IEnumerable<Doctor>> GetDoctorsRepositoryAsync()
         {
             var role = await _context.Roles.SingleOrDefaultAsync(r => r.Name.Equals(RolesSettings.Doctor));
 
@@ -53,18 +62,16 @@ namespace Psychology_API.Repositories.Repositories
             return doctors;
         }
 
-        public async Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId)
+        public async Task<Doctor> GetDoctorWithoutCacheRepositoryAsync(int doctorId)
         {
-            var key = _cache.CreateKeyForCache(doctorId, suffix);
-            _cache.Remove(key);
+            RemoveItemInCashe(doctorId.ToString(), suffix);
             var doctor = await GetDoctorFromContext(doctorId);
 
             return doctor;
         }
 
-        public async Task<IEnumerable<Reception>> GetReceptionsForDoctors(int doctorId)
+        public async Task<IEnumerable<Reception>> GetReceptionsForDoctorsRepositoryAsync(int doctorId)
         {
-            //TODO: Дописать , вернуть все записи к врачу в течении недели.
             var receptions = await _context.Receptions
                 .Include(r => r.Patient)
                 .Where(r => r.DoctorId == doctorId)

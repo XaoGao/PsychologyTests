@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Psychology_API.DataServices.Contracts;
+using Psychology_API.DataServices.DataServices;
 using Psychology_API.Helpers;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Repositories.Contracts.GenericRepository;
@@ -21,6 +23,7 @@ namespace Psychology_API.Servises.DI
         /// <param name="services"> IServiceCollection. </param>
         public static void AddAllServices(this IServiceCollection services)
         {
+            // Repository 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
@@ -31,6 +34,10 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<IVacationRepository, VacationRepository>();
             services.AddScoped<ILoggerRepository, LoggerRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // DataServices
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IPatientService, PatientService>();
+            //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));

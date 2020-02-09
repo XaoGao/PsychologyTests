@@ -13,26 +13,26 @@ namespace Psychology_API.Repositories.Repositories
     public class PatientRepository : BaseRepository, IPatientRepository
     {
         private readonly DataContext _context;
-        private readonly ICache<Patient> _cache;
         private const string suffix = "-Patient";
 
-        public PatientRepository(DataContext context, ICache<Patient> cache) : base(context)
+        public event Action<string, string, Patient> SetInCashe;
+        public event Func<string, string, Patient> GetFromCashe;
+        public event Action<string, string> RemoveItemInCashe;
+
+        public PatientRepository(DataContext context) : base(context)
         {
-            _cache = cache;
             _context = context;
         }
-        public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
+        public async Task<Patient> GetPatientRepositoryAsync(int doctorId, int patientId)
         {
-            Patient patient = null;
-                
-            string key = _cache.CreateKeyForCache(patientId, suffix);
+            Patient patient = GetFromCashe(patientId.ToString(), suffix);
 
-            if(!_cache.Get(key, out patient))
+            if(patient == null)
             {
                 patient = await GetPatientFromContext(doctorId, patientId);
 
                 if (patient != null)
-                    _cache.Set(key, patient);
+                    SetInCashe(patientId.ToString(), suffix, patient);
                 else
                     patient = new Patient();
             }
@@ -40,7 +40,7 @@ namespace Psychology_API.Repositories.Repositories
             return patient;
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
+        public async Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(int doctorId)
         {
             var patients = await _context.Patients
                 .Include(p => p.Doctor)
@@ -51,7 +51,7 @@ namespace Psychology_API.Repositories.Repositories
             return patients;
         }
 
-        public void MovePatinetToArchive(Patient patient)
+        public void MovePatinetToArchiveRepository(Patient patient)
         {
             patient.IsDelete = true;
         }
@@ -62,12 +62,11 @@ namespace Psychology_API.Repositories.Repositories
             
             if(patient.Id != 0)
             {
-                var key = _cache.CreateKeyForCache(patient.Id, suffix);
-                _cache.Set(key, patient);
+                SetInCashe(patient.Id.ToString(), suffix, patient);
             }
         }
 
-        public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)
+        public async Task<IEnumerable<Anamnesis>> GetAnamnesesRepositoryAsync(int patientId)
         {
             var anamneses = await _context.Anamneses
                 .Where(a => a.PatientId == patientId)
@@ -78,28 +77,14 @@ namespace Psychology_API.Repositories.Repositories
             return anamneses.OrderByDescending(a => a.ConclusionTime);
         }
 
-        public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
+        public async Task<Patient> GetPatientWithoutCacheRepositoryAsync(int doctorId, int patientId)
         {
-            var key = _cache.CreateKeyForCache(patientId, suffix);
-            _cache.Remove(key);
+            RemoveItemInCashe(patientId.ToString(), suffix);
             var patient = await GetPatientFromContext(doctorId, patientId);
 
             return patient;
         }
-        private async Task<Patient> GetPatientFromContext(int doctorId, int patientId)
-        {
-            var patient = await _context.Patients
-                    .Include(p => p.Doctor)
-                    .Include(p => p.Anamneses)
-                    .Include(p => p.Documents)
-                    .Include(p => p.Documents)
-                        .ThenInclude(d => d.DocumenType)
-                    .SingleOrDefaultAsync(p =>/*p.DoctorId == doctorId &&*/ p.Id == patientId);
-
-            return patient;
-        }
-
-        public async Task<Anamnesis> CreateAnamnesisAsync(int doctorId, int patientId, Anamnesis anamnesis)
+        public async Task<Anamnesis> CreateAnamnesisRepositoryAsync(int doctorId, int patientId, Anamnesis anamnesis)
         {
             var patient = await _context.Patients.SingleOrDefaultAsync(p => p.Id == patientId);
 
@@ -117,11 +102,23 @@ namespace Psychology_API.Repositories.Repositories
             return anamnesis;
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientsForRegistryAsync()
+        public async Task<IEnumerable<Patient>> GetPatientsForRegistryRepositoryAsync()
         {
             var patients = await _context.Patients.Where(p => p.IsDelete != true).ToListAsync();
 
             return patients;
+        }
+        private async Task<Patient> GetPatientFromContext(int doctorId, int patientId)
+        {
+            var patient = await _context.Patients
+                    .Include(p => p.Doctor)
+                    .Include(p => p.Anamneses)
+                    .Include(p => p.Documents)
+                    .Include(p => p.Documents)
+                        .ThenInclude(d => d.DocumenType)
+                    .SingleOrDefaultAsync(p =>/*p.DoctorId == doctorId &&*/ p.Id == patientId);
+
+            return patient;
         }
     }
 }

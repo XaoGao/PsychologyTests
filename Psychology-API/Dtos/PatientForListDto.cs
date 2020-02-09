@@ -1,5 +1,4 @@
 using System;
-using Psychology_Domain.Domain;
 
 namespace Psychology_API.Dtos
 {

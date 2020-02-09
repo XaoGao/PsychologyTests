@@ -2,6 +2,7 @@
 using System;
 using Microsoft.Extensions.Caching.Memory;
 using Psychology_API.Settings;
+using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Servises.Cache
 {
@@ -30,7 +31,7 @@ namespace Psychology_API.Servises.Cache
         /// <param name="id"></param>
         /// <param name="suffix"></param>
         /// <returns></returns>
-        public string CreateKeyForCache(int id, string suffix)
+        public string CreateKeyForCache(string id, string suffix)
         {
             return $"{id}{suffix}";
         }
@@ -41,13 +42,27 @@ namespace Psychology_API.Servises.Cache
         /// <param name="key"> Ключ. </param>
         /// <param name="item"> Объект в который положим данные. </param>
         /// <returns> True если данные были найдены и успешно извлечены. </returns>
-        public bool Get(string key, out TEntity item)
+        public TEntity Get(string key)
         {
+            TEntity item = null;
             if (!_cache.TryGetValue(key, out item))
-                return false;
+                return null;
 
-            return true;
+            return item;
         }
+        /// <summary>
+        /// Получить из хранилища объект.
+        /// </summary>
+        /// <param name="id"> Идентификатор для рассчета ключа. </param>
+        /// <param name="suffix"> Суффикс для рассчета ключа. </param>
+        /// <param name="item"> Объект в который положим данные. </param>
+        /// <returns></returns>
+        public TEntity Get(string id, string suffix)
+        {
+            var key = CreateKeyForCache(id, suffix);
+            return Get(key);
+        }
+
         /// <summary>
         /// Удалить из хранилища объект.
         /// </summary>
@@ -56,6 +71,16 @@ namespace Psychology_API.Servises.Cache
         public void Remove(string key)
         {
             _cache.Remove(key);
+        }
+        /// <summary>
+        /// Удалить из хранилища объект.
+        /// </summary>
+        /// <param name="id"> Идентификатор для рассчета ключа. </param>
+        /// <param name="suffix"> Суффикс для рассчета ключа. </param>
+        public void Remove(string id, string suffix)
+        {
+            var key = CreateKeyForCache(id, suffix);
+            Remove(key);
         }
 
         /// <summary>
@@ -69,6 +94,17 @@ namespace Psychology_API.Servises.Cache
                 throw new ArgumentNullException(nameof(key), "Ключ не может быть пустой строкой");
                 
             _cache.Set(key, item, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(_cacheSettings.TimeLifeInMinut)));
+        }
+        /// <summary>
+        /// Положить данные в хранилище. 
+        /// </summary>
+        /// <param name="id"> Идентификатор для рассчета ключа. </param>
+        /// <param name="suffix"> Суффикс для рассчета ключа. </param>
+        /// <param name="item"> Объект, который мы хотим положить в хранилище. </param>
+        public void Set(string id, string suffix, TEntity item)
+        {
+            var key = CreateKeyForCache(id, suffix);
+            Set(key, item);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Psychology_API.Repositories.Contracts
     /// <summary>
     /// Репозитории для работы с документами.
     /// </summary>
-    public interface IDocumentRepository : IBaseRepository
+    public interface IDocumentRepository : IBaseRepository, ILoggerable
     {
         /// <summary>
         /// Перевести входящую обертку IFormFile в массив байтов и сохранить в базу данных.

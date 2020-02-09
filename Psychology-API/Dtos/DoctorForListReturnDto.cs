@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Psychology_Domain.Domain;
+
 namespace Psychology_API.Dtos
 {
     public class DoctorForListReturnDto
@@ -23,5 +26,6 @@ namespace Psychology_API.Dtos
         /// <value></value>
         public string Middlename { get; set; }
         public string Fullname { get => $"{Lastname} {Firstname} {Middlename}";}
+        public ICollection<Patient> Patients { get; set; }
     }
 }

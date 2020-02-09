@@ -3,7 +3,6 @@ using Psychology_Domain.Abstarct;
 
 namespace Psychology_Domain.Domain
 {
-    //TODO: Добавить необходимые данные для сущности
     /// <summary>
     /// Врач.
     /// </summary>

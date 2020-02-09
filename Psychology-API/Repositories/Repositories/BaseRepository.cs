@@ -9,7 +9,7 @@ namespace Psychology_API.Repositories.Repositories
     /// <summary>
     /// Базовый репозиторий для работы с сущностями БД.
     /// </summary>
-    public class BaseRepository : IBaseRepository
+    public class BaseRepository : IBaseRepository, ILoggerable
     {
         /// <summary>
         /// Контекст БД.
@@ -24,9 +24,10 @@ namespace Psychology_API.Repositories.Repositories
         {
             _context = context;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public event Action<DomainEntity> Logger;
-
         /// <summary>
         /// Добавление сущности в контекст данных.
         /// </summary>

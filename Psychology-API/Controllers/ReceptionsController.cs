@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
@@ -17,17 +18,17 @@ namespace Psychology_API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IReceptionRepository _receptionRepository;
-        private readonly IDoctorRepository _doctorRepository;
-        private readonly IPatientRepository _patientRepository;
+        private readonly IPatientService _patientService;
+        private readonly IDoctorService _doctorService;
 
         public ReceptionsController(IMapper mapper,
                                     IReceptionRepository receptionRepository,
-                                    IDoctorRepository doctorRepository,
-                                    IPatientRepository patientRepository)
+                                    IDoctorService doctorService,
+                                    IPatientService patientService)
         {
+            _doctorService = doctorService;
             _receptionRepository = receptionRepository;
-            _doctorRepository = doctorRepository;
-            _patientRepository = patientRepository;
+            _patientService = patientService;
             _mapper = mapper;
 
         }
@@ -37,22 +38,22 @@ namespace Psychology_API.Controllers
         {
             var reception = _mapper.Map<Reception>(receptionForCreateDto);
 
-            var doctor = await _doctorRepository.GetDoctorAsync(reception.DoctorId);
+            var doctor = await _doctorService.GetDoctorAsync(reception.DoctorId);
 
             if (doctor == null)
                 return BadRequest("Указаный доктор не зарегистрирован в системе.");
 
-            var patient = await _patientRepository.GetPatientAsync(reception.DoctorId, reception.PatientId);
+            var patient = await _patientService.GetPatientAsync(reception.DoctorId, reception.PatientId);
 
             if (doctor == null)
                 return BadRequest("Указаного пациента нет в системе.");
 
-            if(!await _receptionRepository.CheckReceptionTime(reception.DoctorId, reception.DateTimeReception))
+            if (!await _receptionRepository.CheckReceptionTime(reception.DoctorId, reception.DateTimeReception))
                 return BadRequest("Указанное время занято.");
 
             _receptionRepository.Add(reception);
 
-            if(await _receptionRepository.SaveAllAsync())
+            if (await _receptionRepository.SaveAllAsync())
                 return NoContent();
 
             throw new Exception();

@@ -35,7 +35,7 @@ namespace Psychology_API.Repositories.Repositories
 
             string key = id + "-" + type;
 
-            if (!_cache.Get(key, out entity))
+            if (_cache.Get(key) == null)
             {
                 entity = await _dbSet.FindAsync(id);
                 if (entity != null)

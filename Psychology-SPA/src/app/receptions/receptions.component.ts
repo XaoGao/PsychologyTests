@@ -31,7 +31,6 @@ export class ReceptionsComponent implements OnInit {
       this.doctors = data.doctors;
       this.currentDoctor = this.doctors[0];
     });
-    this.doctors.filter(d => d.isDeleted === false);
   }
   public getFreeTime(): void {
     this.receptionService.getFreeTime(this.currentDoctor.id, this.date).subscribe((data) => {

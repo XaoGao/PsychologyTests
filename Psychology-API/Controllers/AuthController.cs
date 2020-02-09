@@ -85,7 +85,7 @@ namespace Psychology_API.Controllers
         [HttpPost("{doctorId}")]       
         public async Task<IActionResult> DropPassword(int doctorId, int adminId)
         {
-            var doctorFromRepo = await _doctorRepository.GetDoctorAsync(doctorId);
+            var doctorFromRepo = await _doctorRepository.GetDoctorRepositoryAsync(doctorId);
 
             if(doctorFromRepo == null)
                 return BadRequest("Указаный пользователь не зарегистрирован в системе");
