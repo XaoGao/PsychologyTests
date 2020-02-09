@@ -37,6 +37,7 @@ namespace Psychology_API.Servises.DI
             // DataServices
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IAuthService, AuthService>();
             //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();

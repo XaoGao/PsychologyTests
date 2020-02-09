@@ -31,7 +31,10 @@ namespace Psychology_API.DataServices.DataServices
 
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
-            return await base.GetPatientRepositoryAsync(doctorId, patientId);
+            AddGetSetEvents();
+            var patient = await base.GetPatientRepositoryAsync(doctorId, patientId);
+            RemoveGetSetEvents();
+            return patient;
         }
 
         public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
@@ -46,12 +49,31 @@ namespace Psychology_API.DataServices.DataServices
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
         {
-            return await base.GetPatientWithoutCacheRepositoryAsync(doctorId, patientId);
+            base.RemoveItemInCashe += _cache.Remove;
+            var patient = await base.GetPatientWithoutCacheRepositoryAsync(doctorId, patientId);
+            base.RemoveItemInCashe -= _cache.Remove;
+            return patient;
         }
 
         public void MovePatinetToArchive(Patient patient)
         {
             base.MovePatinetToArchiveRepository(patient);
+        }
+        /// <summary>
+        /// Добавление событии на получения и внесения в кеш.
+        /// </summary>
+        private void AddGetSetEvents()
+        {
+            GetFromCashe += _cache.Get;
+            SetInCashe += _cache.Set;
+        }
+        /// <summary>
+        /// Убрать событии по получению и внесению в кеш.
+        /// </summary>
+        private void RemoveGetSetEvents()
+        {
+            GetFromCashe -= _cache.Get;
+            SetInCashe -= _cache.Set;
         }
     }
 }

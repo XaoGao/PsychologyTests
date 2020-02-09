@@ -1,12 +1,10 @@
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 using Psychology_Domain.Domain;
 
-namespace Psychology_API.Repositories.Contracts
+namespace Psychology_API.DataServices.Contracts
 {
-    /// <summary>
-    /// Идентификация пользователя в системе.
-    /// </summary>
-    public interface IAuthRepository
+    public interface IAuthService
     {
         /// <summary>
         /// Авторизация пользователя.
@@ -14,26 +12,33 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="username"> Логин пролзователя. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns></returns>
-        Task<Doctor> LoginRepositoryAsync(string username, string password);
+        Task<Doctor> LoginAsync(string username, string password);
         /// <summary>
         /// Регистрация пользователя в системе.
         /// </summary>
         /// <param name="doctor"> Врач. </param>
         /// <param name="password"> Пароль пользователя. </param>
         /// <returns></returns>
-        Task<Doctor> RegisterRepositoryAsync(Doctor doctor, string password);
+        Task<Doctor> RegisterAsync(Doctor doctor, string password);
         /// <summary>
         /// Проверка на существование пользователя в системе по логину.
         /// </summary>
         /// <param name="username"> Логни. </param>
         /// <returns> Пользователь с логином уже зарегистрирован. </returns>
-        Task<bool> UserExistRepositoryAsync(string username);
+        Task<bool> UserExistAsync(string username);
         /// <summary>
         /// Сменить пароль доктора на новый.
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <param name="newPassword"> Новый пароль. </param>
         /// <returns></returns>
-        Task<bool> ChangePasswordRepositoryAsync(int doctorId, string newPassword);
+        Task<bool> ChangePasswordAsync(int doctorId, string newPassword);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <returns></returns>
+        SecurityToken CreateToken(Doctor doctor);
+
     }
 }
