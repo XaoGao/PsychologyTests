@@ -23,7 +23,7 @@ namespace Psychology_API.DataServices.Contracts
         /// <returns></returns>
         Task<IEnumerable<DocumentType>> GetDocTypesAsync();
         /// <summary>
-        /// Получить документ из БД.
+        /// Получить документ из репозитория.
         /// </summary>
         /// <param name="documentId"> Идентификатор документа. </param>
         /// <returns> Документ типа Document </returns>
@@ -32,7 +32,13 @@ namespace Psychology_API.DataServices.Contracts
         /// Получить категорию документа.
         /// </summary>
         /// <param name="documentId"> Идентификатор документа. </param>
-        /// <returns> Категория докуммента. </returns>
+        /// <returns> Категория документа. </returns>
         Task<DocumentType> GetDocTypeAsync(int documentId);
+        /// <summary>
+        /// Получить список документов пациента.
+        /// </summary>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns> Список документов. </returns>
+        Task<IEnumerable<Document>> GetDocumentsAsync(int patientId);
     }
 }

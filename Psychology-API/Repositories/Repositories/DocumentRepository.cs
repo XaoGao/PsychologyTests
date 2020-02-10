@@ -44,8 +44,6 @@ namespace Psychology_API.Repositories.Repositories
                 if(document != null)
                     SetInCashe(document.Id.ToString(), suffix, document);
             }
-            // if(document != null)
-            //     RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
 
             return document;
         }
@@ -70,7 +68,6 @@ namespace Psychology_API.Repositories.Repositories
 
             document.Body = docBase64;
 
-            RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
             _context.Documents.Add(document);
 
             if (await _context.SaveChangesAsync() > 0)
@@ -80,6 +77,19 @@ namespace Psychology_API.Repositories.Repositories
             }
                 
             return false;
+        }
+
+        public async Task<IEnumerable<Document>> GetDocumentsRepositoryAsync(int patientId)
+        {
+            var documents = await _context.Documents.Where(d => d.PatientId == patientId).ToListAsync();
+
+            return documents;
+        }
+        public override void Remove<T>(T entity)
+        {
+            var document = entity as Document;
+            RemoveItemInCashe(document.Id.ToString(), suffix);
+            base.Remove(document);
         }
     }
 }

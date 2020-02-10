@@ -15,6 +15,11 @@ namespace Psychology_API.Repositories.Repositories
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
         private readonly ICache<TEntity> _cache;
+
+        public event Action<string, string, TEntity> SetInCashe;
+        public event Func<string, string, TEntity> GetFromCashe;
+        public event Action<string, string> RemoveItemInCashe;
+
         public GenericRepository(DataContext context, ICache<TEntity> cache)
         {
             _cache = cache;
@@ -22,54 +27,53 @@ namespace Psychology_API.Repositories.Repositories
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllRepositoryAsync()
         {
             var entities = await EntityFrameworkQueryableExtensions.ToListAsync(_dbSet.AsNoTracking());
 
             return entities;
         }
 
-        public async Task<TEntity> GetAsync(int id, string type)
+        public async Task<TEntity> GetRepositoryAsync(int id, string type)
         {
-            TEntity entity = null;
+            TEntity entity = GetFromCashe(id.ToString(),type);
 
-            string key = id + "-" + type;
-
-            if (_cache.Get(key) == null)
+            if (entity == null)
             {
                 entity = await _dbSet.FindAsync(id);
                 if (entity != null)
-                    _cache.Set(key, entity);
+                    SetInCashe(id.ToString(), type, entity);
             }
 
             return entity;
         }
 
-        public IEnumerable<TEntity> GetWithCondition(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> GetWithConditionRepository(Func<TEntity, bool> predicate)
         {
             return _dbSet.AsNoTracking().Where(predicate).ToList();
         }
 
-        public async Task<bool> UpdateAsync(TEntity item)
+        public async Task<bool> UpdateRepositoryAsync(TEntity item)
         {
             if(await SaveChangeAsync())
                 return true;
 
             return false;
         }
-        public async Task<bool> CreateAsync(TEntity item)
+        public async Task<bool> CreateRepositoryAsync(TEntity item)
         {
             await _dbSet.AddAsync(item);
             if (await SaveChangeAsync())
             {
-                _cache.Set(item.Id + "-" + item.GetType(), item);
+                SetInCashe(item.Id.ToString(), item.GetType().ToString(), item);
                 return true;
             }
             return false;
         }
 
-        public async Task<bool> DeleteAsync(TEntity item)
+        public async Task<bool> DeleteRepositoryAsync(TEntity item)
         {
+            RemoveItemInCashe(item.Id.ToString(), item.GetType().ToString());
             _dbSet.Remove(item);
             return await SaveChangeAsync();
         }
@@ -81,19 +85,19 @@ namespace Psychology_API.Repositories.Repositories
             return false;
         }
 
-        public async Task<TEntity> GetAsync(int id)
+        public async Task<TEntity> GetRepositoryAsync(int id)
         {
             var item = await _dbSet.FindAsync(id);
 
             return item;
         }
 
-        public async Task<bool> UpdateAsync(TEntity item, string type)
+        public async Task<bool> UpdateRepositoryAsync(TEntity item, string type)
         {
+            RemoveItemInCashe(item.Id.ToString(), type);
             if(await SaveChangeAsync())
             {
-                string key = item.Id + "-" + type;
-                _cache.Set(key, item);
+                SetInCashe(item.Id.ToString(), item.GetType().ToString(), item);
                 return true;
             }
 

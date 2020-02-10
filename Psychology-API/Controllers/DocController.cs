@@ -73,5 +73,16 @@ namespace Psychology_API.Controllers
             // TODO: что то пошло не так, записать в БД ошибку
             throw new Exception("");
         }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpGet("GetDocuments")]
+        public async Task<IActionResult> GetDocuments(int doctorId, int patientId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return BadRequest("Пользователь не авторизован");
+
+            var documents = await _documentService.GetDocumentsAsync(patientId);
+
+            return Ok(documents);
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
@@ -102,7 +103,7 @@ const routes: Routes = [
         path: 'patientsforregistry/:id',
         component: PatientForRegistryComponent,
         resolve: { patient: PatientResolver, docTypes: DocumentTypesResolver,
-                    doctors: DoctorsListResolver, documents: DocumentTypesResolver}
+                    doctors: DoctorsListResolver, documents: DocumentsListResolver}
       },
       {
         path: 'patients/:id',

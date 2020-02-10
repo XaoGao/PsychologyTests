@@ -40,7 +40,7 @@ namespace Psychology_API.Repositories.Repositories
         /// Удаление сущности из контекста данных.
         /// </summary>
         /// <typeparam name="T"> Обобщеная сущность из контекста данных. </typeparam>
-        public void Remove<T>(T entity) where T : DomainEntity
+        public virtual void Remove<T>(T entity) where T : DomainEntity
         {
             Logger?.Invoke(entity);
             _context.Remove(entity);

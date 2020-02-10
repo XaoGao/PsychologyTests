@@ -43,6 +43,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IPhonebookService, PhonebookService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();
