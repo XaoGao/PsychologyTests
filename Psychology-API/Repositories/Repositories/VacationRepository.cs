@@ -17,7 +17,7 @@ namespace Psychology_API.Repositories.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Vacation>> GetVacations()
+        public async Task<IEnumerable<Vacation>> GetVacationsRepositoryAsync()
         {
             var vacations = await _context.Vacations
                 .Include(v => v.Doctor)
@@ -27,7 +27,7 @@ namespace Psychology_API.Repositories.Repositories
             return vacations;
         }
 
-        public async Task<IEnumerable<Vacation>> GetVacationsForDoctor(int doctorId)
+        public async Task<IEnumerable<Vacation>> GetVacationsForDoctorRepositoryAsync(int doctorId)
         {
             var vacations = await _context.Vacations
                 .Include(v => v.Doctor)

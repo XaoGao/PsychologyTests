@@ -15,7 +15,7 @@ namespace Psychology_API.Repositories.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookAsync()
+        public async Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookRepositoryAsync()
         {
             var departments = await _context.Departments.Where(d => d.IsLock != true).ToListAsync();
             List<DepartmentWithDoctors> phonebook = new List<DepartmentWithDoctors>();

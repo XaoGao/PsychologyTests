@@ -17,18 +17,18 @@ namespace Psychology_API.Controllers
     public class ReceptionsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IReceptionRepository _receptionRepository;
         private readonly IPatientService _patientService;
+        private readonly IReceptionService _receptionService;
         private readonly IDoctorService _doctorService;
 
         public ReceptionsController(IMapper mapper,
-                                    IReceptionRepository receptionRepository,
                                     IDoctorService doctorService,
-                                    IPatientService patientService)
+                                    IPatientService patientService,
+                                    IReceptionService receptionService)
         {
             _doctorService = doctorService;
-            _receptionRepository = receptionRepository;
             _patientService = patientService;
+            _receptionService = receptionService;
             _mapper = mapper;
 
         }
@@ -48,12 +48,12 @@ namespace Psychology_API.Controllers
             if (doctor == null)
                 return BadRequest("Указаного пациента нет в системе.");
 
-            if (!await _receptionRepository.CheckReceptionTime(reception.DoctorId, reception.DateTimeReception))
+            if (!await _receptionService.CheckReceptionTimeAsync(reception.DoctorId, reception.DateTimeReception))
                 return BadRequest("Указанное время занято.");
 
-            _receptionRepository.Add(reception);
+            _receptionService.Add(reception);
 
-            if (await _receptionRepository.SaveAllAsync())
+            if (await _receptionService.SaveAllAsync())
                 return NoContent();
 
             throw new Exception();
@@ -62,8 +62,8 @@ namespace Psychology_API.Controllers
         [HttpGet("GetFreeTime")]
         public async Task<IActionResult> GetFreeTime(int doctorId, DateTime dateTimeReception)
         {
-            var freeTimesOfDoctorForDay = await _receptionRepository
-                .GetFreeReceptionTimeForDay(doctorId, dateTimeReception);
+            var freeTimesOfDoctorForDay = await _receptionService
+                .GetFreeReceptionTimeForDayAsync(doctorId, dateTimeReception);
 
             return Ok(freeTimesOfDoctorForDay);
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Servises.Cache;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -14,15 +14,17 @@ namespace Psychology_API.Repositories.Repositories
     public class DocumentRepository : BaseRepository, IDocumentRepository
     {
         private readonly DataContext _context;
-        private readonly ICache<Patient> _cache;
+        private const string suffix = "-Document";
+        public event Action<string, string, Document> SetInCashe;
+        public event Func<string, string, Document> GetFromCashe;
+        public event Action<string, string> RemoveItemInCashe;
 
-        public DocumentRepository(DataContext context, ICache<Patient> cache) : base(context)
+        public DocumentRepository(DataContext context) : base(context)
         {
             _context = context;
-            _cache = cache;
         }
 
-        public async Task<IEnumerable<DocumentType>> GetDocTypesAsync()
+        public async Task<IEnumerable<DocumentType>> GetDocTypesRepositoryAsync()
         {
             var docTypes = await _context.DocumentTypes
                 .Where(dt => dt.IsLock == false)
@@ -31,17 +33,24 @@ namespace Psychology_API.Repositories.Repositories
             return docTypes;
         }
 
-        public async Task<Document> GetDocumentAsync(int documentId)
+        public async Task<Document> GetDocumentRepositoryAsync(int documentId)
         {
-            var document = await _context.Documents.SingleOrDefaultAsync(d => d.Id == documentId);
+            Document document = GetFromCashe(documentId.ToString(), suffix);
 
-            if(document != null)
-                _cache.Remove($"{document.PatientId}-Patient");
+            if(document == null)
+            {
+                document = await _context.Documents.SingleOrDefaultAsync(d => d.Id == documentId);
+
+                if(document != null)
+                    SetInCashe(document.Id.ToString(), suffix, document);
+            }
+            // if(document != null)
+            //     RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
 
             return document;
         }
 
-        public async Task<DocumentType> GetDocTypeAsync(int documentId)
+        public async Task<DocumentType> GetDocTypeRepositoryAsync(int documentId)
         {
             var doc = await _context.Documents.SingleOrDefaultAsync(d => d.Id == documentId);
             var doctype = await _context.DocumentTypes.SingleOrDefaultAsync(dt => dt.Id == doc.DocumentTypeId);
@@ -49,7 +58,7 @@ namespace Psychology_API.Repositories.Repositories
             return doctype;
         }
 
-        public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
+        public async Task<bool> SaveDocRepositoryAsync(Document document, IFormFile formFile)
         {
             byte[] docBase64 = null;
 
@@ -61,12 +70,15 @@ namespace Psychology_API.Repositories.Repositories
 
             document.Body = docBase64;
 
-            _cache.Remove($"{document.PatientId}-Patient");
+            RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
             _context.Documents.Add(document);
 
             if (await _context.SaveChangesAsync() > 0)
+            {
+                SetInCashe(document.Id.ToString(), suffix, document);
                 return true;
-
+            }
+                
             return false;
         }
     }

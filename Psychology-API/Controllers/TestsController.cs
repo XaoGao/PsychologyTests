@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
-using Psychology_API.Repositories.Contracts;
-using Psychology_API.Servises.CofR.ComputedTestResult;
 using Psychology_API.Settings;
 using Psychology_API.ViewModels;
 
@@ -18,13 +17,12 @@ namespace Psychology_API.Controllers
     [Route("api/doctors/{doctorId}/patients/{patientId}/[controller]")]
     public class TestsController : ControllerBase
     {
-        private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
-        public TestsController(ITestRepository testRepository, IMapper mapper)
+        private readonly ITestService _testService;
+        public TestsController(ITestService testService, IMapper mapper)
         {
+            _testService = testService;
             _mapper = mapper;
-            _testRepository = testRepository;
-
         }
         [HttpGet]
         public async Task<IActionResult> GetTests(int doctorId, int patientId)
@@ -32,7 +30,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var tests = await _testRepository.GetTestsAsync();
+            var tests = await _testService.GetTestsAsync();
 
             var testForReturn = _mapper.Map<IEnumerable<TestForReturnListDto>>(tests);
 
@@ -43,8 +41,8 @@ namespace Psychology_API.Controllers
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
-                
-            var test = await _testRepository.GetTestAsync(testId);
+
+            var test = await _testService.GetTestAsync(testId);
 
             var questions = test.Questions.OrderBy(q => q.sortLevel);
 
@@ -56,14 +54,13 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var test = await _testRepository.GetTestAsync(testId);
-            if(test == null)
+            var test = await _testService.GetTestAsync(testId);
+            if (test == null)
                 BadRequest("Теста с указаным идентификаторм не существет");
 
-            var managerComputedTest = new ManagerComputedTestResultHandler();
-            var testResultInPoints =  managerComputedTest.GetTestResultInPoints(questionsAnswers, test.Name);
+            var testResultInPoints = _testService.GetTestResultInPoints(questionsAnswers, test.Name);
 
-            var patientTestResult = await _testRepository.CreateAndGetPatientTestResultAsnyc(doctorId, patientId, testId, testResultInPoints, questionsAnswers);
+            var patientTestResult = await _testService.CreateAndGetPatientTestResultAsnyc(doctorId, patientId, testId, testResultInPoints, questionsAnswers);
 
             return Ok(patientTestResult);
         }
@@ -73,7 +70,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var testsHistory = await _testRepository.GetTestsHistiryOfPatient(patientId);
+            var testsHistory = await _testService.GetTestsHistiryOfPatientAsync(patientId);
 
             var testsHistoryListReturn = _mapper.Map<IEnumerable<PatientTestResultForReturnListDto>>(testsHistory);
 
@@ -85,7 +82,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var testHistory = await _testRepository.GetTestHistiryOfPatient(patientTestResultId);
+            var testHistory = await _testService.GetTestHistiryOfPatientAsync(patientTestResultId);
 
             var testHistoryForReturn = _mapper.Map<PatientTestResultForReturnDetailDto>(testHistory);
 

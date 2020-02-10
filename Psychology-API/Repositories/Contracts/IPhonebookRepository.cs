@@ -13,6 +13,6 @@ namespace Psychology_API.Repositories.Contracts
         /// Формирует телефоный справочник.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookAsync();
+        Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookRepositoryAsync();
     }
 }

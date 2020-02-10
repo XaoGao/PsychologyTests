@@ -38,6 +38,11 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IReceptionService, ReceptionService>();
+            services.AddScoped<IVacationService, VacationService>();
+            services.AddScoped<ITestService, TestService>();
+            services.AddScoped<IPhonebookService, PhonebookService>();
+            services.AddScoped<IDocumentService, DocumentService>();
             //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();

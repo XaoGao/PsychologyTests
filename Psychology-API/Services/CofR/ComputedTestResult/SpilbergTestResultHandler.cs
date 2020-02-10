@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.Extensions.Logging;
 using Psychology_API.ViewModels;
 
 namespace Psychology_API.Servises.CofR.ComputedTestResult
@@ -27,29 +26,31 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         {
             if(testName.Equals("Тест Спилбергера"))
             {
-                int[] directQuestions = new int[] {3,4,6,7,9,12,13,14,17,18,22,23,24,25,28,29,31,32,34,35,37,38,40};
-                int[] backQuestions = new int[] {1,2,5,8,10,11,15,16,19,20,21,26,27,30,33,36,39};
-
-                int sumDirectQuestions = 0;
-                int sumBackQuestions = 0;
-
-                foreach (var item in questionsAnswers.QuestionsAnswerList)
-                {
-                    if(directQuestions.Any(x => x == item.SortLevel))
-                        sumDirectQuestions += item.AnswerValue;
-
-                    if(backQuestions.Any(x => x == item.SortLevel))
-                        sumBackQuestions += item.AnswerValue;
-                }
-
-                var result = sumDirectQuestions - sumBackQuestions + 40;
-
-                return result;
+                return GetPoints(questionsAnswers);
             }
             else
             {
                 return base.ComputedTestResult(questionsAnswers, testName);
             }
+        }
+
+        protected override int GetPoints(QuestionsAnswersViewModel questionsAnswers)
+        {
+            int[] directQuestions = new int[] {3,4,6,7,9,12,13,14,17,18,22,23,24,25,28,29,31,32,34,35,37,38,40};
+            int[] backQuestions = new int[] {1,2,5,8,10,11,15,16,19,20,21,26,27,30,33,36,39};
+            int sumDirectQuestions = 0;
+            int sumBackQuestions = 0;
+            foreach (var item in questionsAnswers.QuestionsAnswerList)
+            {
+                if(directQuestions.Any(x => x == item.SortLevel))
+                    sumDirectQuestions += item.AnswerValue;
+                    
+                if(backQuestions.Any(x => x == item.SortLevel))
+                    sumBackQuestions += item.AnswerValue;
+            }
+            var result = sumDirectQuestions - sumBackQuestions + 40;
+
+            return result;
         }
     }
 }

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
-using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
@@ -15,25 +15,24 @@ namespace Psychology_API.Controllers
     [Route("api/[controller]")]
     public class VacationsController : ControllerBase
     {
-        private readonly IVacationRepository _vacationRepository;
         private readonly IMapper _mapper;
-        public VacationsController(IVacationRepository vacationRepository, IMapper mapper)
+        private readonly IVacationService _vacationService;
+        public VacationsController(IVacationService vacationService, IMapper mapper)
         {
+            _vacationService = vacationService;
             _mapper = mapper;
-            _vacationRepository = vacationRepository;
-
         }
         [HttpGet]
         public async Task<IActionResult> GetVacations()
         {
-            var vacations = await _vacationRepository.GetVacations();
+            var vacations = await _vacationService.GetVacationsAsync();
 
             return Ok(vacations);
         }
         [HttpGet("doctors/{doctorId}")]
         public async Task<IActionResult> GetVacationsForDoctor(int doctorId)
         {
-            var vacations = await _vacationRepository.GetVacationsForDoctor(doctorId);
+            var vacations = await _vacationService.GetVacationsForDoctorAsync(doctorId);
 
             return Ok(vacations);
         }
@@ -43,12 +42,12 @@ namespace Psychology_API.Controllers
         {
             var vacation = _mapper.Map<Vacation>(vacationForCreateDto);
 
-            if(vacation.CountDays <= 0 && vacation.StartVacation <= DateTime.Now)
+            if (vacation.CountDays <= 0 && vacation.StartVacation <= DateTime.Now)
                 return BadRequest("Неверная начальная дата отпуска.");
 
-            _vacationRepository.Add(vacation);
+            _vacationService.Add(vacation);
 
-            if(await _vacationRepository.SaveAllAsync())
+            if (await _vacationService.SaveAllAsync())
                 return NoContent();
 
             throw new Exception();

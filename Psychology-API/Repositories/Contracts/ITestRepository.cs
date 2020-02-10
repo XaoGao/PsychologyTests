@@ -14,13 +14,13 @@ namespace Psychology_API.Repositories.Contracts
         /// Получить все тесты.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Test>> GetTestsAsync();
+        Task<IEnumerable<Test>> GetTestsRepositoryAsync();
         /// <summary>
         /// Получить данные о тесте.
         /// </summary>
         /// <param name="testId"> Идентификатор теста. </param>
         /// <returns></returns>
-        Task<Test> GetTestAsync(int testId);
+        Task<Test> GetTestRepositoryAsync(int testId);
         /// <summary>
         /// Создать новую запись о результате тестирования и вернуть ее.
         /// </summary>
@@ -29,18 +29,18 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="patientId"> Идентификатор теста. </param>
         /// <param name="TestResultInPoints"> Результат тестирования в баллах. </param>
         /// <returns></returns>
-        Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testId, int testResultInPoints, QuestionsAnswersViewModel questionsAnswers);
+        Task<PatientTestResult> CreateAndGetPatientTestResultRepositoryAsnyc(int doctorId, int patientId, int testId, int testResultInPoints, QuestionsAnswersViewModel questionsAnswers);
         /// <summary>
         /// Получить историю тестов конкретного пациента.
         /// </summary>
         /// <param name="patientId"> Идентификатор пациента. </param>
         /// <returns> Список истории тестирования пациента. </returns>
-        Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatient(int patientId);
+        Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatientRepositoryAsync(int patientId);
         /// <summary>
         /// Получить подробную истрию теста.
         /// </summary>
         /// <param name="patientTestResult"> Идентификатор результата тестирования. </param>
         /// <returns> Результат тестирования. </returns>
-        Task<PatientTestResult> GetTestHistiryOfPatient(int patientTestResultId);
+        Task<PatientTestResult> GetTestHistiryOfPatientRepositoryAsync(int patientTestResultId);
     }
 }

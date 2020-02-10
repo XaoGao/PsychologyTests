@@ -1,13 +1,11 @@
 import { DocService } from './../_services/doc.service';
 import { DocumentType } from './../_models/documentType';
-import { PatientService } from './../_services/patient.service';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { Patient } from '../_models/patient';
 
 @Injectable()
 

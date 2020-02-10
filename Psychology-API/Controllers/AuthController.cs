@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
-using Psychology_API.Repositories.Contracts;
-using Psychology_API.Services.Token;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
@@ -24,20 +21,19 @@ namespace Psychology_API.Controllers
     {
 
         private readonly IMapper _mapper;
-        private readonly IReceptionRepository _receptionRepository;
+        private readonly IReceptionService _receptionService;
         private readonly ILogger<AuthController> _logger;
         private readonly IAuthService _authService;
         private readonly IDoctorService _doctorService;
 
         public AuthController(IMapper mapper,
-                              
-                              IReceptionRepository receptionRepository,
+                              IReceptionService receptionService,
                               ILogger<AuthController> logger,
                               IAuthService authService,
                               IDoctorService doctorService)
         {
             _mapper = mapper;
-            _receptionRepository = receptionRepository;
+            _receptionService = receptionService;
             _logger = logger;
             _authService = authService;
             _doctorService = doctorService;
@@ -67,7 +63,7 @@ namespace Psychology_API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = _authService.CreateToken(doctorFromRepo);
 
-            var receptionsForWeekForDoctor = await _receptionRepository.GetReseptionsOfCurrentWeekAsync(doctorFromRepo.Id, DateTime.Now);
+            var receptionsForWeekForDoctor = await _receptionService.GetReseptionsOfCurrentWeekAsync(doctorFromRepo.Id, DateTime.Now);
             var receptionsForReturn = _mapper.Map<IEnumerable<ReceptionForReturnDto>>(receptionsForWeekForDoctor);
 
             // Если есть данные, которые необходимо отправить на view сразу после авторизации, то добавить данные в данный кортедж

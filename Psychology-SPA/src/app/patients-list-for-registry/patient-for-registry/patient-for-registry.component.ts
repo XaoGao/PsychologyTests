@@ -39,8 +39,8 @@ export class PatientForRegistryComponent implements OnInit {
       this.patient = data.patient;
       this.docTypes = data.docTypes;
       this.doctors = data.doctors;
-      this.doctors = this.doctors.filter(doctor => doctor.isDeleted === false);
     });
+
     this.isNewPatient();
     this.initUploader();
   }

@@ -2,7 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Psychology_API.Repositories.Contracts;
+using Psychology_API.DataServices.Contracts;
 
 namespace Psychology_API.Controllers.Phonebook
 {
@@ -11,18 +11,18 @@ namespace Psychology_API.Controllers.Phonebook
     [Route("api/doctors/{doctorId}/[controller]")]
     public class PhonebookController : ControllerBase
     {
-        private readonly IPhonebookRepository _phonebookRepository;
-        public PhonebookController(IPhonebookRepository phonebookRepository)
+        private readonly IPhonebookService _phonebookService;
+        public PhonebookController(IPhonebookService phonebookService)
         {
-            _phonebookRepository = phonebookRepository;
+            _phonebookService = phonebookService;
         }
         [HttpGet]
         public async Task<IActionResult> GetPhonebook(int doctorId)
         {
-            if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var phonebook = await _phonebookRepository.GetPhonebookAsync();
+            var phonebook = await _phonebookService.GetPhonebookAsync();
 
             //TODO: добавить Dtos классы для телефоного справочника.
 

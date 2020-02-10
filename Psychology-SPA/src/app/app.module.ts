@@ -51,6 +51,7 @@ import { PatientTestResultsDetailResolver } from './_resolvers/patient-test-resu
 import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
+import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -173,6 +174,7 @@ export function tokenGetter() {
     DepartmentsResolver,
     PositionsResolver,
     DocumentTypesResolver,
+    DocumentsListResolver,
     PhonesResolver,
     PhonebookResolver,
     PatientsListResolver,

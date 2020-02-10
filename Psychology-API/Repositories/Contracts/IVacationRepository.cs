@@ -4,9 +4,21 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Contracts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IVacationRepository : IBaseRepository
     {
-        Task<IEnumerable<Vacation>> GetVacations();
-        Task<IEnumerable<Vacation>> GetVacationsForDoctor(int doctorId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Vacation>> GetVacationsRepositoryAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>
+        Task<IEnumerable<Vacation>> GetVacationsForDoctorRepositoryAsync(int doctorId);
     }
 }

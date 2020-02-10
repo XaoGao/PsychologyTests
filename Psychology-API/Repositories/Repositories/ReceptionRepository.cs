@@ -19,9 +19,9 @@ namespace Psychology_API.Repositories.Repositories
             _context = context;
         }
 
-        public async Task<bool> CheckReceptionTime(int doctorId, DateTime timeReception)
+        public async Task<bool> CheckReceptionTimeRepositoryAsync(int doctorId, DateTime timeReception)
         {
-            var receptions = await GetReseptionsAsync(doctorId);
+            var receptions = await GetReseptionsRepositoryAsync(doctorId);
 
             if(receptions.Any(r => r.DateTimeReception == timeReception))
                 return false;
@@ -34,7 +34,7 @@ namespace Psychology_API.Repositories.Repositories
             return true;
         }
 
-        public async Task<IEnumerable<Reception>> GetReseptionsAsync(int doctorId)
+        public async Task<IEnumerable<Reception>> GetReseptionsRepositoryAsync(int doctorId)
         {
             var receptions = await _context.Receptions
                 .Where(r => r.DoctorId == doctorId)
@@ -42,7 +42,7 @@ namespace Psychology_API.Repositories.Repositories
 
             return receptions;
         }
-        public async Task<IEnumerable<DateTime>> GetFreeReceptionTimeForDay(int doctorId, DateTime dateTimeReception)
+        public async Task<IEnumerable<DateTime>> GetFreeReceptionTimeForDayRepositoryAsync(int doctorId, DateTime dateTimeReception)
         {
             var allWorkTimesOfDoctor = getAllWorkTimes(dateTimeReception);
 
@@ -61,19 +61,7 @@ namespace Psychology_API.Repositories.Repositories
 
             return freeTimeOfDoctors;
         }
-
-        private List<DateTime> getAllWorkTimes(DateTime day)
-        {
-            List<DateTime> times = new List<DateTime>();
-            for (int i = 8; i <= 18; i++)
-            {
-                DateTime time = new DateTime(day.Year, day.Month, day.Day, i, 0, 0);
-                times.Add(time);
-            }
-            return times;
-        }
-
-        public async Task<IEnumerable<Reception>> GetReseptionsOfCurrentWeekAsync(int doctorId, DateTime now)
+        public async Task<IEnumerable<Reception>> GetReseptionsOfCurrentWeekRepositoryAsync(int doctorId, DateTime now)
         {
             var day = DayOfWeek.Monday;
             var dateStartWeek = now.GetDateOfStartWeek(day);
@@ -85,6 +73,16 @@ namespace Psychology_API.Repositories.Repositories
                 .ToListAsync();
 
             return receptions;
+        }
+        private List<DateTime> getAllWorkTimes(DateTime day)
+        {
+            List<DateTime> times = new List<DateTime>();
+            for (int i = 8; i <= 18; i++)
+            {
+                DateTime time = new DateTime(day.Year, day.Month, day.Day, i, 0, 0);
+                times.Add(time);
+            }
+            return times;
         }
     }
 }

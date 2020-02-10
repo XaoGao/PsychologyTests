@@ -5,7 +5,7 @@ using Psychology_Domain.Domain;
 namespace Psychology_API.DataServices.Contracts
 {
     /// <summary>
-    /// 
+    /// Сераис для работы с пациентами.
     /// </summary>
     public interface IPatientService : IBaseService
     {

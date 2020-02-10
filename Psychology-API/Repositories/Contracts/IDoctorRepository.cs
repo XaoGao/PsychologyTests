@@ -27,7 +27,7 @@ namespace Psychology_API.Repositories.Contracts
         /// <returns> Список рабртающих врачей. </returns>
         Task<IEnumerable<Doctor>> GetDoctorsRepositoryAsync();
         /// <summary>
-        /// Получить приемы пациентов у конкретного врача в течении текущей недели
+        /// Получить приемы пациентов у конкретного врача в течении текущей недели.
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <returns> Список приемов у врача. </returns>

@@ -4,6 +4,9 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.DataServices.Contracts
 {
+    /// <summary>
+    /// Сервис автризации.
+    /// </summary>
     public interface IAuthService
     {
         /// <summary>
@@ -34,10 +37,10 @@ namespace Psychology_API.DataServices.Contracts
         /// <returns></returns>
         Task<bool> ChangePasswordAsync(int doctorId, string newPassword);
         /// <summary>
-        /// 
+        /// Сформировать токен для пользователя.
         /// </summary>
-        /// <param name="doctor"></param>
-        /// <returns></returns>
+        /// <param name="doctor"> Идентификатор пользователя. </param>
+        /// <returns> JWT объект. </returns>
         SecurityToken CreateToken(Doctor doctor);
 
     }

@@ -101,7 +101,8 @@ const routes: Routes = [
       {
         path: 'patientsforregistry/:id',
         component: PatientForRegistryComponent,
-        resolve: { patient: PatientResolver, docTypes: DocumentTypesResolver, doctors: DoctorsListResolver }
+        resolve: { patient: PatientResolver, docTypes: DocumentTypesResolver,
+                    doctors: DoctorsListResolver, documents: DocumentTypesResolver}
       },
       {
         path: 'patients/:id',

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using Psychology_API.ViewModels;
 
 namespace Psychology_API.Servises.CofR.ComputedTestResult
@@ -25,12 +24,22 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
         {
             if(testName.Equals("Шкала депрессии Бека"))
             {
-                return base.ComputedTestResult(questionsAnswers, testName);
+                return GetPoints(questionsAnswers);
             }
             else
             {
                 return base.ComputedTestResult(questionsAnswers, testName);
             }
+        }
+
+        protected override int GetPoints(QuestionsAnswersViewModel questionsAnswers)
+        {
+            int sum = 0;
+            foreach (var questionsAnswer in questionsAnswers.QuestionsAnswerList)
+            {
+                sum += questionsAnswer.AnswerValue;
+            }
+            return sum;
         }
     }
 }

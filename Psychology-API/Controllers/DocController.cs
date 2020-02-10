@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
-using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
-using Psychology_Domain.Abstarct;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
@@ -18,14 +17,11 @@ namespace Psychology_API.Controllers
     public class DocController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IDocumentRepository _documentRepository;
-        private readonly ILoggerRepository _loggerRepository;
-        public DocController(IDocumentRepository documentRepository, IMapper mapper, ILoggerRepository loggerRepository)
+        private readonly IDocumentService _documentService;
+        public DocController(IDocumentService documentService, IMapper mapper)
         {
-            _loggerRepository = loggerRepository;
-            _documentRepository = documentRepository;
+            _documentService = documentService;
             _mapper = mapper;
-
         }
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
@@ -42,9 +38,9 @@ namespace Psychology_API.Controllers
 
             document.GetExtensionFromFullNameDocument();
 
-            if (await _documentRepository.SaveDocAsync(document, docForCreateDto.File))
+            if (await _documentService.SaveDocAsync(document, docForCreateDto.File))
             {
-                document.DocumenType = await _documentRepository.GetDocTypeAsync(document.Id);
+                document.DocumenType = await _documentService.GetDocTypeAsync(document.Id);
                 return Ok(document);
             }
 
@@ -53,7 +49,7 @@ namespace Psychology_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDocTypes()
         {
-            var docTypes = await _documentRepository.GetDocTypesAsync();
+            var docTypes = await _documentService.GetDocTypesAsync();
 
             return Ok(docTypes);
         }
@@ -64,15 +60,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");
 
-            var document = await _documentRepository.GetDocumentAsync(documentId);
+            var document = await _documentService.GetDocumentAsync(documentId);
 
             if (document == null)
                 return BadRequest("Указаного документа не существует");
 
-            _documentRepository.Logger += _loggerRepository.WriteInformerLog;
-            _documentRepository.Remove(document);
+            _documentService.Remove(document);
 
-            if (await _documentRepository.SaveAllAsync())
+            if (await _documentService.SaveAllAsync())
                 return NoContent();
 
             // TODO: что то пошло не так, записать в БД ошибку

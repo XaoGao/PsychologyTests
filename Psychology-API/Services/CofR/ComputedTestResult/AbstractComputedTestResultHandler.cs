@@ -46,5 +46,6 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
                 return sum;
             }
         }
+        protected abstract int GetPoints(QuestionsAnswersViewModel questionsAnswers);
     }
 }

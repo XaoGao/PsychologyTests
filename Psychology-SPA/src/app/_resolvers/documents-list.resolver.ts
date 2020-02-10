@@ -1,5 +1,4 @@
-import { Anamnesis } from './../_models/anamnesis';
-import { PatientService } from './../_services/patient.service';
+import { DocService } from './../_services/doc.service';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -9,12 +8,12 @@ import { AuthService } from '../_services/auth.service';
 
 @Injectable()
 
-export class AnamnesesListResolver implements Resolve<Anamnesis[]> {
-    constructor(private authService: AuthService, private patientService: PatientService,
+export class DocumentsListResolver implements Resolve<Document> {
+    constructor(private authService: AuthService, private docService: DocService,
                 private router: Router, private toastrService: ToastrAlertService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Anamnesis[]> {
-        return this.patientService.getAnamnesesList(this.authService.decodedToken.nameid, route.params.id).pipe(
+    resolve(route: ActivatedRouteSnapshot): Observable<Document> {
+        return this.docService.getDocuments(this.authService.decodedToken.nameid, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
                 this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);

@@ -14,25 +14,64 @@ namespace Psychology_API.Repositories.Repositories
     public class TestRepository : BaseRepository, ITestRepository
     {
         private readonly DataContext _context;
-        private readonly IConfiguration _configuration;
-        public TestRepository(DataContext context, IConfiguration configuration) : base(context)
+        public TestRepository(DataContext context) : base(context)
         {
-            _configuration = configuration;
             _context = context;
         }
 
-        public async Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testId ,int testResultInPoints, QuestionsAnswersViewModel questionsAnswers)
+        public async Task<PatientTestResult> CreateAndGetPatientTestResultRepositoryAsnyc(int doctorId, int patientId, int testId ,int testResultInPoints, QuestionsAnswersViewModel questionsAnswers)
         {
-            var testResult = await _context.ProcessingInterpretationOfResults.SingleOrDefaultAsync(tr => tr.TestId == testId && tr.MinValue <= testResultInPoints && tr.MaxValue >= testResultInPoints);
+            var testResult = await _context.ProcessingInterpretationOfResults.SingleOrDefaultAsync(tr => tr.TestId == testId && 
+                tr.MinValue <= testResultInPoints && 
+                tr.MaxValue >= testResultInPoints);
 
             if(testResult == null)
                 throw new Exception("Не предвиденная ошибка, не верное расчитаны количество баллов");
 
-            var questionsAnswersList = await CreateQuestionsAnswersAsync(patientId, testId, questionsAnswers);
+            var questionsAnswersList = await CreateQuestionsAnswersRepositoryAsync(patientId, testId, questionsAnswers);
             var patientTestResult = new PatientTestResult(doctorId, patientId, testId, testResultInPoints, testResult.Id, DateTime.Now, questionsAnswersList);
 
             await _context.PatientTestResult.AddAsync(patientTestResult);
             await _context.SaveChangesAsync();
+
+            return patientTestResult;
+        }
+        public async Task<Test> GetTestRepositoryAsync(int testId)
+        {
+            var test = await _context.Tests
+                                .Include(t => t.Questions)
+                                    .ThenInclude(q => q.Answers)
+                                .SingleOrDefaultAsync(t => t.Id == testId);
+
+            return test;
+        }
+        public async Task<IEnumerable<Test>> GetTestsRepositoryAsync()
+        {
+            var tests = await _context.Tests.ToListAsync();
+
+            return tests;
+        }
+        public async Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatientRepositoryAsync(int patientId)
+        {
+            var patientTestResults = await _context.PatientTestResult
+                .Include(ptr => ptr.Doctor)
+                .Include(ptr => ptr.Patient)
+                .Include(ptr => ptr.Test)
+                .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .OrderByDescending(ptr => ptr.DateTimeCreate)
+                .ToListAsync();
+
+            return patientTestResults;
+        }
+        public async Task<PatientTestResult> GetTestHistiryOfPatientRepositoryAsync(int patientTestResultId)
+        {
+            var patientTestResult = await _context.PatientTestResult
+                .Include(ptr => ptr.Test)
+                .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .Include(ptr => ptr.QuestionsAnswers)
+                    .ThenInclude(q => q.Question)
+                    .ThenInclude(a => a.Answers)
+                .SingleOrDefaultAsync(ptr => ptr.Id == patientTestResultId);
 
             return patientTestResult;
         }
@@ -43,7 +82,7 @@ namespace Psychology_API.Repositories.Repositories
         /// <param name="testId"> Идентификатор теста. </param>
         /// <param name="questionsAnswers"> Входящий массив вопросов и ответов. </param>
         /// <returns> Записи БД Вопрос-Ответ. </returns>
-        private async Task<ICollection<QuestionAnswer>> CreateQuestionsAnswersAsync(int patientId, int testId, QuestionsAnswersViewModel questionsAnswers)
+        private async Task<ICollection<QuestionAnswer>> CreateQuestionsAnswersRepositoryAsync(int patientId, int testId, QuestionsAnswersViewModel questionsAnswers)
         {
             List<QuestionAnswer> questionAnswersList = new List<QuestionAnswer>();
             foreach (var item in questionsAnswers.QuestionsAnswerList)
@@ -60,48 +99,6 @@ namespace Psychology_API.Repositories.Repositories
                 questionAnswersList.Add(questionAnswer);
             }
             return questionAnswersList;
-        }
-        public async Task<Test> GetTestAsync(int testId)
-        {
-            var test = await _context.Tests
-                                .Include(t => t.Questions)
-                                    .ThenInclude(q => q.Answers)
-                                .SingleOrDefaultAsync(t => t.Id == testId);
-
-            return test;
-        }
-
-        public async Task<IEnumerable<Test>> GetTestsAsync()
-        {
-            var tests = await _context.Tests.ToListAsync();
-
-            return tests;
-        }
-
-        public async Task<IEnumerable<PatientTestResult>> GetTestsHistiryOfPatient(int patientId)
-        {
-            var patientTestResults = await _context.PatientTestResult
-                .Include(ptr => ptr.Doctor)
-                .Include(ptr => ptr.Patient)
-                .Include(ptr => ptr.Test)
-                .Include(ptr => ptr.ProcessingInterpretationOfResult)
-                .OrderByDescending(ptr => ptr.DateTimeCreate)
-                .ToListAsync();
-
-            return patientTestResults;
-        }
-
-        public async Task<PatientTestResult> GetTestHistiryOfPatient(int patientTestResultId)
-        {
-            var patientTestResult = await _context.PatientTestResult
-                .Include(ptr => ptr.Test)
-                .Include(ptr => ptr.ProcessingInterpretationOfResult)
-                .Include(ptr => ptr.QuestionsAnswers)
-                    .ThenInclude(q => q.Question)
-                    .ThenInclude(a => a.Answers)
-                .SingleOrDefaultAsync(ptr => ptr.Id == patientTestResultId);
-
-            return patientTestResult;
         }
     }
 }
