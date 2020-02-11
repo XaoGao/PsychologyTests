@@ -1,33 +1,49 @@
 <div class="container">
     <!-- Для доктора -->
     <div *ngIf="isDoctor()" [routerLink]="['/patients']" routerLinkActive="router-link-active">
-        <p>Пациенты(для врача)</p>
+        <p>Пациенты</p>
         <hr>
     </div>
 
     <!-- Для регистратора -->
-
-    <div *ngIf="isRegistry()" [routerLink]="['/receptions']">
-        <p>Назначить прием пациента</p>
-        <hr>
+    <div *ngIf="isRegistry()">
+        <div [routerLink]="['/receptions']">
+            <p>Назначить прием пациента</p>
+            <hr>
+        </div>
+        <div [routerLink]="['/patientsforregistry', 0]">
+            <p>Добавить пациента</p>
+            <hr>
+        </div>
+        <div [routerLink]="['/patientsforregistry']">
+            <p>Пациенты</p>
+            <hr>
+        </div>
     </div>
-    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry', 0]">
-        <p>Добавить пациента</p>
-        <hr>
-    </div>
-
-    <div *ngIf="isRegistry()" [routerLink]="['/patientsforregistry']">
-        <p>Пациенты(для регистратора)</p>
-        <hr>
-    </div>
-
     <!-- Для отдела кадров -->
     <div *ngIf="isHR()">
-        <p>График работ</p>
-        <hr>
+        <div>
+            <p>График работ</p>
+            <hr>
+        </div>
+        <div [routerLink]="['/vacations']">
+            <p>График отпусков</p>
+            <hr>
+        </div>
     </div>
-    <div *ngIf="isHR()" [routerLink]="['/vacations']">
-        <p>График отпусков</p>
-        <hr>
+    <!-- Для администратора -->
+    <div *ngIf="isAdmin()">
+        <div>
+            <p>Добавить пользователя</p>
+            <hr>
+        </div>
+        <div>
+            <p>Пользователи</p>
+            <hr>
+        </div>
+        <div>
+            <p>Роли</p>
+            <hr>
+        </div>
     </div>
 </div>

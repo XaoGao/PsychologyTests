@@ -4,7 +4,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.Dtos;
-using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
 using System;
 using System.Collections.Generic;

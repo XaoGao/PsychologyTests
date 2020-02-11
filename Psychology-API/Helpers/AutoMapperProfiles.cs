@@ -73,6 +73,9 @@ namespace Psychology_API.Helpers
                 .ForMember(dest => dest.CountDays, opt => {
                     opt.MapFrom(src => (src.EndVacation - src.StartVacation).Days);
                 });
+
+            //
+            CreateMap<Role, Role>();
         }
     }
 }

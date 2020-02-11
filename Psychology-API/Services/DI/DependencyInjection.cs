@@ -34,6 +34,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<IReceptionRepository, ReceptionRepository>();
             services.AddScoped<IVacationRepository, VacationRepository>();
             services.AddScoped<ILoggerRepository, LoggerRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             // DataServices
             services.AddScoped<IDoctorService, DoctorService>();
@@ -44,6 +45,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IPhonebookService, PhonebookService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IAdminService, AdminService>();
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             //
             services.AddSingleton<CacheSettings>();

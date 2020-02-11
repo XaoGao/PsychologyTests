@@ -77,9 +77,6 @@ namespace Psychology_API.Dtos
         /// </summary>
         /// <value></value>
         public int RoleId { get; set; }
-        /// <summary>
-        /// Роль пользователя.
-        /// </summary>
-        /// <value></value>
+        public bool IsDeleted { get; set; }
     }
 }
