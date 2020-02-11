@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
-using Microsoft.Extensions.Configuration;
 using System;
 using Psychology_API.ViewModels;
 using System.Linq;
@@ -58,6 +57,7 @@ namespace Psychology_API.Repositories.Repositories
                 .Include(ptr => ptr.Patient)
                 .Include(ptr => ptr.Test)
                 .Include(ptr => ptr.ProcessingInterpretationOfResult)
+                .Where(ptr => ptr.PatientId == patientId)
                 .OrderByDescending(ptr => ptr.DateTimeCreate)
                 .ToListAsync();
 

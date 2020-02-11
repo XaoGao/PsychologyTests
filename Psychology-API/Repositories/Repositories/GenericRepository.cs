@@ -14,15 +14,12 @@ namespace Psychology_API.Repositories.Repositories
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;
-        private readonly ICache<TEntity> _cache;
-
         public event Action<string, string, TEntity> SetInCashe;
         public event Func<string, string, TEntity> GetFromCashe;
         public event Action<string, string> RemoveItemInCashe;
 
-        public GenericRepository(DataContext context, ICache<TEntity> cache)
+        public GenericRepository(DataContext context)
         {
-            _cache = cache;
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }

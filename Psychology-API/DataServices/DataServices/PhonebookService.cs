@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Repositories.Repositories;
+using Psychology_API.Repositories.Contracts;
 using Psychology_API.ViewModels;
 
 namespace Psychology_API.DataServices.DataServices
 {
-    public class PhonebookService : PhonebookRepository, IPhonebookService
+    public class PhonebookService : IPhonebookService
     {
-        public PhonebookService(DataContext context) : base(context)
+        private readonly IPhonebookRepository _phonebookRepository;
+        public PhonebookService(IPhonebookRepository phonebookRepository)
         {
+            _phonebookRepository = phonebookRepository;
         }
 
         public async Task<IEnumerable<DepartmentWithDoctors>> GetPhonebookAsync()
         {
-            return await base.GetPhonebookRepositoryAsync();
+            return await _phonebookRepository.GetPhonebookRepositoryAsync();
         }
     }
 }

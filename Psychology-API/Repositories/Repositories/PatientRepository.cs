@@ -65,18 +65,6 @@ namespace Psychology_API.Repositories.Repositories
                 SetInCashe(patient.Id.ToString(), suffix, patient);
             }
         }
-
-        public async Task<IEnumerable<Anamnesis>> GetAnamnesesRepositoryAsync(int patientId)
-        {
-            var anamneses = await _context.Anamneses
-                .Where(a => a.PatientId == patientId)
-                .Include(a => a.Doctor)
-                .Include(a => a.Patient)
-                .ToListAsync();
-
-            return anamneses.OrderByDescending(a => a.ConclusionTime);
-        }
-
         public async Task<Patient> GetPatientWithoutCacheRepositoryAsync(int doctorId, int patientId)
         {
             RemoveItemInCashe(patientId.ToString(), suffix);
@@ -84,24 +72,6 @@ namespace Psychology_API.Repositories.Repositories
 
             return patient;
         }
-        public async Task<Anamnesis> CreateAnamnesisRepositoryAsync(int doctorId, int patientId, Anamnesis anamnesis)
-        {
-            var patient = await _context.Patients.SingleOrDefaultAsync(p => p.Id == patientId);
-
-            var anamnesisIsLast = await _context.Anamneses.SingleOrDefaultAsync(a => a.IsLast == true && a.PatientId == patientId);
-
-            if(anamnesisIsLast != null)
-                anamnesisIsLast.IsLast = false;
-
-            patient.Anamneses.Add(anamnesis);
-
-            await _context.Anamneses.AddAsync(anamnesis);
-
-            await _context.SaveChangesAsync();
-
-            return anamnesis;
-        }
-
         public async Task<IEnumerable<Patient>> GetPatientsForRegistryRepositoryAsync()
         {
             var patients = await _context.Patients.Where(p => p.IsDelete != true).ToListAsync();
@@ -116,7 +86,7 @@ namespace Psychology_API.Repositories.Repositories
                     .Include(p => p.Documents)
                     .Include(p => p.Documents)
                         .ThenInclude(d => d.DocumenType)
-                    .SingleOrDefaultAsync(p =>/*p.DoctorId == doctorId &&*/ p.Id == patientId);
+                    .SingleOrDefaultAsync(p => p.Id == patientId);
 
             return patient;
         }
