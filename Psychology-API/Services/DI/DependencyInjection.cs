@@ -45,6 +45,7 @@ namespace Psychology_API.Servises.DI
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IPhonebookService, PhonebookService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IAnamnesisService, AnamnesisService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             //

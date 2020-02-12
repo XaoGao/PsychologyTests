@@ -14,28 +14,15 @@ namespace Psychology_API.DataServices.DataServices
         private readonly ICache<Patient> _cache;
         private readonly DataContext _context;
         private readonly IPatientRepository _patientRepository;
-        private readonly IAnamnesisRepository _anamnesisRepository;
 
         public PatientService(DataContext context,
                               ICache<Patient> cache,
-                              IPatientRepository patientRepository,
-                              IAnamnesisRepository anamnesisRepository) : base(context)
+                              IPatientRepository patientRepository) : base(context)
         {
             _patientRepository = patientRepository;
-            _anamnesisRepository = anamnesisRepository;
             _context = context;
             _cache = cache;
         }
-        public async Task<Anamnesis> CreateAnamnesisAsync(int doctorId, int patientId, Anamnesis anamnesis)
-        {
-            return await _anamnesisRepository.CreateAnamnesisRepositoryAsync(doctorId, patientId, anamnesis);
-        }
-
-        public async Task<IEnumerable<Anamnesis>> GetAnamnesesAsync(int patientId)
-        {
-            return await _anamnesisRepository.GetAnamnesesRepositoryAsync(patientId);
-        }
-
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
             AddGetSetEvents();
