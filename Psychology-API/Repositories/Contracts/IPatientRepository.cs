@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Psychology_API.Settings.Patients;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Contracts
@@ -14,7 +15,7 @@ namespace Psychology_API.Repositories.Contracts
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <returns> Пациенты, которые записаны на доктора. </returns>
-        Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(int doctorId);
+        Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(int doctorId, PatientsType patientsType);
         /// <summary>
         /// Получить конкретного пациента доктора.
         /// </summary>
@@ -38,7 +39,7 @@ namespace Psychology_API.Repositories.Contracts
         /// <summary>
         /// Получить всех пациентов для регистратора.
         /// </summary>
-        /// <returns> Список все пациентов. </returns>
-        Task<IEnumerable<Patient>> GetPatientsForRegistryRepositoryAsync();
+        /// <returns> Список всех пациентов. </returns>
+        Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(PatientsType patientsType);
     }
 }

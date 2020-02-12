@@ -1,3 +1,4 @@
+import { RolesComponent } from './roles/roles.component';
 import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
@@ -43,6 +44,8 @@ import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { PatientTestResultsListResolver } from './_resolvers/patient-test-results-list.resolver';
 import { PatientTestResultsDetailResolver } from './_resolvers/patient-test-result-detail.resolver';
+import { DoctorsListForAdminResolver } from './_resolvers/doctors-list-for-admin.resolver';
+import { RolesListResolver } from './_resolvers/roles-list.resolver';
 
 const routes: Routes = [
   {
@@ -88,7 +91,16 @@ const routes: Routes = [
           vacations: VacationsListForDoctorResolver
         }
       },
-      { path: 'doctors', component: DoctorsListComponent },
+      {
+        path: 'doctors',
+        component: DoctorsListComponent,
+        resolve: { doctors: DoctorsListForAdminResolver }
+      },
+      {
+        path: 'roles',
+        component: RolesComponent,
+        resolve: { roles: RolesListResolver }
+      },
       {
         path: 'patients',
         component: PatientsListComponent,

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Psychology_API.Settings.Doctors;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.DataServices.Contracts
@@ -18,7 +19,7 @@ namespace Psychology_API.DataServices.Contracts
         /// Получить всех докторов в системе.
         /// </summary>
         /// <returns> Список докторов. </returns>
-        Task<IEnumerable<Doctor>> GetAllDoctorsAsync();
+        Task<IEnumerable<Doctor>> GetDoctorsAsync(DoctorsType doctorsType);
         /// <summary>
         /// Создать роль.
         /// </summary>

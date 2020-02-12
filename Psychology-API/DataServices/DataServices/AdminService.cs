@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Settings.Doctors;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.DataServices.DataServices
@@ -23,9 +24,9 @@ namespace Psychology_API.DataServices.DataServices
             return await _adminRepository.CreateRoleAsync(role);
         }
 
-        public async Task<IEnumerable<Doctor>> GetAllDoctorsAsync()
+        public async Task<IEnumerable<Doctor>> GetDoctorsAsync(DoctorsType doctorsType)
         {
-            return await _adminRepository.GetAllDoctorsRepositoryAsync();
+            return await _doctorRepository.GetDoctorsRepositoryAsync(doctorsType);
         }
 
         public async Task<Role> GetRoleAsync(int roleId)

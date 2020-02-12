@@ -25,12 +25,14 @@ namespace Psychology_API.Repositories.Repositories
             return false;
         }
 
-        public async Task<IEnumerable<Doctor>> GetAllDoctorsRepositoryAsync()
-        {
-            var doctors = await _context.Doctors.ToListAsync();
+        // public async Task<IEnumerable<Doctor>> GetAllDoctorsRepositoryAsync(DoctorsType doctorsType)
+        // {
+        //     DoctorFactory doctorFactory = new DoctorFactory(_context);
 
-            return doctors;
-        }
+        //     var doctors = await doctorFactory.GetDoctors(doctorsType);
+
+        //     return doctors;
+        // }
 
         public async Task<Role> GetRoleRepositoryAsync(int roleId)
         {

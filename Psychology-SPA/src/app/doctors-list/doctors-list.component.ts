@@ -1,3 +1,5 @@
+import { Doctor } from './../_models/doctor';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorsListComponent implements OnInit {
 
-  constructor() { }
+  doctors: Doctor[];
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe((data) => {
+      this.doctors = data.doctors;
+    });
   }
 
 }

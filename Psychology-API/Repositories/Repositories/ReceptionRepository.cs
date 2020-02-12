@@ -37,6 +37,7 @@ namespace Psychology_API.Repositories.Repositories
         public async Task<IEnumerable<Reception>> GetReseptionsRepositoryAsync(int doctorId)
         {
             var receptions = await _context.Receptions
+                .Include(r => r.Patient)
                 .Where(r => r.DoctorId == doctorId)
                 .ToListAsync();
 
@@ -44,7 +45,7 @@ namespace Psychology_API.Repositories.Repositories
         }
         public async Task<IEnumerable<DateTime>> GetFreeReceptionTimeForDayRepositoryAsync(int doctorId, DateTime dateTimeReception)
         {
-            var allWorkTimesOfDoctor = getAllWorkTimes(dateTimeReception);
+            var allWorkTimesOfDoctor = GetAllWorkTimes(dateTimeReception);
 
             var receptions = await _context.Receptions
                 .Where(r => r.DoctorId == doctorId && r.DateTimeReception >= DateTime.Now)
@@ -74,7 +75,12 @@ namespace Psychology_API.Repositories.Repositories
 
             return receptions;
         }
-        private List<DateTime> getAllWorkTimes(DateTime day)
+        /// <summary>
+        /// Поучитб список рабочих часов в кокретный день.
+        /// </summary>
+        /// <param name="day"> Дата на которую нужно получить рабочие часы. </param>
+        /// <returns> Список рабочих часов. </returns>
+        private List<DateTime> GetAllWorkTimes(DateTime day)
         {
             List<DateTime> times = new List<DateTime>();
             for (int i = 8; i <= 18; i++)

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Psychology_API.Settings;
 using Psychology_API.DataServices.Contracts;
+using Psychology_API.Settings.Patients;
 
 namespace Psychology_API.Controllers
 {
@@ -34,7 +35,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patients = await _patientService.GetPatientsAsync(doctorId);
+            var patients = await _patientService.GetPatientsAsync(doctorId, PatientsType.PatientsOfDoctor);
 
             var patientsForReturn = _mapper.Map<IEnumerable<PatientForListDto>>(patients);
 
@@ -150,7 +151,7 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patient = await _patientService.GetPatientsForRegistryAsync();
+            var patient = await _patientService.GetPatientsAsync(PatientsType.EnablePatients);
 
             return Ok(patient);
         }

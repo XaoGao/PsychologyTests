@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Servises.Cache;
+using Psychology_API.Repositories.Repositories.Factory.Patients;
+using Psychology_API.Settings.Patients;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -40,13 +40,11 @@ namespace Psychology_API.Repositories.Repositories
             return patient;
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(int doctorId)
+        public async Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(int doctorId, PatientsType patientsType)
         {
-            var patients = await _context.Patients
-                .Include(p => p.Doctor)
-                .Include(p => p.Anamneses)
-                .Where(p => p.DoctorId == doctorId && p.IsDelete != true)
-                .ToListAsync();
+            PatientFactory patientFactory = new PatientFactory(_context);
+
+            var patients = await patientFactory.GetPatientAsync(doctorId, patientsType);
 
             return patients;
         }
@@ -72,9 +70,11 @@ namespace Psychology_API.Repositories.Repositories
 
             return patient;
         }
-        public async Task<IEnumerable<Patient>> GetPatientsForRegistryRepositoryAsync()
+        public async Task<IEnumerable<Patient>> GetPatientsRepositoryAsync(PatientsType patientsType)
         {
-            var patients = await _context.Patients.Where(p => p.IsDelete != true).ToListAsync();
+            PatientFactory patientFactory = new PatientFactory(_context);
+
+            var patients = await patientFactory.GetPatientAsync(patientsType);
 
             return patients;
         }

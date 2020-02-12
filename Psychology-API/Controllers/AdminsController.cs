@@ -9,6 +9,7 @@ using Psychology_API.Dtos;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 using System;
+using Psychology_API.Settings.Doctors;
 
 namespace Psychology_API.Controllers
 {
@@ -37,7 +38,7 @@ namespace Psychology_API.Controllers
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");
 
-            var doctors = await _adminService.GetAllDoctorsAsync();
+            var doctors = await _adminService.GetDoctorsAsync(DoctorsType.AllDoctors);
 
             var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForReturnDto>>(doctors);
 

@@ -10,6 +10,7 @@ using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
+using Psychology_API.Settings.Doctors;
 
 namespace Psychology_API.Controllers
 {
@@ -50,7 +51,7 @@ namespace Psychology_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDoctors() 
         {
-            var doctors = await _doctorService.GetDoctorsAsync();
+            var doctors = await _doctorService.GetDoctorsAsync(DoctorsType.DoctorsWithRoleDoctor);
             // TODO: доделать
             var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
 

@@ -4,6 +4,7 @@ using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Servises.Cache;
+using Psychology_API.Settings.Patients;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.DataServices.DataServices
@@ -43,14 +44,14 @@ namespace Psychology_API.DataServices.DataServices
             return patient;
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId)
+        public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId, PatientsType patientsType)
         {
-            return await _patientRepository.GetPatientsRepositoryAsync(doctorId);
+            return await _patientRepository.GetPatientsRepositoryAsync(doctorId, patientsType);
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientsForRegistryAsync()
+        public async Task<IEnumerable<Patient>> GetPatientsAsync(PatientsType patientsType)
         {
-            return await _patientRepository.GetPatientsForRegistryRepositoryAsync();
+            return await _patientRepository.GetPatientsRepositoryAsync(patientsType);
         }
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)

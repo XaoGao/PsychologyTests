@@ -52,6 +52,8 @@ import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsListForDoctorResolver } from './_resolvers/vacations-list-for-doctor.resolver';
 import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
+import { DoctorsListForAdminResolver } from './_resolvers/doctors-list-for-admin.resolver';
+import { RolesListResolver } from './_resolvers/roles-list.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -90,6 +92,7 @@ import { VacationsComponent } from './vacations/vacations.component';
 import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
+import { RolesComponent } from './roles/roles.component';
 
 
 export function tokenGetter() {
@@ -127,7 +130,8 @@ export function tokenGetter() {
     VacationsComponent,
     CreateVacationComponent,
     TestHistoryComponent,
-    TestDetailHistoryComponent
+    TestDetailHistoryComponent,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
@@ -189,6 +193,8 @@ export function tokenGetter() {
     VacationsListResolver,
     VacationsListForDoctorResolver,
     TestResolver,
+    DoctorsListForAdminResolver,
+    RolesListResolver,
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ],
   bootstrap: [

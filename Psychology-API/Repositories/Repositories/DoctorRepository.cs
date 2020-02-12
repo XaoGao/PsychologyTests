@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Settings;
+using Psychology_API.Repositories.Repositories.Factory.Doctors;
+using Psychology_API.Settings.Doctors;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -46,17 +46,11 @@ namespace Psychology_API.Repositories.Repositories
             return doctor;
         }
 
-        public async Task<IEnumerable<Doctor>> GetDoctorsRepositoryAsync()
+        public async Task<IEnumerable<Doctor>> GetDoctorsRepositoryAsync(DoctorsType doctorsType)
         {
-            var role = await _context.Roles.SingleOrDefaultAsync(r => r.Name.Equals(RolesSettings.Doctor));
+            DoctorFactory doctorFactory = new DoctorFactory(_context);
 
-            if(role == null)
-                throw new Exception("Возникла ошибка. Обратитесь к администратору для утрочнее ролей пользователей системы");
-
-            var doctors = await _context.Doctors
-                .Where(d => d.RoleId == role.Id && d.IsDeleted == false)
-                .Include(d => d.Patients)
-                .ToListAsync();
+            var doctors = await doctorFactory.GetDoctors(doctorsType);
 
             return doctors;
         }
@@ -68,17 +62,6 @@ namespace Psychology_API.Repositories.Repositories
 
             return doctor;
         }
-
-        public async Task<IEnumerable<Reception>> GetReceptionsForDoctorsRepositoryAsync(int doctorId)
-        {
-            var receptions = await _context.Receptions
-                .Include(r => r.Patient)
-                .Where(r => r.DoctorId == doctorId)
-                .ToListAsync();
-
-            return receptions;
-        }
-
         private async Task<Doctor> GetDoctorFromContext(int doctorId)
         {
             var doctor = await _context.Doctors
