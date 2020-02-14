@@ -11,6 +11,7 @@ import { Patient } from './../../_models/patient';
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { PatientService } from 'src/app/_services/patient.service';
+import {saveFile, saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-patient-for-registry',
@@ -121,6 +122,17 @@ export class PatientForRegistryComponent implements OnInit {
     }, err => {
       this.toastrService.error(err);
     });
+  }
+  public downloadDoc(document: Document): void {
+    this.docService.downloadDocument(this.authService.decodedToken.nameid, this.patient.id, document.id).subscribe((data: any) => {
+      this.downloadFile(data, document.docName);
+    }, err => {
+      this.toastrService.error(err);
+    });
+  }
+  private downloadFile(data: any, fileName: string) {
+    const blob = new Blob([data], { type: 'application/octet-stream' });
+    saveAs(blob, fileName);
   }
   public deletePatient() {
     if (confirm(`Вы уверены, что хотите удалить из системы пациента:${this.patient.fullname}?`)) {

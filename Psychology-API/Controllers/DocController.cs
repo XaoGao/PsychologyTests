@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -83,6 +84,24 @@ namespace Psychology_API.Controllers
             var documents = await _documentService.GetDocumentsAsync(patientId);
 
             return Ok(documents);
+        }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpGet("{documentId}")]
+        public async Task<IActionResult> GetDocument(int doctorId, int patientId, int documentId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return BadRequest("Пользователь не авторизован");
+
+            var document = await _documentService.GetDocumentAsync(documentId);
+
+            if (document == null)
+                return BadRequest("Указаного документа не существует");
+
+
+            return File(document.Body, "application/vnd.ms-word", document.DocName);
+
+            // TODO: что то пошло не так, записать в БД ошибку
+            throw new Exception("");
         }
     }
 }

@@ -33,7 +33,7 @@
     </div>
     <!-- Для администратора -->
     <div *ngIf="isAdmin()">
-        <div>
+        <div [routerLink]="['/doctors', 0]" >
             <p>Добавить пользователя</p>
             <hr>
         </div>

@@ -33,7 +33,8 @@
             </mat-select>
         </mat-form-field>
         <br>
-        <button class="col-3 ml-3 btn btn-primary" (click)="save(patientForm)"><i class="fa fa-save"></i>Сохранить</button>
+        <button class="col-3 ml-3 btn btn-primary" (click)="save(patientForm)"><i
+                class="fa fa-save"></i>Сохранить</button>
         <button *ngIf="!isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i
                 class="fa fa-trash"></i>Удалить</button>
     </div>
@@ -47,8 +48,9 @@
             <th scope="col" class="col-3">Наименование документа</th>
             <th scope="col" class="col-1">Номер</th>
             <th scope="col" class="col-1">Серия</th>
-            <th scope="col" class="col-3">Тип</th>
+            <th scope="col" class="col-2">Тип</th>
             <th scope="col" class="col-2">Запрос</th>
+            <th scope="col" class="col-1">Скачать</th>
             <th scope="col" class="col-1">Удалить</th>
         </thead>
 
@@ -57,10 +59,13 @@
             <th class="col-3">{{ documentFromPatient.docName }}</th>
             <th class="col-1">{{ documentFromPatient?.number }}</th>
             <th class="col-1">{{ documentFromPatient?.series }}</th>
-            <th class="col-3">{{ documentFromPatient.documenType.name }}</th>
+            <th class="col-2">{{ documentFromPatient.documenType.name }}</th>
             <th class="col-2">Запрос</th>
+            <th class="col-1 text-center"><button class="btn btn-success" title="Загрузить документ"
+                (click)="downloadDoc(documentFromPatient)"><i class="fa fa-download"></i></button></th>
             <th class="col-1 text-center"><button class="btn btn-danger" title="Удалить документ"
                     (click)="deleteDoc(documentFromPatient)"><i class="fa fa-trash"></i></button></th>
+            
         </tbody>
     </table>
 </div>

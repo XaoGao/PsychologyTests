@@ -22,6 +22,9 @@ export class DocService {
   public deleteDocument(doctorId: number, patientId: number, documentId: number) {
     return this.http.delete(this.getDocumentUrl(doctorId, patientId) + documentId);
   }
+  public downloadDocument(doctorId: number, patientId: number, documentId: number) {
+    return this.http.get(this.getDocumentUrl(doctorId, patientId) + documentId, { responseType: 'blob' });
+  }
   private getDocumentUrl(doctorId: number, patientId: number): string {
     return this.BASE_URL_DOC + doctorId + '/patients/' + patientId + '/doc/';
   }

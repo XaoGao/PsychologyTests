@@ -1,1 +1,12 @@
-<p>roles works!</p>
+<h1 class="text-center">Роли в системе</h1>
+<hr>
+<div class="mt-5 ml-5"> 
+    <div *ngFor="let role of roles; let i = index;">
+        <hr>
+        <p> {{ i + 1 }}) {{ role.name }}</p>
+        <hr>
+    </div>
+</div>
+<div>
+   <p>Для добавлении ролии небходимо добавть ее в БД в таблицу Role.</p> 
+</div>

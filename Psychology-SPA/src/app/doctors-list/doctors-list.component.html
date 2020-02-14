@@ -1,1 +1,20 @@
-<p *ngFor="let doctor of doctors">{{ doctor.fullname }}</p>
+<h1> Пользователи </h1>
+<hr>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Пользователи:</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Поиск по логину" name="search" [(ngModel)]="search"
+        aria-describedby="basic-addon1">
+</div>
+<div class="mt-5 ml-5">
+    <div *ngFor="let doctor of doctors">
+        <div *ngIf="doctor.username.includes(search)">
+            <p>Ф.И.О.: {{ doctor.fullname }}</p>
+            <p>Логин: {{ doctor.username }}</p>
+            <p>Активный: {{ doctor.isDeleted }}</p>
+            <button class="btn btn-primary" [routerLink]="['/doctors', doctor.id]">Подробнее</button>
+            <hr>
+        </div>
+    </div>
+</div>

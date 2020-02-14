@@ -1,3 +1,5 @@
+import { DoctorResolver } from './_resolvers/doctor.resolver';
+import { DoctorComponent } from './doctors-list/doctor/doctor.component';
 import { RolesComponent } from './roles/roles.component';
 import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
@@ -95,6 +97,11 @@ const routes: Routes = [
         path: 'doctors',
         component: DoctorsListComponent,
         resolve: { doctors: DoctorsListForAdminResolver }
+      },
+      {
+        path: 'doctors/:id',
+        component: DoctorComponent,
+        resolve: { doctor: DoctorResolver }
       },
       {
         path: 'roles',

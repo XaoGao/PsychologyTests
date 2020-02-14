@@ -54,6 +54,7 @@ import { DocumentTypesResolver } from './_resolvers/document-types.resolver';
 import { DocumentsListResolver } from './_resolvers/documents-list.resolver';
 import { DoctorsListForAdminResolver } from './_resolvers/doctors-list-for-admin.resolver';
 import { RolesListResolver } from './_resolvers/roles-list.resolver';
+import { DoctorResolver } from './_resolvers/doctor.resolver';
 // Component
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -93,6 +94,7 @@ import { CreateVacationComponent } from './vacations/create-vacation/create-vaca
 import { TestHistoryComponent } from './tests/test-history/test-history.component';
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 import { RolesComponent } from './roles/roles.component';
+import { DoctorComponent } from './doctors-list/doctor/doctor.component';
 
 
 export function tokenGetter() {
@@ -131,7 +133,8 @@ export function tokenGetter() {
     CreateVacationComponent,
     TestHistoryComponent,
     TestDetailHistoryComponent,
-    RolesComponent
+    RolesComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -195,6 +198,7 @@ export function tokenGetter() {
     TestResolver,
     DoctorsListForAdminResolver,
     RolesListResolver,
+    DoctorResolver,
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' }
   ],
   bootstrap: [

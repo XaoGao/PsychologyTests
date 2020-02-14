@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class DoctorsListComponent implements OnInit {
 
   doctors: Doctor[];
+  search = '';
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
