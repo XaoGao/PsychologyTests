@@ -1,5 +1,5 @@
+import { AdminService } from './../_services/admin.service';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
-import { DoctorService } from '../_services/doctor.service';
 import { Doctor } from '../_models/doctor';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -10,11 +10,11 @@ import { AuthService } from '../_services/auth.service';
 @Injectable()
 
 export class DoctorResolver implements Resolve<Doctor> {
-    constructor(private doctorService: DoctorService, private router: Router,
+    constructor(private adminService: AdminService, private router: Router,
                 private toastrService: ToastrAlertService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Doctor> {
-        return this.doctorService.getDoctor(route.params.id).pipe(
+        return this.adminService.getDoctor(this.authService.decodedToken.nameid, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
                 this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);

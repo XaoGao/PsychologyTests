@@ -10,14 +10,14 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  BASE_URL = environment.apiUrl + 'auth/';
-  helper = new JwtHelperService();
-  decodedToken: any;
+  private BASE_URL = environment.apiUrl + 'auth/';
+  public helper = new JwtHelperService();
+  public decodedToken: any;
   receptions: Reception[];
 
   constructor(private http: HttpClient) { }
 
-  login(model: any) {
+  public login(model: any) {
     return this.http.post(this.BASE_URL + 'login', model).pipe(
       map((res: any) => {
         const user = res;
@@ -32,14 +32,14 @@ export class AuthService {
       })
     );
   }
-  register(model: any) {
+  public register(model: any) {
     return this.http.post(this.BASE_URL + 'register', model);
   }
-  loggedIn(): boolean {
+  public loggedIn(): boolean {
     const token = localStorage.getItem('token');
     return !this.helper.isTokenExpired(token);
   }
-  loggedOut(): void {
+  public loggedOut(): void {
     this.decodedToken = null;
     localStorage.removeItem('token');
     localStorage.removeItem('receptions');

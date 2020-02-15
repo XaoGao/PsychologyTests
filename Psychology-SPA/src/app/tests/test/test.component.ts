@@ -14,6 +14,7 @@ import { QuestionsAnswer } from 'src/app/_models/questionsAnswer';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+  // TODO: fix
   @ViewChild('testForm', { static: false }) testForm: NgForm;
   public test: Test;
   public questionsAnswers: QuestionsAnswers = new QuestionsAnswers();

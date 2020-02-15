@@ -30,7 +30,7 @@ export class DepartmentComponent implements OnInit {
       this.departments = data.departments;
     });
   }
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

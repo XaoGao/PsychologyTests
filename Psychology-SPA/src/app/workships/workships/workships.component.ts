@@ -3,11 +3,7 @@ import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { CalendarDateFormatter, CalendarEvent } from 'angular-calendar';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { addHours, parseISO, format } from 'date-fns';
-// import dayGridPlugin from '@fullcalendar/daygrid';
-// import timeGrigPlugin from '@fullcalendar/timegrid';
-// import interactionPlugin from '@fullcalendar/interaction';
 
 const colors: any = {
   red: {
@@ -38,7 +34,6 @@ const colors: any = {
 })
 export class WorkshipsComponent implements OnInit {
 
-  // calendarPlugins = [dayGridPlugin];
   viewDate: Date = new Date();
   locale = 'ru';
   receptions: Reception[];
@@ -46,8 +41,6 @@ export class WorkshipsComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    // this.calendarPlugins.setOptions('height', 700);
-    // console.log(this.calendarPlugins);
     this.getReceptions();
   }
   public logged(): boolean {

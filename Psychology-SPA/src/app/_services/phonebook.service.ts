@@ -12,10 +12,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class PhonebookService {
 
-  BASE_URL = environment.apiUrl;
+  private BASE_URL = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  getDepartments(param: boolean): Observable<Department[]> {
+  public getDepartments(param: boolean): Observable<Department[]> {
     let params = new HttpParams();
     params = params.append('param', String(param));
     return this.http.get<Department[]>(this.BASE_URL + 'departments', { observe: 'response', params})
@@ -25,7 +25,7 @@ export class PhonebookService {
         })
       );
   }
-  getPositions(param: boolean): Observable<Position[]> {
+  public getPositions(param: boolean): Observable<Position[]> {
     let params = new HttpParams();
     params = params.append('param', String(param));
     return this.http.get<Position[]>(this.BASE_URL + 'positions', { observe: 'response', params})
@@ -35,33 +35,33 @@ export class PhonebookService {
         })
       );
   }
-  getPhones(): Observable<Phone[]> {
+  public getPhones(): Observable<Phone[]> {
     return this.http.get<Phone[]>(this.BASE_URL + 'phones');
   }
-  getPhonebook(doctorId: number) {
+  public getPhonebook(doctorId: number) {
     return this.http.get(this.BASE_URL  + 'doctors/' + doctorId + '/phonebook');
   }
-  updateDepartment(departmentId: number, department: Department) {
+  public updateDepartment(departmentId: number, department: Department) {
     return this.http.put(this.BASE_URL + 'departments/' + departmentId, department);
   }
-  createDepartment(doctorId: number, department: Department) {
+  public createDepartment(doctorId: number, department: Department) {
     return this.http.post(this.BASE_URL + 'departments/' + doctorId, department);
   }
 
-  updatePosition(positionId: number, position: Position) {
+  public updatePosition(positionId: number, position: Position) {
     return this.http.put(this.BASE_URL + 'positions/' + positionId, position);
   }
-  createPosition(doctorId: number, position: Position) {
+  public createPosition(doctorId: number, position: Position) {
     return this.http.post(this.BASE_URL + 'positions/' + doctorId, position);
   }
 
-  updatePhone(phoneId: number, phone: Phone) {
+  public updatePhone(phoneId: number, phone: Phone) {
     return this.http.put(this.BASE_URL + 'phones/' + phoneId, phone);
   }
-  createPhone(doctorId: number, phone: Phone) {
+  public createPhone(doctorId: number, phone: Phone) {
     return this.http.post(this.BASE_URL + 'phones/' + doctorId, phone);
   }
-  deleteDepartment(doctorId: number, departmentId: number) {
+  public  deleteDepartment(doctorId: number, departmentId: number) {
     let params = new HttpParams();
     params = params.append('doctorId', String(doctorId));
     return this.http.delete(this.BASE_URL + 'department/' + departmentId, { observe: 'response', params})
@@ -71,7 +71,7 @@ export class PhonebookService {
       })
     );
   }
-  deletePosition(doctorId: number, positionId: number) {
+  public deletePosition(doctorId: number, positionId: number) {
     let params = new HttpParams();
     params = params.append('doctorId', String(doctorId));
     return this.http.delete(this.BASE_URL + 'Position/' + positionId, { observe: 'response', params})
@@ -81,7 +81,7 @@ export class PhonebookService {
       })
     );
   }
-  deletePhone(doctorId: number, phoneId: number) {
+  public deletePhone(doctorId: number, phoneId: number) {
     let params = new HttpParams();
     params = params.append('doctorId', String(doctorId));
     return this.http.delete(this.BASE_URL + 'Phone/' + phoneId, { observe: 'response', params})

@@ -16,6 +16,9 @@ export class AdminService {
   public getDoctors(adminId: number): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(this.getAdminUrl(adminId) + 'doctors');
   }
+  public getDoctor(adminId: number, doctorId: number): Observable<Doctor> {
+    return this.http.get<Doctor>(this.getAdminUrl(adminId) + 'doctors/' + doctorId);
+  }
   public getRoles(adminId: number): Observable<Role[]> {
     return this.http.get<Role[]>(this.getAdminUrl(adminId) + 'roles');
   }

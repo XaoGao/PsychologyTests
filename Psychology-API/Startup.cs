@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Psychology_API.Data;
-using Psychology_API.Repositories.Contracts;
-using Psychology_API.Repositories.Repositories;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Psychology_API.Helpers;
@@ -15,12 +13,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.SeedData;
 using Newtonsoft.Json;
-using Psychology_API.Settings;
-using Psychology_API.Servises.Cache;
-using Microsoft.Extensions.Logging;
 using Psychology_API.Servises.DI;
 
 namespace Psychology_API
@@ -39,6 +33,7 @@ namespace Psychology_API
         {
             services.AddControllers().AddNewtonsoftJson(options =>
             {
+                //Плохая практика нужно делать плоские модели 
                 //you have to install nuget package - Microsoft.AspNetCore.Mvc.NewtonsoftJson 
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });

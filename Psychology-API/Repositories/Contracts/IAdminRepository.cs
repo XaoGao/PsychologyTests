@@ -15,11 +15,6 @@ namespace Psychology_API.Repositories.Contracts
         /// <returns> Список ролей. </returns>
         Task<IEnumerable<Role>> GetRolesRepositoryAsync();
         /// <summary>
-        /// Получить всех докторов в системе.
-        /// </summary>
-        /// <returns> Список докторов. </returns>
-        // Task<IEnumerable<Doctor>> GetAllDoctorsRepositoryAsync();
-        /// <summary>
         /// Создать роль.
         /// </summary>
         /// <param name="role"> Новая роль. </param>

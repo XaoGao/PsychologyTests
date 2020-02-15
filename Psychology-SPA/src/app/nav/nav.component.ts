@@ -19,19 +19,18 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     console.log(this.authService.decodedToken);
   }
-  loggedin(): boolean {
+  public loggedin(): boolean {
     return this.authService.loggedIn();
   }
-  logout() {
+  public logout() {
     this.authService.loggedOut();
     this.toastrService.info('Вы вышли из системы');
     this.route.navigate(['/']);
   }
-  isHR(): boolean {
-    // return this.authService.decodedToken.role === this.rolseService.HR;
+  public isHR(): boolean {
     return this.rolseService.isHR(this.authService.decodedToken.role);
   }
-  isAdmin(): boolean {
+  public isAdmin(): boolean {
     return this.rolseService.isAdmin(this.authService.decodedToken.role);
   }
 }

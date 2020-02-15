@@ -23,45 +23,25 @@ namespace Psychology_API.DataServices.DataServices
             _cache = cache;
             _doctorRepository = doctorRepository;
             _receptionRepository = receptionRepository;
+            _doctorRepository.GetFromCashe += _cache.Get;
+            _doctorRepository.SetInCashe += _cache.Set;
+            _doctorRepository.RemoveItemInCashe += _cache.Remove;
         }
         public async Task<Doctor> GetDoctorAsync(int doctorId)
         {
-            AddGetSetEvents();
-            var doctor = await _doctorRepository.GetDoctorRepositoryAsync(doctorId); 
-            RemoveGetSetEvents();
-
-            return doctor;
+            return await _doctorRepository.GetDoctorRepositoryAsync(doctorId); 
         }
         public async Task<IEnumerable<Doctor>> GetDoctorsAsync(DoctorsType doctorsType)
         {
             return await _doctorRepository.GetDoctorsRepositoryAsync(doctorsType);
         }
         public async Task<Doctor> GetDoctorWithoutCacheAsync(int doctorId)
-        {
-            _doctorRepository.RemoveItemInCashe += _cache.Remove;
-            var doctor = await _doctorRepository.GetDoctorWithoutCacheRepositoryAsync(doctorId);
-            _doctorRepository.RemoveItemInCashe -= _cache.Remove;
-            return doctor;
+        { 
+            return await _doctorRepository.GetDoctorWithoutCacheRepositoryAsync(doctorId);
         }
         public async Task<IEnumerable<Reception>> GetReceptionsForDoctorsAsync(int doctorId)
         {
             return await _receptionRepository.GetReseptionsRepositoryAsync(doctorId);
-        }
-        /// <summary>
-        /// Добавление событии на получения и внесения в кеш.
-        /// </summary>
-        private void AddGetSetEvents()
-        {
-            _doctorRepository.GetFromCashe += _cache.Get;
-            _doctorRepository.SetInCashe += _cache.Set;
-        }
-        /// <summary>
-        /// Убрать событии по получению и внесению в кеш.
-        /// </summary>
-        private void RemoveGetSetEvents()
-        {
-            _doctorRepository.GetFromCashe -= _cache.Get;
-            _doctorRepository.SetInCashe -= _cache.Set;
         }
     }
 }

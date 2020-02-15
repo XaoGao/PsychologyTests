@@ -9,16 +9,16 @@ import { Doctor } from '../_models/doctor';
 })
 export class DoctorService {
 
-  BASE_URL_DOCTOR = environment.apiUrl + 'doctors';
+  private BASE_URL_DOCTOR = environment.apiUrl + 'doctors';
   constructor(private http: HttpClient) { }
 
-  getDoctor(id: number): Observable<Doctor> {
+  public getDoctor(id: number): Observable<Doctor> {
     return this.http.get<Doctor>(this.BASE_URL_DOCTOR + '/' + id);
   }
-  updateDoctor(doctor: Doctor) {
+  public updateDoctor(doctor: Doctor) {
     return this.http.put(this.BASE_URL_DOCTOR + '/' + doctor.id, doctor);
   }
-  getDoctors(): Observable<Doctor[]> {
+  public getDoctors(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(this.BASE_URL_DOCTOR);
   }
 }

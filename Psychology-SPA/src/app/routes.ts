@@ -101,7 +101,13 @@ const routes: Routes = [
       {
         path: 'doctors/:id',
         component: DoctorComponent,
-        resolve: { doctor: DoctorResolver }
+        resolve: {
+          doctor: DoctorResolver,
+          departments: DepartmentsWithParamResolver,
+          positions: PositionsWithParamResolver,
+          phones: PhonesResolver,
+          vacations: VacationsListForDoctorResolver
+        }
       },
       {
         path: 'roles',

@@ -24,6 +24,8 @@ namespace Psychology_API.DataServices.DataServices
             _documentRepository = documentRepository;
             _loggerRepository = loggerRepository;
             Logger += _loggerRepository.WriteInformerLog;
+            _documentRepository.GetFromCashe += _cache.Get;
+            _documentRepository.SetInCashe += _cache.Set;
             _documentRepository.RemoveItemInCashe += _cache.Remove;
         }
 
@@ -39,13 +41,8 @@ namespace Psychology_API.DataServices.DataServices
         }
 
         public async Task<Document> GetDocumentAsync(int documentId)
-        {
-            _documentRepository.GetFromCashe += _cache.Get;
-            _documentRepository.SetInCashe += _cache.Set;
-            var document = await _documentRepository.GetDocumentRepositoryAsync(documentId);
-            _documentRepository.GetFromCashe -= _cache.Get;
-            _documentRepository.SetInCashe -= _cache.Set;
-            return document;
+        {            
+            return await _documentRepository.GetDocumentRepositoryAsync(documentId);
         }
 
         public async Task<IEnumerable<Document>> GetDocumentsAsync(int patientId)
@@ -55,10 +52,7 @@ namespace Psychology_API.DataServices.DataServices
 
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
         {
-            _documentRepository.SetInCashe += _cache.Set;
-            var save = await _documentRepository.SaveDocRepositoryAsync(document, formFile);
-            _documentRepository.SetInCashe -= _cache.Set;
-            return save;
+            return await _documentRepository.SaveDocRepositoryAsync(document, formFile);
         }
     }
 }

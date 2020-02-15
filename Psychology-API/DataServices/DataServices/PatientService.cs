@@ -22,13 +22,14 @@ namespace Psychology_API.DataServices.DataServices
             _patientRepository = patientRepository;
             _context = context;
             _cache = cache;
+
+            _patientRepository.GetFromCashe += _cache.Get;
+            _patientRepository.SetInCashe += _cache.Set;
+            _patientRepository.RemoveItemInCashe += _cache.Remove;
         }
         public async Task<Patient> GetPatientAsync(int doctorId, int patientId)
         {
-            AddGetSetEvents();
-            var patient = await _patientRepository.GetPatientRepositoryAsync(doctorId, patientId);
-            RemoveGetSetEvents();
-            return patient;
+            return await _patientRepository.GetPatientRepositoryAsync(doctorId, patientId);
         }
 
         public async Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId, PatientsType patientsType)
@@ -43,31 +44,13 @@ namespace Psychology_API.DataServices.DataServices
 
         public async Task<Patient> GetPatientWithoutCacheAsync(int doctorId, int patientId)
         {
-            _patientRepository.RemoveItemInCashe += _cache.Remove;
-            var patient = await _patientRepository.GetPatientWithoutCacheRepositoryAsync(doctorId, patientId);
-            _patientRepository.RemoveItemInCashe -= _cache.Remove;
-            return patient;
+           
+            return await _patientRepository.GetPatientWithoutCacheRepositoryAsync(doctorId, patientId);
         }
 
         public void MovePatinetToArchive(Patient patient)
         {
             _patientRepository.MovePatinetToArchiveRepository(patient);
-        }
-        /// <summary>
-        /// Добавление событии на получения и внесения в кеш.
-        /// </summary>
-        private void AddGetSetEvents()
-        {
-            _patientRepository.GetFromCashe += _cache.Get;
-            _patientRepository.SetInCashe += _cache.Set;
-        }
-        /// <summary>
-        /// Убрать событии по получению и внесению в кеш.
-        /// </summary>
-        private void RemoveGetSetEvents()
-        {
-            _patientRepository.GetFromCashe -= _cache.Get;
-            _patientRepository.SetInCashe -= _cache.Set;
         }
     }
 }

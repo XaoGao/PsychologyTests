@@ -24,28 +24,13 @@ namespace Psychology_API.Repositories.Repositories
 
             return false;
         }
-
-        // public async Task<IEnumerable<Doctor>> GetAllDoctorsRepositoryAsync(DoctorsType doctorsType)
-        // {
-        //     DoctorFactory doctorFactory = new DoctorFactory(_context);
-
-        //     var doctors = await doctorFactory.GetDoctors(doctorsType);
-
-        //     return doctors;
-        // }
-
         public async Task<Role> GetRoleRepositoryAsync(int roleId)
         {
-            var role = await _context.Roles.SingleOrDefaultAsync(r => r.Id == roleId);
-
-            return role;
+            return await _context.Roles.SingleOrDefaultAsync(r => r.Id == roleId);
         }
-
         public async Task<IEnumerable<Role>> GetRolesRepositoryAsync()
         {
-            var roles = await _context.Roles.ToListAsync();
-
-            return roles;
+            return await _context.Roles.ToListAsync();
         }
     }
 }

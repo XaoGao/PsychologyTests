@@ -18,79 +18,41 @@ namespace Psychology_API.DataServices.DataServices
         {
             _genericRepository = genericRepository;
             _cache = cache;
-        }
-
-        public async Task<bool> CreateAsync(TEntity item)
-        {
             _genericRepository.SetInCashe += _cache.Set;
-            var result = await _genericRepository.CreateRepositoryAsync(item);
-            _genericRepository.SetInCashe -= _cache.Set;
-            return result;
-        }
-
-        public async Task<bool> DeleteAsync(TEntity item)
-        {
             _genericRepository.RemoveItemInCashe += _cache.Remove;
-            var result = await _genericRepository.DeleteRepositoryAsync(item);
-            _genericRepository.RemoveItemInCashe -= _cache.Remove;
-            return result;
+            _genericRepository.GetFromCashe += _cache.Get;
         }
-
+        public async Task<bool> CreateAsync(TEntity item)
+        {            
+            return await _genericRepository.CreateRepositoryAsync(item);
+        }
+        public async Task<bool> DeleteAsync(TEntity item)
+        {            
+            return await _genericRepository.DeleteRepositoryAsync(item);
+        }
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _genericRepository.GetAllRepositoryAsync();
         }
-
         public async Task<TEntity> GetAsync(int id)
         {
-            AddGetSetEvents();
-            var item = await _genericRepository.GetRepositoryAsync(id);
-            RemoveGetSetEvents();
-            return item;
+            return await _genericRepository.GetRepositoryAsync(id);
         }
-
         public async Task<TEntity> GetAsync(int id, string type)
         {
-            AddGetSetEvents();
-            var item = await _genericRepository.GetRepositoryAsync(id);
-            RemoveGetSetEvents();
-            return item;
+            return await _genericRepository.GetRepositoryAsync(id);
         }
-
         public IEnumerable<TEntity> GetWithCondition(Func<TEntity, bool> predicate)
         {
             return _genericRepository.GetWithConditionRepository(predicate);
         }
-
         public async Task<bool> UpdateAsync(TEntity item)
         {
             return await _genericRepository.UpdateRepositoryAsync(item);
         }
-
         public async Task<bool> UpdateAsync(TEntity item, string type)
         {
-            _genericRepository.RemoveItemInCashe += _cache.Remove;
-            _genericRepository.SetInCashe += _cache.Set;
-            var result = await _genericRepository.UpdateRepositoryAsync(item, type);
-            _genericRepository.RemoveItemInCashe -= _cache.Remove;
-            _genericRepository.SetInCashe -= _cache.Set;
-            return result;
-        }
-        /// <summary>
-        /// Добавление событии на получения и внесения в кеш.
-        /// </summary>
-        private void AddGetSetEvents()
-        {
-            _genericRepository.GetFromCashe += _cache.Get;
-            _genericRepository.SetInCashe += _cache.Set;
-        }
-        /// <summary>
-        /// Убрать событии по получению и внесению в кеш.
-        /// </summary>
-        private void RemoveGetSetEvents()
-        {
-            _genericRepository.GetFromCashe -= _cache.Get;
-            _genericRepository.SetInCashe -= _cache.Set;
+            return await _genericRepository.UpdateRepositoryAsync(item, type);
         }
     }
 }

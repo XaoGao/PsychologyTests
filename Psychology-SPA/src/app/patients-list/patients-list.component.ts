@@ -1,8 +1,6 @@
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { PatientService } from './../_services/patient.service';
-import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { Patient } from './../_models/patient';
-import { Anamnesis } from './../_models/anamnesis';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -29,7 +27,7 @@ export class PatientsListComponent implements OnInit {
       this.patients = data.patients;
     });
   }
-
+  // TODO: delete
   // public addPatient() {
   //   this.openDialog();
   // }

@@ -1,1 +1,55 @@
-<p>doctor works!</p>
+<div class="containre mt-2">
+    <form class="example-form" #editForm="ngForm" (ngSubmit)="updateDoctor()">
+        <h3 class="ml-5"> Профиль: {{ doctor.fullname }}</h3>
+        <div class="row ml-5 mt-4">
+            <mat-form-field class="col-9">
+                <input matInput placeholder="Логин" name="username" [(ngModel)]="doctor.username" required>
+            </mat-form-field>
+            <mat-form-field class="col-9">
+                <input matInput placeholder="Фамилия" name="lastname" [(ngModel)]="doctor.lastname" required>
+            </mat-form-field>
+            <mat-form-field class="col-9">
+                <input matInput placeholder="Имя" name="firstName" [(ngModel)]="doctor.firstname" required>
+            </mat-form-field>
+            <mat-form-field class="col-9">
+                <input matInput placeholder="Отчество" name="middleName" [(ngModel)]="doctor.middlename" required>
+            </mat-form-field>
+            <mat-form-field class="col-5">
+                <input matInput [matDatepicker]="picker" placeholder="Дата рождения" name="dateOfBirth"
+                    [(ngModel)]="doctor.dateOfBirth" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="col-7"></div>
+            <mat-form-field class="col-3">
+                <mat-label>Укажите отдел</mat-label>
+                <mat-select [(value)]="doctor.departmentId">
+                    <mat-option *ngFor="let department of departments" [value]="department.id">
+                        {{ department.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-3">
+                <mat-label>Укажите должность</mat-label>
+                <mat-select [(value)]="doctor.positionId">
+                    <mat-option *ngFor="let position of positions" [value]="position.id">
+                        {{ position.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-3">
+                <mat-label>Телефон</mat-label>
+                <mat-select [(value)]="doctor.phoneId">
+                    <mat-option *ngFor="let phone of phones" [value]="phone.id">
+                        {{ phone.numberMask }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <div class="col-7"></div>
+            <button class="btn btn-primary col-2"><i class="fa fa-save"></i> Сохранить
+                изменения</button>
+        </div>
+    </form>
+</div>

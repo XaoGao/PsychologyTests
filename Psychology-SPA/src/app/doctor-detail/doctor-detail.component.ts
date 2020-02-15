@@ -15,10 +15,10 @@ import { Vacation } from '../_models/vacation';
 })
 export class DoctorDetailComponent implements OnInit {
   public doctor: Doctor;
-  departments: Department[];
-  positions: Position[];
-  phones: Phone[];
-  vacations: Vacation[];
+  public departments: Department[];
+  public positions: Position[];
+  public phones: Phone[];
+  public vacations: Vacation[];
   constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute, private doctorService: DoctorService) { }
 
   ngOnInit() {

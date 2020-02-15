@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -98,10 +97,7 @@ namespace Psychology_API.Controllers
                 return BadRequest("Указаного документа не существует");
 
 
-            return File(document.Body, "application/vnd.ms-word", document.DocName);
-
-            // TODO: что то пошло не так, записать в БД ошибку
-            throw new Exception("");
+            return File(document.Body, "application/" + document.Extension, document.DocName);
         }
     }
 }
