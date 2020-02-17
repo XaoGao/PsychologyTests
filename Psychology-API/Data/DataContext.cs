@@ -26,5 +26,7 @@ namespace Psychology_API.Data
         public DbSet<Log> Logs { get; set; }
         public DbSet<Reception> Receptions { get; set; }
         public DbSet<PatientTestResult> PatientTestResult { get; set; }
+        public DbSet<InterdepartStatus> InterdepartStatuses { get; set; }
+        public DbSet<InterdepartRequest> InterdepartRequests { get; set; }
     }
 }

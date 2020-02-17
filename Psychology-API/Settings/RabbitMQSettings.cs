@@ -40,5 +40,11 @@ namespace Psychology_API.Settings
         /// <typeparam name="string"> Пароль. </typeparam>
         /// <returns></returns>
         public string Password => _configuration.GetValue<string>("Rabbitmq:Password");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="string"></typeparam>
+        /// <returns></returns>
+        public string Uri => _configuration.GetValue<string>("Rabbitmq:Uri");
     }
 }

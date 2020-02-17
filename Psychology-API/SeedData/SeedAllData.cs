@@ -153,7 +153,15 @@ namespace Psychology_API.SeedData
                 _context.SaveChanges();
             }
             
+            //Статус межведомственных запросов
+            var interdepartStatusesFromFile = File.ReadAllText("SeedData/DataSeedInterdepartStatus.json");
+            var interdepartStatuses = JsonConvert.DeserializeObject<List<InterdepartStatus>>(interdepartStatusesFromFile);
 
+            foreach (var interdepartStatus in interdepartStatuses)
+            {
+                _context.InterdepartStatuses.Add(interdepartStatus);
+                _context.SaveChanges();
+            }
         }
     }
 }

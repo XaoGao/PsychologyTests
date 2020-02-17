@@ -6,6 +6,7 @@ using Psychology_API.Repositories.Contracts;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.Repositories.Repositories;
 using Psychology_API.SeedData;
+using Psychology_API.Services.RabbitMQ;
 using Psychology_API.Servises.Cache;
 using Psychology_API.Servises.ComputedHash;
 using Psychology_API.Settings;
@@ -52,6 +53,7 @@ namespace Psychology_API.Servises.DI
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
+            services.AddScoped<IBroker, Rabbit>();
             services.AddTransient<SeedAllData>();
             services.AddScoped<IHash, HashHmac>();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Psychology_API.Migrations
@@ -12,7 +13,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     SortLevel = table.Column<int>(nullable: false)
@@ -27,7 +28,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     IsLock = table.Column<bool>(nullable: false)
                 },
@@ -37,11 +38,26 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InterdepartStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    LevelSort = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    IsLock = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InterdepartStatuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Logs",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     LevelLog = table.Column<string>(nullable: true),
                     Body = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true),
@@ -57,7 +73,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IsLock = table.Column<bool>(nullable: false),
                     Number = table.Column<string>(nullable: true)
                 },
@@ -71,7 +87,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     SortLevel = table.Column<int>(nullable: false)
@@ -86,7 +102,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     IsLock = table.Column<bool>(nullable: false)
                 },
@@ -100,7 +116,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Instruction = table.Column<string>(nullable: true)
@@ -115,7 +131,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
@@ -163,7 +179,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MinValue = table.Column<int>(nullable: false),
                     MaxValue = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -185,7 +201,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
                     sortLevel = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false)
@@ -206,7 +222,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
@@ -231,7 +247,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     StartVacation = table.Column<DateTime>(nullable: false),
                     EndVacation = table.Column<DateTime>(nullable: false),
@@ -253,7 +269,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
                     Value = table.Column<int>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),
@@ -281,7 +297,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ConclusionTime = table.Column<DateTime>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     Conclusion = table.Column<string>(nullable: true),
@@ -310,7 +326,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DocName = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true),
@@ -342,7 +358,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false),
@@ -366,7 +382,7 @@ namespace Psychology_API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PatientTestResult_ProcessingInterpretationOfResults_ProcessingInterpretationOfResultId",
+                        name: "FK_PatientTestResult_ProcessingInterpretationOfResults_Processi~",
                         column: x => x.ProcessingInterpretationOfResultId,
                         principalTable: "ProcessingInterpretationOfResults",
                         principalColumn: "Id",
@@ -384,7 +400,7 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DateTimeReception = table.Column<DateTime>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false)
@@ -407,11 +423,40 @@ namespace Psychology_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InterdepartRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DocumentId = table.Column<int>(nullable: false),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Request = table.Column<DateTime>(nullable: false),
+                    Response = table.Column<DateTime>(nullable: false),
+                    InterdepartStatusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InterdepartRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InterdepartRequests_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InterdepartRequests_InterdepartStatuses_InterdepartStatusId",
+                        column: x => x.InterdepartStatusId,
+                        principalTable: "InterdepartStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuestionsAnswers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PatientId = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),
@@ -498,6 +543,16 @@ namespace Psychology_API.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InterdepartRequests_DocumentId",
+                table: "InterdepartRequests",
+                column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InterdepartRequests_InterdepartStatusId",
+                table: "InterdepartRequests",
+                column: "InterdepartStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
                 column: "DoctorId");
@@ -577,7 +632,7 @@ namespace Psychology_API.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "InterdepartRequests");
 
             migrationBuilder.DropTable(
                 name: "Logs");
@@ -592,13 +647,19 @@ namespace Psychology_API.Migrations
                 name: "Vacations");
 
             migrationBuilder.DropTable(
-                name: "DocumentTypes");
+                name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "InterdepartStatuses");
 
             migrationBuilder.DropTable(
                 name: "PatientTestResult");
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "DocumentTypes");
 
             migrationBuilder.DropTable(
                 name: "Patients");

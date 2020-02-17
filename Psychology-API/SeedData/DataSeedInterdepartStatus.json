@@ -1,0 +1,27 @@
+[
+    {
+        "LevelSort" : 1,
+        "Name" : "Ожидает отправки",
+        "IsLock" : false
+    },
+    {
+        "LevelSort" : 2,
+        "Name" : "Запрос отправлен",
+        "IsLock" : false
+    },
+    {
+        "LevelSort" : 3,
+        "Name" : "Неактвно",
+        "IsLock" : true
+    },
+    {
+        "LevelSort" : 4,
+        "Name" : "Ответ получен",
+        "IsLock" : false
+    },
+    {
+        "LevelSort" : 5,
+        "Name" : "Неактивно 2",
+        "IsLock" : true
+    }
+]

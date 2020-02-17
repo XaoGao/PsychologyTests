@@ -23,6 +23,7 @@ namespace Psychology_API.DataServices.DataServices
             _cache = cache;
             _documentRepository = documentRepository;
             _loggerRepository = loggerRepository;
+            
             Logger += _loggerRepository.WriteInformerLog;
             _documentRepository.GetFromCashe += _cache.Get;
             _documentRepository.SetInCashe += _cache.Set;
@@ -48,6 +49,16 @@ namespace Psychology_API.DataServices.DataServices
         public async Task<IEnumerable<Document>> GetDocumentsAsync(int patientId)
         {
             return await _documentRepository.GetDocumentsRepositoryAsync(patientId);
+        }
+
+        public Task<bool> RequestDocument(Document document)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> ResponseDocument(int documentId)
+        {
+            throw new System.NotImplementedException();
         }
 
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)

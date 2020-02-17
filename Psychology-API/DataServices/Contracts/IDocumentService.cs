@@ -40,5 +40,17 @@ namespace Psychology_API.DataServices.Contracts
         /// <param name="patientId"> Идентификатор пациента. </param>
         /// <returns> Список документов. </returns>
         Task<IEnumerable<Document>> GetDocumentsAsync(int patientId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        Task<bool> RequestDocument(Document document);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        Task<bool> ResponseDocument(int documentId);
     }
 }
