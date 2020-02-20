@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Psychology_Domain.Abstarct
 {
     /// <summary>
@@ -5,6 +8,8 @@ namespace Psychology_Domain.Abstarct
     /// </summary>
     public abstract class DomainEntity
     {
-        
+        // [Key]
+        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
     }
 }

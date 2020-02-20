@@ -74,8 +74,16 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => (src.EndVacation - src.StartVacation).Days);
                 });
 
-            //
+            // Роль
             CreateMap<Role, Role>();
+            // Межведомственные запросы
+            CreateMap<InterdepartRequest, InterdepartRequestDto>()
+                .ForMember(dest => dest.Series, opt => {
+                    opt.MapFrom(src => src.Document.Series);
+                })
+                .ForMember(dest => dest.Number, opt => {
+                    opt.MapFrom(src => src.Document.Number);
+                });;
         }
     }
 }

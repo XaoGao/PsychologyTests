@@ -1,40 +1,37 @@
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using Psychology_API.Dtos;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Psychology_API.Services.Converter
 {
-    public class Converter<T> where T : DocumentForInterdepartRequestDto
+    /// <summary>
+    /// Конвертер по сериализации и десериализации объектов.
+    /// </summary>
+    /// <typeparam name="T"> Класс </typeparam>
+    public class Converter<T> where T : class
     {
+        /// <summary>
+        /// Конвертация класса в массив байтов.
+        /// </summary>
+        /// <param name="entity"> Класс, который нужно конвертировать. </param>
+        /// <returns> Массив байтов. </returns>
         public byte[] Serialze(T entity)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
+            string body = JsonConvert.SerializeObject(entity);
+            var result  = Encoding.UTF8.GetBytes(body);
 
-            using (MemoryStream ms = new MemoryStream())
-            {
-
-                formatter.Serialize(ms, entity);
-
-                ms.Position = 0;
-
-                StreamReader st = new StreamReader(ms);
-
-                var result = st.ReadToEnd();
-
-                return System.Text.Encoding.UTF8.GetBytes(result);
-            }      
+            return result;
         }
+        /// <summary>
+        /// Конвертация массива байтов в класс.
+        /// </summary>
+        /// <param name="entity"> Массив байтов. </param>
+        /// <returns> Экземпляр класса. </returns>
         public T Desiarile(byte[] entity)
         {
-            var formatter = new BinaryFormatter();
+            var body = Encoding.UTF8.GetString(entity);
+            var result = JsonConvert.DeserializeObject<T>(body);
 
-            using (MemoryStream ms = new MemoryStream())
-            {   
-                if (ms.Length > 0 && formatter.Deserialize(ms) is T items)
-                    return items;
-                else
-                    return default(T);
-            }      
+            return result;
         }
     }
 }

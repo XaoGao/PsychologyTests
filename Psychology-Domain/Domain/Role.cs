@@ -11,7 +11,7 @@ namespace Psychology_Domain.Domain
         /// Идентификатор.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Наименование роли.
         /// </summary>

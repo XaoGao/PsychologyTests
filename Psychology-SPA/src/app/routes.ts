@@ -106,7 +106,7 @@ const routes: Routes = [
           departments: DepartmentsWithParamResolver,
           positions: PositionsWithParamResolver,
           phones: PhonesResolver,
-          vacations: VacationsListForDoctorResolver
+          roles: RolesListResolver
         }
       },
       {

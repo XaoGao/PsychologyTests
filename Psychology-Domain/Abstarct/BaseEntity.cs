@@ -9,7 +9,7 @@ namespace Psychology_Domain.Abstarct
         /// Идентификатор.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Актуальность.
         /// </summary>

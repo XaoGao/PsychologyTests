@@ -17,7 +17,7 @@ export class DocService {
     return this.http.get<DocumentType[]>(this.getDocumentUrl(doctorId, patientId));
   }
   public getDocuments(doctorId: number, patientId: number): Observable<Document[]> {
-    return this.http.get<Document[]>(this.getDocumentUrl(doctorId, patientId));
+    return this.http.get<Document[]>(this.getDocumentUrl(doctorId, patientId) + 'GetDocuments');
   }
   public deleteDocument(doctorId: number, patientId: number, documentId: number) {
     return this.http.delete(this.getDocumentUrl(doctorId, patientId) + documentId);

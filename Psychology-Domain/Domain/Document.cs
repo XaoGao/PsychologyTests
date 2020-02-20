@@ -6,14 +6,13 @@ namespace Psychology_Domain.Domain
     /// <summary>
     /// Документы пациента
     /// </summary>
-    [Serializable]
     public class Document : DomainEntity
     {
         /// <summary>
         /// Идентификатор.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Наименование документа.
         /// </summary>

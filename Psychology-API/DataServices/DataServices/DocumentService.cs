@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Services.Interdepart;
 using Psychology_API.Servises.Cache;
 using Psychology_Domain.Domain;
 
@@ -14,20 +15,29 @@ namespace Psychology_API.DataServices.DataServices
         private readonly ILoggerRepository _loggerRepository;
         private readonly ICache<Document> _cache;
         private readonly IDocumentRepository _documentRepository;
+        private readonly ISenderInterdepartRequest _senderInterdepartRequest;
 
         public DocumentService(DataContext context,
                                ILoggerRepository loggerRepository,
                                ICache<Document> cache,
-                               IDocumentRepository documentRepository) : base(context)
+                               IDocumentRepository documentRepository,
+                               ISenderInterdepartRequest senderInterdepartRequest
+                               ) : base(context)
         {
             _cache = cache;
             _documentRepository = documentRepository;
+            _senderInterdepartRequest = senderInterdepartRequest;
             _loggerRepository = loggerRepository;
             
             Logger += _loggerRepository.WriteInformerLog;
             _documentRepository.GetFromCashe += _cache.Get;
             _documentRepository.SetInCashe += _cache.Set;
             _documentRepository.RemoveItemInCashe += _cache.Remove;
+        }
+
+        public void ChangeInterdepartDeprtment(string interdepartDeprtment)
+        {
+            throw new System.NotImplementedException();
         }
 
         public async Task<DocumentType> GetDocTypeAsync(int documentId)
@@ -51,14 +61,9 @@ namespace Psychology_API.DataServices.DataServices
             return await _documentRepository.GetDocumentsRepositoryAsync(patientId);
         }
 
-        public Task<bool> RequestDocument(Document document)
+        public Task<bool> RequestInterdepart(Document document)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> ResponseDocument(int documentId)
-        {
-            throw new System.NotImplementedException();
+            return _senderInterdepartRequest.Request(document);
         }
 
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)

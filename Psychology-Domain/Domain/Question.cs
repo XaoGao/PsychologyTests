@@ -12,7 +12,7 @@ namespace Psychology_Domain.Domain
         /// Идентификатор вопроса.
         /// </summary>
         /// <value></value>
-        public int Id { get; set; }
+        // public int Id { get; set; }
         /// <summary>
         /// Текст вопроса.
         /// </summary>

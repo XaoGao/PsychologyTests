@@ -16,12 +16,12 @@
     },
     {
         "LevelSort" : 4,
-        "Name" : "Ответ получен",
+        "Name" : "Подтверждено",
         "IsLock" : false
     },
     {
         "LevelSort" : 5,
-        "Name" : "Неактивно 2",
-        "IsLock" : true
+        "Name" : "Отказано",
+        "IsLock" : false
     }
 ]

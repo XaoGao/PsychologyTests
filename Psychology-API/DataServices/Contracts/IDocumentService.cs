@@ -45,12 +45,11 @@ namespace Psychology_API.DataServices.Contracts
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        Task<bool> RequestDocument(Document document);
+        Task<bool> RequestInterdepart(Document document);
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="documentId"></param>
-        /// <returns></returns>
-        Task<bool> ResponseDocument(int documentId);
+        /// <param name="interdepartDeprtment"></param>
+        void ChangeInterdepartDeprtment(string interdepartDeprtment);
     }
 }

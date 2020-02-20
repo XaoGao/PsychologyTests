@@ -96,8 +96,35 @@ namespace Psychology_API.Controllers
             if (document == null)
                 return BadRequest("Указаного документа не существует");
 
-
             return File(document.Body, "application/" + document.Extension, document.DocName);
+        }
+    
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpPut("{documentId}/request")]     
+        public async Task<IActionResult> RequestInterdepart(int doctorId, int patientId, int documentId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return BadRequest("Пользователь не авторизован");
+
+            var document = await _documentService.GetDocumentAsync(documentId);
+
+            if (document == null)
+                return BadRequest("Указаного документа не существует");
+
+            await _documentService.RequestInterdepart(document);
+
+            return NoContent();
+        }
+        [Authorize(Roles = RolesSettings.Registry)]
+        [HttpPut("changeinterdepart")] 
+        public async Task<IActionResult> ChangeInterdepart(int doctorId, int patientId)
+        {
+            if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return BadRequest("Пользователь не авторизован");
+            
+            // _documentService.ChangeInterdepartDeprtment();
+
+            return NoContent();
         }
     }
 }

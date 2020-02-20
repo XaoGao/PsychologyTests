@@ -11,7 +11,7 @@ import { Patient } from './../../_models/patient';
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { PatientService } from 'src/app/_services/patient.service';
-import {saveFile, saveAs} from 'file-saver';
+import { saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-patient-for-registry',

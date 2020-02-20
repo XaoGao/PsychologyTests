@@ -52,6 +52,9 @@ namespace Psychology_API.Controllers
 
             var doctor = await _doctorService.GetDoctorAsync(doctorId);
 
+            if(doctor == null)
+                doctor = new Doctor();
+
             var doctorForReturn = _mapper.Map<DoctorForReturnDto>(doctor);
 
             return Ok(doctorForReturn);

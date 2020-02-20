@@ -22,8 +22,14 @@ export class AdminService {
   public getRoles(adminId: number): Observable<Role[]> {
     return this.http.get<Role[]>(this.getAdminUrl(adminId) + 'roles');
   }
-
+  public createDoctor(adminId: number, doctor: Doctor) {
+    return this.http.post(this.getAdminUrl(adminId) + 'doctors', doctor);
+  }
+  public updateDoctor(adminId: number, doctor: Doctor) {
+    return this.http.put(this.getAdminUrl(adminId) + 'doctors/' + doctor.id, doctor);
+  }
   private getAdminUrl(adminId: number): string {
     return this.BASE_ADMIN_URL + adminId + '/';
   }
+
 }
