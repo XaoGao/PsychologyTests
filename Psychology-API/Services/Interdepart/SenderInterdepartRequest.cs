@@ -54,6 +54,7 @@ namespace Psychology_API.Services.Interdepart
         /// <param name="serviceProvider"></param>
         private void InitDictionary(IMapper mapper, IDocumentRepository documentRepository, IServiceProvider serviceProvider)
         {
+            container = new Dictionary<string, ISenderInterdepartRequestFacad<Document>>();
             container.Add(REAL, new SenderInerdepartRequestFacad(mapper, documentRepository, serviceProvider));
             container.Add(LOCAL, new SenderInerdepartRequestLocalFacad(documentRepository));
         }
