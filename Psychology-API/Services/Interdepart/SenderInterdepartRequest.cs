@@ -1,39 +1,40 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Services.Interdepart
 {
     /// <summary>
-    /// 
+    /// Класса по работе с межведомственными запросами.
     /// </summary>
     public class SenderInterdepartRequest : ISenderInterdepartRequest
     {
         /// <summary>
-        /// 
+        /// Логика работы межведомственного запроса.
         /// </summary>
-        private ISenderInterdepartRequestFacad _senderInterdepartRequestFacad;
+        private ISenderInterdepartRequestFacad<Document> _senderInterdepartRequestFacad;
+        private Dictionary<string, ISenderInterdepartRequestFacad<Document>> container;
+        public const string LOCAL = "local";
+        public const string REAL = "real";
         /// <summary>
-        /// 
+        /// Создание экземпляра класса.
         /// </summary>
-        /// <param name="senderInterdepartRequestFacad"></param>
+        /// <param name="mapper"></param>
+        /// <param name="documentRepository"></param>
+        /// <param name="serviceProvider"></param>
         public SenderInterdepartRequest(IMapper mapper, IDocumentRepository documentRepository, IServiceProvider serviceProvider)
         {
-            _senderInterdepartRequestFacad = new SenderInerdepartRequestFacad(mapper, documentRepository, serviceProvider);
+            InitDictionary(mapper, documentRepository, serviceProvider);
+            _senderInterdepartRequestFacad = container[REAL];
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public async Task<bool> Request(Document document)
+        public async Task<bool> RequestAsync(Document document)
         {
             try
             {
-                await _senderInterdepartRequestFacad.Request(document);
+                await _senderInterdepartRequestFacad.RequestAsync(document);
                 return true;
             }
             catch(Exception ex)
@@ -41,13 +42,20 @@ namespace Psychology_API.Services.Interdepart
                 throw new Exception(ex.Message);
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="senderInterdepartRequestFacad"></param>
-        public void ChangeInterdepartDeprtment(ISenderInterdepartRequestFacad senderInterdepartRequestFacad)
+        public void ChangeInterdepartDeprtment(string senderInterdepartRequestFacadKey)
         {
-            _senderInterdepartRequestFacad = senderInterdepartRequestFacad;
+            _senderInterdepartRequestFacad = container[senderInterdepartRequestFacadKey];
+        }
+        /// <summary>
+        /// Инициализировать словарь.
+        /// </summary>
+        /// <param name="mapper"> </param>
+        /// <param name="documentRepository"></param>
+        /// <param name="serviceProvider"></param>
+        private void InitDictionary(IMapper mapper, IDocumentRepository documentRepository, IServiceProvider serviceProvider)
+        {
+            container.Add(REAL, new SenderInerdepartRequestFacad(mapper, documentRepository, serviceProvider));
+            container.Add(LOCAL, new SenderInerdepartRequestLocalFacad(documentRepository));
         }
     }
 }

@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { DoctorResolver } from './_resolvers/doctor.resolver';
 import { DoctorComponent } from './doctors-list/doctor/doctor.component';
 import { RolesComponent } from './roles/roles.component';
@@ -170,6 +171,10 @@ const routes: Routes = [
         path: 'patients/:id/testhistory/:testhistoryId',
         component: TestDetailHistoryComponent,
         resolve: { patientTestHistory: PatientTestResultsDetailResolver }
+      },
+      {
+        path: 'about',
+        component: AboutComponent
       }
     ]
   },

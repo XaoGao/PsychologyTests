@@ -95,6 +95,7 @@ import { TestHistoryComponent } from './tests/test-history/test-history.componen
 import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
 import { RolesComponent } from './roles/roles.component';
 import { DoctorComponent } from './doctors-list/doctor/doctor.component';
+import { AboutComponent } from './about/about.component';
 
 
 export function tokenGetter() {
@@ -134,7 +135,8 @@ export function tokenGetter() {
     TestHistoryComponent,
     TestDetailHistoryComponent,
     RolesComponent,
-    DoctorComponent
+    DoctorComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

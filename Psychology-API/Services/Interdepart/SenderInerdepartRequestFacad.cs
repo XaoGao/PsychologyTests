@@ -12,16 +12,16 @@ using Psychology_Domain.Domain;
 namespace Psychology_API.Services.Interdepart
 {
     /// <summary>
-    /// 
+    /// Класс отправки данных на реальный сервис.
     /// </summary>
-    public class SenderInerdepartRequestFacad : ISenderInterdepartRequestFacad
+    public class SenderInerdepartRequestFacad : ISenderInterdepartRequestFacad<Document>
     {
         private readonly IMapper _mapper;
         private readonly IBroker _broker;
         private readonly IDocumentRepository _documentRepository;
         private readonly Converter<InterdepartRequestDto> _converter;
         /// <summary>
-        /// 
+        /// Создание экземпляра класса.
         /// </summary>
         /// <param name="mapper"></param>
         /// <param name="documentRepository"></param>
@@ -33,20 +33,15 @@ namespace Psychology_API.Services.Interdepart
             _documentRepository = documentRepository;
             _converter = new Converter<InterdepartRequestDto>();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public async Task Request(Document document)
+        public async Task RequestAsync(Document entity)
         {
-            InterdepartRequest interdepartRequest = new InterdepartRequest(document,
+            InterdepartRequest interdepartRequest = new InterdepartRequest(entity,
                 (int)InterdepartStatusType.AwaitingDispatch);
 
             _documentRepository.Add(interdepartRequest);
             await _documentRepository.SaveAllAsync();
 
-            interdepartRequest.Document = document;
+            interdepartRequest.Document = entity;
 
             var interdepartRequestDto = _mapper.Map<InterdepartRequestDto>(interdepartRequest);
 

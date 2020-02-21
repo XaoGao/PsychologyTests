@@ -35,9 +35,9 @@ namespace Psychology_API.DataServices.DataServices
             _documentRepository.RemoveItemInCashe += _cache.Remove;
         }
 
-        public void ChangeInterdepartDeprtment(string interdepartDeprtment)
+        public void ChangeInterdepartDeprtment(string interdepartDeprtmentKey)
         {
-            throw new System.NotImplementedException();
+            _senderInterdepartRequest.ChangeInterdepartDeprtment(interdepartDeprtmentKey);
         }
 
         public async Task<DocumentType> GetDocTypeAsync(int documentId)
@@ -61,9 +61,9 @@ namespace Psychology_API.DataServices.DataServices
             return await _documentRepository.GetDocumentsRepositoryAsync(patientId);
         }
 
-        public Task<bool> RequestInterdepart(Document document)
+        public async Task<bool> RequestInterdepart(Document document)
         {
-            return _senderInterdepartRequest.Request(document);
+            return await _senderInterdepartRequest.RequestAsync(document);
         }
 
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)

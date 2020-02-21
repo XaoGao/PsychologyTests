@@ -1,3 +1,4 @@
+import { DocService } from './../_services/doc.service';
 import { RolesService } from './../_services/roles.service';
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
@@ -14,7 +15,8 @@ export class NavComponent implements OnInit {
   constructor(public authService: AuthService,
               private route: Router,
               private toastrService: ToastrAlertService,
-              private rolseService: RolesService) { }
+              private rolseService: RolesService,
+              private documentService: DocService) { }
 
   ngOnInit() {
     console.log(this.authService.decodedToken);
@@ -32,5 +34,14 @@ export class NavComponent implements OnInit {
   }
   public isAdmin(): boolean {
     return this.rolseService.isAdmin(this.authService.decodedToken.role);
+  }
+  public isRegistry(): boolean {
+    return this.rolseService.isRegistry(this.authService.decodedToken.role);
+  }
+  public setLocal(): void {
+    this.documentService.changeInterdepart('local');
+  }
+  public setReal(): void {
+    this.documentService.changeInterdepart('real');
   }
 }

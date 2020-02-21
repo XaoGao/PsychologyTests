@@ -2,8 +2,9 @@ import { DocumentType } from './../_models/documentType';
 import { environment } from './../../environments/environment';
 import { Document } from './../_models/document';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,15 @@ export class DocService {
   }
   public downloadDocument(doctorId: number, patientId: number, documentId: number) {
     return this.http.get(this.getDocumentUrl(doctorId, patientId) + documentId, { responseType: 'blob' });
+  }
+  public interdepartReguest(documentId: number) {
+    return this.http.put(environment.apiUrl + 'Interdeparts/Doc' + documentId + '/request', {});
+  }
+  public changeInterdepart(interdepartType: string) {
+    let params = new HttpParams();
+    params = params.append('interdepartType', interdepartType);
+
+    return this.http.put(environment.apiUrl + 'Interdeparts/changeinterdepart', { params });
   }
   private getDocumentUrl(doctorId: number, patientId: number): string {
     return this.BASE_URL_DOC + doctorId + '/patients/' + patientId + '/doc/';

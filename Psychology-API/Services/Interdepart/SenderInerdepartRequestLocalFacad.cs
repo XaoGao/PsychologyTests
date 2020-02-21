@@ -6,25 +6,20 @@ using Psychology_Domain.Domain;
 namespace Psychology_API.Services.Interdepart
 {
     /// <summary>
-    /// 
+    /// Класс по имитации отправки данных на сервис.
     /// </summary>
-    public class SenderInerdepartRequestLocalFacad : ISenderInterdepartRequestFacad
+    public class SenderInerdepartRequestLocalFacad : ISenderInterdepartRequestFacad<Document>
     {
         private readonly IDocumentRepository _documentRepository;
         /// <summary>
-        /// 
+        /// Создание экземпляра класса.
         /// </summary>
         /// <param name="documentRepository"></param>
         public SenderInerdepartRequestLocalFacad(IDocumentRepository documentRepository)
         {
             _documentRepository = documentRepository;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public async Task Request(Document document)
+        public async Task RequestAsync(Document document)
         {
             InterdepartRequest interdepartRequest;
             if(Verification(document))
@@ -42,10 +37,10 @@ namespace Psychology_API.Services.Interdepart
             await _documentRepository.SaveAllAsync();
         }
         /// <summary>
-        /// 
+        /// Проверка данных на корректность.(имитация)
         /// </summary>
         /// <param name="document"></param>
-        /// <returns></returns>
+        /// <returns> True документ валидный</returns>
         private bool Verification(Document document)
         {
             if (string.IsNullOrWhiteSpace(document.Number))
