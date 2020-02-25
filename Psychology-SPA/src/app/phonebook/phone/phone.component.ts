@@ -16,7 +16,7 @@ import { ModalPhoneComponent } from './modal-phone/modal-phone.component';
 export class PhoneComponent implements OnInit {
   public phones: Phone[];
   displayedColumns: string[] = ['position', 'numberMask', 'isLock', 'edit'];
-  dataSource = new MatTableDataSource(this.phones);
+  public dataSource = new MatTableDataSource(this.phones);
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               private phonebookService: PhonebookService,
@@ -27,8 +27,10 @@ export class PhoneComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.phones = data.phones;
     });
+    this.dataSource = new MatTableDataSource(this.phones);
   }
-  applyFilter(filterValue: string) {
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   public addPhone() {

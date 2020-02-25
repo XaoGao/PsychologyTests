@@ -14,7 +14,6 @@ import { QuestionsAnswer } from 'src/app/_models/questionsAnswer';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  // TODO: fix
   @ViewChild('testForm', { static: false }) testForm: NgForm;
   public test: Test;
   public questionsAnswers: QuestionsAnswers = new QuestionsAnswers();
@@ -37,8 +36,7 @@ export class TestComponent implements OnInit {
     const patientId = +this.route.snapshot.paramMap.get('id');
     this.testService
       .sendQuestionsAnswers(doctorId, patientId, this.test.id, this.questionsAnswers)
-      .subscribe(
-        res => {
+      .subscribe(() => {
           this.toastrService.success('Тест успешно пройден, данные сохранены');
           testForm.reset();
           this.router.navigate(['/patients']);

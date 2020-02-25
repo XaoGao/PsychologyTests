@@ -2,8 +2,8 @@
     <div class="mt-5 col-12">
         <table class="table">
             <thead class="row">
-                <th scope="col" class="col-1">№</th>
-                <th scope="col" class="col-4">Должность</th>
+                <!-- <th scope="col" class="col-1">№</th> -->
+                <th scope="col" class="col-5">Должность</th>
                 <th scope="col" class="col-5">Ф.И.О.</th>
                 <th scope="col" class="col-2">Телефон</th>
             </thead>
@@ -13,8 +13,8 @@
                 <th> {{ department.department.name }}</th>
             </thead>
             <tbody *ngFor="let doctor of department.doctors" class="col-12 row">
-                <td class="col-1"> {{ doctor.id }}</td>
-                <td class="col-4"> {{ doctor.position.name }}</td>
+                <!-- <td class="col-1"> {{ doctor.id }}</td> -->
+                <td class="col-5"> {{ doctor.position.name }}</td>
                 <td class="col-5"> {{ doctor.fullname }}</td>
                 <td class="col-2"> {{ doctor.phone.numberMask }}</td>
             </tbody>

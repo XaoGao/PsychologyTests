@@ -16,7 +16,7 @@ import { ModalPositionComponent } from './modal-position/modal-position.componen
 export class PositionComponent implements OnInit {
   public positions: Position[];
   displayedColumns: string[] = ['position', 'name', 'sortLevel', 'isLock', 'edit'];
-  dataSource = new MatTableDataSource(this.positions);
+  public dataSource = new MatTableDataSource(this.positions);
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               private phonebookService: PhonebookService,
@@ -27,8 +27,10 @@ export class PositionComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.positions = data.positions;
     });
+    this.dataSource = new MatTableDataSource(this.positions);
   }
-  applyFilter(filterValue: string) {
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   public addPosition() {

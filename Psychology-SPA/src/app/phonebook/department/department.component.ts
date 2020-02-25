@@ -29,8 +29,10 @@ export class DepartmentComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.departments = data.departments;
     });
+    this.dataSource = new MatTableDataSource(this.departments);
   }
-  public applyFilter(filterValue: string): void {
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
