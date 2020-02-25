@@ -1,9 +1,9 @@
 using System;
 using Psychology_Domain.Domain;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.DocumentDto
 {
-    public class DocForReturnDto
+    public class DocumentForReturnDto
     {
         public int Id { get; set; }
         public string DocName { get; set; }

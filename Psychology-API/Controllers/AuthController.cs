@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
+using Psychology_API.Dtos.DoctorDto;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 

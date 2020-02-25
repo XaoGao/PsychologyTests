@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.DoctorDto
 {
     public class DoctorForRegisterDto
     {

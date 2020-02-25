@@ -1,12 +1,12 @@
-import { Phone } from './../_models/phone';
-import { Position } from './../_models/position';
+import { Phone } from '../../_models/phone';
+import { Position } from '../../_models/position';
 import { Component, OnInit } from '@angular/core';
-import { Doctor } from '../_models/doctor';
-import { ToastrAlertService } from '../_services/toastr-alert.service';
+import { Doctor } from '../../_models/doctor';
+import { ToastrAlertService } from '../../_services/toastr-alert.service';
 import { ActivatedRoute } from '@angular/router';
-import { DoctorService } from '../_services/doctor.service';
-import { Department } from '../_models/department';
-import { Vacation } from '../_models/vacation';
+import { DoctorService } from '../../_services/doctor.service';
+import { Department } from '../../_models/department';
+import { Vacation } from '../../_models/vacation';
 
 @Component({
   selector: 'app-doctor-detail',

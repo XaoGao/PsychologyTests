@@ -1,6 +1,6 @@
 using System;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.InterdepartDto
 {
     [Serializable]
     public class InterdepartResponseDto

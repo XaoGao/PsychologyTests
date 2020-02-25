@@ -6,7 +6,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Dtos;
+using Psychology_API.Dtos.PatientTestResultDto;
+using Psychology_API.Dtos.TestDto;
 using Psychology_API.Settings;
 using Psychology_API.ViewModels;
 

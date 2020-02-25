@@ -1,7 +1,10 @@
 using System;
+using Psychology_API.Dtos.DoctorDto;
+using Psychology_API.Dtos.PatientDto;
+using Psychology_API.Dtos.TestDto;
 using Psychology_Domain.Domain;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.PatientTestResultDto
 {
     public class PatientTestResultForReturnListDto
     {

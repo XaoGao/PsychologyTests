@@ -1,13 +1,13 @@
-import { AuthService } from './../../_services/auth.service';
-import { AdminService } from './../../_services/admin.service';
-import { ToastrAlertService } from './../../_services/toastr-alert.service';
-import { Phone } from './../../_models/phone';
+import { AuthService } from '../../../_services/auth.service';
+import { AdminService } from '../../../_services/admin.service';
+import { ToastrAlertService } from '../../../_services/toastr-alert.service';
+import { Phone } from '../../../_models/phone';
 import { Department } from 'src/app/_models/department';
-import { Doctor } from './../../_models/doctor';
+import { Doctor } from '../../../_models/doctor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Position } from './../../_models/position';
-import { Role } from './../../_models/role';
+import { Position } from '../../../_models/position';
+import { Role } from '../../../_models/role';
 
 @Component({
   selector: 'app-doctor',

@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Dtos;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 using System;
 using Psychology_API.Settings.Doctors;
+using Psychology_API.Dtos.DoctorDto;
 
 namespace Psychology_API.Controllers
 {

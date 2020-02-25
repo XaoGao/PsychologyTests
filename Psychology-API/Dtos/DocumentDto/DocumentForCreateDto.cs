@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Http;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.DocumentDto
 {
-    public class DocForCreateDto
+    public class DocumentForCreateDto
     {
         public string Series { get; set; }
         public string Number { get; set; }
@@ -11,7 +11,7 @@ namespace Psychology_API.Dtos
         public int DocumentTypeId { get; set; }
         public DateTime DateUpload { get; set; }
         public IFormFile File { get; set; }
-        public DocForCreateDto()
+        public DocumentForCreateDto()
         {
             DateUpload = DateTime.Now;
         }

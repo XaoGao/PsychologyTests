@@ -1,4 +1,4 @@
-import { Doctor } from './../_models/doctor';
+import { Doctor } from '../../_models/doctor';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';

@@ -64,8 +64,8 @@ import { WorksheepsLayoutComponent } from './layouts/worksheeps-layout/worksheep
 import { DepartmentComponent } from './phonebook/department/department.component';
 import { PositionComponent } from './phonebook/position/position.component';
 import { PhoneComponent } from './phonebook/phone/phone.component';
-import { DoctorsListComponent } from './doctors-list/doctors-list.component';
-import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
+import { DoctorsListComponent } from './doctors/doctors-list/doctors-list.component';
+import { DoctorDetailComponent } from './doctors/doctor-detail/doctor-detail.component';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
@@ -74,6 +74,15 @@ import { AnamnesesListComponent } from './patients/anamneses-list/anamneses-list
 import { SelectTestComponent } from './tests/select-test/select-test.component';
 import { TestComponent } from './tests/test/test.component';
 import { PatientsListForRegistryComponent } from './patients/patients-list-for-registry/patients-list-for-registry.component';
+import { ReceptionsComponent } from './receptions/receptions.component';
+import { VacationsComponent } from './vacations/vacations.component';
+import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
+import { TestHistoryComponent } from './tests/test-history/test-history.component';
+import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
+import { RolesComponent } from './roles/roles.component';
+import { DoctorComponent } from './doctors/doctors-list/doctor/doctor.component';
+import { AboutComponent } from './about/about.component';
+import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 // ModalWindow
 import { PatientEditComponent } from './patients/patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
@@ -86,15 +95,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PatientForRegistryComponent } from './patients/patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
-import { ReceptionsComponent } from './receptions/receptions.component';
-import { VacationsComponent } from './vacations/vacations.component';
-import { CreateVacationComponent } from './vacations/create-vacation/create-vacation.component';
-import { TestHistoryComponent } from './tests/test-history/test-history.component';
-import { TestDetailHistoryComponent } from './tests/test-detail-history/test-detail-history.component';
-import { RolesComponent } from './roles/roles.component';
-import { DoctorComponent } from './doctors-list/doctor/doctor.component';
-import { AboutComponent } from './about/about.component';
-import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 
 
 export function tokenGetter() {

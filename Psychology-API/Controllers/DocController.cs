@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Dtos;
+using Psychology_API.Dtos.DocumentDto;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
@@ -25,7 +25,7 @@ namespace Psychology_API.Controllers
         }
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
-        public async Task<IActionResult> UploadDocs(int doctorId, int patientId, [FromForm]DocForCreateDto docForCreateDto)
+        public async Task<IActionResult> UploadDocs(int doctorId, int patientId, [FromForm]DocumentForCreateDto docForCreateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");

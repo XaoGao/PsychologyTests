@@ -1,4 +1,4 @@
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.TestDto
 {
     public class TestForReturnListDto
     {

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Dtos;
+using Psychology_API.Dtos.AnamnesisDto;
 using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
@@ -34,8 +35,9 @@ namespace Psychology_API.Controllers
 
             var anamneses = await _anamnesisService.GetAnamnesesAsync(patientId);
 
-            //TODO: добавить dto для возврата данных
-            return Ok(anamneses);
+            var anamnesesForReturn = _mapper.Map<IEnumerable<AnamnesisForReturnDto>>(anamneses);
+
+            return Ok(anamnesesForReturn);
         }
         [Authorize(Roles = RolesSettings.Doctor)]
         [HttpPost("{patientId}/anamneses")]

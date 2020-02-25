@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.PatientDto
 {
-    /// <summary>
-    /// Модель создания пациента.
-    /// </summary>
-    public class PatientForCreateDto
+    public class PatientForUpdateDto
     {
+        // [Required(ErrorMessage = "Нужно обязательно указать идентификатор пацента")]
+        // public int Id { get; set; }
         [Required(ErrorMessage = "Нужно обязательно указать номер личного дела")]
         public string PersonalCardNumber { get; set; }
         [Required(ErrorMessage = "Нужно обязательно указать фамилию пациента")]

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Psychology_Domain.Domain;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.DoctorDto
 {
     public class DoctorForListReturnDto
     {

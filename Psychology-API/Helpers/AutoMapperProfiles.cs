@@ -3,6 +3,14 @@ using Psychology_API.Dtos;
 using Psychology_Domain.Domain;
 using System.Linq;
 using System;
+using Psychology_API.Dtos.AnamnesisDto;
+using Psychology_API.Dtos.DoctorDto;
+using Psychology_API.Dtos.DocumentDto;
+using Psychology_API.Dtos.InterdepartDto;
+using Psychology_API.Dtos.PatientDto;
+using Psychology_API.Dtos.PatientTestResultDto;
+using Psychology_API.Dtos.TestDto;
+using Psychology_API.Dtos.VacationDto;
 
 namespace Psychology_API.Helpers
 {
@@ -39,6 +47,7 @@ namespace Psychology_API.Helpers
                 .ForMember(dest => dest.IsLast, opt => {
                     opt.MapFrom(src => true);
                 });
+            
 
             // Телефоный справочник.
             CreateMap<Department, Department>();
@@ -63,7 +72,7 @@ namespace Psychology_API.Helpers
             CreateMap<ReceptionForCreateDto, Reception>();
 
             // Документы
-            CreateMap<DocForCreateDto, Document>()
+            CreateMap<DocumentForCreateDto, Document>()
                 .ForMember(dest => dest.DocName, opt => {
                     opt.MapFrom(src => src.File.FileName);
                 });

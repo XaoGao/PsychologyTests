@@ -5,9 +5,9 @@ export class Anamnesis {
     id: number;
     conclusionTime: Date;
     patinetId: number;
-    patient: Patient;
+    patientFullname: string;
     conclusion: string;
     doctorId: number;
-    doctor: Doctor;
+    doctorFullname: string;
     isLast: boolean;
 }

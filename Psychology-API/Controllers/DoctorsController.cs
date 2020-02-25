@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
-using Psychology_API.Dtos;
+using Psychology_API.Dtos.DoctorDto;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Settings;
 using Psychology_API.Settings.Doctors;
@@ -52,7 +52,7 @@ namespace Psychology_API.Controllers
         public async Task<IActionResult> GetDoctors() 
         {
             var doctors = await _doctorService.GetDoctorsAsync(DoctorsType.DoctorsWithRoleDoctor);
-            // TODO: доделать
+            
             var doctorsForReturn = _mapper.Map<IEnumerable<DoctorForListReturnDto>>(doctors);
 
             return Ok(doctorsForReturn);

@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using Psychology_API.Data;
-using Psychology_API.Dtos;
+using Psychology_API.Dtos.InterdepartDto;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Services.Converter;
 using Psychology_API.Services.RabbitMQ;

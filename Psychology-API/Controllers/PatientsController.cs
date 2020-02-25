@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Psychology_API.Dtos;
 using Psychology_Domain.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Psychology_API.Settings;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Settings.Patients;
+using Psychology_API.Dtos.PatientDto;
 
 namespace Psychology_API.Controllers
 {

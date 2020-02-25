@@ -1,6 +1,6 @@
 using System;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.AnamnesisDto
 {
     public class AnamnesisForReturnDto
     {
@@ -18,13 +18,15 @@ namespace Psychology_API.Dtos
         /// Идентификатор пациента.
         /// </summary>
         /// <value></value>
-        public PatientForListDto Patient { get; set; }
+        public int Patientid { get; set; }
+        public string PatientFullname { get; set; }
         /// <summary>
         /// Текст заключения.
         /// </summary>
         /// <value></value>
         public string Conclusion { get; set; }
-        public DoctorForListReturnDto Doctor { get; set; }
+        public int DoctorId { get; set; }
+        public string DoctorFullname { get; set; }
         /// <summary>
         /// Указатель на последнее заключение от врача.
         /// </summary>

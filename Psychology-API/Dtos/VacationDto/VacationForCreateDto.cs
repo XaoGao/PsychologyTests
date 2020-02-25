@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Psychology_API.Dtos
+namespace Psychology_API.Dtos.VacationDto
 {
     public class VacationForCreateDto
     {
