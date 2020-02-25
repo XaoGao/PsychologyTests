@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   public login() {
     this.authService.login(this.userForLogin).subscribe(() => {
       this.toastrService.success('Вы успешно зашли в программу');
-      this.router.navigate(['/workship/' + this.authService.decodedToken.nameid]);
+      this.router.navigate(['/workship/' + this.authService.doctorId]);
     }, err => {
       this.toastrService.error(err);
     });

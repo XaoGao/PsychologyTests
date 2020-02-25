@@ -17,7 +17,7 @@ export class PhonesResolver implements Resolve<Phone> {
         return this.phonebookService.getPhones().pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
+                this.router.navigate(['/workship/:id', this.authService.doctorId]);
                 return of(null);
             })
         );

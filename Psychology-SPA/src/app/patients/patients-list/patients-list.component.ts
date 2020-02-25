@@ -1,8 +1,8 @@
-import { ToastrAlertService } from './../_services/toastr-alert.service';
-import { PatientService } from './../_services/patient.service';
-import { Patient } from './../_models/patient';
+import { ToastrAlertService } from '../../_services/toastr-alert.service';
+import { PatientService } from '../../_services/patient.service';
+import { Patient } from '../../_models/patient';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 

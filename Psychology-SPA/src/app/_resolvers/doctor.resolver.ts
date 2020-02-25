@@ -14,10 +14,10 @@ export class DoctorResolver implements Resolve<Doctor> {
                 private toastrService: ToastrAlertService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Doctor> {
-        return this.adminService.getDoctor(this.authService.decodedToken.nameid, route.params.id).pipe(
+        return this.adminService.getDoctor(this.authService.doctorId, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
+                this.router.navigate(['/workship/:id', this.authService.doctorId]);
                 return of(null);
             })
         );

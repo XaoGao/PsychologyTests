@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     const receptions = JSON.parse(localStorage.getItem('receptions'));
     if (token) {
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
+      this.authService.setUserDetail(this.authService.decodedToken);
     }
     if (receptions) {
       this.authService.receptions = receptions;

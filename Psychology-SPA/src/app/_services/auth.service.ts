@@ -15,6 +15,10 @@ export class AuthService {
   public decodedToken: any;
   receptions: Reception[];
 
+  public doctorId: number;
+  public role: string;
+  public username: string;
+
   constructor(private http: HttpClient) { }
 
   public login(model: any) {
@@ -25,6 +29,7 @@ export class AuthService {
           localStorage.setItem('token', user.token);
           localStorage.setItem('receptions', JSON.stringify(user.receptionsForReturn));
           this.decodedToken = this.helper.decodeToken(user.token);
+          this.setUserDetail(this.decodedToken);
           this.receptions = user.receptionsForReturn;
           // !раскомментировать, чтобы посмотреть, что лежит в токене
           // console.log(this.decodedToken);
@@ -44,4 +49,11 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('receptions');
   }
+  public setUserDetail(decodedToken: any) {
+    this.doctorId = decodedToken.nameid;
+    this.role = decodedToken.role;
+    this.username = decodedToken.unique_name;
+  }
+
+
 }

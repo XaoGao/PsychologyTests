@@ -77,7 +77,7 @@ export class DepartmentComponent implements OnInit {
     );
   }
   private createDepartment(department: Department) {
-    this.phonebookService.createDepartment(this.authService.decodedToken.nameid, department).subscribe((res: Department) => {
+    this.phonebookService.createDepartment(this.authService.doctorId, department).subscribe((res: Department) => {
         this.toastrService.success('Новый отдел успешно добавлен');
       }, err => {
         this.toastrService.error(err);

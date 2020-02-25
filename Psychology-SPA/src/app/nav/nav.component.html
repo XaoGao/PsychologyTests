@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
-    <a class="navbar-brand text-light" [routerLink]="['/workship/', authService.decodedToken.nameid]">Психея</a>
+    <a class="navbar-brand text-light" [routerLink]="['/workship/', authService.doctorId]">Психея</a>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -25,7 +25,7 @@
             </li>
         </ul>
         <button *ngIf="loggedin()" class="text-light" mat-button [matMenuTriggerFor]="menu">Привет,
-            {{ authService.decodedToken.unique_name | titlecase }} <i class="fa fa-caret-down"></i></button>
+            {{ authService.username | titlecase }} <i class="fa fa-caret-down"></i></button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item [routerLink]="['/doctor/edit']">Редактировать профиль <i
                     class="fa fa-user"></i></button>

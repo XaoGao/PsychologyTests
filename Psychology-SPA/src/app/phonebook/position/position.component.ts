@@ -71,7 +71,7 @@ export class PositionComponent implements OnInit {
     );
   }
   private createPosition(position: Position) {
-    this.phonebookService.createPosition(this.authService.decodedToken.nameid, position).subscribe((res: Position) => {
+    this.phonebookService.createPosition(this.authService.doctorId, position).subscribe((res: Position) => {
         this.toastrService.success('Новая должность успешно добавлена');
         this.positions.push(res);
       }, err => {

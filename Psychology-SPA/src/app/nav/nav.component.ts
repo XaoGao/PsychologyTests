@@ -19,7 +19,6 @@ export class NavComponent implements OnInit {
               private documentService: DocService) { }
 
   ngOnInit() {
-    console.log(this.authService.decodedToken);
   }
   public loggedin(): boolean {
     return this.authService.loggedIn();
@@ -30,13 +29,13 @@ export class NavComponent implements OnInit {
     this.route.navigate(['/']);
   }
   public isHR(): boolean {
-    return this.rolseService.isHR(this.authService.decodedToken.role);
+    return this.rolseService.isHR(this.authService.role);
   }
   public isAdmin(): boolean {
-    return this.rolseService.isAdmin(this.authService.decodedToken.role);
+    return this.rolseService.isAdmin(this.authService.role);
   }
   public isRegistry(): boolean {
-    return this.rolseService.isRegistry(this.authService.decodedToken.role);
+    return this.rolseService.isRegistry(this.authService.role);
   }
   public setLocal(): void {
     this.documentService.changeInterdepart('local');

@@ -52,7 +52,7 @@ export class DoctorComponent implements OnInit {
     }
   }
   private createDoctor(): void {
-    this.adminService.createDoctor(this.authService.decodedToken.nameid, this.doctor).subscribe(() => {
+    this.adminService.createDoctor(this.authService.doctorId, this.doctor).subscribe(() => {
       this.toastrService.success('Вы добавили нового врача');
       this.router.navigate(['/doctors']);
     }, err => {
@@ -60,7 +60,7 @@ export class DoctorComponent implements OnInit {
     });
   }
   private updateDoctor(): void {
-    this.adminService.updateDoctor(this.authService.decodedToken.nameid, this.doctor).subscribe(() => {
+    this.adminService.updateDoctor(this.authService.doctorId, this.doctor).subscribe(() => {
       this.toastrService.success('Вы обновили врача');
       this.router.navigate(['/doctors']);
     }, err => {

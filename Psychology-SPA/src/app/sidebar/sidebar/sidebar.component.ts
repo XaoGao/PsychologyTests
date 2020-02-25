@@ -18,15 +18,15 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
   public isDoctor(): boolean {
-    return this.rolesService.isDoctor(this.authService.decodedToken.role);
+    return this.rolesService.isDoctor(this.authService.role);
   }
   public isHR(): boolean {
-    return this.rolesService.isHR(this.authService.decodedToken.role);
+    return this.rolesService.isHR(this.authService.role);
   }
   public isRegistry(): boolean {
-    return this.rolesService.isRegistry(this.authService.decodedToken.role);
+    return this.rolesService.isRegistry(this.authService.role);
   }
   public isAdmin(): boolean {
-    return this.rolesService.isAdmin(this.authService.decodedToken.role);
+    return this.rolesService.isAdmin(this.authService.role);
   }
 }

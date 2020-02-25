@@ -1,8 +1,8 @@
-import { Patient } from './../_models/patient';
-import { ToastrAlertService } from './../_services/toastr-alert.service';
-import { AuthService } from './../_services/auth.service';
-import { PatientService } from './../_services/patient.service';
-import { Anamnesis } from './../_models/anamnesis';
+import { Patient } from '../../_models/patient';
+import { ToastrAlertService } from '../../_services/toastr-alert.service';
+import { AuthService } from '../../_services/auth.service';
+import { PatientService } from '../../_services/patient.service';
+import { Anamnesis } from '../../_models/anamnesis';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -34,11 +34,11 @@ export class AnamnesesListComponent implements OnInit {
     this.isNewRecord = !this.isNewRecord;
   }
   public addAnamnesis() {
-    const doctorId = this.authService.decodedToken.nameid;
+    const doctorId = this.authService.doctorId;
     const patientId = +this.route.snapshot.paramMap.get('id');
     this.newRecord.doctorId = doctorId;
     this.newRecord.patinetId = patientId;
-    this.patientService.createAnamnesis(doctorId, patientId, this.newRecord).subscribe((res) => {
+    this.patientService.createAnamnesis(doctorId, patientId, this.newRecord).subscribe(() => {
       this.toastrService.success('Запись успешно добавлена в историю');
       this.router.navigate(['/patients']);
     }, err => {

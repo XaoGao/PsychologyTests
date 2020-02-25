@@ -1,13 +1,13 @@
 import { NgForm } from '@angular/forms';
-import { DocService } from './../../_services/doc.service';
-import { AuthService } from './../../_services/auth.service';
-import { ToastrAlertService } from './../../_services/toastr-alert.service';
-import { Doctor } from './../../_models/doctor';
-import { DocumentType } from './../../_models/documentType';
+import { DocService } from '../../../_services/doc.service';
+import { AuthService } from '../../../_services/auth.service';
+import { ToastrAlertService } from '../../../_services/toastr-alert.service';
+import { Doctor } from '../../../_models/doctor';
+import { DocumentType } from '../../../_models/documentType';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Document } from './../../_models/document';
-import { environment } from './../../../environments/environment';
-import { Patient } from './../../_models/patient';
+import { Document } from '../../../_models/document';
+import { environment } from '../../../../environments/environment';
+import { Patient } from '../../../_models/patient';
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { PatientService } from 'src/app/_services/patient.service';
@@ -64,7 +64,7 @@ export class PatientForRegistryComponent implements OnInit {
 
   private initUploader(): void {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'doctors/' + this.authService.decodedToken.nameid + '/patients/' + this.patient.id + '/doc',
+      url: this.baseUrl + 'doctors/' + this.authService.doctorId + '/patients/' + this.patient.id + '/doc',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image', 'tiff', 'doc', 'docx', 'pdf'],
@@ -114,7 +114,7 @@ export class PatientForRegistryComponent implements OnInit {
     }
   }
   private updatePatient(patient: Patient) {
-    this.patientService.updatePatient(this.authService.decodedToken.nameid, patient.id, patient).subscribe((res) => {
+    this.patientService.updatePatient(this.authService.doctorId, patient.id, patient).subscribe((res) => {
        const newpatient = res as Patient;
        this.toastrService.success(`Данные ${newpatient.fullname} пациента успешно обновлены`);
        this.router.navigate(['/patientsforregistry']);
@@ -124,7 +124,7 @@ export class PatientForRegistryComponent implements OnInit {
     });
   }
   private createPatient(patient: Patient, patientForm: NgForm) {
-    this.patientService.createPatient(this.authService.decodedToken.nameid, patient).subscribe((res) => {
+    this.patientService.createPatient(this.authService.doctorId, patient).subscribe((res) => {
       const newpatient = res as Patient;
       this.toastrService.success(`Пациент ${newpatient.fullname} успешно добавлен в систему`);
       patientForm.resetForm();
@@ -134,7 +134,7 @@ export class PatientForRegistryComponent implements OnInit {
     });
   }
   public downloadDoc(document: Document): void {
-    this.docService.downloadDocument(this.authService.decodedToken.nameid, this.patient.id, document.id).subscribe((data: any) => {
+    this.docService.downloadDocument(this.authService.doctorId, this.patient.id, document.id).subscribe((data: any) => {
       this.downloadFile(data, document.docName);
     }, err => {
       this.toastrService.error(err);
@@ -146,7 +146,7 @@ export class PatientForRegistryComponent implements OnInit {
   }
   public deletePatient() {
     if (confirm(`Вы уверены, что хотите удалить из системы пациента:${this.patient.fullname}?`)) {
-      this.patientService.deletePatient(this.authService.decodedToken.nameid, this.patient.id).subscribe(() => {
+      this.patientService.deletePatient(this.authService.doctorId, this.patient.id).subscribe(() => {
         this.toastrService.success('Вы удалили пользователя');
         this.router.navigate(['/patientsforregistry']);
       }, err => {
@@ -162,7 +162,7 @@ export class PatientForRegistryComponent implements OnInit {
     }
   }
   public deleteDoc(document: Document) {
-    this.docService.deleteDocument(this.authService.decodedToken.nameid, this.patient.id, document.id).subscribe(() => {
+    this.docService.deleteDocument(this.authService.doctorId, this.patient.id, document.id).subscribe(() => {
       this.toastrService.success('Документ успешно удален');
       const index = this.patient.documents.indexOf(document, 0);
       if (index >= 0) {

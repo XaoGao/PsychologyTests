@@ -14,10 +14,10 @@ export class PatientTestResultsListResolver implements Resolve<PatientTestResult
                 private router: Router, private toastrService: ToastrAlertService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<PatientTestResult[]> {
-        return this.testService.getTestsHistory(this.authService.decodedToken.nameid, route.params.id).pipe(
+        return this.testService.getTestsHistory(this.authService.doctorId, route.params.id).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
+                this.router.navigate(['/workship/:id', this.authService.doctorId]);
                 return of(null);
             })
         );

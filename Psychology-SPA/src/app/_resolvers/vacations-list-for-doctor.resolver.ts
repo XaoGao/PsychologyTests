@@ -14,10 +14,10 @@ export class VacationsListForDoctorResolver implements Resolve<Vacation[]> {
                 private router: Router, private toastrService: ToastrAlertService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Vacation[]> {
-        return this.vacationService.getVacationsForDoctor(this.authService.decodedToken.nameid).pipe(
+        return this.vacationService.getVacationsForDoctor(this.authService.doctorId).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.decodedToken.nameid]);
+                this.router.navigate(['/workship/:id', this.authService.doctorId]);
                 return of(null);
             })
         );

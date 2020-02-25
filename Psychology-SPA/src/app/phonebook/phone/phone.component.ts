@@ -73,7 +73,7 @@ export class PhoneComponent implements OnInit {
     );
   }
   private createPhone(phone: Phone) {
-    this.phonebookService.createPhone(this.authService.decodedToken.nameid, phone).subscribe(
+    this.phonebookService.createPhone(this.authService.doctorId, phone).subscribe(
       () => {
         this.toastrService.success('Новый телефон успешно добавлен');
       }, err => {

@@ -32,7 +32,7 @@ export class TestComponent implements OnInit {
     this.setQuestuinsId();
   }
   public SaveTestResult(testForm: NgForm): void {
-    const doctorId = this.authService.decodedToken.nameid;
+    const doctorId = this.authService.doctorId;
     const patientId = +this.route.snapshot.paramMap.get('id');
     this.testService
       .sendQuestionsAnswers(doctorId, patientId, this.test.id, this.questionsAnswers)

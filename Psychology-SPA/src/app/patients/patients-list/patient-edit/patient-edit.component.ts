@@ -1,5 +1,5 @@
-import { AuthService } from './../../_services/auth.service';
-import { Patient } from './../../_models/patient';
+import { AuthService } from '../../../_services/auth.service';
+import { Patient } from '../../../_models/patient';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -24,7 +24,7 @@ export class PatientEditComponent implements OnInit {
   }
   isNewPatient(): boolean {
     if (this.patient.id === undefined) {
-      this.patient.doctorId = this.authService.decodedToken.nameid;
+      this.patient.doctorId = this.authService.doctorId;
       return true;
     } else {
       return false;

@@ -69,13 +69,13 @@ import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { WorkshipsComponent } from './workships/workships/workships.component';
 import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
-import { PatientsListComponent } from './patients-list/patients-list.component';
-import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
+import { PatientsListComponent } from './patients/patients-list/patients-list.component';
+import { AnamnesesListComponent } from './patients/anamneses-list/anamneses-list.component';
 import { SelectTestComponent } from './tests/select-test/select-test.component';
 import { TestComponent } from './tests/test/test.component';
-import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
+import { PatientsListForRegistryComponent } from './patients/patients-list-for-registry/patients-list-for-registry.component';
 // ModalWindow
-import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
+import { PatientEditComponent } from './patients/patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
 import { ModalPositionComponent } from './phonebook/position/modal-position/modal-position.component';
 import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.component';
@@ -83,7 +83,7 @@ import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.c
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { PatientForRegistryComponent } from './patients-list-for-registry/patient-for-registry/patient-for-registry.component';
+import { PatientForRegistryComponent } from './patients/patients-list-for-registry/patient-for-registry/patient-for-registry.component';
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReceptionsComponent } from './receptions/receptions.component';
