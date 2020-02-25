@@ -71,7 +71,7 @@ import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { AnamnesesListComponent } from './anamneses-list/anamneses-list.component';
-import { SelectTestComponent } from './select-test/select-test.component';
+import { SelectTestComponent } from './tests/select-test/select-test.component';
 import { TestComponent } from './tests/test/test.component';
 import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
 // ModalWindow
@@ -94,6 +94,7 @@ import { TestDetailHistoryComponent } from './tests/test-detail-history/test-det
 import { RolesComponent } from './roles/roles.component';
 import { DoctorComponent } from './doctors-list/doctor/doctor.component';
 import { AboutComponent } from './about/about.component';
+import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 
 
 export function tokenGetter() {
@@ -133,7 +134,8 @@ export function tokenGetter() {
     TestDetailHistoryComponent,
     RolesComponent,
     DoctorComponent,
-    AboutComponent
+    AboutComponent,
+    TestDetailComponent
   ],
   imports: [
     BrowserModule,

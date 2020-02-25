@@ -1,3 +1,4 @@
+import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 import { AboutComponent } from './about/about.component';
 import { DoctorResolver } from './_resolvers/doctor.resolver';
 import { DoctorComponent } from './doctors-list/doctor/doctor.component';
@@ -16,7 +17,7 @@ import { PatientsListForRegistryComponent } from './patients-list-for-registry/p
 import { PreventUnsavedTestGuard } from './_guards/prevent-unsaved-test.guard';
 import { TestComponent } from './tests/test/test.component';
 import { TestsResolver } from './_resolvers/tests.resolver';
-import { SelectTestComponent } from './select-test/select-test.component';
+import { SelectTestComponent } from './tests/select-test/select-test.component';
 import { PositionsWithParamResolver } from './_resolvers/positionsWithParam.resolver';
 import { PatientsListResolver } from './_resolvers/patients-list.resolver';
 import { PatientsListComponent } from './patients-list/patients-list.component';
@@ -175,6 +176,11 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent
+      },
+      {
+        path: 'patients/:id/tests/:testId/detail',
+        component: TestDetailComponent,
+        resolve: {test: TestResolver }
       }
     ]
   },

@@ -27,12 +27,4 @@ export class HomeComponent implements OnInit {
       this.toastrService.error(err);
     });
   }
-  public register() {
-    this.authService.login(this.userForRegister).subscribe(() => {
-      this.toastrService.success('Вы успешно зарегистрировались в программе');
-    }, err => {
-      this.toastrService.error(err);
-    });
-  }
-
 }

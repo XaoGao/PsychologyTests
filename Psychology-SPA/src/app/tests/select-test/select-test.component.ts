@@ -1,6 +1,6 @@
-import { Test } from './../_models/test';
+import { Test } from '../../_models/test';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { TestService } from './../_services/test.service';
+import { TestService } from '../../_services/test.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class SelectTestComponent implements OnInit {
 
   public tests: Test[];
   public id: string;
-  constructor(private testService: TestService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {

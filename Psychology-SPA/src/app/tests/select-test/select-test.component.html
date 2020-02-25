@@ -10,11 +10,12 @@
                 </p>
             </mat-card-content>
             <div class="row">
+                <div class="col-1"></div>
                 <mat-card-actions class="col-5">
                     <button mat-button [routerLink]="['/patients', id, 'tests', test.id]"> Выбрать тест </button>
                 </mat-card-actions>
                 <mat-card-actions class="col-5">
-                    <button mat-button [routerLink]="['/patients', id, 'tests', test.id]"> Подробности теста </button>
+                    <button mat-button [routerLink]="['/patients', id, 'tests', test.id, 'detail']"> Подробности теста </button>
                 </mat-card-actions>
             </div>
         </mat-card>
