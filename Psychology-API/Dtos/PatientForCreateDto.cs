@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Psychology_API.Dtos
 {
+    /// <summary>
+    /// Модель создания пациента.
+    /// </summary>
     public class PatientForCreateDto
     {
         [Required(ErrorMessage = "Нужно обязательно указать номер личного дела")]

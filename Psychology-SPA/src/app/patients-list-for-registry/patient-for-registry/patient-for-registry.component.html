@@ -1,6 +1,6 @@
 <form #patientForm="ngForm">
     <div>
-        <p *ngIf="isNewPatient()"> Новый пациента.</p>
+        <p class="text-center h2" *ngIf="isNewPatient()"> Новый пациента </p>
         <p *ngIf="!isNewPatient()"> Данные: <strong>{{ patient.fullname }}</strong></p>
         <hr>
         <p>Номер карточки: <strong>{{ patient.personalCardNumber }}</strong></p>
@@ -26,14 +26,14 @@
         </mat-form-field>
         <mat-form-field class="col-3">
             <mat-label>Укажите врача</mat-label>
-            <mat-select [(value)]="patient.doctorId">
-                <mat-option *ngFor="let doctor of doctors" [value]="doctor.id" required>
+            <mat-select [(value)]="patient.doctorId" required [(ngModel)]="patient.doctorId" name="doctorId">
+                <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
                     {{ doctor.fullname }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <br>
-        <button class="col-3 ml-3 btn btn-primary" (click)="save(patientForm)"><i
+        <button class="col-3 ml-3 btn btn-primary" [disabled]="!patientForm.valid" (click)="save(patientForm)"><i
                 class="fa fa-save"></i>Сохранить</button>
         <button *ngIf="!isNewPatient()" class="col-3 ml-3 btn btn-danger" (click)="deletePatient()"><i
                 class="fa fa-trash"></i>Удалить</button>

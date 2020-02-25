@@ -41,10 +41,13 @@ export class PatientForRegistryComponent implements OnInit {
       this.docTypes = data.docTypes;
       this.doctors = data.doctors;
     });
-
+    console.log(this.patient);
     this.isNewPatient();
     this.initUploader();
   }
+  /**
+   * Проверка новый пациент или нет(создать пациента или обновить сущесвтующего)
+   */
   public isNewPatient(): boolean {
     if (this.patient.id) {
       return false;
@@ -52,9 +55,13 @@ export class PatientForRegistryComponent implements OnInit {
       return true;
     }
   }
+  /**
+   * Инициализация области загрузки документов
+   */
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
+
   private initUploader(): void {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'doctors/' + this.authService.decodedToken.nameid + '/patients/' + this.patient.id + '/doc',
@@ -96,6 +103,9 @@ export class PatientForRegistryComponent implements OnInit {
       }
     };
   }
+  /**
+   * Сохрнить данные(для нового пациента создать его, для существующего обновить данные )
+   */
   public save(patientForm: NgForm): void {
     if (this.isNewPatient()) {
       this.createPatient(this.patient, patientForm);

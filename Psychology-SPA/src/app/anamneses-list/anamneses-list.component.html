@@ -1,18 +1,24 @@
 <div class="text-center mb-5">
-    <h3>История заключении пациента: {{ patientFullname }}</h3>
-    <button mat-button class="float-right" (click)="addNewRecordAnamnesis()"><i class="fa fa-plus"></i> Добавить новую
-        запись в историю</button>
+    <div class="mb-5">
+        <h3>История заключении пациента: {{ patient.firstname }}</h3>
+        <button mat-button class="float-right" (click)="addNewRecordAnamnesis()"><i class="fa fa-plus"></i> Добавить
+            новую
+            запись в историю</button>
+    </div>
     <hr>
 </div>
 <form *ngIf="isNewRecord" (ngSubmit)="addAnamnesis()">
     <hr>
-    <div>
-        <mat-form-field class="form-group  full-width">
-            <textarea matInput placeholder="Заключение" name="conclusion" [(ngModel)]="newRecord.conclusion"
-                required ></textarea>
-        </mat-form-field>
+    <div class="mb-5">
+        <div>
+            <mat-form-field class="form-group  full-width">
+                <textarea matInput placeholder="Заключение" name="conclusion" [(ngModel)]="newRecord.conclusion"
+                    required></textarea>
+            </mat-form-field>
+        </div>
+        <button class="btn btn-primary float-right mb-5" type="submit"><i class="fa fa-plus"></i> Добавить
+            заключение</button>
     </div>
-    <button class="btn btn-primary float-right mb-5" type="submit"><i class="fa fa-plus"></i> Добавить заключение</button>
     <hr>
 </form>
 <div *ngFor="let anamnesis of anamneses">

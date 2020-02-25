@@ -32,8 +32,21 @@ export class TestComponent implements OnInit {
     });
     this.setQuestuinsId();
   }
-  public SaveTestResult(): void {
-    this.sendQuestionsAnswersResult();
+  public SaveTestResult(testForm: NgForm): void {
+    const doctorId = this.authService.decodedToken.nameid;
+    const patientId = +this.route.snapshot.paramMap.get('id');
+    this.testService
+      .sendQuestionsAnswers(doctorId, patientId, this.test.id, this.questionsAnswers)
+      .subscribe(
+        res => {
+          this.toastrService.success('Тест успешно пройден, данные сохранены');
+          testForm.reset();
+          this.router.navigate(['/patients']);
+        },
+        err => {
+          this.toastrService.error(err);
+        }
+      );
   }
   private setQuestuinsId(): void {
     this.questionsAnswers.questionsAnswerList = [];
@@ -44,20 +57,5 @@ export class TestComponent implements OnInit {
       questionsAnswer.sortLevel = this.test.questions[index].sortLevel;
       this.questionsAnswers.questionsAnswerList.push(questionsAnswer);
     }
-  }
-  public sendQuestionsAnswersResult(): void {
-    const doctorId = this.authService.decodedToken.nameid;
-    const patientId = +this.route.snapshot.paramMap.get('id');
-    this.testService
-      .sendQuestionsAnswers(doctorId, patientId, this.test.id, this.questionsAnswers)
-      .subscribe(
-        res => {
-          this.toastrService.success('Тест успешно пройден, данные сохранены');
-          this.router.navigate(['/patients']);
-        },
-        err => {
-          this.toastrService.error(err);
-        }
-      );
   }
 }

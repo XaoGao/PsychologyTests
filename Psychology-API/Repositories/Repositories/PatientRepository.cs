@@ -90,5 +90,13 @@ namespace Psychology_API.Repositories.Repositories
 
             return patient;
         }
+
+        public async Task<bool> PatientIsExistRepositoryAsync(string patientNumberCard)
+        {
+            if (await _context.Patients.AnyAsync(p => p.PersonalCardNumber.Equals(patientNumberCard)))
+                return true;
+
+            return false;
+        }
     }
 }

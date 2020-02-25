@@ -62,11 +62,14 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
+            patientForCreateDto.PersonalCardNumber = patientForCreateDto.PersonalCardNumber.Trim();
+
+            if(await _patientService.PatientIsExistAsync(patientForCreateDto.PersonalCardNumber))
+                return BadRequest("В системе уже существует пациент с указым номером карточки.");
+
             var patient = _mapper.Map<Patient>(patientForCreateDto);
 
             _patientService.Add(patient);
-
-            //TODO: добавить dto для возврата данных
 
             if (await _patientService.SaveAllAsync())
                 return Ok(patient);

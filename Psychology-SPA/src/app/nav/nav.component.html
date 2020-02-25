@@ -13,7 +13,7 @@
                 </mat-menu>
             </li>
             <li>
-                <button class="nav-link text-light" mat-button>О программе</button>
+                <button class="nav-link text-light" mat-button [routerLink]="['/about']">О программе</button>
             </li>
             <li class="nav-item" *ngIf="isRegistry()">
                 <button class="nav-link text-light" mat-button [matMenuTriggerFor]="interdepart">Сервис проверки

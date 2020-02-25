@@ -132,9 +132,9 @@ const routes: Routes = [
                     doctors: DoctorsListResolver, documents: DocumentsListResolver}
       },
       {
-        path: 'patients/:id',
+        path: 'patients/:id/anamneses',
         component: AnamnesesListComponent,
-        resolve: { anamneses: AnamnesesListResolver }
+        resolve: { patient: PatientResolver, anamneses: AnamnesesListResolver }
       },
       {
         path: 'patients/:id/tests',

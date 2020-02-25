@@ -1,3 +1,4 @@
+import { Patient } from './../_models/patient';
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
 import { PatientService } from './../_services/patient.service';
@@ -13,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AnamnesesListComponent implements OnInit {
 
   public anamneses: Anamnesis[];
-  public patientFullname;
+  public patient: Patient;
   public isNewRecord = false;
   public newRecord = new Anamnesis();
   constructor(private route: ActivatedRoute,
@@ -25,16 +26,9 @@ export class AnamnesesListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.anamneses = data.anamneses;
-      this.getFullname();
+      this.patient = data.patient;
     });
     this.newRecord.conclusion = '';
-  }
-  private getFullname() {
-    if (this.anamneses[0]) {
-      this.patientFullname = this.anamneses[0].patient.fullname;
-    } else {
-      this.patientFullname = 'нет ни одной записи';
-    }
   }
   public addNewRecordAnamnesis(): void {
     this.isNewRecord = !this.isNewRecord;

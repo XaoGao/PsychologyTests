@@ -23,6 +23,7 @@
                 <div class="row">
                     <button class="btn btn-success col-3 ml-3" [routerLink]="['/patientsforregistry/', patient.id]"
                     >Редактировать данные</button>
+                    <button class="btn btn-danger col-3 ml-3"  (click)="deletePatient(patient)">Удалить пациента</button>
                 </div>
             </div>
         </mat-expansion-panel>

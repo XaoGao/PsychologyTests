@@ -52,5 +52,10 @@ namespace Psychology_API.DataServices.DataServices
         {
             _patientRepository.MovePatinetToArchiveRepository(patient);
         }
+
+        public async Task<bool> PatientIsExistAsync(string patientNumberCard)
+        {
+            return await _patientRepository.PatientIsExistRepositoryAsync(patientNumberCard);
+        }
     }
 }

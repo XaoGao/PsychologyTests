@@ -12,7 +12,7 @@ namespace Psychology_API.Controllers
 {
     [AllowAnonymous]
     [ApiController]
-    [Route("api/doctors/{doctorId}/Patients")]
+    [Route("api/doctors/{doctorId}/patients")]
     public class AnamnesesController : ControllerBase
     {
         private readonly IMapper _mapper;

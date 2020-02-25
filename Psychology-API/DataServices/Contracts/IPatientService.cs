@@ -41,5 +41,11 @@ namespace Psychology_API.DataServices.Contracts
         /// </summary>
         /// <returns> Список все пациентов. </returns>
         Task<IEnumerable<Patient>> GetPatientsAsync(PatientsType patientsType);
+        /// <summary>
+        /// Проверить существует ли пациент в системе.
+        /// </summary>
+        /// <param name="patientNumberCard"> Номер личной карточки. </param>
+        /// <returns> True если в системе уже есть пациент с указанным номерм карточки. </returns>
+        Task<bool> PatientIsExistAsync(string patientNumberCard);
     }
 }

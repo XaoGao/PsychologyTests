@@ -74,8 +74,6 @@ import { AnamnesesListComponent } from './anamneses-list/anamneses-list.componen
 import { SelectTestComponent } from './select-test/select-test.component';
 import { TestComponent } from './tests/test/test.component';
 import { PatientsListForRegistryComponent } from './patients-list-for-registry/patients-list-for-registry.component';
-// tslint:disable-next-line:max-line-length
-import { PatientForRegistryDetailComponent } from './patients-list-for-registry/patient-for-registry-detail/patient-for-registry-detail.component';
 // ModalWindow
 import { PatientEditComponent } from './patients-list/patient-edit/patient-edit.component';
 import { ModalDepartmentComponent } from './phonebook/department/modal-department/modal-department.component';
@@ -127,7 +125,6 @@ export function tokenGetter() {
     SelectTestComponent,
     TestComponent,
     PatientsListForRegistryComponent,
-    PatientForRegistryDetailComponent,
     PatientForRegistryComponent,
     ReceptionsComponent,
     VacationsComponent,
