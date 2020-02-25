@@ -1,9 +1,10 @@
-using System;
-using Microsoft.Extensions.Logging;
 using Psychology_API.ViewModels;
 
 namespace Psychology_API.Servises.CofR.ComputedTestResult
 {
+    /// <summary>
+    /// Базовый класс для цепочки отвественных.
+    /// </summary>
     public abstract class AbstractComputedTestResultHandler : IComputedTestResultHandler
     {
         public AbstractComputedTestResultHandler()
@@ -46,6 +47,11 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
                 return sum;
             }
         }
+        /// <summary>
+        /// Алгоритм расчета баллов.
+        /// </summary>
+        /// <param name="questionsAnswers"></param>
+        /// <returns></returns>
         protected abstract int GetPoints(QuestionsAnswersViewModel questionsAnswers);
     }
 }

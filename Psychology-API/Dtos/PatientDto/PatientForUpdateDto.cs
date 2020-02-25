@@ -4,8 +4,6 @@ namespace Psychology_API.Dtos.PatientDto
 {
     public class PatientForUpdateDto
     {
-        // [Required(ErrorMessage = "Нужно обязательно указать идентификатор пацента")]
-        // public int Id { get; set; }
         [Required(ErrorMessage = "Нужно обязательно указать номер личного дела")]
         public string PersonalCardNumber { get; set; }
         [Required(ErrorMessage = "Нужно обязательно указать фамилию пациента")]

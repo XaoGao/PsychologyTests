@@ -22,10 +22,6 @@
     </div>
     <!-- Для отдела кадров -->
     <div *ngIf="isHR()">
-        <div>
-            <p>График работ</p>
-            <hr>
-        </div>
         <div [routerLink]="['/vacations']">
             <p>График отпусков</p>
             <hr>

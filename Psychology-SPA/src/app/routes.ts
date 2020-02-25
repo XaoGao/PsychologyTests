@@ -11,7 +11,7 @@ import { VacationsListResolver } from './_resolvers/vacations-list.resolver';
 import { VacationsComponent } from './vacations/vacations.component';
 import { ReceptionsComponent } from './receptions/receptions.component';
 import { PatientResolver } from './_resolvers/patient.resolver';
-import { PatientForRegistryComponent } from './patients/patients-list-for-registry/patient-for-registry/patient-for-registry.component';
+import { PatientForRegistryComponent } from './patients/patient-for-registry/patient-for-registry.component';
 import { PatientsListForRegistryResolver } from './_resolvers/patients-list-for-registry.resolver';
 import { PatientsListForRegistryComponent } from './patients/patients-list-for-registry/patients-list-for-registry.component';
 import { PreventUnsavedTestGuard } from './_guards/prevent-unsaved-test.guard';

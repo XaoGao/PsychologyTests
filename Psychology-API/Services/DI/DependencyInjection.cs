@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.DataServices.DataServices;
-using Psychology_API.Helpers;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.Repositories.Repositories;

@@ -1,5 +1,8 @@
 namespace Psychology_API.Servises.ComputedHash
 {
+    /// <summary>
+    /// Интерфейс алгоритма расчета хеша.
+    /// </summary>
     public interface IHash
     {
         /// <summary>

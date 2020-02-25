@@ -1,5 +1,3 @@
-using Psychology_Domain.Abstarct;
-
 namespace Psychology_API.Servises.Cache
 {
     /// <summary>

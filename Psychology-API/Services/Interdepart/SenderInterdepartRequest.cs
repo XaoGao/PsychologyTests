@@ -8,7 +8,7 @@ using Psychology_Domain.Domain;
 namespace Psychology_API.Services.Interdepart
 {
     /// <summary>
-    /// Класса по работе с межведомственными запросами.
+    /// Класс по работе с межведомственными запросами.
     /// </summary>
     public class SenderInterdepartRequest : ISenderInterdepartRequest
     {

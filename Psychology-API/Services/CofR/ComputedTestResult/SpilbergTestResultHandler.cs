@@ -33,7 +33,7 @@ namespace Psychology_API.Servises.CofR.ComputedTestResult
                 return base.ComputedTestResult(questionsAnswers, testName);
             }
         }
-
+        
         protected override int GetPoints(QuestionsAnswersViewModel questionsAnswers)
         {
             int[] directQuestions = new int[] {3,4,6,7,9,12,13,14,17,18,22,23,24,25,28,29,31,32,34,35,37,38,40};

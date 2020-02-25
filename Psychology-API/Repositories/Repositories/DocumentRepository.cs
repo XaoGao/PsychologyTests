@@ -72,6 +72,7 @@ namespace Psychology_API.Repositories.Repositories
 
             if (await _context.SaveChangesAsync() > 0)
             {
+                RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
                 SetInCashe(document.Id.ToString(), suffix, document);
                 return true;
             }

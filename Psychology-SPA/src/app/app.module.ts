@@ -92,7 +92,7 @@ import { ModalPhoneComponent } from './phonebook/phone/modal-phone/modal-phone.c
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { PatientForRegistryComponent } from './patients/patients-list-for-registry/patient-for-registry/patient-for-registry.component';
+import { PatientForRegistryComponent } from './patients/patient-for-registry/patient-for-registry.component';
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
 
