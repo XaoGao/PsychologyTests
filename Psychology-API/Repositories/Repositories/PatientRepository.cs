@@ -51,7 +51,7 @@ namespace Psychology_API.Repositories.Repositories
 
         public void MovePatinetToArchiveRepository(Patient patient)
         {
-            patient.IsDelete = true;
+            patient.IsLock = true;
         }
         public override void Add<T>(T entity) where T : class
         {

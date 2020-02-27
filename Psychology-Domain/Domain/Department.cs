@@ -5,7 +5,7 @@ namespace Psychology_Domain.Domain
     /// <summary>
     /// Отдел.
     /// </summary>
-    public class Department : BaseEntity
+    public class Department : BasePhonebookEntity
     {
         /// <summary>
         /// Наименование отдела.

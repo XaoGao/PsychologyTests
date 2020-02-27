@@ -8,11 +8,6 @@ namespace Psychology_Domain.Domain
     public class InterdepartStatus : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Уровень сортровки.
         /// </summary>
         /// <value></value>
@@ -22,10 +17,5 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string Name { get; set; }
-        /// <summary>
-        /// Актуальность статуса.
-        /// </summary>
-        /// <value></value>
-        public bool IsLock { get; set; }
     }
 }

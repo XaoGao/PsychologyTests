@@ -42,6 +42,10 @@ namespace Psychology_API.Services.Interdepart
                 throw new Exception(ex.Message);
             }
         }
+        /// <summary>
+        /// Получить из словаря класс отвечающий за отправку межведомственных запросов.
+        /// </summary>
+        /// <param name="senderInterdepartRequestFacadKey"> Ключ для словаря. </param>
         public void ChangeInterdepartDeprtment(string senderInterdepartRequestFacadKey)
         {
             _senderInterdepartRequestFacad = container[senderInterdepartRequestFacadKey];

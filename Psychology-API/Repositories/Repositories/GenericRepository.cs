@@ -10,7 +10,7 @@ using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BasePhonebookEntity
     {
         private readonly DataContext _context;
         private DbSet<TEntity> _dbSet;

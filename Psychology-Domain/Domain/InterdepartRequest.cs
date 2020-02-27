@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class InterdepartRequest : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Идентификатор документа по которому идет межведомственный запрос.
         /// </summary>
         /// <value></value>
@@ -23,11 +18,6 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public Document Document { get; set; }
-        /// <summary>
-        /// Дата создания межведоственного запроса.
-        /// </summary>
-        /// <value></value>
-        public DateTime Create { get; set; }
         /// <summary>
         /// Дата обработки межведоственного запроса сторонней системы.
         /// </summary>
@@ -65,7 +55,6 @@ namespace Psychology_Domain.Domain
                 throw new ArgumentException("Не валидная ссылка на статус запроса", nameof(interdepartStatusId));
 
             DocumentId = document.Id;
-            // Document = document;
             Create = DateTime.Now;
             InterdepartStatusId = interdepartStatusId;
         }

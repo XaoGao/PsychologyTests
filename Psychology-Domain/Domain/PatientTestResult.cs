@@ -10,11 +10,6 @@ namespace Psychology_Domain.Domain
     public class PatientTestResult : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Идентификатор доктора.
         /// </summary>
         /// <value></value>

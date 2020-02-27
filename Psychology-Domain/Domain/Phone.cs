@@ -5,7 +5,7 @@ namespace Psychology_Domain.Domain
     /// <summary>
     /// Телефон доктора.
     /// </summary>
-    public class Phone : BaseEntity
+    public class Phone : BasePhonebookEntity
     {
         /// <summary>
         /// Номер телефона.

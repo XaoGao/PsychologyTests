@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Vacation : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Идентификатор доктора.
         /// </summary>
         /// <value></value>

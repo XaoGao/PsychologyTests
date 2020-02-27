@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Doctor : People
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Логин.
         /// </summary>
         /// <value></value>
@@ -73,10 +68,5 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public Role Role { get; set; }
-        /// <summary>
-        /// Флаг для удаленных врачей.
-        /// </summary>
-        /// <value></value>
-        public bool IsDeleted { get; set; }
     }
 }

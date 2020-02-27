@@ -14,11 +14,11 @@ namespace Psychology_API.Controllers
     [AllowAnonymous]
     [ApiController]
     [Route("api/doctors/{doctorId}/patients/{patientId}/[controller]")]
-    public class DocController : ControllerBase
+    public class DocumentsController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IDocumentService _documentService;
-        public DocController(IDocumentService documentService, IMapper mapper)
+        public DocumentsController(IDocumentService documentService, IMapper mapper)
         {
             _documentService = documentService;
             _mapper = mapper;

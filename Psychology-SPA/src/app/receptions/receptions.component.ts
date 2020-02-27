@@ -46,8 +46,7 @@ export class ReceptionsComponent implements OnInit {
     reception.dateTimeReception = timeReception;
     this.receptionService.createReception(reception).subscribe(() => {
       this.toastrService.success(`${this.currentPatient.fullname} записан на ${timeReception.toLocaleString()}`);
-      // TODO: fix
-      this.router.navigate(['/workship/:id', this.authService.doctorId]);
+      this.router.navigate(['/workship', this.authService.doctorId]);
     }, err => {
       this.toastrService.error(err);
     });

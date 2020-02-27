@@ -8,11 +8,6 @@ namespace Psychology_Domain.Domain
     public class ProcessingInterpretationOfResult : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Минимальное количество очков по ответам.
         /// </summary>
         /// <value></value>

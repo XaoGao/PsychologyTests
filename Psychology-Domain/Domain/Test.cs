@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Test : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Наименование теста.
         /// </summary>
         /// <value></value>
@@ -38,6 +33,10 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public ICollection<Answer> Answers { get; set; }
+        /// <summary>
+        /// Интерпритация результата.
+        /// </summary>
+        /// <value></value>
         public ICollection<ProcessingInterpretationOfResult> ProcessingInterpretationOfResults { get; set; }
 
     }

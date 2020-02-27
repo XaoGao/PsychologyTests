@@ -5,7 +5,7 @@ using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.DataServices.Contracts
 {
-    public interface IGenericService<TEntity> where TEntity : BaseEntity
+    public interface IGenericService<TEntity> where TEntity : BasePhonebookEntity
     {
         /// <summary>
         /// Получить конкретный экземпляр конкртеного класса.

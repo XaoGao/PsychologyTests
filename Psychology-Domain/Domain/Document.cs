@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Document : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Наименование документа.
         /// </summary>
         /// <value></value>

@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Psychology_Domain.Abstarct;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Data
@@ -28,5 +31,27 @@ namespace Psychology_API.Data
         public DbSet<PatientTestResult> PatientTestResult { get; set; }
         public DbSet<InterdepartStatus> InterdepartStatuses { get; set; }
         public DbSet<InterdepartRequest> InterdepartRequests { get; set; }
+
+
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is DomainEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((DomainEntity)entityEntry.Entity).Update = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((DomainEntity)entityEntry.Entity).Create = DateTime.Now;
+                }
+            }
+
+            return base.SaveChanges();
+        }
     }
 }

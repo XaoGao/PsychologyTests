@@ -19,7 +19,7 @@ namespace Psychology_API.Migrations
 
             modelBuilder.Entity("Psychology_Domain.Domain.Anamnesis", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -29,16 +29,25 @@ namespace Psychology_API.Migrations
                     b.Property<DateTime>("ConclusionTime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLast")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
@@ -53,6 +62,12 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
@@ -61,6 +76,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Value")
                         .HasColumnType("int");
@@ -80,6 +98,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
@@ -88,6 +109,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("SortLevel")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -100,6 +124,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime(6)");
 
@@ -109,7 +136,7 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Lastname")
@@ -132,6 +159,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Username")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -158,6 +188,9 @@ namespace Psychology_API.Migrations
                     b.Property<byte[]>("Body")
                         .HasColumnType("longblob");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateUpload")
                         .HasColumnType("datetime(6)");
 
@@ -170,6 +203,9 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Extension")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Number")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -178,6 +214,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("Series")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -194,11 +233,17 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -220,10 +265,16 @@ namespace Psychology_API.Migrations
                     b.Property<int>("InterdepartStatusId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("Request")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("Response")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
@@ -241,6 +292,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
@@ -249,6 +303,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -264,14 +321,20 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("DateInsert")
+                    b.Property<DateTime>("Create")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LevelLog")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -284,6 +347,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime(6)");
 
@@ -293,7 +359,7 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("IsDelete")
+                    b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Lastname")
@@ -304,6 +370,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("PersonalCardNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -318,11 +387,17 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateTimeCreate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -335,6 +410,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("TestResultInPoints")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -355,11 +433,17 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Number")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -372,6 +456,9 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
@@ -380,6 +467,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("SortLevel")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -392,8 +482,14 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("MaxValue")
                         .HasColumnType("int");
@@ -403,6 +499,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("TestId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -417,11 +516,20 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("TestId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("sortLevel")
                         .HasColumnType("int");
@@ -442,6 +550,12 @@ namespace Psychology_API.Migrations
                     b.Property<int>("AnswersValue")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
@@ -453,6 +567,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<int>("TestId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -473,14 +590,23 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateTimeReception")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -497,11 +623,17 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("IsLock")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -514,14 +646,23 @@ namespace Psychology_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Instruction")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -537,13 +678,22 @@ namespace Psychology_API.Migrations
                     b.Property<int>("CountDays")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Create")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndVacation")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("StartVacation")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");

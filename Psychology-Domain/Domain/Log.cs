@@ -9,6 +9,21 @@ namespace Psychology_Domain.Domain
     public class Log : DomainEntity
     {
         /// <summary>
+        /// Уровень лога.
+        /// </summary>
+        /// <value></value>
+        public string LevelLog { get; set; }
+        /// <summary>
+        /// Поле для записи тела.
+        /// </summary>
+        /// <value></value>
+        public string Body { get; set; }
+        /// <summary>
+        /// Текст ошибки.
+        /// </summary>
+        /// <value></value>
+        public string Text { get; set; }
+        /// <summary>
         /// Создание нового экземпляра класса.
         /// </summary>
         /// <param name="text"> Текст ошибки. </param>
@@ -18,14 +33,14 @@ namespace Psychology_Domain.Domain
                 throw new ArgumentNullException(nameof(text), "Текст для записи в лог не может быть пустым");
 
             Text = text;
-            DateInsert = DateTime.Now;
+            Create = DateTime.Now;
         }
         /// <summary>
         /// Создание нового экземпляра класса.
         /// </summary>
         public Log()
         {
-            DateInsert = DateTime.Now;
+            Create = DateTime.Now;
         }
         /// <summary>
         /// Создание нового экземпляра класса.
@@ -42,7 +57,7 @@ namespace Psychology_Domain.Domain
 
             LevelLog = levelLog;
             Body = body;
-            DateInsert = DateTime.Now;
+            Create = DateTime.Now;
         }
         /// <summary>
         /// Создание нового экземпляра класса.
@@ -64,33 +79,7 @@ namespace Psychology_Domain.Domain
             LevelLog = levelLog;
             Body = body;
             Text = text;
-            DateInsert = DateTime.Now;
+            Create = DateTime.Now;
         }
-        /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
-        /// Уровень лога.
-        /// </summary>
-        /// <value></value>
-        public string LevelLog { get; set; }
-        /// <summary>
-        /// Поле для записи тела.
-        /// </summary>
-        /// <value></value>
-        public string Body { get; set; }
-        /// <summary>
-        /// Текст ошибки.
-        /// </summary>
-        /// <value></value>
-        public string Text { get; set; }
-
-        /// <summary>
-        /// Дата записи.
-        /// </summary>
-        /// <value></value>
-        public DateTime DateInsert { get; set; }
     }
 }

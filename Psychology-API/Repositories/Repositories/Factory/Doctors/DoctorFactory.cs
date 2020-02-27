@@ -57,7 +57,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Doctors
         /// <returns> Список активных врачей. </returns>
         private async Task<IEnumerable<Doctor>> GetEnableDoctorsAsync()
         {
-            return await _context.Doctors.Where(d => d.IsDeleted == false).ToListAsync();
+            return await _context.Doctors.Where(d => d.IsLock == false).ToListAsync();
         }
         /// <summary>
         /// Возвращает только активных врачей с ролью Доктор.
@@ -72,7 +72,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Doctors
 
             return await _context.Doctors
                 .Include(d => d.Patients)
-                .Where(d => d.IsDeleted == false && d.Role.Id == role.Id)
+                .Where(d => d.IsLock == false && d.Role.Id == role.Id)
                 .ToListAsync();
         }
     }

@@ -1,5 +1,5 @@
+import { DocumentService } from './../../_services/document.service';
 import { NgForm } from '@angular/forms';
-import { DocService } from '../../_services/doc.service';
 import { AuthService } from '../../_services/auth.service';
 import { ToastrAlertService } from '../../_services/toastr-alert.service';
 import { Doctor } from '../../_models/doctor';
@@ -33,7 +33,7 @@ export class PatientForRegistryComponent implements OnInit {
               private authService: AuthService,
               private toastrService: ToastrAlertService,
               private router: Router,
-              private docService: DocService) { }
+              private docService: DocumentService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -64,7 +64,7 @@ export class PatientForRegistryComponent implements OnInit {
 
   private initUploader(): void {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'doctors/' + this.authService.doctorId + '/patients/' + this.patient.id + '/doc',
+      url: this.baseUrl + 'doctors/' + this.authService.doctorId + '/patients/' + this.patient.id + '/documents',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image', 'tiff', 'doc', 'docx', 'pdf'],

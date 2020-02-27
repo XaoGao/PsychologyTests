@@ -23,7 +23,7 @@ namespace Psychology_API.Repositories.Repositories
             foreach (var department in departments)
             {
                 var doctorsInDepartment = await _context.Doctors
-                    .Where(d => d.DepartmentId == department.Id && d.RoleId != 1 && d.IsDeleted != true)
+                    .Where(d => d.DepartmentId == department.Id && d.RoleId != 1 && d.IsLock != true)
                     .Include(d => d.Position)
                     .Include(d => d.Department)
                     .Include (d => d.Phone)

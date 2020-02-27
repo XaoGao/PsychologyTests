@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Patient : People
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Номер личной карточки.
         /// </summary>
         /// <value></value>
@@ -24,11 +19,6 @@ namespace Psychology_Domain.Domain
         /// <value></value>
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
-        /// <summary>
-        /// Актуальность пациента.
-        /// </summary>
-        /// <value></value>
-        public bool IsDelete { get; set; }
         /// <summary>
         /// Коллекция заключении пациента.
         /// </summary>

@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class PatientHistory : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Дата записи в БД.
         /// </summary>
         /// <value></value>

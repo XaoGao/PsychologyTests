@@ -9,7 +9,7 @@
         "PositionId" : 1,
         "PhoneId" : 1,
         "RoleId" : 1,
-        "IsDeleted" : false 
+        "IsLock" : false 
     },
     {
         "Username" : "test",
@@ -21,7 +21,7 @@
         "PositionId" : 1,
         "PhoneId" : 1,
         "RoleId" : 2,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test2",
@@ -33,7 +33,7 @@
         "PositionId" : 2,
         "PhoneId" : 2,
         "RoleId" : 2,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test3",
@@ -45,7 +45,7 @@
         "PositionId" : 3,
         "PhoneId" : 3,
         "RoleId" : 2,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test4",
@@ -57,7 +57,7 @@
         "PositionId" : 4,
         "PhoneId" : 4,
         "RoleId" : 3,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test5",
@@ -69,7 +69,7 @@
         "PositionId" : 5,
         "PhoneId" : 5,
         "RoleId" : 3,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test6",
@@ -81,7 +81,7 @@
         "PositionId" : 6,
         "PhoneId" : 6,
         "RoleId" : 2,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test7",
@@ -93,7 +93,7 @@
         "PositionId" : 6,
         "PhoneId" : 7,
         "RoleId" : 2,
-        "IsDeleted" : false
+        "IsLock" : false
     },
     {
         "Username" : "test8",
@@ -105,6 +105,6 @@
         "PositionId" : 7,
         "PhoneId" : 8,
         "RoleId" : 2,
-        "IsDeleted" : true
+        "IsLock" : true
     }
 ]

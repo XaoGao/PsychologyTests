@@ -1,4 +1,4 @@
-import { DocService } from './../_services/doc.service';
+import { DocumentService } from './../_services/document.service';
 import { DocumentType } from './../_models/documentType';
 import { ToastrAlertService } from '../_services/toastr-alert.service';
 import { Router, ActivatedRouteSnapshot, Resolve } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '../_services/auth.service';
 @Injectable()
 
 export class DocumentTypesResolver implements Resolve<DocumentType[]> {
-    constructor(private authService: AuthService, private docService: DocService,
+    constructor(private authService: AuthService, private docService: DocumentService,
                 private router: Router, private toastrService: ToastrAlertService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<DocumentType[]> {

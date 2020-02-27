@@ -1,4 +1,4 @@
-import { DocService } from './../_services/doc.service';
+import { DocumentService } from './../_services/document.service';
 import { RolesService } from './../_services/roles.service';
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
               private route: Router,
               private toastrService: ToastrAlertService,
               private rolseService: RolesService,
-              private documentService: DocService) { }
+              private documentService: DocumentService) { }
 
   ngOnInit() {
   }

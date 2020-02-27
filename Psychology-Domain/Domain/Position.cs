@@ -5,7 +5,7 @@ namespace Psychology_Domain.Domain
     /// <summary>
     /// Должность.
     /// </summary>
-    public class Position : BaseEntity
+    public class Position : BasePhonebookEntity
     {
         /// <summary>
         /// Наименование должности.

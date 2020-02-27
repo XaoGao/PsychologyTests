@@ -9,7 +9,7 @@ namespace Psychology_API.Repositories.Contracts.GenericRepository
     /// Обобщеный интерфейс для чтения данных из БД.
     /// </summary>
     /// <typeparam name="TEntity"> Класс: должность, отдел. </typeparam>
-    public interface IGenericRepository<TEntity> : ICasheable<TEntity> where TEntity : BaseEntity
+    public interface IGenericRepository<TEntity> : ICasheable<TEntity> where TEntity : BasePhonebookEntity
     {
         /// <summary>
         /// Получить конкретный экземпляр конкртеного класса.

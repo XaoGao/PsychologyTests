@@ -6,7 +6,7 @@
         "Middlename" : "Михайлович",
         "DateOfBirth" : "1973-01-01",
         "DoctorId" : 7,
-        "IsDelete" : false
+        "IsLock" : false
     },
     {
         "PersonalCardNumber" : "ПР-7852",
@@ -15,7 +15,7 @@
         "Middlename" : "Николаевич",
         "DateOfBirth" : "1987-06-06",
         "DoctorId" : 7,
-        "IsDelete" : false
+        "IsLock" : false
     },
     {
         "PersonalCardNumber" : "СЗ-1234",
@@ -24,7 +24,7 @@
         "Middlename" : "Иванович",
         "DateOfBirth" : "1973-03-03",
         "DoctorId" : 6,
-        "IsDelete" : false
+        "IsLock" : false
     },
     {
         "PersonalCardNumber" : "ПР-6241",
@@ -33,7 +33,7 @@
         "Middlename" : "Иванович",
         "DateOfBirth" : "1995-05-01",
         "DoctorId" : 6,
-        "IsDelete" : false
+        "IsLock" : false
     },
     {
         "PersonalCardNumber" : "ПР-9655",
@@ -42,6 +42,6 @@
         "Middlename" : "Владимирович",
         "DateOfBirth" : "1983-11-11",
         "DoctorId" : 7,
-        "IsDelete" : true
+        "IsLock" : true
     }
 ]

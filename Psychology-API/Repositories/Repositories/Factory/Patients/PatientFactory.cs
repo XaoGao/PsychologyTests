@@ -66,7 +66,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Patients
         /// <returns> Список пациентов. </returns>
         private async Task<IEnumerable<Patient>> GetEnablePatients()
         {
-            return await _context.Patients.Where(p => p.IsDelete != true).ToListAsync();
+            return await _context.Patients.Where(p => p.IsLock != true).ToListAsync();
         }
         /// <summary>
         /// Вернуть пациентов, которые закреплены за врачем.
@@ -78,7 +78,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Patients
             return await _context.Patients
                 .Include(p => p.Doctor)
                 .Include(p => p.Anamneses)
-                .Where(p => p.DoctorId == doctorId && p.IsDelete != true)
+                .Where(p => p.DoctorId == doctorId && p.IsLock != true)
                 .ToListAsync();
         }
     }

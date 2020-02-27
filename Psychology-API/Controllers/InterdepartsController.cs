@@ -17,7 +17,7 @@ namespace Psychology_API.Controllers
             _documentService = documentService;
         }
         [Authorize(Roles = RolesSettings.Registry)]
-        [HttpPut("Doc/{documentId}/request")]
+        [HttpPut("document/{documentId}/request")]
         public async Task<IActionResult> RequestInterdepart(int documentId)
         {
             var document = await _documentService.GetDocumentAsync(documentId);

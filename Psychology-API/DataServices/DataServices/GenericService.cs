@@ -10,7 +10,7 @@ using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.DataServices.DataServices
 {
-    public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : BaseEntity
+    public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : BasePhonebookEntity
     {
         private readonly ICache<TEntity> _cache;
         private readonly IGenericRepository<TEntity> _genericRepository;

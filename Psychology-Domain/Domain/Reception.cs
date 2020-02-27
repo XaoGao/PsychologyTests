@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Reception : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Время приема пациента.
         /// </summary>
         /// <value></value>

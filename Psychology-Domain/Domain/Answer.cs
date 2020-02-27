@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Answer : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Текст ответа.
         /// </summary>
         /// <value></value>

@@ -9,11 +9,6 @@ namespace Psychology_Domain.Domain
     public class Anamnesis : DomainEntity
     {
         /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        /// <value></value>
-        // public int Id { get; set; }
-        /// <summary>
         /// Время проведения осмотра.
         /// </summary>
         /// <value></value>

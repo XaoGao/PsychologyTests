@@ -14,6 +14,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     SortLevel = table.Column<int>(nullable: false)
@@ -29,8 +31,10 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    IsLock = table.Column<bool>(nullable: false)
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,9 +47,11 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     LevelSort = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    IsLock = table.Column<bool>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,10 +64,12 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     LevelLog = table.Column<string>(nullable: true),
                     Body = table.Column<string>(nullable: true),
-                    Text = table.Column<string>(nullable: true),
-                    DateInsert = table.Column<DateTime>(nullable: false)
+                    Text = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,6 +82,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
                     Number = table.Column<string>(nullable: true)
                 },
@@ -88,6 +98,8 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     SortLevel = table.Column<int>(nullable: false)
@@ -103,8 +115,10 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    IsLock = table.Column<bool>(nullable: false)
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,6 +131,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Instruction = table.Column<string>(nullable: true)
@@ -132,6 +149,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
@@ -142,8 +162,7 @@ namespace Psychology_API.Migrations
                     DepartmentId = table.Column<int>(nullable: false),
                     PositionId = table.Column<int>(nullable: false),
                     PhoneId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,6 +199,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     MinValue = table.Column<int>(nullable: false),
                     MaxValue = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -202,6 +224,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     Text = table.Column<string>(nullable: true),
                     sortLevel = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false)
@@ -223,13 +248,15 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     Lastname = table.Column<string>(nullable: true),
                     Firstname = table.Column<string>(nullable: true),
                     Middlename = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     PersonalCardNumber = table.Column<string>(nullable: true),
-                    DoctorId = table.Column<int>(nullable: false),
-                    IsDelete = table.Column<bool>(nullable: false)
+                    DoctorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,6 +275,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     StartVacation = table.Column<DateTime>(nullable: false),
                     EndVacation = table.Column<DateTime>(nullable: false),
@@ -270,6 +300,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     Text = table.Column<string>(nullable: true),
                     Value = table.Column<int>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),
@@ -296,8 +329,11 @@ namespace Psychology_API.Migrations
                 name: "Anamneses",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     ConclusionTime = table.Column<DateTime>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     Conclusion = table.Column<string>(nullable: true),
@@ -306,7 +342,7 @@ namespace Psychology_API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Anamneses", x => x.id);
+                    table.PrimaryKey("PK_Anamneses", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Anamneses_Doctors_DoctorId",
                         column: x => x.DoctorId,
@@ -327,6 +363,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     DocName = table.Column<string>(nullable: true),
                     Series = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true),
@@ -359,6 +398,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false),
@@ -401,6 +443,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     DateTimeReception = table.Column<DateTime>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: false)
@@ -428,8 +473,10 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DocumentId = table.Column<int>(nullable: false),
                     Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
+                    DocumentId = table.Column<int>(nullable: false),
                     Request = table.Column<DateTime>(nullable: false),
                     Response = table.Column<DateTime>(nullable: false),
                     InterdepartStatusId = table.Column<int>(nullable: false)
@@ -457,6 +504,9 @@ namespace Psychology_API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Create = table.Column<DateTime>(nullable: false),
+                    Update = table.Column<DateTime>(nullable: false),
+                    IsLock = table.Column<bool>(nullable: false),
                     PatientId = table.Column<int>(nullable: false),
                     TestId = table.Column<int>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),

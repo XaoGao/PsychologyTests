@@ -13,7 +13,7 @@ namespace Psychology_API.Controllers.Phonebook
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
-    public class GenericController<TEntity> : ControllerBase where TEntity : BaseEntity
+    public class GenericController<TEntity> : ControllerBase where TEntity : BasePhonebookEntity
     {
         private readonly IMapper _mapper;
         private readonly IGenericService<TEntity> _genericService;

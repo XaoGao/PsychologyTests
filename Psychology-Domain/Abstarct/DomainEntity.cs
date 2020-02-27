@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace Psychology_Domain.Abstarct
 {
@@ -8,8 +7,26 @@ namespace Psychology_Domain.Abstarct
     /// </summary>
     public abstract class DomainEntity
     {
-        // [Key]
-        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
+        /// <value></value>
         public int Id { get; set; }
+        /// <summary>
+        /// Время создание записи.
+        /// </summary>
+        /// <value></value>
+        public DateTime Create { get; set; }
+        /// <summary>
+        /// Время последнего обновления записи.
+        /// </summary>
+        /// <value></value>
+        public DateTime Update { get; set; }
+        /// <summary>
+        /// Флаг актуальности.
+        /// </summary>
+        /// <value></value>
+        public bool IsLock { get; set; }
+
     }
 }
