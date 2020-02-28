@@ -76,6 +76,8 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => src.File.FileName);
                 });
 
+            CreateMap<Document, DocumentForReturnListDto>();
+
             // Отпуск
             CreateMap<VacationForCreateDto, Vacation>()
                 .ForMember(dest => dest.CountDays, opt => {

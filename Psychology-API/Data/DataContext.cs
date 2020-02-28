@@ -32,7 +32,10 @@ namespace Psychology_API.Data
         public DbSet<InterdepartStatus> InterdepartStatuses { get; set; }
         public DbSet<InterdepartRequest> InterdepartRequests { get; set; }
 
-
+        /// <summary>
+        /// Указывать дату создания или обновления сущности при сохранении изменений в БД.
+        /// </summary>
+        /// <returns></returns>
         public override int SaveChanges()
         {
             var entries = ChangeTracker

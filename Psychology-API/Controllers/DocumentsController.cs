@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -81,6 +82,8 @@ namespace Psychology_API.Controllers
                 return BadRequest("Пользователь не авторизован");
 
             var documents = await _documentService.GetDocumentsAsync(patientId);
+
+            var documentsForReturn = _mapper.Map<IEnumerable<DocumentForReturnListDto>>(documents);
 
             return Ok(documents);
         }

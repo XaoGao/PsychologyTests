@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
+using Psychology_API.Settings.DocumentType;
+using Psychology_API.Settings.InterdepartStatus;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Repositories.Repositories
@@ -72,6 +74,7 @@ namespace Psychology_API.Repositories.Repositories
 
             if (await _context.SaveChangesAsync() > 0)
             {
+                await CheckDocTypeAsync(document);
                 RemoveItemInCashe(document.PatientId.ToString(), "-Patient");
                 SetInCashe(document.Id.ToString(), suffix, document);
                 return true;
@@ -91,6 +94,33 @@ namespace Psychology_API.Repositories.Repositories
             var document = entity as Document;
             RemoveItemInCashe(document.Id.ToString(), suffix);
             base.Remove(document);
+        }
+
+        private async Task CheckDocTypeAsync(Document document) 
+        {
+            if (document.DocumentTypeId == (int)DocumentsType.Pasport)
+                await CreateAndSaveInterdepartEntityAsync(document);
+
+            return;
+        }
+
+        private async Task CreateAndSaveInterdepartEntityAsync(Document document)
+        {
+            InterdepartRequest interdepartRequest = new InterdepartRequest(document,
+                (int)InterdepartStatusType.AwaitingDispatch);
+
+            await _context.InterdepartRequests.AddAsync(interdepartRequest);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<InterdepartRequest> GetInterdepartRequestRepositoryAsync(int documentId)
+        {
+            var interdepartRequest = await _context.InterdepartRequests
+                .Where(ir => ir.DocumentId == documentId)
+                .OrderByDescending(ir => ir.Create)
+                .FirstAsync();
+
+            return interdepartRequest;
         }
     }
 }

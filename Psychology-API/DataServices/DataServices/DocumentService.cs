@@ -63,7 +63,6 @@ namespace Psychology_API.DataServices.DataServices
 
         public async Task<bool> RequestInterdepart(Document document)
         {
-            // throw new System.Exception();
             return await _senderInterdepartRequest.RequestAsync(document);
         }
 
