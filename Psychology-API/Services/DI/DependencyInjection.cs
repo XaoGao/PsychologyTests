@@ -52,7 +52,7 @@ namespace Psychology_API.Servises.DI
             //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();
-            services.AddSingleton<ISenderInterdepartRequest, SenderInterdepartRequest>();
+            services.AddScoped<ISenderInterdepartRequest, SenderInterdepartRequest>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
             services.AddScoped<IBroker, Rabbit>();
             services.AddTransient<SeedAllData>();

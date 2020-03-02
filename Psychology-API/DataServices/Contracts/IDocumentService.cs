@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Psychology_API.Dtos.DocumentDto;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.DataServices.Contracts
@@ -41,15 +42,21 @@ namespace Psychology_API.DataServices.Contracts
         /// <returns> Список документов. </returns>
         Task<IEnumerable<Document>> GetDocumentsAsync(int patientId);
         /// <summary>
-        /// 
+        /// Создать запрос по проверки докеумента в стороннем сервисе.
         /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
+        /// <param name="document"> Документ. </param>
+        /// <returns> True если усешно выполнен межведомственный запрос. </returns>
         Task<bool> RequestInterdepart(Document document);
         /// <summary>
-        /// 
+        /// Сменть сервич по проверке документов(удаленный, локальный).
         /// </summary>
-        /// <param name="interdepartDeprtment"></param>
-        void ChangeInterdepartDeprtment(string interdepartDeprtment);
+        /// <param name="interdepartDeprtmentKey"> Ключ по которому определяется, какой сервис будет обрабатывать. </param>
+        void ChangeInterdepartDeprtment(string interdepartDeprtmentKey);
+        /// <summary>
+        /// Запролнить Dto объекты данными по межведомственным запросам.
+        /// </summary>
+        /// <param name="documents"> Список документов. </param>
+        /// <returns> Список документов с идентиыикаторами межведомственных запросов. </returns>
+        Task<List<DocumentForReturnListDto>> SetInterdepartId(List<DocumentForReturnListDto> documents);
     }
 }

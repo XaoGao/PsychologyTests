@@ -1,5 +1,4 @@
 import { DocumentService } from './../_services/document.service';
-import { RolesService } from './../_services/roles.service';
 import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +14,6 @@ export class NavComponent implements OnInit {
   constructor(public authService: AuthService,
               private route: Router,
               private toastrService: ToastrAlertService,
-              private rolseService: RolesService,
               private documentService: DocumentService) { }
 
   ngOnInit() {
@@ -29,13 +27,13 @@ export class NavComponent implements OnInit {
     this.route.navigate(['/']);
   }
   public isHR(): boolean {
-    return this.rolseService.isHR(this.authService.role);
+    return this.authService.isHR(this.authService.role);
   }
   public isAdmin(): boolean {
-    return this.rolseService.isAdmin(this.authService.role);
+    return this.authService.isAdmin(this.authService.role);
   }
   public isRegistry(): boolean {
-    return this.rolseService.isRegistry(this.authService.role);
+    return this.authService.isRegistry(this.authService.role);
   }
   public setLocal(): void {
     this.documentService.changeInterdepart('local');

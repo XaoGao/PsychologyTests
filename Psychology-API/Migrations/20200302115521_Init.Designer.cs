@@ -9,7 +9,7 @@ using Psychology_API.Data;
 namespace Psychology_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200227142127_Init")]
+    [Migration("20200302115521_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -762,7 +762,7 @@ namespace Psychology_API.Migrations
 
             modelBuilder.Entity("Psychology_Domain.Domain.Document", b =>
                 {
-                    b.HasOne("Psychology_Domain.Domain.DocumentType", "DocumenType")
+                    b.HasOne("Psychology_Domain.Domain.DocumentType", "DocumentType")
                         .WithMany()
                         .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)

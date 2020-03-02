@@ -5,7 +5,7 @@ using Psychology_Domain.Domain;
 namespace Psychology_API.Repositories.Contracts
 {
     /// <summary>
-    /// Репозитории для работв с ролью.
+    /// Репозитории для работы с ролью.
     /// </summary>
     public interface IAdminRepository : IBaseRepository
     {

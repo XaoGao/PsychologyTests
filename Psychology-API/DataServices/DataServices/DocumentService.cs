@@ -3,10 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
+using Psychology_API.Dtos.DocumentDto;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Services.Interdepart;
 using Psychology_API.Servises.Cache;
+using Psychology_API.Settings.DocumentType;
 using Psychology_Domain.Domain;
+using Psychology_API.Helpers;
 
 namespace Psychology_API.DataServices.DataServices
 {
@@ -69,6 +72,34 @@ namespace Psychology_API.DataServices.DataServices
         public async Task<bool> SaveDocAsync(Document document, IFormFile formFile)
         {
             return await _documentRepository.SaveDocRepositoryAsync(document, formFile);
+        }
+
+        public async Task<List<DocumentForReturnListDto>> SetInterdepartId(List<DocumentForReturnListDto> documents)
+        {
+            List<InterdepartRequestForIdDto> interdepartRequestDtos =  await GetInterdepartStatus(documents);
+            var listForReturn = documents.SetInterdepartIdInDocument(interdepartRequestDtos);
+            
+            return listForReturn;
+        }
+        /// <summary>
+        /// Вспомогательный метод для получения из БД необходимых межведомственных запросов.
+        /// </summary>
+        /// <param name="documents"> Список документов. </param>
+        /// <returns> Список межведомственных запросов. </returns>
+        private async Task<List<InterdepartRequestForIdDto>> GetInterdepartStatus(List<DocumentForReturnListDto> documents)
+        {
+            List<InterdepartRequestForIdDto> interdepartRequestDtos = new List<InterdepartRequestForIdDto>();
+            foreach (var item in documents)
+            {
+                if(item.DocumentTypeId != (int)DocumentsType.Pasport)
+                    continue;
+
+                var interdepart = await _documentRepository.GetInterdepartRequestRepositoryAsync(item.Id);
+                var interdepartForId = new InterdepartRequestForIdDto(interdepart.DocumentId, interdepart.Id, interdepart.InterdepartStatusId);
+
+                interdepartRequestDtos.Add(interdepartForId);
+            }
+            return interdepartRequestDtos;
         }
     }
 }

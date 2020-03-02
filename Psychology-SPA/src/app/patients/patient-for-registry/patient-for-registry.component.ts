@@ -1,3 +1,4 @@
+import { Document } from './../../_models/document';
 import { DocumentService } from './../../_services/document.service';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
@@ -5,7 +6,6 @@ import { ToastrAlertService } from '../../_services/toastr-alert.service';
 import { Doctor } from '../../_models/doctor';
 import { DocumentType } from '../../_models/documentType';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Document } from '../../_models/document';
 import { environment } from '../../../environments/environment';
 import { Patient } from '../../_models/patient';
 import { Component, OnInit } from '@angular/core';
@@ -22,6 +22,7 @@ export class PatientForRegistryComponent implements OnInit {
   public patient: Patient;
   public docTypes: DocumentType[];
   public doctors: Doctor[];
+  public documents: Document[];
   public doc: Document = new Document();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
@@ -40,8 +41,9 @@ export class PatientForRegistryComponent implements OnInit {
       this.patient = data.patient;
       this.docTypes = data.docTypes;
       this.doctors = data.doctors;
+      this.documents = data.documents;
     });
-    console.log(this.patient);
+    console.log(this.documents);
     this.isNewPatient();
     this.initUploader();
   }
@@ -95,9 +97,11 @@ export class PatientForRegistryComponent implements OnInit {
           number: res.number,
           dateUpload: res.dateUpload,
           documentTypeId: res.documentTypeId,
-          documenType: res.documenType,
+          documentType: res.documentType,
           patientId: res.patientId,
-          patient: res.patient
+          patient: res.patient,
+          interdepartStatusId: res.interdepartStatusId,
+          interdepartRequestId: res.interdepartRequestId,
         };
         this.patient.documents.push(document);
       }

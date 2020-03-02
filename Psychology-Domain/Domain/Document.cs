@@ -33,7 +33,7 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public int DocumentTypeId { get; set; }
-        public DocumentType DocumenType { get; set; }
+        public DocumentType DocumentType { get; set; }
         /// <summary>
         /// Идентификатор пациента, кому принадлежат докумнеты.
         /// </summary>

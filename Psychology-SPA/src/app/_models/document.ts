@@ -7,7 +7,9 @@ export class Document {
     number: string;
     dateUpload: Date;
     documentTypeId: number;
-    documenType: DocumentType;
+    documentType: DocumentType;
     patientId: number;
     patient: Patient;
+    interdepartStatusId: number;
+    interdepartRequestId: number;
 }

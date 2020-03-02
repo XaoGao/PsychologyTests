@@ -85,7 +85,10 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<IEnumerable<Document>> GetDocumentsRepositoryAsync(int patientId)
         {
-            var documents = await _context.Documents.Where(d => d.PatientId == patientId).ToListAsync();
+            var documents = await _context.Documents
+                .Include(d => d.DocumentType)
+                .Where(d => d.PatientId == patientId)
+                .ToListAsync();
 
             return documents;
         }

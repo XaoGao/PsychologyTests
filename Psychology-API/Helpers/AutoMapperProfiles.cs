@@ -76,7 +76,8 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => src.File.FileName);
                 });
 
-            CreateMap<Document, DocumentForReturnListDto>();
+            CreateMap<Document, DocumentForReturnListDto>()
+                .IncludeAllDerived();
 
             // Отпуск
             CreateMap<VacationForCreateDto, Vacation>()

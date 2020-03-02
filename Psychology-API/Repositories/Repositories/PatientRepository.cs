@@ -85,7 +85,7 @@ namespace Psychology_API.Repositories.Repositories
                     .Include(p => p.Anamneses)
                     .Include(p => p.Documents)
                     .Include(p => p.Documents)
-                        .ThenInclude(d => d.DocumenType)
+                        .ThenInclude(d => d.DocumentType)
                     .SingleOrDefaultAsync(p => p.Id == patientId);
 
             return patient;

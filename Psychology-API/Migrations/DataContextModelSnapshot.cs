@@ -760,7 +760,7 @@ namespace Psychology_API.Migrations
 
             modelBuilder.Entity("Psychology_Domain.Domain.Document", b =>
                 {
-                    b.HasOne("Psychology_Domain.Domain.DocumentType", "DocumenType")
+                    b.HasOne("Psychology_Domain.Domain.DocumentType", "DocumentType")
                         .WithMany()
                         .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)

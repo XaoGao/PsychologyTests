@@ -41,7 +41,7 @@ namespace Psychology_API.Controllers
 
             if (await _documentService.SaveDocAsync(document, docForCreateDto.File))
             {
-                document.DocumenType = await _documentService.GetDocTypeAsync(document.Id);
+                document.DocumentType = await _documentService.GetDocTypeAsync(document.Id);
                 return Ok(document);
             }
 
@@ -83,9 +83,11 @@ namespace Psychology_API.Controllers
 
             var documents = await _documentService.GetDocumentsAsync(patientId);
 
-            var documentsForReturn = _mapper.Map<IEnumerable<DocumentForReturnListDto>>(documents);
+            var documentsDto = _mapper.Map<List<DocumentForReturnListDto>>(documents);
 
-            return Ok(documents);
+            var documentsForReturn = await _documentService.SetInterdepartId(documentsDto);
+
+            return Ok(documentsForReturn);
         }
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpGet("{documentId}")]
