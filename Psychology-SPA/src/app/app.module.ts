@@ -95,6 +95,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PatientForRegistryComponent } from './patients/patient-for-registry/patient-for-registry.component';
 // Upload File
 import { FileUploadModule } from 'ng2-file-upload';
+import { ChangePasswordDoctorComponent } from './doctors/change-password-doctor/change-password-doctor.component';
 
 
 export function tokenGetter() {
@@ -135,7 +136,8 @@ export function tokenGetter() {
     RolesComponent,
     DoctorComponent,
     AboutComponent,
-    TestDetailComponent
+    TestDetailComponent,
+    ChangePasswordDoctorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../_guards/auth.guard';
 import { AuthService } from '../../../_services/auth.service';
 import { AdminService } from '../../../_services/admin.service';
 import { ToastrAlertService } from '../../../_services/toastr-alert.service';
@@ -21,6 +22,7 @@ export class DoctorComponent implements OnInit {
   public positions: Position;
   public phones: Phone[];
   public roles: Role[];
+  public minDate: Date = new Date(1940, 1, 1);
   constructor(private route: ActivatedRoute,
               private adminService: AdminService,
               private toastrService: ToastrAlertService,
@@ -35,7 +37,6 @@ export class DoctorComponent implements OnInit {
       this.phones = data.phones;
       this.roles = data.roles;
     });
-    console.log(this.doctor);
   }
   public isNewDoctor(): boolean {
     if (this.doctor.id) {
@@ -62,6 +63,14 @@ export class DoctorComponent implements OnInit {
   private updateDoctor(): void {
     this.adminService.updateDoctor(this.authService.doctorId, this.doctor).subscribe(() => {
       this.toastrService.success('Вы обновили врача');
+      this.router.navigate(['/doctors']);
+    }, err => {
+      this.toastrService.error(err);
+    });
+  }
+  public deleteDoctor(): void {
+    this.adminService.deleteDoctor(this.authService.doctorId, this.doctor.id).subscribe(() => {
+      this.toastrService.warning('Вы удалили пользователя');
       this.router.navigate(['/doctors']);
     }, err => {
       this.toastrService.error(err);

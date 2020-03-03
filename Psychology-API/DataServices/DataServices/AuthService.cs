@@ -41,9 +41,11 @@ namespace Psychology_API.DataServices.DataServices
         public SecurityToken CreateToken(Doctor doctor)
         {
             var tokenService = new TokenService();
-            return tokenService.CreateToken(doctor,
-                _config.GetSection("AppSettings:Token").Value,
-                _config.GetSection("AppSettings:TimeLifeTokenInHours").Value);
+
+            var keyForToken = _config.GetSection("AppSettings:Token").Value;
+            var timeLifeToken = _config.GetSection("AppSettings:TimeLifeTokenInHours").Value;
+
+            return tokenService.CreateToken(doctor, keyForToken, timeLifeToken);
         }
     }
 }

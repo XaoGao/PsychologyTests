@@ -29,6 +29,8 @@
         <mat-menu #menu="matMenu">
             <button mat-menu-item [routerLink]="['/doctor/edit']">Редактировать профиль <i
                     class="fa fa-user"></i></button>
+            <button mat-menu-item [routerLink]="['/doctor/changepassword']"> Поменять пароль <i
+                    class="fa fa-key"></i></button>
             <div class="dropdown-divider"></div>
             <button mat-menu-item (click)="logout()">Выйти <i class="fa fa-sign-out"></i></button>
         </mat-menu>

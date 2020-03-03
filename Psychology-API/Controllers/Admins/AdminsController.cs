@@ -11,13 +11,14 @@ using System;
 using Psychology_API.Settings.Doctors;
 using Psychology_API.Dtos.DoctorDto;
 
-namespace Psychology_API.Controllers
+namespace Psychology_API.Controllers.Admins
 {
     [Authorize(Roles = RolesSettings.Administrator)]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{adminId}")]
     public class AdminsController : ControllerBase
     {
+        private const string PASSWORD = "123456";
         private readonly IAdminService _adminService;
         private readonly IMapper _mapper;
         private readonly IDoctorService _doctorService;
@@ -32,7 +33,7 @@ namespace Psychology_API.Controllers
             _doctorService = doctorService;
             _authService = authService;
         }
-        [HttpGet("{adminId}/doctors")]
+        [HttpGet("doctors")]
         public async Task<IActionResult> GetDoctors(int adminId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -44,7 +45,7 @@ namespace Psychology_API.Controllers
 
             return Ok(doctorsForReturn);
         }
-        [HttpGet("{adminId}/doctors/{doctorId}")]
+        [HttpGet("doctors/{doctorId}")]
         public async Task<IActionResult> GetDoctor(int adminId, int doctorId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -59,27 +60,8 @@ namespace Psychology_API.Controllers
 
             return Ok(doctorForReturn);
         }
-        [HttpGet("{adminId}/roles")]
-        public async Task<IActionResult> GetRoles(int adminId)
-        {
-            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
-
-            var roles = await _adminService.GetRolesAsync();
-
-            return Ok(roles);
-        }
-        [HttpGet("{adminId}/roles/{roleId}")]
-        public async Task<IActionResult> GetRole(int adminId, int roleId)
-        {
-            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
-
-            var role = await _adminService.GetRoleAsync(roleId);
-
-            return Ok(role);
-        }
-        [HttpPost("{adminId}/doctors")]
+        
+        [HttpPost("doctors")]
         public async Task<IActionResult> CreateDoctor(int adminId, DoctorForRegisterDto doctorForRegisterDto)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -89,21 +71,11 @@ namespace Psychology_API.Controllers
                 return BadRequest("В системе уже существует пользователь с данным логином.");
 
             var doctorToCreate = _mapper.Map<Doctor>(doctorForRegisterDto);
-            var createdDoctor = _authService.RegisterAsync(doctorToCreate, doctorForRegisterDto.Password);
+            var createdDoctor = await _authService.RegisterAsync(doctorToCreate, doctorForRegisterDto.Password);
 
             return StatusCode(201);
         }
-        [HttpPost("{adminId}/roles")]
-        public async Task<IActionResult> CreateRole(int adminId, Role role)
-        {
-            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
-
-            await _adminService.CreateRoleAsync(role);
-
-            return NoContent();
-        }
-        [HttpPut("{adminId}/doctors/{doctorId}")]
+        [HttpPut("doctors/{doctorId}")]
         public async Task<IActionResult> UpdateDoctor(int adminId, int doctorId, DoctorForUpdateDto doctorForUpdateDto)        
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -120,25 +92,38 @@ namespace Psychology_API.Controllers
                 return NoContent();            
 
             throw new Exception("");
-
         }
-        [HttpPut("{adminId}/roles/{roleId}")]
-        public async Task<IActionResult> UpdateRole(int adminId, int roleId, Role role)        
+        [HttpDelete("doctors/{doctorId}")]
+        public async Task<IActionResult> DeleteDoctor(int adminId, int doctorId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return BadRequest("Пользователь не авторизован");
 
-            var roleFromRepo = await _adminService.GetRoleAsync(roleId);
+            var doctorFromRepo = await _doctorService.GetDoctorWithoutCacheAsync(doctorId);
 
-            if(roleFromRepo == null)
+            if(doctorFromRepo == null)
                 return BadRequest("Указаного пользователя не существует");
 
-            _mapper.Map(role, roleFromRepo);
+            doctorFromRepo.IsLock = true;
 
             if(await _doctorService.SaveAllAsync())
-                return NoContent();            
+                return NoContent(); 
 
             throw new Exception("");
+        }
+        [HttpPut("doctors/{doctorId}/dropPassword")]       
+        public async Task<IActionResult> DropPassword(int adminId, int doctorId)
+        {
+            var doctorFromRepo = await _doctorService.GetDoctorAsync(doctorId);
+
+            if(doctorFromRepo == null)
+                return BadRequest("Указаный пользователь не зарегистрирован в системе");
+
+            if(await _authService.ChangePasswordAsync(doctorId, PASSWORD))
+                return NoContent();
+
+            // _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Администратор c ID {adminId} хотел измнить пароль для доктора {doctorFromRepo.Fullname} id = {doctorId}");
+            throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
         }
     }
 }

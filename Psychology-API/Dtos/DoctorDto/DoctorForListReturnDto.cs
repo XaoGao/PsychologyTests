@@ -26,6 +26,7 @@ namespace Psychology_API.Dtos.DoctorDto
         /// <value></value>
         public string Middlename { get; set; }
         public string Fullname { get => $"{Lastname} {Firstname} {Middlename}";}
+        public bool IsLock { get; set; }
         public ICollection<Patient> Patients { get; set; }
     }
 }

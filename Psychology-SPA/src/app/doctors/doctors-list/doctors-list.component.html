@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-3"></div>
     <mat-form-field class="col-5 text-center">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Фильтр">
     </mat-form-field>
     <!-- <button class="col-2 btn btn-default" title="Добавить отдел" (click)="addDepartment()"><i class="fa fa-plus"></i></button> -->
-    <table mat-table [dataSource]="doctors" class="mat-elevation-z8 col-12">
+    <table mat-table [dataSource]="dataSource   " class="mat-elevation-z8 col-12">
 
         <ng-container matColumnDef="position">
             <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -21,14 +21,28 @@
             <td mat-cell *matCellDef="let doctor;"> {{ doctor.fullname }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="isDeleted">
+        <ng-container matColumnDef="isLock">
             <th mat-header-cell *matHeaderCellDef> Акутальность </th>
-            <td mat-cell *matCellDef="let doctor;"><mat-checkbox [disabled]=true [(ngModel)]="doctor.isDeleted"></mat-checkbox> </td>
+            <td mat-cell *matCellDef="let doctor;">
+                <mat-checkbox [disabled]=true [(ngModel)]="doctor.isLock"></mat-checkbox>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef> Редактировать </th>
-            <td mat-cell *matCellDef="let doctor;"><i class="fa fa-edit"  [routerLink]="['/doctors', doctor.id]"></i> </td>
+            <td mat-cell *matCellDef="let doctor;"><button class="btn btn-info"
+                    [routerLink]="['/doctors', doctor.id]"><i class="fa fa-edit"></i></button> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Заблокировать </th>
+            <td mat-cell *matCellDef="let doctor;"><button class="btn btn-danger" [disabled]="doctor.isLock"
+                    (click)="deleteDoctor(doctor.id)"> <i class="fa fa-trash"></i> </button></td>
+        </ng-container>
+
+        <ng-container matColumnDef="dropPassword">
+            <th mat-header-cell *matHeaderCellDef> Сбросить пароль </th>
+            <td mat-cell *matCellDef="let doctor;"><button class="btn btn-warning" (click)="dropPassword(doctor.id)"><i class="fa fa-key"></i></button></td>
         </ng-container>
 
 

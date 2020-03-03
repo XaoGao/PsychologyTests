@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
 using Psychology_API.Dtos.DoctorDto;
-using Psychology_API.Settings;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
@@ -60,6 +59,8 @@ namespace Psychology_API.Controllers
             if (doctorFromRepo == null)
                 return Unauthorized("В системе нет пользователя с указаными логином и паролем.");
 
+            if (doctorFromRepo.IsLock == true)
+                return Unauthorized("Указанный пользователь заблокирован");
             
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = _authService.CreateToken(doctorFromRepo);
@@ -74,24 +75,8 @@ namespace Psychology_API.Controllers
                 receptionsForReturn
             });
         }
-        [Authorize(Roles = RolesSettings.Administrator)]
-        [HttpPost("{doctorId}")]       
-        public async Task<IActionResult> DropPassword(int doctorId, int adminId)
-        {
-            var doctorFromRepo = await _doctorService.GetDoctorAsync(doctorId);
-
-            if(doctorFromRepo == null)
-                return BadRequest("Указаный пользователь не зарегистрирован в системе");
-
-            if(await _authService.ChangePasswordAsync(doctorId, "123456"))
-                return NoContent();
-
-            _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Администратор c ID {adminId} хотел измнить пароль для доктора {doctorFromRepo.Fullname} id = {doctorId}");
-            throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
-            
-        }
         [Authorize]
-        [HttpPost("{doctorId}")]
+        [HttpPut("{doctorId}/changePassword")]
         public async Task<IActionResult> ChangePassword(int doctorId, string newPassword)
         {
             if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

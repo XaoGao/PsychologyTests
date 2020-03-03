@@ -21,4 +21,7 @@ export class DoctorService {
   public getDoctors(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(this.BASE_URL_DOCTOR);
   }
+  public createDoctor(doctor: Doctor) {
+    return this.http.post(this.BASE_URL_DOCTOR, doctor);
+  }
 }

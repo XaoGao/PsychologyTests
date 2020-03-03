@@ -23,5 +23,6 @@ namespace Psychology_API.Dtos.DoctorDto
         [Required(ErrorMessage = "Обязательно укажите идентификатор должности.")]
         public int PositionId { get; set; }
         public int PhoneId { get; set; }
+        public bool IsLock { get; set; }
     }
 }

@@ -76,6 +76,5 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Ошибка в обновлении данных. {doctorForUpdateDto.Username + " " + doctorForUpdateDto.Firstname + " " + doctorForUpdateDto.Lastname + " " + doctorForUpdateDto.Middlename + " departamentId = " + doctorForUpdateDto.DepartmentId + " positionId = " + doctorForUpdateDto.PositionId + " phoneId = " + doctorForUpdateDto.PhoneId + " db = " + doctorForUpdateDto.DateOfBirth}");
             throw new Exception("Возникла не предвиденная ошибка в ходе обновления данных");
         }
-
     }
 }

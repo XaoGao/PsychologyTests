@@ -77,6 +77,6 @@ namespace Psychology_API.Dtos.DoctorDto
         /// </summary>
         /// <value></value>
         public int RoleId { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsLock { get; set; }
     }
 }

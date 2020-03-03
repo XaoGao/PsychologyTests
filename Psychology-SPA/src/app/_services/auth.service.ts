@@ -60,6 +60,10 @@ export class AuthService {
     this.username = decodedToken.unique_name;
   }
 
+  public changePassword(doctorId: number, newPassword: string) {
+    return this.http.put(this.BASE_URL + doctorId + '/changePassword', {});
+  }
+
   public isAdmin(role: string): boolean {
     if (role === this.admin) {
       return true;

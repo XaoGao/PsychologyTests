@@ -1,3 +1,4 @@
+import { ChangePasswordDoctorComponent } from './doctors/change-password-doctor/change-password-doctor.component';
 import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 import { AboutComponent } from './about/about.component';
 import { DoctorResolver } from './_resolvers/doctor.resolver';
@@ -109,6 +110,13 @@ const routes: Routes = [
           positions: PositionsWithParamResolver,
           phones: PhonesResolver,
           roles: RolesListResolver
+        }
+      },
+      {
+        path: 'doctor/changepassword',
+        component: ChangePasswordDoctorComponent,
+        resolve: {
+          doctor: DoctorDetailResolver
         }
       },
       {

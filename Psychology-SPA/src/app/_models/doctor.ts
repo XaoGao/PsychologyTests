@@ -6,6 +6,7 @@ import { Department } from './department';
 export interface Doctor {
     id: number;
     username: string;
+    password: string;
     lastname: string;
     firstname: string;
     middlename: string;
@@ -18,6 +19,6 @@ export interface Doctor {
     phoneId: number;
     phone: Phone;
     patients: Patient[];
-    isDeleted: boolean;
+    isLock: boolean;
     roleId: number;
 }

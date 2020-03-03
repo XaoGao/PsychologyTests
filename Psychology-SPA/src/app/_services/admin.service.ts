@@ -28,8 +28,13 @@ export class AdminService {
   public updateDoctor(adminId: number, doctor: Doctor) {
     return this.http.put(this.getAdminUrl(adminId) + 'doctors/' + doctor.id, doctor);
   }
+  public deleteDoctor(adminId: number, doctorId: number) {
+    return this.http.delete(this.getAdminUrl(adminId) + 'doctors/' + doctorId);
+  }
+  public dropPassword(adminId: number, doctorId: number) {
+    return this.http.put(this.getAdminUrl(adminId) + 'doctors/' + doctorId + '/dropPassword', {});
+  }
   private getAdminUrl(adminId: number): string {
     return this.BASE_ADMIN_URL + adminId + '/';
   }
-
 }

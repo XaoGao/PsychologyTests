@@ -5,6 +5,9 @@
             <mat-form-field class="col-9">
                 <input matInput placeholder="Логин" name="username" [(ngModel)]="doctor.username" required>
             </mat-form-field>
+            <mat-form-field class="col-9" *ngIf="isNewDoctor()">
+                <input matInput type="password" placeholder="Пароль" name="password" [(ngModel)]="doctor.password" required>
+            </mat-form-field>
             <mat-form-field class="col-9">
                 <input matInput placeholder="Фамилия" name="lastname" [(ngModel)]="doctor.lastname" required>
             </mat-form-field>
@@ -14,20 +17,21 @@
             <mat-form-field class="col-9">
                 <input matInput placeholder="Отчество" name="middleName" [(ngModel)]="doctor.middlename" required>
             </mat-form-field>
-            <mat-form-field class="col-5">
-                <input matInput [matDatepicker]="picker" placeholder="Дата рождения" name="dateOfBirth"
+            <mat-form-field class="col-4">
+                <input matInput [matDatepicker]="picker" min="minDate" placeholder="Дата рождения" name="dateOfBirth"
                     [(ngModel)]="doctor.dateOfBirth" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-3">
                 <mat-label>Роль</mat-label>
-                <mat-select>
+                <mat-select [(value)]="doctor.roleId">
                     <mat-option *ngFor="let role of roles" [value]="role.id">
                         {{ role.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <mat-checkbox class="col-1 mt-3" name="isLock" [disabled]="isNewDoctor()" [(ngModel)]="doctor.isLock">Заблокирован</mat-checkbox>
             <div class="col-4"></div>
             <mat-form-field class="col-3">
                 <mat-label>Укажите отдел</mat-label>
@@ -56,8 +60,9 @@
         </div>
         <div class="row">
             <div class="col-7"></div>
-            <button class="btn btn-primary col-2" (click)="save()"><i class="fa fa-save"></i> Сохранить
+            <button class="btn btn-primary col-2" [disabled]="!doctorForm.valid" (click)="save()"><i class="fa fa-save"></i> Сохранить
                 изменения</button>
+                <button class="btn btn-danger col-2" *ngIf="!isNewDoctor()" (click)="deleteDoctor()"><i class="fa fa-trash"></i> Удалить доктора</button>
         </div>
     </form>
 </div>
