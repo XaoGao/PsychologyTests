@@ -17,7 +17,7 @@ export class PositionsWithParamResolver implements Resolve<Position> {
         return this.phonebookService.getPositions(false).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.doctorId]);
+                this.router.navigate(['/workship', this.authService.doctorId]);
                 return of(null);
             })
         );

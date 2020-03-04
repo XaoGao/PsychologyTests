@@ -1,7 +1,8 @@
+import { Passwords } from './../../_models/passwords';
 import { AuthService } from './../../_services/auth.service';
 import { Doctor } from './../../_models/doctor';
 import { ToastrAlertService } from './../../_services/toastr-alert.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorService } from './../../_services/doctor.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -23,6 +24,7 @@ export class ChangePasswordDoctorComponent implements OnInit {
   constructor(private toastrService: ToastrAlertService,
               private route: ActivatedRoute,
               private doctorService: DoctorService,
+              private router: Router,
               private authService: AuthService,
               private fb: FormBuilder) { }
 
@@ -37,8 +39,12 @@ export class ChangePasswordDoctorComponent implements OnInit {
   }
   public changePassword(): void {
     if (this.changePasswordForm.valid) {
-      this.authService.changePassword(this.authService.doctorId, '').subscribe(() => {
+      const passwords: Passwords = new Passwords();
+      passwords.newPassword = this.changePasswordForm.get('newPassword').value;
+      passwords.oldPassword = this.changePasswordForm.get('password').value;
+      this.authService.changePassword(this.authService.doctorId, passwords).subscribe(() => {
         this.toastrService.success('Вы успешно поменяли пароль');
+        this.router.navigate(['/workship', this.authService.doctorId]);
       }, err => {
         this.toastrService.error(err);
       });
@@ -47,9 +53,9 @@ export class ChangePasswordDoctorComponent implements OnInit {
 
   private createChangePasswordForm() {
     this.changePasswordForm = this.fb.group({
-      password: ['', Validators.required, Validators.minLength(6)],
-      confirmPassword: ['', Validators.required],
-      newPassword: ['', Validators.required, Validators.minLength(6)]
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
     }, { validator: this.passwordMatchValidator});
   }
   private passwordMatchValidator(g: FormGroup) {

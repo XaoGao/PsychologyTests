@@ -77,15 +77,20 @@ namespace Psychology_API.Controllers
         }
         [Authorize]
         [HttpPut("{doctorId}/changePassword")]
-        public async Task<IActionResult> ChangePassword(int doctorId, string newPassword)
+        public async Task<IActionResult> ChangePassword(int doctorId, Passwords passwords)
         {
             if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользовать должен авторизоваться");
 
-            if(await _authService.ChangePasswordAsync(doctorId, newPassword))
+            var doctor = await _doctorService.GetDoctorAsync(doctorId);
+
+            if( !_authService.VerificateOldPassword(doctor, passwords.OldPassword))
+                return BadRequest("Не корректный пароль");
+
+            if(await _authService.ChangePasswordAsync(doctorId, passwords.NewPassword))
                 return NoContent();
 
-            _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Доктор id = {doctorId} хотел измнить пароль на {newPassword} ");
+            // _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Доктор id = {doctorId} хотел измнить пароль на {newPassword} ");
             throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
         }
     }

@@ -104,5 +104,10 @@ namespace Psychology_API.Repositories.Repositories
 
             return true;
         }
+
+        public bool VerificateOldPassword(Doctor doctor, string password)
+        {
+            return _hash.VerifyPasswordHash(password, doctor.PasswordHash, doctor.PasswordSalt);
+        }
     }
 }

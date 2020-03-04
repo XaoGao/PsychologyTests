@@ -47,5 +47,10 @@ namespace Psychology_API.DataServices.DataServices
 
             return tokenService.CreateToken(doctor, keyForToken, timeLifeToken);
         }
+
+        public bool VerificateOldPassword(Doctor doctor, string password)
+        {
+            return _authRepository.VerificateOldPassword(doctor, password);
+        }
     }
 }

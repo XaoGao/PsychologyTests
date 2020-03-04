@@ -17,7 +17,7 @@ export class PatientsListResolver implements Resolve<Patient[]> {
         return this.patientService.getPatients(this.authService.doctorId).pipe(
             catchError(error => {
                 this.toastrService.error('Ошибка при загрузке данных');
-                this.router.navigate(['/workship/:id', this.authService.doctorId]);
+                this.router.navigate(['/workship', this.authService.doctorId]);
                 return of(null);
             })
         );

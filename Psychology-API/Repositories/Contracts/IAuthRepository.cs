@@ -35,5 +35,6 @@ namespace Psychology_API.Repositories.Contracts
         /// <param name="newPassword"> Новый пароль. </param>
         /// <returns></returns>
         Task<bool> ChangePasswordRepositoryAsync(int doctorId, string newPassword);
+        bool VerificateOldPassword(Doctor doctor, string password);
     }
 }

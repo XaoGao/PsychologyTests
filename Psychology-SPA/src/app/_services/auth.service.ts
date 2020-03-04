@@ -1,8 +1,9 @@
+import { Passwords } from './../_models/passwords';
 import { Reception } from './../_models/reception';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -60,8 +61,8 @@ export class AuthService {
     this.username = decodedToken.unique_name;
   }
 
-  public changePassword(doctorId: number, newPassword: string) {
-    return this.http.put(this.BASE_URL + doctorId + '/changePassword', {});
+  public changePassword(doctorId: number, passwords: Passwords) {
+    return this.http.put(this.BASE_URL + doctorId + '/changePassword', passwords );
   }
 
   public isAdmin(role: string): boolean {

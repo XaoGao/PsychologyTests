@@ -42,6 +42,7 @@ namespace Psychology_API.DataServices.Contracts
         /// <param name="doctor"> Идентификатор пользователя. </param>
         /// <returns> JWT объект. </returns>
         SecurityToken CreateToken(Doctor doctor);
+        bool VerificateOldPassword(Doctor doctor, string password);
 
     }
 }
