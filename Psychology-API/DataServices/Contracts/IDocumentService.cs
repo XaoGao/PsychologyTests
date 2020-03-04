@@ -58,5 +58,6 @@ namespace Psychology_API.DataServices.Contracts
         /// <param name="documents"> Список документов. </param>
         /// <returns> Список документов с идентиыикаторами межведомственных запросов. </returns>
         Task<List<DocumentForReturnListDto>> SetInterdepartId(List<DocumentForReturnListDto> documents);
+        Task<DocumentForReturnListDto> SetInterdepartId(DocumentForReturnListDto document);
     }
 }

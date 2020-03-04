@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class DocumentService {
 
   private BASE_URL_DOC = environment.apiUrl + 'doctors/';
+  public interdepartType = true;
   constructor(private http: HttpClient) { }
 
   public getDocumentTypes(doctorId: number, patientId: number): Observable<DocumentType[]>  {
@@ -31,6 +32,8 @@ export class DocumentService {
   public changeInterdepart(interdepartType: string) {
     let params = new HttpParams();
     params = params.append('interdepartType', interdepartType);
+
+    this.interdepartType = !this.interdepartType;
 
     return this.http.put(environment.apiUrl + 'interdeparts/changeinterdepart', { params });
   }

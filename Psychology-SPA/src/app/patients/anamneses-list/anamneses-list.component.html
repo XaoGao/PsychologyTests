@@ -24,7 +24,10 @@
 <div *ngFor="let anamnesis of anamneses">
     <div>
         <p> <strong>Дата осмотра:</strong> {{ anamnesis.conclusionTime | date: 'yyyy.MM.dd' }}</p>
-        <p> <strong>Заключение:</strong> {{ anamnesis.conclusion }}</p>
+        <!-- <p> <strong>Заключение:</strong> <textarea>{{ anamnesis.conclusion }}</textarea></p> -->
+        <mat-form-field class="form-group  full-width">
+            <textarea class="text-dark" matInput [disabled]="true" > {{ anamnesis.conclusion }} </textarea>
+        </mat-form-field>
         <p> <strong>Заключение сделал:</strong> {{ anamnesis.doctorFullname }}</p>
     </div>
     <hr>

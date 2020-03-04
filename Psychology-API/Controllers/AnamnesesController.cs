@@ -11,7 +11,7 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = RolesSettings.Doctor)]
     [ApiController]
     [Route("api/doctors/{doctorId}/patients")]
     public class AnamnesesController : ControllerBase
@@ -26,7 +26,7 @@ namespace Psychology_API.Controllers
             _mapper = mapper;
 
         }
-        [Authorize(Roles = RolesSettings.Doctor)]
+        
         [HttpGet("{patientId}/anamneses")]
         public async Task<IActionResult> GetPatientAnamneses(int doctorId, int patientId)
         {
@@ -39,7 +39,6 @@ namespace Psychology_API.Controllers
 
             return Ok(anamnesesForReturn);
         }
-        [Authorize(Roles = RolesSettings.Doctor)]
         [HttpPost("{patientId}/anamneses")]
         public async Task<IActionResult> CreatePatientAnamnesis(int doctorId, int patientId, AnamnesisForCreateDto anamnesisForCreateDto)
         {

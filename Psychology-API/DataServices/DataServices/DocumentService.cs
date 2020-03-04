@@ -81,6 +81,18 @@ namespace Psychology_API.DataServices.DataServices
             
             return listForReturn;
         }
+
+        public async Task<DocumentForReturnListDto> SetInterdepartId(DocumentForReturnListDto document)
+        {
+            var interdepart = await _documentRepository.GetInterdepartRequestRepositoryAsync(document.Id);
+
+            var documentForReturn = document;
+
+            documentForReturn .InterdepartRequestId = interdepart.Id;
+            documentForReturn .InterdepartStatusId = interdepart.InterdepartStatusId;
+
+            return documentForReturn;
+        }
         /// <summary>
         /// Вспомогательный метод для получения из БД необходимых межведомственных запросов.
         /// </summary>

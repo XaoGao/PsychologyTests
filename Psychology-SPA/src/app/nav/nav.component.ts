@@ -27,18 +27,21 @@ export class NavComponent implements OnInit {
     this.route.navigate(['/']);
   }
   public isHR(): boolean {
-    return this.authService.isHR(this.authService.role);
+    return this.authService.isHR();
   }
   public isAdmin(): boolean {
-    return this.authService.isAdmin(this.authService.role);
+    return this.authService.isAdmin();
   }
   public isRegistry(): boolean {
-    return this.authService.isRegistry(this.authService.role);
+    return this.authService.isRegistry();
   }
   public setLocal(): void {
     this.documentService.changeInterdepart('local');
   }
   public setReal(): void {
     this.documentService.changeInterdepart('real');
+  }
+  public interdepartType(): boolean {
+    return this.documentService.interdepartType;
   }
 }

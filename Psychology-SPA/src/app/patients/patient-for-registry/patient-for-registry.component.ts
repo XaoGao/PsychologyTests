@@ -103,7 +103,7 @@ export class PatientForRegistryComponent implements OnInit {
           interdepartStatusId: res.interdepartStatusId,
           interdepartRequestId: res.interdepartRequestId,
         };
-        this.patient.documents.push(document);
+        this.documents.push(document);
       }
     };
   }
@@ -149,7 +149,7 @@ export class PatientForRegistryComponent implements OnInit {
     saveAs(blob, fileName);
   }
   public deletePatient() {
-    if (confirm(`Вы уверены, что хотите удалить из системы пациента:${this.patient.fullname}?`)) {
+    if (confirm(`Вы уверены, что хотите удалить из системы пациента: ${this.patient.fullname}?`)) {
       this.patientService.deletePatient(this.authService.doctorId, this.patient.id).subscribe(() => {
         this.toastrService.success('Вы удалили пользователя');
         this.router.navigate(['/patientsforregistry']);
@@ -168,9 +168,9 @@ export class PatientForRegistryComponent implements OnInit {
   public deleteDoc(document: Document) {
     this.docService.deleteDocument(this.authService.doctorId, this.patient.id, document.id).subscribe(() => {
       this.toastrService.success('Документ успешно удален');
-      const index = this.patient.documents.indexOf(document, 0);
+      const index = this.documents.indexOf(document, 0);
       if (index >= 0) {
-        this.patient.documents.splice(index, 1);
+        this.documents.splice(index, 1);
       }
     }, err => {
       this.toastrService.error(err);

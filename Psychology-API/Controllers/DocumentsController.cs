@@ -42,7 +42,9 @@ namespace Psychology_API.Controllers
             if (await _documentService.SaveDocAsync(document, docForCreateDto.File))
             {
                 document.DocumentType = await _documentService.GetDocTypeAsync(document.Id);
-                return Ok(document);
+                var documentDto = _mapper.Map<DocumentForReturnListDto>(document);
+                var documentForReturn = await _documentService.SetInterdepartId(documentDto);
+                return Ok(documentForReturn);
             }
 
             throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");

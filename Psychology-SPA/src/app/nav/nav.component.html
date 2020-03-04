@@ -19,8 +19,8 @@
                 <button class="nav-link text-light" mat-button [matMenuTriggerFor]="interdepart">Сервис проверки
                     документов</button>
                 <mat-menu #interdepart="matMenu">
-                    <button mat-menu-item (click)="setLocal()">Локально</button>
-                    <button mat-menu-item (click)="setReal()">Удаленно</button>
+                    <button mat-menu-item (click)="setLocal()"> <i *ngIf="!interdepartType()"  class="fa fa-check"></i> Локально</button>
+                    <button mat-menu-item (click)="setReal()"> <i  *ngIf="interdepartType()" class="fa fa-check"></i> Удаленно</button>
                 </mat-menu>
             </li>
         </ul>

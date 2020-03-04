@@ -65,29 +65,29 @@ export class AuthService {
     return this.http.put(this.BASE_URL + doctorId + '/changePassword', passwords );
   }
 
-  public isAdmin(role: string): boolean {
-    if (role === this.admin) {
+  public isAdmin(): boolean {
+    if (this.role === this.admin) {
       return true;
     } else {
       return false;
     }
   }
-  public isHR(role: string): boolean {
-    if (role === this.HR) {
+  public isHR(): boolean {
+    if (this.role === this.HR) {
       return true;
     } else {
       return false;
     }
   }
-  public isDoctor(role: string): boolean {
-    if (role === this.doctor) {
+  public isDoctor(): boolean {
+    if (this.role === this.doctor) {
       return true;
     } else {
       return false;
     }
   }
-  public isRegistry(role: string): boolean {
-    if (role === this.registry) {
+  public isRegistry(): boolean {
+    if (this.role === this.registry) {
       return true;
     } else {
       return false;
