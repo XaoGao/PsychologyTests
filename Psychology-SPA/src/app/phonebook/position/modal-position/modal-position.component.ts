@@ -21,5 +21,12 @@ export class ModalPositionComponent implements OnInit {
       this.position = new Position();
     }
   }
+  public isNew(): boolean {
+    if (this.position.id) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 }

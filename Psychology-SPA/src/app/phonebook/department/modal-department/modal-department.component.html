@@ -10,7 +10,7 @@
             <input matInput placeholder="Уровень сортировки" title="Чем уровень меньше, тем выше стоит в списке"
                 name="sortLevel" [(ngModel)]="department.sortLevel" required>
         </mat-form-field>
-        <mat-checkbox 
+        <mat-checkbox [disabled]="isNew()"
             class="col-4" 
             name="isLock" 
             [(ngModel)]="department.isLock" 

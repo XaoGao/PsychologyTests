@@ -68,9 +68,15 @@ export class DepartmentComponent implements OnInit {
   }
 
   private updateDepartment(department: Department) {
-    this.phonebookService.updateDepartment(department.id, department).subscribe(
-      () => {
+    this.phonebookService.updateDepartment(department.id, department).subscribe(() => {
         this.toastrService.success('Данные успешно обновлены');
+        this.departments.sort((dep1, dep2) => {
+          if (dep1.sortLevel > dep2.sortLevel) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
       }, err => {
         this.toastrService.error(err);
       }
@@ -79,6 +85,15 @@ export class DepartmentComponent implements OnInit {
   private createDepartment(department: Department) {
     this.phonebookService.createDepartment(this.authService.doctorId, department).subscribe((res: Department) => {
         this.toastrService.success('Новый отдел успешно добавлен');
+        this.departments.push(res);
+        this.dataSource = new MatTableDataSource(this.departments);
+        this.departments.sort((dep1, dep2) => {
+          if (dep1.sortLevel > dep2.sortLevel) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
       }, err => {
         this.toastrService.error(err);
       }

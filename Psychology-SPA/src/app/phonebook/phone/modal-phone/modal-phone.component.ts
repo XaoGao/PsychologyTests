@@ -20,5 +20,12 @@ export class ModalPhoneComponent implements OnInit {
       this.phone = new Phone();
     }
   }
+  public isNew(): boolean {
+    if (this.phone.id) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 }

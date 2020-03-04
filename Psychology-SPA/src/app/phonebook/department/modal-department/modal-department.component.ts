@@ -21,4 +21,11 @@ export class ModalDepartmentComponent implements OnInit {
       this.department = new Department();
     }
   }
+  public isNew(): boolean {
+    if (this.department.id) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

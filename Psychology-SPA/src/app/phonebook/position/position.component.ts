@@ -65,6 +65,13 @@ export class PositionComponent implements OnInit {
   private updatePosition(position: Position) {
     this.phonebookService.updatePosition(position.id, position).subscribe((res: Position) => {
         this.toastrService.success('Данные успешно обновлены');
+        this.positions.sort((pos1, pos2) => {
+          if (pos1.sortLevel > pos2.sortLevel) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
       }, err => {
         this.toastrService.error(err);
       }
@@ -74,6 +81,14 @@ export class PositionComponent implements OnInit {
     this.phonebookService.createPosition(this.authService.doctorId, position).subscribe((res: Position) => {
         this.toastrService.success('Новая должность успешно добавлена');
         this.positions.push(res);
+        this.dataSource = new MatTableDataSource(this.positions);
+        this.positions.sort((pos1, pos2) => {
+          if (pos1.sortLevel > pos2.sortLevel) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
       }, err => {
         this.toastrService.error(err);
       });

@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_Domain.Abstarct;
 using Psychology_Domain.Domain;
@@ -55,6 +57,25 @@ namespace Psychology_API.Data
             }
 
             return base.SaveChanges();
+        }
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is DomainEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((DomainEntity)entityEntry.Entity).Update = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((DomainEntity)entityEntry.Entity).Create = DateTime.Now;
+                }
+            }
+            return (await base.SaveChangesAsync(true, cancellationToken));
         }
     }
 }
