@@ -3,7 +3,7 @@ using Psychology_API.Data;
 using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Domain;
 using Microsoft.EntityFrameworkCore;
-using Psychology_API.Servises.ComputedHash;
+using Psychology_API.Services.ComputedHash;
 
 namespace Psychology_API.Repositories.Repositories
 {

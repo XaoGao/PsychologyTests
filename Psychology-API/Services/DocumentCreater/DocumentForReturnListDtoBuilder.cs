@@ -43,8 +43,16 @@ namespace Psychology_API.Services.DocumentCreater
         /// <returns></returns>
         public DocumentForReturnListDtoBuilder SetInterdepartInfo(InterdepartRequestForIdDto interdepart)
         {
-            documentForReturnListDto.InterdepartRequestId = interdepart.InterdepartRequestId;
-            documentForReturnListDto.InterdepartStatusId = interdepart.InterdepartStatusId;
+            if(interdepart != null)
+            {
+                documentForReturnListDto.InterdepartRequestId = interdepart.InterdepartRequestId;
+                documentForReturnListDto.InterdepartStatusId = interdepart.InterdepartStatusId;
+            }
+            else 
+            {
+                documentForReturnListDto.InterdepartRequestId = 0;
+                documentForReturnListDto.InterdepartStatusId = 0;
+            }
 
             return this;
         }

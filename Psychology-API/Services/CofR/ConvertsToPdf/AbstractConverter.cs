@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Psychology_API.Servises.COfR.ConvertsToPdf
+namespace Psychology_API.Services.COfR.ConvertsToPdf
 {
     /// <summary>
     /// Базовый класс от которого должны наследоваться все остальные обработчики.

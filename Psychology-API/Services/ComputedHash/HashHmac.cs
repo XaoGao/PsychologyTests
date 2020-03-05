@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Psychology_API.Servises.ComputedHash
+namespace Psychology_API.Services.ComputedHash
 {
     public class HashHmac : IHash
     {

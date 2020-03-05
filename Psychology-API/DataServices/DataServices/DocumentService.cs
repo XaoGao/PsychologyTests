@@ -6,7 +6,7 @@ using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos.DocumentDto;
 using Psychology_API.Repositories.Contracts;
 using Psychology_API.Services.Interdepart;
-using Psychology_API.Servises.Cache;
+using Psychology_API.Services.Cache;
 using Psychology_API.Settings.DocumentType;
 using Psychology_Domain.Domain;
 using Psychology_API.Helpers;

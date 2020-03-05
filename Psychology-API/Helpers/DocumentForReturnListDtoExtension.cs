@@ -16,7 +16,7 @@ namespace Psychology_API.Helpers
             foreach (var item in list)
             {
                 var interdepartItem = interdepartRequestDtos.Where(ii => ii.DocumentId == item.Id).FirstOrDefault();
-                
+
                 var documentDto = documentFactory.CreateDocumentFoReturnListDto(item, interdepartItem);
 
                 listWithInterDepartId.Add(documentDto);

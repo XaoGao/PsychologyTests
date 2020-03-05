@@ -6,7 +6,7 @@ using Psychology_API.Settings;
 
 namespace Psychology_API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = RolesSettings.Registry)]
     [ApiController]
     [Route("api/[controller]")]
     public class InterdepartsController : ControllerBase
@@ -16,7 +16,7 @@ namespace Psychology_API.Controllers
         {
             _documentService = documentService;
         }
-        [Authorize(Roles = RolesSettings.Registry)]
+        
         [HttpPut("document/{documentId}/request")]
         public async Task<IActionResult> RequestInterdepart(int documentId)
         {
@@ -29,7 +29,6 @@ namespace Psychology_API.Controllers
 
             return NoContent();
         }
-        [Authorize(Roles = RolesSettings.Registry)]
         [HttpPut("changeinterdepart")]
         public IActionResult ChangeInterdepart(string interdepartType)
         {

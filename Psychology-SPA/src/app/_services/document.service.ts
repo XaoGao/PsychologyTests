@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
 export class DocumentService {
 
   private BASE_URL_DOC = environment.apiUrl + 'doctors/';
-  public interdepartType = true;
+
+  public realInterdepartType = true;
+
   constructor(private http: HttpClient) { }
 
   public getDocumentTypes(doctorId: number, patientId: number): Observable<DocumentType[]>  {
@@ -27,17 +29,31 @@ export class DocumentService {
     return this.http.get(this.getDocumentUrl(doctorId, patientId) + documentId, { responseType: 'blob' });
   }
   public interdepartReguest(documentId: number) {
-    return this.http.put(environment.apiUrl + 'interdeparts/document' + documentId + '/request', {});
+    return this.http.put(environment.apiUrl + 'interdeparts/document/' + documentId + '/request', {});
   }
   public changeInterdepart(interdepartType: string) {
     let params = new HttpParams();
     params = params.append('interdepartType', interdepartType);
 
-    this.interdepartType = !this.interdepartType;
-
-    return this.http.put(environment.apiUrl + 'interdeparts/changeinterdepart', { params });
+    return this.http.put(environment.apiUrl + 'Interdeparts/changeinterdepart', {}, { params });
   }
   private getDocumentUrl(doctorId: number, patientId: number): string {
     return this.BASE_URL_DOC + doctorId + '/patients/' + patientId + '/documents/';
+  }
+  public interdepartStatusName(interdepartStatusId: number): string {
+    switch (interdepartStatusId) {
+      case 0:
+        return '-';
+      case 1:
+        return 'Ожидает отправки';
+      case 2:
+        return 'Запрос отправлен';
+      case 4:
+        return 'Подтверждено';
+      case 5:
+        return 'Отказано';
+      default:
+        return 'Некорректный статус';
+    }
   }
 }

@@ -1,4 +1,4 @@
-namespace Psychology_API.Servises.ComputedHash
+namespace Psychology_API.Services.ComputedHash
 {
     /// <summary>
     /// Интерфейс алгоритма расчета хеша.

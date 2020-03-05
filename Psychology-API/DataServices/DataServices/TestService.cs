@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Repositories.Contracts;
-using Psychology_API.Servises.CofR.ComputedTestResult;
+using Psychology_API.Services.CofR.ComputedTestResult;
 using Psychology_API.ViewModels;
 using Psychology_Domain.Domain;
 

@@ -34,7 +34,7 @@ export class PatientForRegistryComponent implements OnInit {
               private authService: AuthService,
               private toastrService: ToastrAlertService,
               private router: Router,
-              private docService: DocumentService) { }
+              private documentService: DocumentService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -138,7 +138,7 @@ export class PatientForRegistryComponent implements OnInit {
     });
   }
   public downloadDoc(document: Document): void {
-    this.docService.downloadDocument(this.authService.doctorId, this.patient.id, document.id).subscribe((data: any) => {
+    this.documentService.downloadDocument(this.authService.doctorId, this.patient.id, document.id).subscribe((data: any) => {
       this.downloadFile(data, document.docName);
     }, err => {
       this.toastrService.error(err);
@@ -166,7 +166,7 @@ export class PatientForRegistryComponent implements OnInit {
     }
   }
   public deleteDoc(document: Document) {
-    this.docService.deleteDocument(this.authService.doctorId, this.patient.id, document.id).subscribe(() => {
+    this.documentService.deleteDocument(this.authService.doctorId, this.patient.id, document.id).subscribe(() => {
       this.toastrService.success('Документ успешно удален');
       const index = this.documents.indexOf(document, 0);
       if (index >= 0) {
@@ -175,5 +175,22 @@ export class PatientForRegistryComponent implements OnInit {
     }, err => {
       this.toastrService.error(err);
     });
+  }
+  public interdepartStatusName(interdepartStatusId: number): string {
+    return this.documentService.interdepartStatusName(interdepartStatusId);
+  }
+  public interdepartRequest(documentId: number): void {
+    this.documentService.interdepartReguest(documentId).subscribe(() => {
+      this.toastrService.info('Запрос отпрален');
+    }, err => {
+      this.toastrService.error(err);
+    });
+  }
+  public getSeriesNumber(item: string): string {
+    if (item !== 'undefined') {
+      return item;
+    } else {
+      return '-';
+    }
   }
 }

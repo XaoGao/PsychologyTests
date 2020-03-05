@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Psychology_API.SeedData;
 using Newtonsoft.Json;
-using Psychology_API.Servises.DI;
+using Psychology_API.Services.DI;
 
 namespace Psychology_API
 {

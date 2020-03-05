@@ -5,7 +5,7 @@ using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Repositories.Contracts.GenericRepository;
 using Psychology_API.Repositories.Repositories;
-using Psychology_API.Servises.Cache;
+using Psychology_API.Services.Cache;
 using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.DataServices.DataServices

@@ -1,6 +1,6 @@
 using Psychology_API.ViewModels;
 
-namespace Psychology_API.Servises.CofR.ComputedTestResult
+namespace Psychology_API.Services.CofR.ComputedTestResult
 {
     /// <summary>
     /// Цепочка ответственных для расчета баллов различных тестов.

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Psychology_API.Servises.COfR.ConvertsToPdf
+namespace Psychology_API.Services.COfR.ConvertsToPdf
 {
     /// <summary>
     /// Создает цепочку отвественных за коневертацию документов в формат pdf.

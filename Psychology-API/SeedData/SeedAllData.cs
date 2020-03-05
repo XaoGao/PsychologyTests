@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 using Psychology_API.Data;
-using Psychology_API.Servises.ComputedHash;
+using Psychology_API.Services.ComputedHash;
 using Psychology_Domain.Domain;
 using System.Collections.Generic;
 using System.IO;

@@ -10,13 +10,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
+  userForLogin: any = { };
   constructor(public authService: AuthService,
               private route: Router,
               private toastrService: ToastrAlertService,
-              private documentService: DocumentService) { }
+              private documentService: DocumentService,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+  public login() {
+    this.authService.login(this.userForLogin).subscribe(() => {
+      this.toastrService.success('Вы успешно зашли в программу');
+      this.router.navigate(['/workship/' + this.authService.doctorId]);
+    }, err => {
+      this.toastrService.error(err);
+    });
   }
   public loggedin(): boolean {
     return this.authService.loggedIn();
@@ -36,12 +45,20 @@ export class NavComponent implements OnInit {
     return this.authService.isRegistry();
   }
   public setLocal(): void {
-    this.documentService.changeInterdepart('local');
+    this.documentService.changeInterdepart('local').subscribe(() => {
+      this.documentService.realInterdepartType = false;
+    }, err => {
+      this.toastrService.error(err);
+    });
   }
   public setReal(): void {
-    this.documentService.changeInterdepart('real');
+    this.documentService.changeInterdepart('real').subscribe(() => {
+      this.documentService.realInterdepartType = true;
+    }, err => {
+      this.toastrService.error(err);
+    });
   }
   public interdepartType(): boolean {
-    return this.documentService.interdepartType;
+    return this.documentService.realInterdepartType;
   }
 }

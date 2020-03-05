@@ -1,4 +1,4 @@
-namespace Psychology_API.Servises.Cache
+namespace Psychology_API.Services.Cache
 {
     /// <summary>
     /// Интерфейс хранилища ключ-значение.

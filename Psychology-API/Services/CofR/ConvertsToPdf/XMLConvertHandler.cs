@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Psychology_API.Servises.COfR.ConvertsToPdf
+namespace Psychology_API.Services.COfR.ConvertsToPdf
 {
     /// <summary>
     /// /// Класс для ковертации xml документа в pdf

@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   userForLogin: any = { };
-  userForRegister: any = { };
 
   constructor(private authService: AuthService, private toastrService: ToastrAlertService,
               private router: Router, private route: ActivatedRoute) { }

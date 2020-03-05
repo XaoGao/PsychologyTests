@@ -7,11 +7,11 @@ using Psychology_API.Repositories.Repositories;
 using Psychology_API.SeedData;
 using Psychology_API.Services.Interdepart;
 using Psychology_API.Services.RabbitMQ;
-using Psychology_API.Servises.Cache;
-using Psychology_API.Servises.ComputedHash;
+using Psychology_API.Services.Cache;
+using Psychology_API.Services.ComputedHash;
 using Psychology_API.Settings;
 
-namespace Psychology_API.Servises.DI
+namespace Psychology_API.Services.DI
 {
     /// <summary>
     /// Статический класс, в котором содердиться метод расширения для IServiceCollection.
@@ -52,7 +52,7 @@ namespace Psychology_API.Servises.DI
             //
             services.AddSingleton<CacheSettings>();
             services.AddSingleton<RabbitMQSettings>();
-            services.AddScoped<ISenderInterdepartRequest, SenderInterdepartRequest>();
+            services.AddSingleton<ISenderInterdepartRequest, SenderInterdepartRequest>();
             services.AddSingleton(typeof(ICache<>), typeof(Cache<>));
             services.AddScoped<IBroker, Rabbit>();
             services.AddTransient<SeedAllData>();

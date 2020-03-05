@@ -54,18 +54,20 @@
             <th scope="col" class="col-1">Удалить</th>
         </thead>
 
-        <tbody *ngFor="let documentFromPatient of documents; index as i;" class="col-12 row text-center">
+        <tbody *ngFor="let document of documents; index as i;" class="col-12 row text-center">
             <th class="col-1">{{ i  + 1 }})</th>
-            <th class="col-3">{{ documentFromPatient.docName }}</th>
-            <th class="col-1">{{ documentFromPatient?.number }}</th>
-            <th class="col-1">{{ documentFromPatient?.series }}</th>
-            <th class="col-2">{{ documentFromPatient.documentType.name }}</th>
-            <th class="col-2"> <button class="btn btn-info"> {{ documentFromPatient.interdepartStatusId }} </button> </th>
+            <th class="col-3">{{ document.docName }}</th>
+            <th class="col-1">{{ getSeriesNumber(document?.number) }}</th>
+            <th class="col-1">{{ getSeriesNumber(document?.series) }}</th>
+            <th class="col-2">{{ document.documentType.name }}</th>
+            <th class="col-2"> <button class="btn btn-info" (click)="interdepartRequest(document.id)"
+                    [disabled]="document.documentTypeId !== 1 || document.interdepartStatusId != 1">
+                    {{ interdepartStatusName(document.interdepartStatusId) }} </button> </th>
             <th class="col-1 text-center"><button class="btn btn-success" title="Загрузить документ"
-                (click)="downloadDoc(documentFromPatient)"><i class="fa fa-download"></i></button></th>
+                    (click)="downloadDoc(document)"><i class="fa fa-download"></i></button></th>
             <th class="col-1 text-center"><button class="btn btn-danger" title="Удалить документ"
-                    (click)="deleteDoc(documentFromPatient)"><i class="fa fa-trash"></i></button></th>
-            
+                    (click)="deleteDoc(document)"><i class="fa fa-trash"></i></button></th>
+
         </tbody>
     </table>
 </div>
