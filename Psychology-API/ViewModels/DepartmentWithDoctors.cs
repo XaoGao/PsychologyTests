@@ -26,12 +26,12 @@ namespace Psychology_API.ViewModels
         /// <param name="doctors"> Работники.</param>
         public DepartmentWithDoctors(Department department, List<Doctor> doctors)
         {
-            if (department == null)
+            if(department == null)
                 throw new ArgumentNullException(nameof(department));
 
             if(doctors.Count == 0)
                 throw new Exception(nameof(doctors));
-            
+
             Department = department;
             Doctors = doctors;
         }

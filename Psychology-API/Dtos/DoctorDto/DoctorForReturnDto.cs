@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Psychology_API.Dtos.PatientDto;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Dtos.DoctorDto
@@ -41,7 +42,7 @@ namespace Psychology_API.Dtos.DoctorDto
         /// Пациенты под надзором данного врача.
         /// </summary>
         /// <value></value>
-        public ICollection<Patient> Patients { get; set; }
+        public ICollection<PatientForListDto> Patients { get; set; }
         /// <summary>
         /// Идентификатор отдела в котором работает доктор.
         /// </summary>

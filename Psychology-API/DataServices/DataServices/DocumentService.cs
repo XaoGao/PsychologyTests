@@ -88,8 +88,11 @@ namespace Psychology_API.DataServices.DataServices
 
             var documentForReturn = document;
 
-            documentForReturn .InterdepartRequestId = interdepart.Id;
-            documentForReturn .InterdepartStatusId = interdepart.InterdepartStatusId;
+            if(interdepart != null )
+            {
+                documentForReturn.InterdepartRequestId = interdepart.Id;
+                documentForReturn.InterdepartStatusId = interdepart.InterdepartStatusId;
+            }
 
             return documentForReturn;
         }

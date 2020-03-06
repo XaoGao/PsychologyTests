@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Psychology_API.Dtos.PatientDto;
 using Psychology_Domain.Domain;
 
 namespace Psychology_API.Dtos.DoctorDto
@@ -27,6 +28,6 @@ namespace Psychology_API.Dtos.DoctorDto
         public string Middlename { get; set; }
         public string Fullname { get => $"{Lastname} {Firstname} {Middlename}";}
         public bool IsLock { get; set; }
-        public ICollection<Patient> Patients { get; set; }
+        public ICollection<PatientForListDto> Patients { get; set; }
     }
 }

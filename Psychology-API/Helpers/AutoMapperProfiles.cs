@@ -11,6 +11,8 @@ using Psychology_API.Dtos.PatientDto;
 using Psychology_API.Dtos.PatientTestResultDto;
 using Psychology_API.Dtos.TestDto;
 using Psychology_API.Dtos.VacationDto;
+using Psychology_API.ViewModels;
+using Psychology_API.Dtos.PhonebookDto;
 
 namespace Psychology_API.Helpers
 {
@@ -37,6 +39,8 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => src.Anamneses.FirstOrDefault(p => p.IsLast == true).Conclusion);
                 });
 
+            CreateMap<Patient, PatientForReturnDto>();
+
             // Анамнез.
             CreateMap<Anamnesis, AnamnesisForReturnDto>();
             CreateMap<AnamnesisForCreateDto, Anamnesis>()
@@ -52,6 +56,11 @@ namespace Psychology_API.Helpers
             CreateMap<Department, Department>();
             CreateMap<Position, Position>();
             CreateMap<Phone, Phone>();
+
+            CreateMap<DepartmentWithDoctors, DepartmentWithDoctorsDto>()
+                .IncludeAllDerived();
+
+            CreateMap<Doctor, DoctorForReturnPhonebookDto>();
 
             // Тесты.
             CreateMap<Test, TestForReturnListDto>()

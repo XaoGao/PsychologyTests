@@ -43,7 +43,7 @@ export class PatientForRegistryComponent implements OnInit {
       this.doctors = data.doctors;
       this.documents = data.documents;
     });
-    // console.log(this.documents);
+    console.log(this.patient);
     this.isNewPatient();
     this.initUploader();
   }

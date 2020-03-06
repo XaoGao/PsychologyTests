@@ -1,5 +1,4 @@
 import { DepartmentWithDoctors } from './../_models/departmentWithDoctors';
-import { ToastrAlertService } from './../_services/toastr-alert.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PhonebookComponent implements OnInit {
   public departmentsWithDoctors: DepartmentWithDoctors[];
   public index: number;
-  constructor(private toastrService: ToastrAlertService, private route: ActivatedRoute  ) { }
+  constructor(private route: ActivatedRoute  ) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -19,10 +18,4 @@ export class PhonebookComponent implements OnInit {
     });
     this.index = 0;
   }
-
-  // public getIndex(): number {
-  //   this.index = this.index + 1;
-  //   return this.index;
-  // }
-
 }

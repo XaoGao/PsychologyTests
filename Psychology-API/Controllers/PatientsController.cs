@@ -52,8 +52,10 @@ namespace Psychology_API.Controllers
             if (patientFromRepo == null)
                 return BadRequest("Указаного пациента нет в системе");
 
+            var patientForReturn = _mapper.Map<PatientForReturnDto>(patientFromRepo);
+
             //TODO: добавить dto для возврата данных
-            return Ok(patientFromRepo);
+            return Ok(patientForReturn);
         }
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]

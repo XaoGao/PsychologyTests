@@ -121,7 +121,7 @@ namespace Psychology_API.Repositories.Repositories
             var interdepartRequest = await _context.InterdepartRequests
                 .Where(ir => ir.DocumentId == documentId)
                 .OrderByDescending(ir => ir.Create)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             return interdepartRequest;
         }

@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
+using Psychology_API.Dtos.PhonebookDto;
 
 namespace Psychology_API.Controllers.Phonebook
 {
@@ -12,9 +15,12 @@ namespace Psychology_API.Controllers.Phonebook
     public class PhonebookController : ControllerBase
     {
         private readonly IPhonebookService _phonebookService;
-        public PhonebookController(IPhonebookService phonebookService)
+        private readonly IMapper _mapper;
+
+        public PhonebookController(IPhonebookService phonebookService, IMapper mapper)
         {
             _phonebookService = phonebookService;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetPhonebook(int doctorId)
@@ -24,9 +30,9 @@ namespace Psychology_API.Controllers.Phonebook
 
             var phonebook = await _phonebookService.GetPhonebookAsync();
 
-            //TODO: добавить Dtos классы для телефоного справочника.
+            var phonebookForReturn = _mapper.Map<IEnumerable<DepartmentWithDoctorsDto>>(phonebook);
 
-            return Ok(phonebook);
+            return Ok(phonebookForReturn);
         }
     }
 }

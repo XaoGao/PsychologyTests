@@ -12,7 +12,7 @@ export class DocumentService {
 
   private BASE_URL_DOC = environment.apiUrl + 'doctors/';
 
-  public realInterdepartType = true;
+  public realInterdepartType: boolean;
 
   constructor(private http: HttpClient) { }
 
