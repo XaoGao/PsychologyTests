@@ -16,6 +16,8 @@ using System.Text;
 using Psychology_API.SeedData;
 using Newtonsoft.Json;
 using Psychology_API.Services.DI;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace Psychology_API
 {
@@ -36,6 +38,10 @@ namespace Psychology_API
                 //Плохая практика нужно делать плоские модели 
                 //you have to install nuget package - Microsoft.AspNetCore.Mvc.NewtonsoftJson 
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+             services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Psychology-API", Version = "v1" });
             });
             services.AddCors();
             services.AddAutoMapper(typeof(Startup));
@@ -58,7 +64,6 @@ namespace Psychology_API
                     ValidateAudience = false
                 };
             });
-
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedAllData seed)
         {
@@ -83,9 +88,18 @@ namespace Psychology_API
                     });
                 });
             }
-            // app.UseHttpsRedirection();
+            
             seed.SeedData();
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());// .AllowCredentials()
 
