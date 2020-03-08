@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
@@ -14,6 +15,7 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
 {
+    [Produces("application/json")]
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
@@ -38,20 +40,14 @@ namespace Psychology_API.Controllers
             _authService = authService;
             _doctorService = doctorService;
         }
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(DoctorForRegisterDto doctorForRegisterDto)
-        {
-            if(await _authService.UserExistAsync(doctorForRegisterDto.Username))
-                return BadRequest("В системе уже существует пользователь с данным логином.");
-
-            var doctorToCreate = _mapper.Map<Doctor>(doctorForRegisterDto);
-            var createdDoctor = _authService.RegisterAsync(doctorToCreate, doctorForRegisterDto.Password);
-
-            //TODO: добавить класс DTOReturn для возврата данных, изменить возвращаемый код 201 на корректную форму с GET.
-            return StatusCode(201);
-        }
-
+        /// <summary>
+        /// Авторизация паользователя в системе.
+        /// </summary>
+        /// <param name="doctorForLoginDto"> Данные для автризации (логин/пароль). </param>
+        /// <returns> Токен. </returns>
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Login(DoctorForLoginDto doctorForLoginDto)
         {
             var doctorFromRepo = await _authService.LoginAsync(doctorForLoginDto.Username, doctorForLoginDto.Password);
@@ -75,8 +71,17 @@ namespace Psychology_API.Controllers
                 receptionsForReturn
             });
         }
+        /// <summary>
+        /// Сменить пароль.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="passwords"> Текущий и новый пароль. </param>
+        /// <returns></returns>
         [Authorize]
         [HttpPut("{doctorId}/changePassword")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> ChangePassword(int doctorId, Passwords passwords)
         {
             if(doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

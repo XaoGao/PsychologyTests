@@ -3,6 +3,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Psychology_API</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591;1587;1711</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Psychology-Domain\Psychology-Domain.csproj" />
   </ItemGroup>

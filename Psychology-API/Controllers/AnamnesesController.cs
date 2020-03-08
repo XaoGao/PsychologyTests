@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos.AnamnesisDto;
@@ -11,6 +12,7 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
 {
+    [Produces("application/json")]
     [Authorize(Roles = RolesSettings.Doctor)]
     [ApiController]
     [Route("api/doctors/{doctorId}/patients")]
@@ -26,8 +28,14 @@ namespace Psychology_API.Controllers
             _mapper = mapper;
 
         }
-        
+        /// <summary>
+        /// Список заключении по конкретному пациенту.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор врача. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns> Список заключении. </returns>
         [HttpGet("{patientId}/anamneses")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPatientAnamneses(int doctorId, int patientId)
         {
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
@@ -39,7 +47,15 @@ namespace Psychology_API.Controllers
 
             return Ok(anamnesesForReturn);
         }
+        /// <summary>
+        /// Создать новое звключение для пациента.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <param name="anamnesisForCreateDto"> Данные по заключению. </param>
+        /// <returns> Заключение по пациенту, если все успешно. </returns>
         [HttpPost("{patientId}/anamneses")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreatePatientAnamnesis(int doctorId, int patientId, AnamnesisForCreateDto anamnesisForCreateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

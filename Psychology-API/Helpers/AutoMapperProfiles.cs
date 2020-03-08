@@ -94,6 +94,8 @@ namespace Psychology_API.Helpers
                     opt.MapFrom(src => (src.EndVacation - src.StartVacation).Days);
                 });
 
+            CreateMap<Vacation, VacationForReturnListDto>();
+
             // Роль
             CreateMap<Role, Role>();
             // Межведомственные запросы

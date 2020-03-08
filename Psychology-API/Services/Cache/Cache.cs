@@ -39,8 +39,7 @@ namespace Psychology_API.Services.Cache
         /// Получить за хранилища данные.
         /// </summary>
         /// <param name="key"> Ключ. </param>
-        /// <param name="item"> Объект в который положим данные. </param>
-        /// <returns> True если данные были найдены и успешно извлечены. </returns>
+        /// <returns> Объект из кеша. </returns>
         public TEntity Get(string key)
         {
             TEntity item = null;
@@ -54,8 +53,7 @@ namespace Psychology_API.Services.Cache
         /// </summary>
         /// <param name="id"> Идентификатор для рассчета ключа. </param>
         /// <param name="suffix"> Суффикс для рассчета ключа. </param>
-        /// <param name="item"> Объект в который положим данные. </param>
-        /// <returns></returns>
+        /// <returns> Объект из кеша. </returns>
         public TEntity Get(string id, string suffix)
         {
             var key = CreateKeyForCache(id, suffix);

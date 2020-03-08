@@ -14,7 +14,8 @@ namespace Psychology_API.DataServices.Contracts
         /// Получить все актуальных пациентов конкретного доктора.
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
-        /// <returns> Пациенты, которые записаны на доктора. </returns>
+        /// <param name="patientsType"> Тип пациентов, которых нужер получить. </param>
+        /// <returns> Список пациентов. </returns>
         Task<IEnumerable<Patient>> GetPatientsAsync(int doctorId, PatientsType patientsType);
         /// <summary>
         /// Получить конкретного пациента доктора.

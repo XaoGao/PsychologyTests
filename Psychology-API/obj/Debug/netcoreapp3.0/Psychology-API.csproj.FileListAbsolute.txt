@@ -101,3 +101,5 @@
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /home/xaogao/Documents/Psychology/Psychology-API/obj/Debug/netcoreapp3.0/Psychology-API.MvcApplicationPartsAssemblyInfo.cs
+/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Psychology-API.xml
+/home/xaogao/Documents/Psychology/Psychology-API/obj/Debug/netcoreapp3.0/Psychology-API.xml

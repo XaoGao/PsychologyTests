@@ -8,21 +8,21 @@ namespace Psychology_XUnit.Services.CofR.ComputedTestResult
     /// </summary>
     public class ManagerComputedTestResultHandlerTest
     {
-        public ManagerComputedTestResultHandlerTest()
-        {
+        // public ManagerComputedTestResultHandlerTest()
+        // {
             
-        }
-        private QuestionsAnswersViewModel GetAnsersViewModelBeck()
-        {
-            var questionsAnswersViewModel = new QuestionsAnswersViewModel();
+        // }
+        // private QuestionsAnswersViewModel GetAnsersViewModelBeck()
+        // {
+        //     var questionsAnswersViewModel = new QuestionsAnswersViewModel();
 
-            return questionsAnswersViewModel;
-        }
-        private QuestionsAnswersViewModel GetAnsersViewModelSpilberg()
-        {
-            var questionsAnswersViewModel = new QuestionsAnswersViewModel();
+        //     return questionsAnswersViewModel;
+        // }
+        // private QuestionsAnswersViewModel GetAnsersViewModelSpilberg()
+        // {
+        //     var questionsAnswersViewModel = new QuestionsAnswersViewModel();
 
-            return questionsAnswersViewModel;
-        }
+        //     return questionsAnswersViewModel;
+        // }
     }
 }

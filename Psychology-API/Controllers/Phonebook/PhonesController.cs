@@ -6,7 +6,8 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers.Phonebook
 {
-    [AllowAnonymous]
+    [Produces("application/json")]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PhonesController : GenericController<Phone>

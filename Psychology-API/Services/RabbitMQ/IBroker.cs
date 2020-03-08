@@ -8,7 +8,8 @@ namespace Psychology_API.Services.RabbitMQ
         /// <summary>
         /// Отправить данные в очередь.
         /// </summary>
-        /// <typeparam name="T"> Данные, которые отправляются в очередь. </typeparam>
+        /// <param name="entity"> Объект в виде массива байтов. </param>
+        /// <returns> True если объект был успешно отправен. </returns>
         bool Request(byte[] entity);
     }
 }

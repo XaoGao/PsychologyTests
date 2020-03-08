@@ -23,7 +23,6 @@ namespace Psychology_API.Services.Cache
         /// Получить из хранилища объект.
         /// </summary>
         /// <param name="key"> Ключ. </param>
-        /// <param name="item"> Объект в который положим данные. </param>
         /// <returns></returns>
         TEntity Get(string key);
         /// <summary>
@@ -31,7 +30,6 @@ namespace Psychology_API.Services.Cache
         /// </summary>
         /// <param name="id"> Идентификатор для рассчета ключа. </param>
         /// <param name="suffix"> Суффикс для рассчета ключа. </param>
-        /// <param name="item"> Объект в который положим данные. </param>
         /// <returns></returns>
         TEntity Get(string id, string suffix);
         /// <summary>

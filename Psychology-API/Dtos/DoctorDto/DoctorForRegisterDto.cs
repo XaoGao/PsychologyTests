@@ -13,13 +13,12 @@ namespace Psychology_API.Dtos.DoctorDto
         [Required]
         public string Username { get; set; }
         [Required]
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "Пароль должен содержать от 2 до 20 символов")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Пароль должен содержать от 6 до 20 символов")]
         public string Password { get; set; }
         [Required]
         public int DepartmentId { get; set; }
         [Required]
         public int PositionId { get; set; }
-        [Required]
         public int PhoneId { get; set; }
         [Required]
         public int RoleId { get; set; }

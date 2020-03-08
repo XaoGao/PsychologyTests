@@ -11,9 +11,11 @@ using Psychology_API.Settings;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Settings.Patients;
 using Psychology_API.Dtos.PatientDto;
+using Microsoft.AspNetCore.Http;
 
 namespace Psychology_API.Controllers
 {
+    [Produces("application/json")]
     [Authorize]
     [ApiController]
     [Route("api/doctors/{doctorId}/[controller]")]
@@ -29,7 +31,14 @@ namespace Psychology_API.Controllers
             _mapper = mapper;
             _logger = logger;
         }
+        /// <summary>
+        /// Получить список пациентов доктора.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns>Список пациентов. </returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPatients(int doctorId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -41,7 +50,16 @@ namespace Psychology_API.Controllers
 
             return Ok(patientsForReturn);
         }
+        /// <summary>
+        /// Данные по пациенту.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns> Подробные данные пациента. </returns>
         [HttpGet("{patientId}", Name = "GetPatient")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPatient(int doctorId, int patientId)
         {
             if ((doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)))
@@ -54,11 +72,19 @@ namespace Psychology_API.Controllers
 
             var patientForReturn = _mapper.Map<PatientForReturnDto>(patientFromRepo);
 
-            //TODO: добавить dto для возврата данных
             return Ok(patientForReturn);
         }
+        /// <summary>
+        /// Добавить пациента в систему.
+        /// </summary>
+        /// <param name="doctorId"> Идентификактор регистратора. </param>
+        /// <param name="patientForCreateDto"> Данные пациента. </param>
+        /// <returns></returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreatePetient(int doctorId, PatientForCreateDto patientForCreateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -79,8 +105,18 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");
         }
+        /// <summary>
+        /// Обновить персональные данные пациента.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <param name="patientForUpdateDto"> Данные пациента. </param>
+        /// <returns></returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPut("{patientId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdatePatient(int doctorId, int patientId, PatientForUpdateDto patientForUpdateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -99,8 +135,17 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору.");
         }
+        /// <summary>
+        /// Перевести пациента в архив.
+        /// </summary>
+        /// <param name="doctorId"> Идентификтор доктора. </param>
+        /// <param name="patientId"> Идентификатор пациента. </param>
+        /// <returns></returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpDelete("{patientId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeletePatient(int doctorId, int patientId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -119,15 +164,23 @@ namespace Psychology_API.Controllers
             _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
         }
-        
+        /// <summary>
+        /// Список пациентов для регистратора.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор регистратора. </param>
+        /// <returns> Список пациентов. </returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpGet("patientsforregistry")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPatientsForRegistry(int doctorId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
             var patient = await _patientService.GetPatientsAsync(PatientsType.EnablePatients);
+
+            // TODO: add Dto
 
             return Ok(patient);
         }

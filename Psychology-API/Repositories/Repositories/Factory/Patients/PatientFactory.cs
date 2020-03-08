@@ -26,7 +26,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Patients
         /// Метод который вернет список пациентов в зависимости от типа.
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
-        /// <param name="patientType"> Условие, которые указывает каких пациентов вернуть. </param>
+        /// <param name="patientsType"> Условие, которые указывает каких пациентов вернуть. </param>
         /// <returns></returns>
         public async Task<IEnumerable<Patient>> GetPatientAsync(int doctorId, PatientsType patientsType)
         {

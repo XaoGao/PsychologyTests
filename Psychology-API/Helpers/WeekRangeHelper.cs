@@ -10,6 +10,7 @@ namespace Psychology_API.Helpers
         /// <summary>
         /// Возвращает дату начала текущей рабочей недели.
         /// </summary>
+        /// <param name="dt"> Тип данных, который расширяем. </param>
         /// <param name="time"> Дата для который определяется начало недели. </param>
         /// <returns> Дата начала недели. </returns>
         public static DateTime GetDateOfStartWeek(this DateTime dt, DayOfWeek time)
@@ -20,6 +21,7 @@ namespace Psychology_API.Helpers
         /// <summary>
         /// Возвращает дату конца текущей рабочей недели.
         /// </summary>
+        /// <param name="dt"> Тип данных, который расширяем. </param>
         /// <param name="time"> Дата для который определяется конец недели. </param>
         /// <returns> Дата конца недели. </returns>
         public static DateTime GetDateOfEndWeek(this DateTime dt, DayOfWeek time)

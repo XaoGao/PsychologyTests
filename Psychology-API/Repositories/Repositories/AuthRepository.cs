@@ -16,11 +16,12 @@ namespace Psychology_API.Repositories.Repositories
         /// Контекст БД.
         /// </summary>
         private readonly DataContext _context;
+        private readonly IHash _hash;
         /// <summary>
         /// Создание нового экземпляра класса.
         /// </summary>
-        /// <param name="context"></param>
-        private readonly IHash _hash;
+        /// <param name="context"> Контекст базы данных. </param>
+        /// <param name="hash"> Алгоритм расчета хеша. </param>
         public AuthRepository(DataContext context, IHash hash)
         {
             _hash = hash;

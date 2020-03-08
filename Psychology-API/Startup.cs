@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using Psychology_API.Services.DI;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Reflection;
+using System.IO;
 
 namespace Psychology_API
 {
@@ -42,7 +44,12 @@ namespace Psychology_API
              services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Psychology-API", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+
             services.AddCors();
             services.AddAutoMapper(typeof(Startup));
             services.AddDistributedMemoryCache();
@@ -96,7 +103,7 @@ namespace Psychology_API
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Psychology API V1");
                 c.RoutePrefix = string.Empty;
             });
 

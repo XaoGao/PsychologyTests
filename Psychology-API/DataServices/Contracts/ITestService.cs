@@ -26,9 +26,10 @@ namespace Psychology_API.DataServices.Contracts
         /// </summary>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <param name="patientId"> Идентификатор пацента. </param>
-        /// <param name="patientId"> Идентификатор теста. </param>
-        /// <param name="TestResultInPoints"> Результат тестирования в баллах. </param>
-        /// <returns></returns>
+        /// <param name="testId"> Идентификатор теста. </param>
+        /// <param name="testResultInPoints"> Результат тестирования в баллах. </param>
+        /// <param name="questionsAnswers"> Список вопрос-ответ теста. </param>
+        /// <returns> Результат тестирования. </returns>
         Task<PatientTestResult> CreateAndGetPatientTestResultAsnyc(int doctorId, int patientId, int testId, int testResultInPoints, QuestionsAnswersViewModel questionsAnswers);
         /// <summary>
         /// Получить историю тестов конкретного пациента.
@@ -39,7 +40,7 @@ namespace Psychology_API.DataServices.Contracts
         /// <summary>
         /// Получить подробную истрию теста.
         /// </summary>
-        /// <param name="patientTestResult"> Идентификатор результата тестирования. </param>
+        /// <param name="patientTestResultId"> Идентификатор результата тестирования. </param>
         /// <returns> Результат тестирования. </returns>
         Task<PatientTestResult> GetTestHistiryOfPatientAsync(int patientTestResultId);
         /// <summary>

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Settings;
@@ -10,6 +11,7 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers.Admins
 {
+    [Produces("application/json")]
     [Authorize(Roles = RolesSettings.Administrator)]
     [ApiController]
     [Route("api/admins/{adminId}/[controller]")]
@@ -29,53 +31,40 @@ namespace Psychology_API.Controllers.Admins
             _doctorService = doctorService;
             _authService = authService;
         }
+        /// <summary>
+        /// Список ролей в системе.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <returns> Список ролей. </returns> 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRoles(int adminId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var roles = await _adminService.GetRolesAsync();
 
             return Ok(roles);
         }
+        /// <summary>
+        /// Данные по роли.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="roleId"> Идентификатор роли. </param>
+        /// <returns> Данные по роли. </returns>
         [HttpGet("{roleId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRole(int adminId, int roleId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var role = await _adminService.GetRoleAsync(roleId);
 
             return Ok(role);
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateRole(int adminId, Role role)
-        {
-            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
-
-            await _adminService.CreateRoleAsync(role);
-
-            return NoContent();
-        }
-        [HttpPut("{roleId}")]
-        public async Task<IActionResult> UpdateRole(int adminId, int roleId, Role role)        
-        {
-            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
-
-            var roleFromRepo = await _adminService.GetRoleAsync(roleId);
-
-            if(roleFromRepo == null)
-                return BadRequest("Указаного пользователя не существует");
-
-            _mapper.Map(role, roleFromRepo);
-
-            if(await _doctorService.SaveAllAsync())
-                return NoContent();            
-
-            throw new Exception("");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Psychology_API.Settings
         /// Время жизни кеш данных в минутах.
         /// </summary>
         /// <typeparam name="int"> Время жизни кеша. </typeparam>
-        /// <returns></returns>
+        /// <returns> Время жизни кеша. </returns>
         public int TimeLifeInMinut => _configuration.GetValue<int>("CacheSettings:TimeLifeInMinut");
         /// <summary>
         /// IP адрес до кеш хранилища.

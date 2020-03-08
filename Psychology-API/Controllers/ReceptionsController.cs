@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
@@ -10,6 +11,7 @@ using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
 {
+    [Produces("application/json")]
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -31,8 +33,15 @@ namespace Psychology_API.Controllers
             _mapper = mapper;
 
         }
+        /// <summary>
+        /// Добавить новый прием для доктора.
+        /// </summary>
+        /// <param name="receptionForCreateDto"> Данные для создания приема пациента. </param>
+        /// <returns></returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> AddReceptions(ReceptionForCreateDto receptionForCreateDto)
         {
             var reception = _mapper.Map<Reception>(receptionForCreateDto);
@@ -57,8 +66,15 @@ namespace Psychology_API.Controllers
 
             throw new Exception();
         }
+        /// <summary>
+        /// Получить список рабочих свободных часов на конкретную дату у доктора.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="dateTimeReception"> Дата </param>
+        /// <returns></returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpGet("GetFreeTime")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetFreeTime(int doctorId, DateTime dateTimeReception)
         {
             var freeTimesOfDoctorForDay = await _receptionService

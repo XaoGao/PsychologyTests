@@ -41,7 +41,7 @@ namespace Psychology_API.Settings
         /// <returns></returns>
         public string Password => _configuration.GetValue<string>("Rabbitmq:Password");
         /// <summary>
-        /// 
+        /// Uri подклчения к брокеру.
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <returns></returns>

@@ -4,27 +4,27 @@ namespace Psychology_XUnit.Helpers
 {
     public class WeekRangeHelperTest
     {
-        public WeekRangeHelperTest()
-        {
+        // public WeekRangeHelperTest()
+        // {
             
-        }
-        [Fact]
-        public void GET_START_WEEK_DATE()
-        {
-        //Given
+        // }
+        // [Fact]
+        // public void GET_START_WEEK_DATE()
+        // {
+        // //Given
         
-        //When
+        // //When
         
-        //Then
-        }
-        [Fact]
-        public void GET_END_WEEK_DATE()
-        {
-        //Given
+        // //Then
+        // }
+        // [Fact]
+        // public void GET_END_WEEK_DATE()
+        // {
+        // //Given
         
-        //When
+        // //When
         
-        //Then
-        }
+        // //Then
+        // }
     }
 }

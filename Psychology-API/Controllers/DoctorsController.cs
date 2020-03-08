@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
@@ -14,6 +15,7 @@ using Psychology_API.Settings.Doctors;
 
 namespace Psychology_API.Controllers
 {
+    [Produces("application/json")]
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -32,7 +34,19 @@ namespace Psychology_API.Controllers
             _mapper = mapper;
             _logger = logger;
         }
+        /// <summary>
+        /// Подробные данные доктора.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns> Подробные данные доктора. </returns>
+        /// <response code="401"> Пользователь не авторизован. </response>    
+        /// <response code="400"> Доктора не существует. </response>    
+        /// <response code="200"> Доктор существует. </response>
+
         [HttpGet("{doctorId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDoctorDetail(int doctorId)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -47,8 +61,14 @@ namespace Psychology_API.Controllers
             
             return Ok(doctorToReturn);
         }
+        /// <summary>
+        /// Список докторов.
+        /// </summary>
+        /// <returns> Список докторов. </returns>    
+        /// <response code="200"> Список докторов. </response>
         [Authorize(Roles = RolesSettings.Registry + "," + RolesSettings.HR)]
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDoctors() 
         {
             var doctors = await _doctorService.GetDoctorsAsync(DoctorsType.DoctorsWithRoleDoctor);
@@ -57,7 +77,19 @@ namespace Psychology_API.Controllers
 
             return Ok(doctorsForReturn);
         }
+        /// <summary>
+        /// Обновить данные доктора.
+        /// </summary>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="doctorForUpdateDto"> Данные доктора. </param>
+        /// <returns></returns>
+        /// <response code="401"> Пользователь не авторизован. </response>    
+        /// <response code="400"> Доктора не существует. </response>    
+        /// <response code="200"> Данные успешно обновлены. </response>
         [HttpPut("{doctorId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateDoctorDetail(int doctorId, DoctorForUpdateDto doctorForUpdateDto)
         {
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

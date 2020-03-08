@@ -10,9 +10,11 @@ using Psychology_Domain.Domain;
 using System;
 using Psychology_API.Settings.Doctors;
 using Psychology_API.Dtos.DoctorDto;
+using Microsoft.AspNetCore.Http;
 
 namespace Psychology_API.Controllers.Admins
 {
+    [Produces("application/json")]
     [Authorize(Roles = RolesSettings.Administrator)]
     [ApiController]
     [Route("api/[controller]/{adminId}")]
@@ -33,11 +35,18 @@ namespace Psychology_API.Controllers.Admins
             _doctorService = doctorService;
             _authService = authService;
         }
+        /// <summary>
+        /// Получить список докторов.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <returns> Список докторов. </returns>
         [HttpGet("doctors")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDoctors(int adminId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var doctors = await _adminService.GetDoctorsAsync(DoctorsType.AllDoctors);
 
@@ -45,11 +54,19 @@ namespace Psychology_API.Controllers.Admins
 
             return Ok(doctorsForReturn);
         }
+        /// <summary>
+        /// Получить данные по доктору.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns> Данные по доктору. </returns>
         [HttpGet("doctors/{doctorId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDoctor(int adminId, int doctorId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var doctor = await _doctorService.GetDoctorAsync(doctorId);
 
@@ -60,12 +77,20 @@ namespace Psychology_API.Controllers.Admins
 
             return Ok(doctorForReturn);
         }
-        
+        /// <summary>
+        /// Создать доктора.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="doctorForRegisterDto"> Данные для создания нового доктора. </param>
+        /// <returns></returns>
         [HttpPost("doctors")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateDoctor(int adminId, DoctorForRegisterDto doctorForRegisterDto)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             if(await _authService.UserExistAsync(doctorForRegisterDto.Username))
                 return BadRequest("В системе уже существует пользователь с данным логином.");
@@ -75,11 +100,21 @@ namespace Psychology_API.Controllers.Admins
 
             return StatusCode(201);
         }
+        /// <summary>
+        /// Обновить доктора.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <param name="doctorForUpdateDto"> Данные для обновления доктора. </param>
+        /// <returns></returns>
         [HttpPut("doctors/{doctorId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateDoctor(int adminId, int doctorId, DoctorForUpdateDto doctorForUpdateDto)        
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var doctorFromRepo = await _doctorService.GetDoctorWithoutCacheAsync(doctorId);
 
@@ -93,11 +128,20 @@ namespace Psychology_API.Controllers.Admins
 
             throw new Exception("");
         }
+        /// <summary>
+        /// Перевести доктора в архив.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns></returns>
         [HttpDelete("doctors/{doctorId}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteDoctor(int adminId, int doctorId)
         {
             if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return BadRequest("Пользователь не авторизован");
+                return Unauthorized("Пользователь не авторизован");
 
             var doctorFromRepo = await _doctorService.GetDoctorWithoutCacheAsync(doctorId);
 
@@ -111,9 +155,21 @@ namespace Psychology_API.Controllers.Admins
 
             throw new Exception("");
         }
-        [HttpPut("doctors/{doctorId}/dropPassword")]       
+        /// <summary>
+        /// Сбросить пароль для доктора.
+        /// </summary>
+        /// <param name="adminId"> Идентификатор администратора. </param>
+        /// <param name="doctorId"> Идентификатор доктора. </param>
+        /// <returns></returns>
+        [HttpPut("doctors/{doctorId}/dropPassword")]   
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]    
         public async Task<IActionResult> DropPassword(int adminId, int doctorId)
         {
+            if (adminId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized("Пользователь не авторизован");
+                
             var doctorFromRepo = await _doctorService.GetDoctorAsync(doctorId);
 
             if(doctorFromRepo == null)
