@@ -34,6 +34,14 @@ namespace Psychology_API.Controllers
         /// <summary>
         /// Получить список пациентов доктора.
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /patients
+        ///     {
+        ///        "doctorId": 1
+        ///     }
+        /// </remarks>
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <returns>Список пациентов. </returns>
         [HttpGet]
@@ -79,7 +87,7 @@ namespace Psychology_API.Controllers
         /// </summary>
         /// <param name="doctorId"> Идентификактор регистратора. </param>
         /// <param name="patientForCreateDto"> Данные пациента. </param>
-        /// <returns></returns>
+        /// <returns> Добавленый пациент. </returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -111,7 +119,7 @@ namespace Psychology_API.Controllers
         /// <param name="doctorId"> Идентификатор доктора. </param>
         /// <param name="patientId"> Идентификатор пациента. </param>
         /// <param name="patientForUpdateDto"> Данные пациента. </param>
-        /// <returns></returns>
+        /// <returns> Обновленный пациент. </returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpPut("{patientId}")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -140,7 +148,7 @@ namespace Psychology_API.Controllers
         /// </summary>
         /// <param name="doctorId"> Идентификтор доктора. </param>
         /// <param name="patientId"> Идентификатор пациента. </param>
-        /// <returns></returns>
+        /// <returns> Удалить пациент. </returns>
         [Authorize(Roles = RolesSettings.Registry)]
         [HttpDelete("{patientId}")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -178,11 +186,11 @@ namespace Psychology_API.Controllers
             if (doctorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized("Пользователь не авторизован");
 
-            var patient = await _patientService.GetPatientsAsync(PatientsType.EnablePatients);
+            var patients = await _patientService.GetPatientsAsync(PatientsType.EnablePatients);
 
-            // TODO: add Dto
+            var patientsForReturn = _mapper.Map<IEnumerable<PatientForListDto>>(patients);
 
-            return Ok(patient);
+            return Ok(patientsForReturn);
         }
     }
 }

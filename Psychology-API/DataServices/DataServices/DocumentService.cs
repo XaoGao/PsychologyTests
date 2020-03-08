@@ -10,6 +10,7 @@ using Psychology_API.Services.Cache;
 using Psychology_API.Settings.DocumentType;
 using Psychology_Domain.Domain;
 using Psychology_API.Helpers;
+using AutoMapper;
 
 namespace Psychology_API.DataServices.DataServices
 {
@@ -19,17 +20,20 @@ namespace Psychology_API.DataServices.DataServices
         private readonly ICache<Document> _cache;
         private readonly IDocumentRepository _documentRepository;
         private readonly ISenderInterdepartRequest _senderInterdepartRequest;
+        private readonly IMapper _mapper;
 
         public DocumentService(DataContext context,
                                ILoggerRepository loggerRepository,
                                ICache<Document> cache,
                                IDocumentRepository documentRepository,
-                               ISenderInterdepartRequest senderInterdepartRequest
+                               ISenderInterdepartRequest senderInterdepartRequest,
+                               IMapper mapper
                                ) : base(context)
         {
             _cache = cache;
             _documentRepository = documentRepository;
             _senderInterdepartRequest = senderInterdepartRequest;
+            _mapper = mapper;
             _loggerRepository = loggerRepository;
             
             Logger += _loggerRepository.WriteInformerLog;
@@ -74,19 +78,22 @@ namespace Psychology_API.DataServices.DataServices
             return await _documentRepository.SaveDocRepositoryAsync(document, formFile);
         }
 
-        public async Task<List<DocumentForReturnListDto>> SetInterdepartId(List<DocumentForReturnListDto> documents)
+        public async Task<IEnumerable<DocumentForReturnListDto>> SetInterdepartId(IEnumerable<Document> documents)
         {
-            List<InterdepartRequestForIdDto> interdepartRequestDtos =  await GetInterdepartStatus(documents);
-            var listForReturn = documents.SetInterdepartIdInDocument(interdepartRequestDtos);
+            IEnumerable<InterdepartRequestForIdDto> interdepartRequestDtos =  await GetInterdepartStatus(documents);
+
+            var documentsDto = _mapper.Map<IEnumerable<DocumentForReturnListDto>>(documents);
             
-            return listForReturn;
+            var documentsForReturn = documentsDto.SetInterdepartIdInDocument(interdepartRequestDtos);
+            
+            return documentsForReturn;
         }
 
-        public async Task<DocumentForReturnListDto> SetInterdepartId(DocumentForReturnListDto document)
+        public async Task<DocumentForReturnListDto> SetInterdepartId(Document document)
         {
             var interdepart = await _documentRepository.GetInterdepartRequestRepositoryAsync(document.Id);
 
-            var documentForReturn = document;
+            var documentForReturn = _mapper.Map<DocumentForReturnListDto>(document);
 
             if(interdepart != null )
             {
@@ -101,7 +108,7 @@ namespace Psychology_API.DataServices.DataServices
         /// </summary>
         /// <param name="documents"> Список документов. </param>
         /// <returns> Список межведомственных запросов. </returns>
-        private async Task<List<InterdepartRequestForIdDto>> GetInterdepartStatus(List<DocumentForReturnListDto> documents)
+        private async Task<IEnumerable<InterdepartRequestForIdDto>> GetInterdepartStatus(IEnumerable<Document> documents)
         {
             List<InterdepartRequestForIdDto> interdepartRequestDtos = new List<InterdepartRequestForIdDto>();
             foreach (var item in documents)

@@ -7,8 +7,8 @@ namespace Psychology_API.Helpers
 {
     public static class DocumentForReturnListDtoExtension
     {
-        public static List<DocumentForReturnListDto> SetInterdepartIdInDocument(this List<DocumentForReturnListDto> list,
-                                                                                List<InterdepartRequestForIdDto> interdepartRequestDtos)
+        public static IEnumerable<DocumentForReturnListDto> SetInterdepartIdInDocument(this IEnumerable<DocumentForReturnListDto> list,
+                                                                                IEnumerable<InterdepartRequestForIdDto> interdepartRequestDtos)
         {
             List<DocumentForReturnListDto> listWithInterDepartId = new List<DocumentForReturnListDto>();
             FactoryDocumentForReturnListDto documentFactory = new FactoryDocumentForReturnListDto();

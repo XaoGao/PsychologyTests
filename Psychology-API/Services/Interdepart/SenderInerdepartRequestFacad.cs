@@ -34,15 +34,8 @@ namespace Psychology_API.Services.Interdepart
         }
         public async Task RequestAsync(Document entity)
         {
-            // InterdepartRequest interdepartRequest = new InterdepartRequest(entity,
-            //     (int)InterdepartStatusType.AwaitingDispatch);
-
-            // _documentRepository.Add(interdepartRequest);
-            // await _documentRepository.SaveAllAsync();
-
-            // interdepartRequest.Document = entity;
-
             var interdepartRequest = await _documentRepository.GetInterdepartRequestRepositoryAsync(entity.Id);
+            interdepartRequest.Document = entity;
 
             var interdepartRequestDto = _mapper.Map<InterdepartRequestDto>(interdepartRequest);
 
