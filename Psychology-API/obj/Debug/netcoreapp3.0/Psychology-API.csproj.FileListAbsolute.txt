@@ -76,7 +76,6 @@
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedTests.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedProcessingInterpretationOfResults.json
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/SeedData/DataSeedDocumentTypes.json
-/home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Dapper.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Data.SqlClient.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/Microsoft.Identity.Client.dll
 /home/xaogao/Documents/Psychology/Psychology-API/bin/Debug/netcoreapp3.0/System.Configuration.ConfigurationManager.dll

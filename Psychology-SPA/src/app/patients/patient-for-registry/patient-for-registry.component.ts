@@ -157,7 +157,7 @@ export class PatientForRegistryComponent implements OnInit {
     }
   }
   public haveDocuments(): boolean {
-    if (this.patient.documents.length > 0) {
+    if (this.documents.length > 0) {
       return true;
     } else {
       return false;
