@@ -7,11 +7,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
 using Psychology_API.Dtos.DoctorDto;
-using Psychology_Domain.Domain;
 
 namespace Psychology_API.Controllers
 {
@@ -24,19 +22,16 @@ namespace Psychology_API.Controllers
 
         private readonly IMapper _mapper;
         private readonly IReceptionService _receptionService;
-        private readonly ILogger<AuthController> _logger;
         private readonly IAuthService _authService;
         private readonly IDoctorService _doctorService;
 
         public AuthController(IMapper mapper,
                               IReceptionService receptionService,
-                              ILogger<AuthController> logger,
                               IAuthService authService,
                               IDoctorService doctorService)
         {
             _mapper = mapper;
             _receptionService = receptionService;
-            _logger = logger;
             _authService = authService;
             _doctorService = doctorService;
         }
@@ -95,7 +90,6 @@ namespace Psychology_API.Controllers
             if(await _authService.ChangePasswordAsync(doctorId, passwords.NewPassword))
                 return NoContent();
 
-            // _logger.LogError($"Не предвиденая ошибка в ходе изменения пароля. Доктор id = {doctorId} хотел измнить пароль на {newPassword} ");
             throw new Exception("Не предвиденая ошибка в ходе изменения пароля.");
         }
     }

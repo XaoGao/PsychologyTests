@@ -47,10 +47,9 @@ namespace Psychology_API.Services.RabbitMQ
                 channel.BasicPublish(exchange: "", routingKey: ROUTING_KEY_REQUEST, basicProperties: null, body: body);
                 return true;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
-                throw new Exception(ex.Message);
             }
         }
     }

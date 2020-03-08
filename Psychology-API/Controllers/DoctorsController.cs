@@ -6,7 +6,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos.DoctorDto;
 using Psychology_API.Repositories.Contracts;
@@ -23,16 +22,13 @@ namespace Psychology_API.Controllers
     {
         private readonly IDoctorService _doctorService;
         private readonly IMapper _mapper;
-        private readonly ILogger<DoctorsController> _logger;
 
         public DoctorsController(IDoctorService doctorService,
                                  IDoctorRepository doctorRepository, 
-                                 IMapper mapper, 
-                                 ILogger<DoctorsController> logger)
+                                 IMapper mapper)
         {
             _doctorService = doctorService;
             _mapper = mapper;
-            _logger = logger;
         }
         /// <summary>
         /// Подробные данные доктора.
@@ -105,7 +101,6 @@ namespace Psychology_API.Controllers
             if(await _doctorService.SaveAllAsync())
                 return NoContent();
 
-            _logger.LogError($"Ошибка в обновлении данных. {doctorForUpdateDto.Username + " " + doctorForUpdateDto.Firstname + " " + doctorForUpdateDto.Lastname + " " + doctorForUpdateDto.Middlename + " departamentId = " + doctorForUpdateDto.DepartmentId + " positionId = " + doctorForUpdateDto.PositionId + " phoneId = " + doctorForUpdateDto.PhoneId + " db = " + doctorForUpdateDto.DateOfBirth}");
             throw new Exception("Возникла не предвиденная ошибка в ходе обновления данных");
         }
     }

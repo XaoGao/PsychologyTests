@@ -28,7 +28,6 @@ export class PatientForRegistryComponent implements OnInit {
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   public minDate: Date = new Date(1940, 1, 1);
-  // response: string;
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
               private authService: AuthService,
@@ -43,7 +42,6 @@ export class PatientForRegistryComponent implements OnInit {
       this.doctors = data.doctors;
       this.documents = data.documents;
     });
-    console.log(this.patient);
     this.isNewPatient();
     this.initUploader();
   }

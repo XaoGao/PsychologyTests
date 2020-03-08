@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -57,7 +56,7 @@ namespace Psychology_API.Controllers
                 return Ok(documentForReturn);
             }
 
-            throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова");
+            throw new Exception("Не предвиденная ошибка в ходе добавления документа, повторите снова.");
         }
         /// <summary>
         /// Список типов документов.
@@ -98,8 +97,7 @@ namespace Psychology_API.Controllers
             if (await _documentService.SaveAllAsync())
                 return NoContent();
 
-            // TODO: что то пошло не так, записать в БД ошибку
-            throw new Exception("");
+            throw new Exception("Не предвиденная ошибка в ходе удаления документа, повторите снова.");
         }
         /// <summary>
         /// Получить список документов пациента.

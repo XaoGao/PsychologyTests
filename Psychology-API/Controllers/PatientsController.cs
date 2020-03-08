@@ -22,14 +22,12 @@ namespace Psychology_API.Controllers
     public class PatientsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ILogger<PatientsController> _logger;
         private readonly IPatientService _patientService;
 
-        public PatientsController(IMapper mapper, ILogger<PatientsController> logger, IPatientService patientService)
+        public PatientsController(IMapper mapper, IPatientService patientService)
         {
             _patientService = patientService;
             _mapper = mapper;
-            _logger = logger;
         }
         /// <summary>
         /// Получить список пациентов доктора.
@@ -110,7 +108,6 @@ namespace Psychology_API.Controllers
             if (await _patientService.SaveAllAsync())
                 return Ok(patient);
 
-            _logger.LogError($"Не предвиденая ошибка в ходе добавления пациента. Пациент  + {patientForCreateDto.Firstname + patientForCreateDto.Lastname + patientForCreateDto.Middlename + " CardNumber = " + patientForCreateDto.PersonalCardNumber + " doctorId = " + patientForCreateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе добавления пациента, обратитесь к администратору.");
         }
         /// <summary>
@@ -140,7 +137,6 @@ namespace Psychology_API.Controllers
             if (await _patientService.SaveAllAsync())
                 return Ok(patientFromRepo);
 
-            _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент  + {patientForUpdateDto.Firstname + patientForUpdateDto.Lastname + patientForUpdateDto.Middlename + " CardNumber = " + patientForUpdateDto.PersonalCardNumber + " doctorId = " + patientForUpdateDto.DoctorId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору.");
         }
         /// <summary>
@@ -169,7 +165,6 @@ namespace Psychology_API.Controllers
             if (await _patientService.SaveAllAsync())
                 return NoContent();
 
-            _logger.LogError($"Не предвиденая ошибка в ходе обновления пациента. Пациент c Id =  {patientId}");
             throw new Exception("Не предвиденая ошибка в ходе обновления пациента, обратитесь к администратору");
         }
         /// <summary>

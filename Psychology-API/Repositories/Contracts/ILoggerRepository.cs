@@ -8,12 +8,12 @@ namespace Psychology_API.Repositories.Contracts
     public interface ILoggerRepository
     {
         /// <summary>
-        /// 
+        /// Записать информацию в БД.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void WriteInformerLog<T>(T entity) where T : DomainEntity;
+        void WriteInformerLog<T>(T entity) where T : class;
         /// <summary>
-        /// 
+        /// Записать ошибку в БД.
         /// </summary>
         /// <param name="message"></param>
         /// <param name="errorText"></param>

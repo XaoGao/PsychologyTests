@@ -21,7 +21,7 @@ namespace Psychology_API.Repositories.Repositories
             _context.SaveChanges();
         }
 
-        public void WriteInformerLog<T>(T entity) where T : DomainEntity
+        public void WriteInformerLog<T>(T entity) where T : class
         {
             var log = new Log("Info","Remove item");
             _context.Logs.Add(log);

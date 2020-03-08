@@ -54,7 +54,9 @@ namespace Psychology_API.Controllers
         {
             var vacations = await _vacationService.GetVacationsForDoctorAsync(doctorId);
 
-            return Ok(vacations);
+            var vacationForReturn = _mapper.Map<IEnumerable<VacationForReturnListDto>>(vacations);
+
+            return Ok(vacationForReturn);
         }
         /// <summary>
         /// Создать новый отпуск.
@@ -78,7 +80,7 @@ namespace Psychology_API.Controllers
             if (await _vacationService.SaveAllAsync())
                 return NoContent();
 
-            throw new Exception();
+            throw new Exception("Ошибка в ходе создания отпуска, обратитесь к администратору.");
         }
     }
 }

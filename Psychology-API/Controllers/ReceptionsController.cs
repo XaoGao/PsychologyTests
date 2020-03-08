@@ -64,7 +64,7 @@ namespace Psychology_API.Controllers
             if (await _receptionService.SaveAllAsync())
                 return NoContent();
 
-            throw new Exception();
+            throw new Exception("Не предвиденная ошибка в ходе добавления приема у врача, повторите снова.");
         }
         /// <summary>
         /// Получить список рабочих свободных часов на конкретную дату у доктора.

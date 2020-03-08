@@ -28,7 +28,6 @@ export class AnamnesesListComponent implements OnInit {
       this.anamneses = data.anamneses;
       this.patient = data.patient;
     });
-    console.log(this.anamneses);
     this.newRecord.conclusion = '';
   }
   public addNewRecordAnamnesis(): void {
