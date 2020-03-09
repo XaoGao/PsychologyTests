@@ -9,7 +9,7 @@ using Psychology_API.Data;
 namespace Psychology_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200302115521_Init")]
+    [Migration("20200309062050_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -443,6 +443,9 @@ namespace Psychology_API.Migrations
 
                     b.Property<string>("Number")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("SortLevel")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
                         .HasColumnType("datetime(6)");

@@ -20,7 +20,7 @@
                 <hr>
                 <p><strong>Дата рождения:</strong> {{ patient.dateOfBirth | date: 'yyyy.MM.dd' }}</p>
                 <hr>
-                <p><strong>Последний результат анамеза:</strong> {{ patient.conclusion.substring(0, 100) }} </p>
+                <p><strong>Последний результат анамеза:</strong> {{ patient.conclusion ? patient.conclusion.substring(0, 100) : ""}} </p>
                 <hr>
                 <div class="row">
                     <button class="btn btn-primary col-3 ml-5" [routerLink]="['/patients', patient.id, 'tests']">Провести тест</button>

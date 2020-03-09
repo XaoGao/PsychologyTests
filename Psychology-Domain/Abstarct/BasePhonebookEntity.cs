@@ -5,6 +5,10 @@ namespace Psychology_Domain.Abstarct
     /// </summary>
     public abstract class BasePhonebookEntity : DomainEntity
     {
-        
+        /// <summary>
+        /// Целочисленое поле для сортировки.
+        /// </summary>
+        /// <value></value>
+        public int SortLevel { get; set; }
     }
 }

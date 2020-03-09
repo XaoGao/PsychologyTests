@@ -12,10 +12,5 @@ namespace Psychology_Domain.Domain
         /// </summary>
         /// <value></value>
         public string Name { get; set; }
-        /// <summary>
-        /// Целочисленое поле для сортировки.
-        /// </summary>
-        /// <value></value>
-        public int SortLevel { get; set; }
     }
 }

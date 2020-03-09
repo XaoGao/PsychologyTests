@@ -1,4 +1,3 @@
-import { AuthGuard } from './../../../_guards/auth.guard';
 import { AuthService } from '../../../_services/auth.service';
 import { AdminService } from '../../../_services/admin.service';
 import { ToastrAlertService } from '../../../_services/toastr-alert.service';

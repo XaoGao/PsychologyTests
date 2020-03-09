@@ -17,8 +17,8 @@ namespace Psychology_API.Migrations
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    SortLevel = table.Column<int>(nullable: false)
+                    SortLevel = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,6 +85,7 @@ namespace Psychology_API.Migrations
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
+                    SortLevel = table.Column<int>(nullable: false),
                     Number = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -101,8 +102,8 @@ namespace Psychology_API.Migrations
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
                     IsLock = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    SortLevel = table.Column<int>(nullable: false)
+                    SortLevel = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

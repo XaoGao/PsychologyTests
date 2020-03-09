@@ -25,7 +25,7 @@ namespace Psychology_API.Repositories.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllRepositoryAsync()
         {
-            var entities = await EntityFrameworkQueryableExtensions.ToListAsync(_dbSet.AsNoTracking());
+            var entities = await _dbSet.OrderBy(e => e.SortLevel).ToListAsync();
 
             return entities;
         }

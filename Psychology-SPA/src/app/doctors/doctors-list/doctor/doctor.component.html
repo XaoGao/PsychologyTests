@@ -6,7 +6,7 @@
                 <input matInput placeholder="Логин" name="username" [(ngModel)]="doctor.username" required>
             </mat-form-field>
             <mat-form-field class="col-9" *ngIf="isNewDoctor()">
-                <input matInput type="password" placeholder="Пароль" name="password" [(ngModel)]="doctor.password" required>
+                <input matInput type="password" placeholder="Пароль" name="password" [(ngModel)]="doctor.password" required minlength="6">
             </mat-form-field>
             <mat-form-field class="col-9">
                 <input matInput placeholder="Фамилия" name="lastname" [(ngModel)]="doctor.lastname" required>

@@ -36,8 +36,10 @@ export class AnamnesesListComponent implements OnInit {
   public addAnamnesis() {
     const doctorId = this.authService.doctorId;
     const patientId = +this.route.snapshot.paramMap.get('id');
+
     this.newRecord.doctorId = doctorId;
-    this.newRecord.patinetId = patientId;
+    this.newRecord.patientId = patientId;
+
     this.patientService.createAnamnesis(doctorId, patientId, this.newRecord).subscribe(() => {
       this.toastrService.success('Запись успешно добавлена в историю');
       this.router.navigate(['/patients']);

@@ -4,7 +4,7 @@ import { Patient } from './patient';
 export class Anamnesis {
     id: number;
     conclusionTime: Date;
-    patinetId: number;
+    patientId: number;
     patientFullname: string;
     conclusion: string;
     doctorId: number;

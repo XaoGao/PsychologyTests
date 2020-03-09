@@ -442,6 +442,9 @@ namespace Psychology_API.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("SortLevel")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Update")
                         .HasColumnType("datetime(6)");
 

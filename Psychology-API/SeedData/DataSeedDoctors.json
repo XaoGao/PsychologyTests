@@ -20,7 +20,7 @@
         "DepartmentId" : 1,
         "PositionId" : 1,
         "PhoneId" : 1,
-        "RoleId" : 2,
+        "RoleId" : 4,
         "IsLock" : false
     },
     {

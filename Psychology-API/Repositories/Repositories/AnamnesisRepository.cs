@@ -25,8 +25,6 @@ namespace Psychology_API.Repositories.Repositories
             if (anamnesisIsLast != null)
                 anamnesisIsLast.IsLast = false;
 
-            patient.Anamneses.Add(anamnesis);
-
             await _context.Anamneses.AddAsync(anamnesis);
 
             await _context.SaveChangesAsync();
