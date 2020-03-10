@@ -13,6 +13,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -30,6 +32,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -46,6 +50,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -63,6 +69,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -81,6 +89,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -98,6 +108,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -115,6 +127,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -131,6 +145,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -149,6 +165,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -199,6 +217,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -224,6 +244,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -248,6 +270,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -275,6 +299,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -300,6 +326,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -331,6 +359,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -355,7 +385,7 @@ namespace Psychology_API.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -363,6 +393,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -398,6 +430,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -423,7 +457,7 @@ namespace Psychology_API.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PatientTestResult_ProcessingInterpretationOfResults_Processi~",
                         column: x => x.ProcessingInterpretationOfResultId,
@@ -435,7 +469,7 @@ namespace Psychology_API.Migrations
                         column: x => x.TestId,
                         principalTable: "Tests",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -443,6 +477,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -465,7 +501,7 @@ namespace Psychology_API.Migrations
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -473,6 +509,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -504,6 +542,8 @@ namespace Psychology_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Sqlite:Autoincrement", true)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Create = table.Column<DateTime>(nullable: false),
                     Update = table.Column<DateTime>(nullable: false),
@@ -540,7 +580,7 @@ namespace Psychology_API.Migrations
                         column: x => x.TestId,
                         principalTable: "Tests",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

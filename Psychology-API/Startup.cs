@@ -33,11 +33,13 @@ namespace Psychology_API
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                // options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                });
             // services.AddDbContext<DataContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                //Плохая практика нужно делать плоские модели 
                 //you have to install nuget package - Microsoft.AspNetCore.Mvc.NewtonsoftJson 
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
@@ -71,6 +73,7 @@ namespace Psychology_API
                     ValidateAudience = false
                 };
             });
+            
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedAllData seed)
         {
@@ -94,9 +97,12 @@ namespace Psychology_API
                         }
                     });
                 });
+                // app.UseHsts();
             }
-            
             seed.SeedData();
+            // app.UseHttpsRedirection();
+            app.UseDeveloperExceptionPage();
+        
             app.UseRouting();
 
             app.UseSwagger();
@@ -110,8 +116,8 @@ namespace Psychology_API
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());// .AllowCredentials()
 
-            // app.UseDefaultFiles();
-            // app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -119,7 +125,7 @@ namespace Psychology_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                // endpoints.MapFallbackToController("Index", "Fallback");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

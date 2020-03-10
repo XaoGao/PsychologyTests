@@ -26,28 +26,28 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Conclusion")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("ConclusionTime")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLast")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -65,10 +65,10 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
@@ -77,10 +77,10 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("Value")
                         .HasColumnType("int");
@@ -101,19 +101,19 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("SortLevel")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -127,31 +127,31 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Firstname")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Lastname")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Middlename")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("longblob");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("longblob");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("PhoneId")
                         .HasColumnType("int");
@@ -163,10 +163,10 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Username")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -188,37 +188,37 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("Body")
-                        .HasColumnType("longblob");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateUpload")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DocName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("DocumentTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Extension")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Number")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Series")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -236,16 +236,16 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -259,7 +259,7 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DocumentId")
                         .HasColumnType("int");
@@ -268,16 +268,16 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Request")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("Response")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -295,19 +295,19 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("LevelSort")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -321,22 +321,22 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("LevelLog")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Text")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -350,31 +350,31 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Firstname")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Lastname")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Middlename")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("PersonalCardNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -390,16 +390,16 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateTimeCreate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -414,7 +414,7 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -436,19 +436,19 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Number")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("SortLevel")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -462,19 +462,19 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("SortLevel")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -488,13 +488,13 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("MaxValue")
                         .HasColumnType("int");
@@ -506,7 +506,7 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -522,19 +522,19 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("TestId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("sortLevel")
                         .HasColumnType("int");
@@ -556,10 +556,10 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -574,7 +574,7 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -596,22 +596,22 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateTimeReception")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -629,16 +629,16 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -652,22 +652,22 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Instruction")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -684,22 +684,22 @@ namespace Psychology_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Create")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndVacation")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartVacation")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("Update")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 

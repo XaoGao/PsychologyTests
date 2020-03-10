@@ -7,9 +7,12 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Psychology_API.Data;
 using Psychology_API.DataServices.Contracts;
 using Psychology_API.Dtos;
 using Psychology_API.Dtos.DoctorDto;
+using Psychology_API.SeedData;
+using Psychology_API.Services.ComputedHash;
 
 namespace Psychology_API.Controllers
 {
@@ -24,7 +27,6 @@ namespace Psychology_API.Controllers
         private readonly IReceptionService _receptionService;
         private readonly IAuthService _authService;
         private readonly IDoctorService _doctorService;
-
         public AuthController(IMapper mapper,
                               IReceptionService receptionService,
                               IAuthService authService,
