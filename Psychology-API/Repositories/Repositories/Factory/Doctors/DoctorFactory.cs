@@ -71,7 +71,7 @@ namespace Psychology_API.Repositories.Repositories.Factory.Doctors
                 throw new Exception("Возникла ошибка. Обратитесь к администратору для утрочнее ролей пользователей системы");
 
             var doctors = await _context.Doctors
-                .Where(d => d.IsLock == false && d.Role.Id == role.Id)
+                .Where(d => d.IsLock == false && d.RoleId == role.Id)
                 .Include(d => d.Patients)
                 .ToListAsync();
 

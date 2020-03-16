@@ -1,7 +1,5 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using Xunit;
 using Psychology_API.Data;
 
 namespace Psychology_XUnit.DataContextTest
