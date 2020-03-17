@@ -11,9 +11,9 @@ Angular CLI -v 8.0.3
 dotnet -v .NET Core SDK (3.0.101)
 Сайт для установки - https://dotnet.microsoft.com/download
 
-## Ide 
+## IDE 
 При разработки использовалась IDE VS Code с расширениями:  
-1) Angular  
+1) Angular:  
     Angular 8 Snippets - TypeScript, Html, Angular Material, ngRx, RxJS & Flex Layout;  
     Angular Language Service;  
     Angular Snippets (Version 9);  
@@ -23,7 +23,7 @@ dotnet -v .NET Core SDK (3.0.101)
     Path Intellisense;  
     Prettier - Code formatter;  
     TSLint;  
-2) C#  
+2) C#:  
     C# for Visual Studio Code (powered by OmniSharp);  
     C# Extensions;  
     C# XML Documentation Comments;  
@@ -49,7 +49,7 @@ C#:
     "Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0"  
     "Pomelo.EntityFrameworkCore.MySql" Version="3.0.0"  
   
-Angular  Ж
+Angular:  
     MaterialUI  
     "@auth0/angular-jwt": "version": "3.0.1",  
     "bootstrap": "version": "4.3.1"  
