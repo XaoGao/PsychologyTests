@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psychology_API.Data;
-using Psychology_API.Repositories.Contracts.GenericRepository;
+using Psychology_API.Repositories.Contracts;
 using Psychology_Domain.Abstarct;
 
 namespace Psychology_API.Repositories.Repositories

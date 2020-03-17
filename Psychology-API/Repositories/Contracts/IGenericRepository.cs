@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Psychology_Domain.Abstarct;
 
-namespace Psychology_API.Repositories.Contracts.GenericRepository
+namespace Psychology_API.Repositories.Contracts
 {
     /// <summary>
     /// Обобщеный интерфейс для чтения данных из БД.
